@@ -27,6 +27,7 @@ void main() {
         RequestConfiguration(
             testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
       );
+      //TODO
       // await _setupFirebase();
     }
     await Hive.openBox(DatabaseBoxConstant.userInfo);
@@ -67,7 +68,4 @@ Future<bool> _setupFirebase() async {
   networkInfoService.initNetworkConnectionCheck();
 
   return hasConnectivity;
-
-  //TODO handle web
-  //TODO fix ioS notifications
 }

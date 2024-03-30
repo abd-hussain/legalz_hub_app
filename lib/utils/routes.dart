@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
+import 'package:legalz_hub_app/screens/login/login_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
