@@ -1,0 +1,8 @@
+app_identifier("com.legalzhub.app") # The bundle identifier of your app
+apple_id("aboud.masoud.92@gmail.com") # Your Apple Developer Portal username
+
+itc_team_id("108758801") # App Store Connect Team ID
+team_id("DX9H87DTX5") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

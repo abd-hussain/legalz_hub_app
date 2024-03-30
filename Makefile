@@ -15,6 +15,11 @@ deploy-ios:
 	cd ios/fastlane && bundle install
 	cd ios/fastlane && bundle exec fastlane deploy
 
-deploy: deploy-android deploy-ios
+deploy-web:
+    @echo "╠ Sending Build to Firebase Hosting..."
+    flutter build web
+    firebase deploy
 
-.PHONY: clean deploy-android deploy-ios
+deploy: deploy-android deploy-ios deploy-web
+
+.PHONY: clean deploy-android deploy-ios deploy-web
