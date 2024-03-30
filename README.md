@@ -1,6 +1,6 @@
 # legalz_hub_app
 
-A new Flutter project.
+Project for Attorney & Clients 
 
 ## Getting Started
 
