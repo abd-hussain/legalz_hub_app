@@ -5,8 +5,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("LoginScreen");
-
     return Scaffold(
       backgroundColor: Colors.amber,
     );

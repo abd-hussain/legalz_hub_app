@@ -30,7 +30,6 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("initla");
     return Scaffold(
       backgroundColor: const Color(0xffF5F6F7),
       body: SafeArea(
@@ -50,11 +49,13 @@ class _InitialScreenState extends State<InitialScreen> {
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) async =>
+                        await _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             const TitleTableWidget(),
-            ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
+            ListOfCountriesWidget(
+                countriesListNotifier: _bloc.countriesListNotifier),
           ],
         ),
       ),
