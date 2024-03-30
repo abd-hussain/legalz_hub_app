@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_color">#F3F4F5</color>
+    <item name="belovedGreen" type="color">#00AEA9</item>
+</resources>

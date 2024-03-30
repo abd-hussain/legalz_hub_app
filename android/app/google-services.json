@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "427308149539",
+    "project_id": "legalzhub",
+    "storage_bucket": "legalzhub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427308149539:android:90bac227799e2b38f7fa96",
+        "android_client_info": {
+          "package_name": "com.legalzhub.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXkbet8CaR6w9jbAoezJNV0PP5BHzqHHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
