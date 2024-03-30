@@ -1,0 +1,16 @@
+name: CI/CD Deploy
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+  ios:
+    runs-on: macos-latest
+
+  web:
+    runs-on: ubuntu-latest

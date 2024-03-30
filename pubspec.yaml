@@ -67,7 +67,8 @@ dependencies:
   http_parser: ^4.0.2
   jaguar_jwt: ^3.0.0
   share_plus: ^7.2.1
-
+  pay: ^1.1.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

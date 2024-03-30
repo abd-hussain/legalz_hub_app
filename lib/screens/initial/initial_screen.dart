@@ -37,18 +37,24 @@ class _InitialScreenState extends State<InitialScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 20),
+            Center(
+              child: Image.asset(
+                "assets/images/logoz/logo-blue.png",
+                height: 100,
+                width: 150,
+              ),
+            ),
             ValueListenableBuilder<int>(
                 valueListenable: _bloc.selectedLanguageNotifier,
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async =>
-                        await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             const TitleTableWidget(),
-            ListOfCountriesWidget(
-                countriesListNotifier: _bloc.countriesListNotifier),
+            ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
           ],
         ),
       ),
