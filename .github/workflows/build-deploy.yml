@@ -9,8 +9,20 @@ jobs:
   android:
     runs-on: ubuntu-latest
 
+    steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+
   ios:
     runs-on: macos-latest
 
+    steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+
   web:
     runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
