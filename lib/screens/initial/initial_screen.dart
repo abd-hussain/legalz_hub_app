@@ -3,6 +3,7 @@ import 'package:legalz_hub_app/screens/initial/initial_bloc.dart';
 import 'package:legalz_hub_app/screens/initial/widgets/change_language_widget.dart';
 import 'package:legalz_hub_app/screens/initial/widgets/list_of_countries_widget.dart';
 import 'package:legalz_hub_app/screens/initial/widgets/title_table_widget.dart';
+import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -44,18 +45,22 @@ class _InitialScreenState extends State<InitialScreen> {
                 width: 150,
               ),
             ),
+            CustomText(
+              title: "Select Your Favorite Language",
+              fontSize: 20,
+              textColor: const Color(0xff034061),
+              fontWeight: FontWeight.bold,
+            ),
             ValueListenableBuilder<int>(
                 valueListenable: _bloc.selectedLanguageNotifier,
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async =>
-                        await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             const TitleTableWidget(),
-            ListOfCountriesWidget(
-                countriesListNotifier: _bloc.countriesListNotifier),
+            ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
           ],
         ),
       ),

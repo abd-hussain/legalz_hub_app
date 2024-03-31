@@ -16,7 +16,7 @@ deploy-ios:
 	cd ios/fastlane && bundle exec fastlane deploy
 
 deploy-web:
-    @echo "╠ Sending Build to Firebase Hosting..."
+	@echo "╠ Sending Build to Firebase Hosting..."
     flutter build web
     firebase deploy
 
