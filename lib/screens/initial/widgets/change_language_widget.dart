@@ -6,7 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ChangeLanguageWidget extends StatelessWidget {
   final int selectionIndex;
   final Function(int) segmentChange;
-  const ChangeLanguageWidget({super.key, required this.selectionIndex, required this.segmentChange});
+  const ChangeLanguageWidget(
+      {super.key, required this.selectionIndex, required this.segmentChange});
 
   @override
   Widget build(BuildContext context) {

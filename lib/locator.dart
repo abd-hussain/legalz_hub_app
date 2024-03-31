@@ -7,6 +7,7 @@ import 'package:legalz_hub_app/services/auth_services.dart';
 import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/services/general/authentication_service.dart';
 import 'package:legalz_hub_app/services/general/network_info_service.dart';
+import 'package:legalz_hub_app/services/general/remote_config_service.dart';
 import 'package:legalz_hub_app/services/home_services.dart';
 import 'package:legalz_hub_app/services/mentor_properties_services.dart';
 import 'package:legalz_hub_app/services/mentor_settings.dart';
@@ -23,6 +24,7 @@ import 'package:local_auth/local_auth.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
+  locator.pushNewScope();
   locator.registerLazySingleton(() => MainContext());
 
   locator.registerSingleton<NetworkInfoService>(NetworkInfoService());
@@ -48,6 +50,11 @@ Future<void> setupLocator() async {
   locator.registerFactory<Dio>(() => Dio());
   locator.registerFactory<HttpInterceptor>(() => HttpInterceptor());
   locator.registerSingleton<HttpRepository>(HttpRepository());
+  //TODO FIX PUSH NOTIFICATIONS
+  // RemoteConfigService remoteConfigService = RemoteConfigService();
+  // await remoteConfigService.initInstance();
+
+  // locator.registerLazySingleton(() => remoteConfigService);
   //TODO
   // locator.registerSingleton<MainContainerBloc>(MainContainerBloc());
 }

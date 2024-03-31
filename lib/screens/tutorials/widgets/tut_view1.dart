@@ -3,11 +3,14 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class TutView extends StatelessWidget {
   final String title;
+  final String desc;
+
   final String image;
 
   const TutView({
     super.key,
     required this.title,
+    required this.desc,
     required this.image,
   });
 
@@ -18,15 +21,26 @@ class TutView extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Image.asset(
-              "assets/images/logo.png",
+              "assets/images/logoz/logo-black.png",
               height: 150,
               width: 175,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
+              padding: const EdgeInsets.only(left: 16, right: 16),
               child: CustomText(
                 title: title,
                 fontSize: 24,
+                textAlign: TextAlign.center,
+                maxLins: 4,
+                fontWeight: FontWeight.bold,
+                textColor: const Color(0xff444444),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+              child: CustomText(
+                title: desc,
+                fontSize: 18,
                 textAlign: TextAlign.center,
                 maxLins: 4,
                 fontWeight: FontWeight.bold,
@@ -41,8 +55,8 @@ class TutView extends StatelessWidget {
                     (MediaQuery.of(context).size.width - 16) / 2),
                 child: Image.asset(
                   image,
-                  height: MediaQuery.of(context).size.width - 16,
-                  width: MediaQuery.of(context).size.width - 16,
+                  height: MediaQuery.of(context).size.width - 64,
+                  width: MediaQuery.of(context).size.width - 64,
                 ),
               ),
             ),

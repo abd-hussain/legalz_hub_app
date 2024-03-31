@@ -75,7 +75,9 @@ class MyAppState extends State<MyApp> {
             pageBuilder: (_, __, ___) => routes[settings.name]!);
       },
       initialRoute: myBox.get(DatabaseFieldConstant.selectedCountryId) != null
-          ? RoutesConstants.loginScreen
+          ? myBox.get(DatabaseFieldConstant.skipTutorials) != null
+              ? RoutesConstants.loginScreen
+              : RoutesConstants.tutorialsScreen
           : RoutesConstants.initialRoute,
     );
   }

@@ -68,7 +68,8 @@ class _InitialScreenState extends State<InitialScreen> {
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) async =>
+                        await _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             Padding(
@@ -77,7 +78,8 @@ class _InitialScreenState extends State<InitialScreen> {
             ),
             const SizedBox(height: 20),
             const TitleTableWidget(),
-            ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
+            ListOfCountriesWidget(
+                countriesListNotifier: _bloc.countriesListNotifier),
           ],
         ),
       ),

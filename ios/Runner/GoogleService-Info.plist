@@ -15,9 +15,9 @@
 	<key>STORAGE_BUCKET</key>
 	<string>legalzhub.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_APPINVITE_ENABLED</key>
 	<true></true>
 	<key>IS_GCM_ENABLED</key>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
+import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
@@ -39,6 +40,7 @@ class RoutesConstants {
 final Map<String, Widget> routes = {
   RoutesConstants.initialRoute: const InitialScreen(),
   RoutesConstants.loginScreen: const LoginScreen(),
+  RoutesConstants.tutorialsScreen: const TutorialsScreen(),
   //TODO
 
   // RoutesConstants.mainContainer: const MainContainer(),
@@ -56,7 +58,7 @@ final Map<String, Widget> routes = {
   // RoutesConstants.webViewScreen: const WebViewScreen(),
   // RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
   // RoutesConstants.reportScreen: const ReportScreen(),
-  // RoutesConstants.tutorialsScreen: const TutorialsScreen(),
+
   // RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
   // RoutesConstants.editProfileScreen: const EditProfileScreen(),
   // RoutesConstants.editExperienceScreen: const EditExperienceScreen(),

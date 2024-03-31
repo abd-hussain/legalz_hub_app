@@ -57,7 +57,7 @@ class DotsIndicator extends AnimatedWidget {
         const Expanded(child: SizedBox()),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List<Widget>.generate(4, _buildDot),
+          children: List<Widget>.generate(5, _buildDot),
         ),
       ],
     );

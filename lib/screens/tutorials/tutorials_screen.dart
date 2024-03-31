@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/screens/tutorials/widgets/dot_indicator_view.dart';
 import 'package:legalz_hub_app/screens/tutorials/widgets/tut_view1.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 enum TutorialOpenFrom {
@@ -50,23 +52,28 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
             children: [
               TutView(
                 title: AppLocalizations.of(context)!.tutorial1,
-                image: "assets/images/tutorials/tutorials1.png",
+                desc: AppLocalizations.of(context)!.tutorial1desc,
+                image: "assets/images/tutorials/1.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial2,
-                image: "assets/images/tutorials/tutorials2.png",
+                desc: AppLocalizations.of(context)!.tutorial2desc,
+                image: "assets/images/tutorials/2.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial3,
-                image: "assets/images/tutorials/tutorials3.png",
+                desc: AppLocalizations.of(context)!.tutorial3desc,
+                image: "assets/images/tutorials/3.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial4,
-                image: "assets/images/tutorials/tutorials4.png",
+                desc: AppLocalizations.of(context)!.tutorial4desc,
+                image: "assets/images/tutorials/4.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial5,
-                image: "assets/images/tutorials/tutorials5.png",
+                desc: AppLocalizations.of(context)!.tutorial5desc,
+                image: "assets/images/tutorials/5.png",
               ),
             ],
           ),
@@ -88,8 +95,11 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
                       curve: Curves.ease,
                     );
                   },
-                  skipPressed: () {
+                  skipPressed: () async {
                     if (openFrom == TutorialOpenFrom.firstInstall) {
+                      final box = Hive.box(DatabaseBoxConstant.userInfo);
+                      await box.put(
+                          DatabaseFieldConstant.skipTutorials, "true");
                       Navigator.of(context, rootNavigator: true)
                           .pushNamedAndRemoveUntil(RoutesConstants.loginScreen,
                               (Route<dynamic> route) => false);

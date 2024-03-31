@@ -15,6 +15,8 @@ class DatabaseFieldConstant {
   static const String biometricP = "biometricP";
   static const String biometricStatus = "biometricStatus";
 
+  static const String skipTutorials = "skipTutorials";
+
   static const String selectedCountryId = "selectedCountryId";
   static const String selectedCountryFlag = "selectedCountryFlag";
   static const String selectedCountryName = "selectedCountryName";

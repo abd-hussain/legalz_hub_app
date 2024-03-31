@@ -24,7 +24,6 @@ platform :ios do
 
   desc "Push a new build to TestFlight"
   lane :deploy do
-    
     set_full_version()
 
     setup_ci if is_ci
