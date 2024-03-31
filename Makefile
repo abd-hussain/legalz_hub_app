@@ -17,8 +17,8 @@ deploy-ios:
 
 deploy-web:
 	@echo "╠ Sending Build to Firebase Hosting..."
-    flutter build web
-    firebase deploy
+    # flutter build web
+    # firebase deploy
 
 deploy: deploy-android deploy-ios deploy-web
 
