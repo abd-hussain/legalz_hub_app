@@ -306,11 +306,11 @@
     "biometricsisdisable" : "Biometric login is disabled",
     "saveemailandpasswordfornextlogin" : "Save Email and Password for next login",
     "metingendwihin" : "call will be end until",
+    "appshortdesc" : "Get instant legal advice from specialist attorneys anytime, anywhere",
     "mentorappdesc" : "Application for attorneys to meet client online, and respond of their legal questions",
     "clientappdesc" : "Application for any client , he can ask his legal question or reserve a meeting with the specialist attorney",
     "invitationcodeinvite" : "Get points if any one use your code to register new account using your invitation code",
     "messageforsharementor" : "Download LegalzHub application now and open new account to get more money by consulting customers legals issues, Also dont forgot to use this invitation code to give me points",
     "messageforshareclient" : "Download LegalzHub application now and consult our best specialist about any legal issue you have, Also don't forget to use this invitation code to give me points",
-    "selectfavlanguage" : "Select Your Favorite Language",
-    "appshortdesc" : "Get instant legal advice from specialist attorneys anytime, anywhere"
+    "selectfavlanguage" : "Select Your Favorite Language"
 }

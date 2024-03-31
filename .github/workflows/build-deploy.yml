@@ -59,9 +59,9 @@ jobs:
             flutter-version: '3.16.0'
             cache: true
 
-        # - name: Set up App Store Connect
-        #   run: |
-        #       echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
+        - name: Set up App Store Connect
+          run: |
+              echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
 
         - name: Setup Fastlane
           uses: ruby/setup-ruby@v1
@@ -69,13 +69,13 @@ jobs:
             ruby-version: 3.2.2
             rubygems: latest
     
-        # - name: Build and Deploy
-        #   run: |
-        #     flutter pub get
-        #     make deploy-ios
-        #   env:
-        #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-        #     MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
+        - name: Build and Deploy
+          run: |
+            flutter pub get
+            make deploy-ios
+          env:
+            MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+            MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
 
   web:
     runs-on: ubuntu-latest
