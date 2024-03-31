@@ -71,7 +71,7 @@ android {
            checkReleaseBuilds false
            disable 'InvalidPackage'
        }
-       namespace 'com.helpera.mentor_app_dev'
+       namespace 'com.legalzhub.app'
 }
 
 flutter {
