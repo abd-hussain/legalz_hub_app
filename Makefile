@@ -17,9 +17,9 @@ deploy-ios:
 
 deploy-web:
 	@echo "╠ Sending Build to Firebase Hosting..."
-    flutter build web
-    firebase deploy
+	flutter build web --no-tree-shake-icons
+	firebase deploy
 
-deploy: deploy-android deploy-ios deploy-web
+deploy: test deploy-android deploy-ios deploy-web
 
-.PHONY: clean deploy-android deploy-ios deploy-web
+.PHONY: test clean deploy-android deploy-ios deploy-web
