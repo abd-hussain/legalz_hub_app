@@ -1,5 +1,5 @@
 {
-    "selectCountry" : "Select Country",
+    "selectCountry" : "Select Your Country",
     "containerHomeIconTitle" : "Home",
     "containerMessagesIconTitle" : "Messages",
     "containerCalenderIconTitle" : "Calender",
@@ -311,5 +311,6 @@
     "invitationcodeinvite" : "Get points if any one use your code to register new account using your invitation code",
     "messageforsharementor" : "Download LegalzHub application now and open new account to get more money by consulting customers legals issues, Also dont forgot to use this invitation code to give me points",
     "messageforshareclient" : "Download LegalzHub application now and consult our best specialist about any legal issue you have, Also don't forget to use this invitation code to give me points",
-    "selectfavlanguage" : "Select Your Favorite Language"
+    "selectfavlanguage" : "Select Your Favorite Language",
+    "appshortdesc" : "Get instant legal advice from specialist attorneys anytime, anywhere"
 }

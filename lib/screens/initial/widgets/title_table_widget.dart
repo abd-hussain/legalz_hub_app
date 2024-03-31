@@ -9,13 +9,15 @@ class TitleTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: CustomText(
           title: AppLocalizations.of(context)!.selectCountry,
-          fontSize: 20,
+          fontSize: 15,
           textColor: const Color(0xff034061),
           fontWeight: FontWeight.bold,
+          textAlign: TextAlign.center,
         ),
       ),
     );
