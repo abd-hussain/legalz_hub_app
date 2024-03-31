@@ -68,7 +68,6 @@ dependencies:
   jaguar_jwt: ^3.0.0
   share_plus: ^7.2.1
   pay: ^1.1.2
-  flutter_svg: ^2.0.9
   
 dev_dependencies:
   flutter_test:
