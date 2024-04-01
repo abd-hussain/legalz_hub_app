@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:legalz_hub_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
+import 'package:legalz_hub_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
@@ -41,6 +43,9 @@ final Map<String, Widget> routes = {
   RoutesConstants.initialRoute: const InitialScreen(),
   RoutesConstants.loginScreen: const LoginScreen(),
   RoutesConstants.tutorialsScreen: const TutorialsScreen(),
+  RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen:
+      const ForgotPasswordConfirmationScreen(),
   //TODO
 
   // RoutesConstants.mainContainer: const MainContainer(),
@@ -66,7 +71,5 @@ final Map<String, Widget> routes = {
   // RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
   // RoutesConstants.paymentsScreen: const PaymentsScreen(),
   // RoutesConstants.notificationsScreen: const NotificationsScreen(),
-  // RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
-  // RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
   // RoutesConstants.ratingAndReviewScreen: const RatingAndReviewScreen()
 };
