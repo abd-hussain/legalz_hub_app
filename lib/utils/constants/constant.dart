@@ -10,15 +10,12 @@ class AppConstant {
       "${AppConstant.applicationMainURL}static/categories/";
   static const String imagesBaseURLForBanners =
       "${AppConstant.applicationMainURL}static/banners/";
-  static const String imagesBaseURLForMentors =
-      "${AppConstant.applicationMainURL}static/mentorsImg/";
-  static const String imagesBaseURLForClient =
-      "${AppConstant.applicationMainURL}static/clientsImg/";
-  static const String imagesIDBaseURLForMentors =
-      "${AppConstant.applicationMainURL}static/mentorsIDs/";
-
-  static const String imagesBaseURLForProfileImages =
-      "${AppConstant.applicationMainURL}profileImg/";
+  static const String imagesBaseURLForAttorney =
+      "${AppConstant.applicationMainURL}static/attorneyProfileImg/";
+  static const String imagesBaseURLForCustomer =
+      "${AppConstant.applicationMainURL}static/customersProfileImg/";
+  static const String imagesIDBaseURLForAttorney =
+      "${AppConstant.applicationMainURL}static/attorneyIDs/";
 
   static const String termsLink =
       "${AppConstant.applicationMainURL}static/web/terms.html";
@@ -40,12 +37,8 @@ class AppConstant {
 
   static const String whatsappNumber = "+962795190663";
   static const String appName = "LegalzHub";
-  static const String mentorAppLinkIos =
+  static const String appLinkIos =
       "https://apps.apple.com/us/app/helpera-mentor/id6474047303";
-  static const String mentorAppLinkAndroid =
+  static const String appLinkAndroid =
       "https://play.google.com/apps/internaltest/4701396781860140433";
-  static const String clientAppLinkIos =
-      "https://apps.apple.com/us/app/helpera-client/id6474086504";
-  static const String clientAppLinkAndroid =
-      "https://play.google.com/apps/internaltest/4701710799932453797";
 }

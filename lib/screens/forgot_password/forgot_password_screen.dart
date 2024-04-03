@@ -100,9 +100,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                           left: 16, right: 16),
                                       enableButton: snapshot,
                                       onTap: () {
-                                        //TODO
-                                        // FocusScope.of(context).requestFocus(FocusNode());
-                                        // bloc.doForgotPasswordCall();
+                                        FocusScope.of(context)
+                                            .requestFocus(FocusNode());
+                                        bloc.doForgotPasswordCall();
                                       },
                                     );
                                   }),

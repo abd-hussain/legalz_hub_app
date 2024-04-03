@@ -7,12 +7,12 @@ import 'package:legalz_hub_app/utils/repository/http_repository.dart';
 import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
 class FilterService with Service {
-  Future<Suffix> suffix() async {
+  Future<CategoriesModel> categories() async {
     final response = await repository.callRequest(
       requestType: RequestType.get,
-      methodName: MethodNameConstant.suffix,
+      methodName: MethodNameConstant.categories,
     );
-    return Suffix.fromJson(response);
+    return CategoriesModel.fromJson(response);
   }
 
   Future<CountriesModel> countries() async {
@@ -23,12 +23,30 @@ class FilterService with Service {
     return CountriesModel.fromJson(response);
   }
 
-  Future<CategoriesModel> categories() async {
+  Future<Suffix> suffix() async {
     final response = await repository.callRequest(
       requestType: RequestType.get,
-      methodName: MethodNameConstant.categories,
+      methodName: MethodNameConstant.suffix,
     );
-    return CategoriesModel.fromJson(response);
+    return Suffix.fromJson(response);
+  }
+
+  Future<bool> validateEmailAddress(String email) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.checkEmail,
+      queryParam: {"email": email},
+    );
+    return response["data"];
+  }
+
+  Future<bool> validateMobileNumber(String mobile) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.checkMobile,
+      queryParam: {"mobile": mobile},
+    );
+    return response["data"];
   }
 
   Future<bool> validateReferalCode(String code) async {
@@ -42,30 +60,13 @@ class FilterService with Service {
     return response["data"];
   }
 
-  Future<bool> validateMobileNumber(String mobile) async {
+  Future<double> currencyConverter(String currency) async {
     final response = await repository.callRequest(
       requestType: RequestType.post,
-      methodName: MethodNameConstant.checkMobile,
-      queryParam: {"mobile": mobile},
+      methodName: MethodNameConstant.currencyConverter,
+      queryParam: {"currency": currency},
     );
+
     return response["data"];
-  }
-
-  Future<bool> validateEmailAddress(String email) async {
-    final response = await repository.callRequest(
-      requestType: RequestType.post,
-      methodName: MethodNameConstant.checkEmail,
-      queryParam: {"email": email},
-    );
-    return response["data"];
-  }
-
-  Future<List<SuffixData>?> getMajors() async {
-    final response = await repository.callRequest(
-      requestType: RequestType.get,
-      methodName: MethodNameConstant.majors,
-    );
-
-    return Suffix.fromJson(response).data;
   }
 }

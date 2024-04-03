@@ -1,41 +1,38 @@
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:legalz_hub_app/models/https/register_model.dart';
+import 'package:legalz_hub_app/models/https/attoreny_register_model.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 import 'package:legalz_hub_app/utils/repository/http_repository.dart';
 import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
-class RegisterService with Service {
-  Future<dynamic> callRegister({required Register data}) async {
+class AttorneyRegisterService with Service {
+  Future<dynamic> callRegister({required AttorneyRegister data}) async {
     FormData formData = FormData();
 
     formData.fields.add(MapEntry("suffixe_name", data.suffixeName));
     formData.fields.add(MapEntry("first_name", data.firstName));
     formData.fields.add(MapEntry("last_name", data.lastName));
-    formData.fields.add(MapEntry("gender", data.gender.toString()));
-    formData.fields.add(MapEntry("password", data.password));
     formData.fields.add(MapEntry("date_of_birth", data.dateOfBirth));
+    formData.fields.add(MapEntry("gender", data.gender.toString()));
     formData.fields.add(MapEntry("bio", data.bio));
-    formData.fields.add(MapEntry("mobile_number", data.mobileNumber));
+
     formData.fields.add(MapEntry("email", data.email));
+    formData.fields.add(MapEntry("password", data.password));
+    formData.fields.add(MapEntry("mobile_number", data.mobileNumber));
 
     if (data.pushToken != "" && data.pushToken != null) {
       formData.fields.add(MapEntry("push_token", data.pushToken!));
     }
 
-    if (data.referalCode != "" && data.referalCode != null) {
-      formData.fields.add(MapEntry("referral_code", data.referalCode ?? ""));
-    }
-
     formData.fields.add(MapEntry("app_version", data.appVersion));
-    formData.fields.add(MapEntry("experience_since", data.experienceSince));
     formData.fields.add(MapEntry("category_id", data.categoryId));
     formData.fields.add(MapEntry("hour_rate", data.hourRate));
     formData.fields.add(MapEntry("iban", data.iban));
+    formData.fields.add(MapEntry("experience_since", data.experienceSince));
     formData.fields.add(MapEntry("country_id", data.countryId));
 
-    for (var x1 in data.majors) {
-      formData.fields.add(MapEntry("majors", x1.toString()));
+    if (data.referalCode != "" && data.referalCode != null) {
+      formData.fields.add(MapEntry("referral_code", data.referalCode ?? ""));
     }
 
     if (data.workingHoursSaturday != null) {
@@ -169,7 +166,7 @@ class RegisterService with Service {
 
     return repository.callRequest(
       requestType: RequestType.post,
-      methodName: MethodNameConstant.register,
+      methodName: MethodNameConstant.attorneyRegister,
       formData: formData,
     );
   }

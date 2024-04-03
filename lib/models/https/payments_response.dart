@@ -19,12 +19,12 @@ class PaymentResponse {
 
 class PaymentResponseData with ModelChecker {
   int? id;
-  int? mentorId;
+  int? attorneyId;
   int? appointmentId;
   int? paymentStatus;
   String? createdAt;
   String? paymentReportedMessage;
-  int? clientId;
+  int? customersId;
   int? appointmentType;
   String? appointmentDateFrom;
   String? appointmentDateTo;
@@ -33,24 +33,24 @@ class PaymentResponseData with ModelChecker {
   double? appointmentPrice;
   double? appointmentTotalPrice;
   String? currency;
-  double? mentorHourRate;
-  String? noteFromClient;
-  String? noteFromMentor;
+  double? attorneyHourRate;
+  String? noteFromCustomer;
+  String? noteFromAttorney;
   int? appointmentDiscountId;
-  String? clientFirstName;
-  String? clientLastName;
-  String? clientProfileImg;
-  int? clientCountryId;
-  String? clientFlagImg;
+  String? customerFirstName;
+  String? customerLastName;
+  String? customerProfileImg;
+  int? customerCountryId;
+  String? customerFlagImg;
 
   PaymentResponseData({
     this.id,
-    this.mentorId,
+    this.attorneyId,
     this.appointmentId,
     this.paymentStatus,
     this.createdAt,
     this.paymentReportedMessage,
-    this.clientId,
+    this.customersId,
     this.appointmentType,
     this.appointmentDateFrom,
     this.appointmentDateTo,
@@ -59,25 +59,25 @@ class PaymentResponseData with ModelChecker {
     this.appointmentPrice,
     this.appointmentTotalPrice,
     this.currency,
-    this.mentorHourRate,
-    this.noteFromClient,
-    this.noteFromMentor,
+    this.attorneyHourRate,
+    this.noteFromCustomer,
+    this.noteFromAttorney,
     this.appointmentDiscountId,
-    this.clientFirstName,
-    this.clientLastName,
-    this.clientProfileImg,
-    this.clientCountryId,
-    this.clientFlagImg,
+    this.customerFirstName,
+    this.customerLastName,
+    this.customerProfileImg,
+    this.customerCountryId,
+    this.customerFlagImg,
   });
 
   PaymentResponseData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    mentorId = json['mentor_id'];
+    attorneyId = json['attorney_id'];
     appointmentId = json['appointment_id'];
     paymentStatus = json['payment_status'];
     createdAt = json['created_at'];
     paymentReportedMessage = json['payment_reported_message'];
-    clientId = json['client_id'];
+    customersId = json['customers_id'];
     appointmentType = json['appointment_type'];
     appointmentDateFrom = json['appointment_date_from'];
     appointmentDateTo = json['appointment_date_to'];
@@ -86,14 +86,14 @@ class PaymentResponseData with ModelChecker {
     appointmentPrice = convertToDouble(json['appointment_price']);
     appointmentTotalPrice = convertToDouble(json['appointment_total_price']);
     currency = json['currency'];
-    mentorHourRate = convertToDouble(json['mentor_hour_rate']);
-    noteFromClient = json['note_from_client'];
-    noteFromMentor = json['note_from_mentor'];
+    attorneyHourRate = convertToDouble(json['attorney_hour_rate']);
+    noteFromCustomer = json['note_from_customers'];
+    noteFromAttorney = json['note_from_attorney'];
     appointmentDiscountId = json['appointment_discount_id'];
-    clientFirstName = json['client_first_name'];
-    clientLastName = json['client_last_name'];
-    clientProfileImg = json['client_profile_img'];
-    clientCountryId = json['client_country_id'];
-    clientFlagImg = json['client_flag_img'];
+    customerFirstName = json['customer_first_name'];
+    customerLastName = json['customer_last_name'];
+    customerProfileImg = json['customer_profile_img'];
+    customerCountryId = json['customer_country_id'];
+    customerFlagImg = json['customer_flag_img'];
   }
 }

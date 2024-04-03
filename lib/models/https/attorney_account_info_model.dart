@@ -1,16 +1,18 @@
-class AccountInfo {
-  AccountInfoData? data;
+class AttorneyAccountInfo {
+  AttorneyAccountInfoData? data;
   String? message;
 
-  AccountInfo({this.data, this.message});
+  AttorneyAccountInfo({this.data, this.message});
 
-  AccountInfo.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? AccountInfoData.fromJson(json['data']) : null;
+  AttorneyAccountInfo.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null
+        ? AttorneyAccountInfoData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
 }
 
-class AccountInfoData {
+class AttorneyAccountInfoData {
   String? profileImg;
   String? mobileNumber;
   String? suffixeName;
@@ -26,7 +28,7 @@ class AccountInfoData {
   String? idImg;
   String? bio;
 
-  AccountInfoData(
+  AttorneyAccountInfoData(
       {this.profileImg,
       this.mobileNumber,
       this.suffixeName,
@@ -42,7 +44,7 @@ class AccountInfoData {
       this.idImg,
       this.bio});
 
-  AccountInfoData.fromJson(Map<String, dynamic> json) {
+  AttorneyAccountInfoData.fromJson(Map<String, dynamic> json) {
     profileImg = json['profile_img'];
     mobileNumber = json['mobile_number'];
     suffixeName = json['suffixe_name'];

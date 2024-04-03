@@ -1,4 +1,4 @@
-class Register {
+class AttorneyRegister {
   final String suffixeName;
   final String firstName;
   final String lastName;
@@ -7,7 +7,6 @@ class Register {
   final int gender;
   final String dateOfBirth;
   final String bio;
-  final List<int> majors;
   final String categoryId;
   final List<String> speakingLanguage;
   final String? referalCode;
@@ -32,7 +31,7 @@ class Register {
   final String? cert2;
   final String? cert3;
 
-  Register(
+  AttorneyRegister(
       {required this.suffixeName,
       required this.firstName,
       required this.lastName,
@@ -41,7 +40,6 @@ class Register {
       required this.gender,
       required this.dateOfBirth,
       required this.bio,
-      required this.majors,
       required this.categoryId,
       required this.speakingLanguage,
       this.referalCode,

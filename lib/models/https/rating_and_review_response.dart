@@ -20,7 +20,7 @@ class RatingAndReviewResponseData {
   int? clientId;
   double? stars;
   String? comment;
-  String? mentorResponse;
+  String? attorneyResponse;
   String? createdAt;
   String? profileImg;
   String? firstName;
@@ -33,7 +33,7 @@ class RatingAndReviewResponseData {
       this.clientId,
       this.stars,
       this.comment,
-      this.mentorResponse,
+      this.attorneyResponse,
       this.createdAt,
       this.profileImg,
       this.firstName,
@@ -46,7 +46,7 @@ class RatingAndReviewResponseData {
     clientId = json['client_id'];
     stars = json['stars'];
     comment = json['comment'];
-    mentorResponse = json['mentor_response'];
+    attorneyResponse = json['attorney_response'];
     createdAt = json['created_at'];
     profileImg = json['profile_img'];
     firstName = json['first_name'];

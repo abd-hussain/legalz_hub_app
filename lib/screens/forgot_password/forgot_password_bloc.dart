@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/forgot_password_request.dart';
 import 'package:legalz_hub_app/services/auth_services.dart';
+import 'package:legalz_hub_app/services/settings_service.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -47,7 +49,7 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
   void doForgotPasswordCall() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
     try {
-      await service.forgotPassword(
+      await locator<SettingService>().forgotPassword(
           data: ForgotPasswordRequest(email: emailFieldController.text));
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openConfirmScreen(maincontext!);

@@ -28,7 +28,6 @@ class UpdateAccountRequest {
 
 class UpdateAccountExperianceRequest {
   String? experienceSince;
-  List<int>? majors;
   File? cv;
   File? cert1;
   File? cert2;
@@ -37,7 +36,6 @@ class UpdateAccountExperianceRequest {
 
   UpdateAccountExperianceRequest({
     required this.experienceSince,
-    required this.majors,
     this.cv,
     this.cert1,
     this.cert2,
