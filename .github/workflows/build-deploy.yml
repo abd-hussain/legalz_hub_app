@@ -16,7 +16,7 @@ jobs:
         - name: Setup Flutter
           uses: subosito/flutter-action@v2
           with:
-            flutter-version: '3.16.0'
+            flutter-version: '3.19.0'
             # channel: 'stable'
             cache: true
     
@@ -56,7 +56,7 @@ jobs:
         - name: Setup Flutter
           uses: subosito/flutter-action@v2
           with:
-            flutter-version: '3.16.0'
+            flutter-version: '3.19.0'
             cache: true
 
         - name: Set up App Store Connect
@@ -87,7 +87,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.0'
+          flutter-version: '3.19.0'
           # channel: 'stable'
           cache: true
 
@@ -96,13 +96,13 @@ jobs:
           flutter pub get
           flutter build web --no-tree-shake-icons
 
-      - name: Deploy Web Build
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHECKLIST_6A64E }}'
-          channelId: live
-          projectId: checklist-6a64e
+      # - name: Deploy Web Build
+      #   uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHECKLIST_6A64E }}'
+      #     channelId: live
+      #     projectId: checklist-6a64e
 
   tag:
     runs-on: ubuntu-latest
