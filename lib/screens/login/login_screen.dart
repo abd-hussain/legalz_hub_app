@@ -71,29 +71,43 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: bloc.emailController,
                                     onClear: () {
                                       bloc.emailController.clear();
-                                      bloc.showHideEmailClearNotifier.value = false;
+                                      bloc.showHideEmailClearNotifier.value =
+                                          false;
                                       bloc.fieldsValidations.value = false;
                                     },
                                     onchange: () => bloc.fieldValidation(),
-                                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
-                                    showHideEmailClearNotifier: bloc.showHideEmailClearNotifier,
+                                    onEditingComplete: () => FocusManager
+                                        .instance.primaryFocus
+                                        ?.unfocus(),
+                                    showHideEmailClearNotifier:
+                                        bloc.showHideEmailClearNotifier,
                                   ),
                                   const SizedBox(height: 20),
                                   PasswordField(
                                     controller: bloc.passwordController,
                                     onClear: () {
                                       bloc.passwordController.clear();
-                                      bloc.showHidePasswordClearNotifier.value = false;
+                                      bloc.showHidePasswordClearNotifier.value =
+                                          false;
                                       bloc.fieldsValidations.value = false;
                                     },
                                     onchange: () => bloc.fieldValidation(),
-                                    showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
-                                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                    showHidePasswordClearNotifier:
+                                        bloc.showHidePasswordClearNotifier,
+                                    onEditingComplete: () => FocusManager
+                                        .instance.primaryFocus
+                                        ?.unfocus(),
                                   ),
                                   SavePasswordLoginView(
-                                    initialValue: bloc.box.get(DatabaseFieldConstant.saveEmailAndPassword) ?? false,
+                                    initialValue: bloc.box.get(
+                                            DatabaseFieldConstant
+                                                .saveEmailAndPassword) ??
+                                        false,
                                     selectedStatus: (val) {
-                                      bloc.box.put(DatabaseFieldConstant.saveEmailAndPassword, val);
+                                      bloc.box.put(
+                                          DatabaseFieldConstant
+                                              .saveEmailAndPassword,
+                                          val);
                                     },
                                   ),
                                   Padding(
@@ -116,39 +130,59 @@ class _LoginScreenState extends State<LoginScreen> {
                                       valueListenable: bloc.fieldsValidations,
                                       builder: (context, snapshot, child) {
                                         return CustomButton(
-                                          padding: const EdgeInsets.only(left: 16, right: 16),
-                                          buttonTitle: AppLocalizations.of(context)!.login,
+                                          padding: const EdgeInsets.only(
+                                              left: 16, right: 16),
+                                          buttonTitle:
+                                              AppLocalizations.of(context)!
+                                                  .login,
                                           enableButton: snapshot,
                                           onTap: () {
-                                            FocusScope.of(context).requestFocus(FocusNode());
+                                            FocusScope.of(context)
+                                                .requestFocus(FocusNode());
                                             bloc.doLoginCall(
                                               context: context,
-                                              userName: bloc.emailController.text.trim(),
-                                              password: bloc.passwordController.text,
+                                              userName: bloc
+                                                  .emailController.text
+                                                  .trim(),
+                                              password:
+                                                  bloc.passwordController.text,
                                             );
                                           },
                                         );
                                       }),
-                                  ValueListenableBuilder<AuthenticationBiometricType>(
-                                      valueListenable: bloc.biometricResultNotifier,
+                                  ValueListenableBuilder<
+                                          AuthenticationBiometricType>(
+                                      valueListenable:
+                                          bloc.biometricResultNotifier,
                                       builder: (context, snapshot, child) {
-                                        return (snapshot.isAvailable && bloc.biometricStatus)
+                                        return (snapshot.isAvailable &&
+                                                bloc.biometricStatus)
                                             ? BiometrincLoginView(
                                                 biometricType: snapshot.type,
                                                 onPress: () async {
-                                                  final contextScafold = ScaffoldMessenger.of(context);
+                                                  final contextScafold =
+                                                      ScaffoldMessenger.of(
+                                                          context);
 
-                                                  if (!bloc.isBiometricAppeared) {
+                                                  if (!bloc
+                                                      .isBiometricAppeared) {
                                                     if (context.mounted) {
-                                                      await bloc.box.get(DatabaseFieldConstant.biometricStatus) ==
+                                                      await bloc.box.get(
+                                                                  DatabaseFieldConstant
+                                                                      .biometricStatus) ==
                                                               'true'
                                                           // ignore: use_build_context_synchronously
-                                                          ? await bloc.tryToAuthintecateUserByBiometric(context)
-                                                          : contextScafold.showSnackBar(
+                                                          ? await bloc
+                                                              .tryToAuthintecateUserByBiometric(
+                                                                  context)
+                                                          : contextScafold
+                                                              .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
                                                                     // ignore: use_build_context_synchronously
-                                                                    AppLocalizations.of(context)!.biometricsisdisable),
+                                                                    AppLocalizations.of(
+                                                                            context)!
+                                                                        .biometricsisdisable),
                                                               ),
                                                             );
                                                     }
@@ -166,7 +200,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.fromLTRB(50, 16, 50, 5),
                               child: CustomText(
                                 textAlign: TextAlign.center,
-                                title: AppLocalizations.of(context)!.dontHaveAccount,
+                                title: AppLocalizations.of(context)!
+                                    .dontHaveAccount,
                                 textColor: const Color(0xff212C34),
                                 fontSize: 14,
                               ),
@@ -175,12 +210,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.fromLTRB(50, 0, 50, 16),
                               child: InkWell(
                                 onTap: () {
-                                  final String step = bloc.box.get(DatabaseFieldConstant.registrationStep) ?? "0";
+                                  final String step = bloc.box.get(
+                                          DatabaseFieldConstant
+                                              .registrationStep) ??
+                                      "0";
                                   final int stepNum = int.parse(step);
 
-                                  final bottomsheet = RegisterInfoBottomSheetsUtil(
+                                  final bottomsheet =
+                                      RegisterInfoBottomSheetsUtil(
                                     context: context,
-                                    language: bloc.box.get(DatabaseFieldConstant.language) ?? "",
+                                    language: bloc.box.get(
+                                            DatabaseFieldConstant.language) ??
+                                        "",
                                   );
 
                                   //TODO
@@ -226,7 +267,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textAlign: TextAlign.center,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  title: AppLocalizations.of(context)!.registerAccount,
+                                  title: AppLocalizations.of(context)!
+                                      .registerAccount,
                                   textColor: const Color(0xff0059FF),
                                 ),
                               ),

@@ -159,7 +159,9 @@ class RegisterInfoBottomSheetsUtil {
   //   );
   // }
 
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
+    Factory(() => EagerGestureRecognizer())
+  };
 
   // Future termsBottomSheet({required Function() openNext}) async {
   //   if (kIsWeb) {
