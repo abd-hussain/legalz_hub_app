@@ -30,7 +30,7 @@ class DatabaseFieldConstant {
   static const String pushNotificationToken = "pushNotificationToken";
 }
 
-class TempFieldToRegistrtConstant {
+class TempFieldToRegistrtAttorneyConstant {
   static const String suffix = "suffix";
   static const String firstName = "firstName";
   static const String lastName = "lastName";
@@ -49,7 +49,6 @@ class TempFieldToRegistrtConstant {
   static const String certificates3 = "certificates3";
 
   static const String speakingLanguages = "speakingLanguages";
-  static const String majors = "majors";
 
   static const String saturdayWH = "saturdayWH";
   static const String sundayWH = "sundayWH";
@@ -61,6 +60,20 @@ class TempFieldToRegistrtConstant {
 
   static const String ratePerHour = "ratePerHour";
   static const String iban = "iban";
+
+  static const String phoneNumber = "phoneNumber";
+  static const String email = "email";
+  static const String password = "password";
+}
+
+class TempFieldToRegistrtCustomerConstant {
+  static const String firstName = "firstName";
+  static const String lastName = "lastName";
+  static const String country = "country";
+  static const String gender = "gender";
+  static const String dateOfBirth = "dateOfBirth";
+  static const String referalCode = "referalCode";
+  static const String profileImage = "profileImage";
 
   static const String phoneNumber = "phoneNumber";
   static const String email = "email";

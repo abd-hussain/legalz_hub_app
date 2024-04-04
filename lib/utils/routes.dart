@@ -3,6 +3,7 @@ import 'package:legalz_hub_app/screens/forgot_password/forgot_password_confirmat
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
+import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_screen.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
 
 class RoutesConstants {
@@ -19,8 +20,10 @@ class RoutesConstants {
   static const String registerAttornyFaze3Screen = 'registerAttornyFaze3Screen';
   static const String registerAttornyFaze4Screen = 'registerAttornyFaze4Screen';
   static const String registerAttornyFaze5Screen = 'registerAttornyFaze5Screen';
-  static const String registerCustomerFaze1Screen = 'registerAttornyFaze5Screen';
-  static const String registerCustomerFaze2Screen = 'registerAttornyFaze5Screen';
+  static const String registerCustomerFaze1Screen =
+      'registerAttornyFaze5Screen';
+  static const String registerCustomerFaze2Screen =
+      'registerAttornyFaze5Screen';
 
   static const String registerfinalfazeScreen = 'registerfinalfazeScreen';
   static const String notificationsScreen = 'notificationsScreen';
@@ -36,7 +39,8 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
-  static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
+  static const String forgotPasswordConfirmationScreen =
+      'forgotPasswordConfirmationScreen';
   static const String insideCallScreen = 'InsideCallScreen';
   static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
 }
@@ -46,7 +50,10 @@ final Map<String, Widget> routes = {
   RoutesConstants.loginScreen: const LoginScreen(),
   RoutesConstants.tutorialsScreen: const TutorialsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
-  RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen:
+      const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.registerAttornyFaze1Screen: const AttorneyRegister1Screen(),
+
   //TODO
 
   // RoutesConstants.mainContainer: const MainContainer(),
@@ -55,7 +62,6 @@ final Map<String, Widget> routes = {
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
   // RoutesConstants.calenderScreen: const CalenderScreen(),
   // RoutesConstants.accountScreen: const AccountScreen(),
-  // RoutesConstants.registerfaze2Screen: const RegisterFaze2Screen(),
   // RoutesConstants.registerfaze3Screen: const RegisterFaze3Screen(),
   // RoutesConstants.registerfaze4Screen: const RegisterFaze4Screen(),
   // RoutesConstants.registerfaze5Screen: const RegisterFaze5Screen(),

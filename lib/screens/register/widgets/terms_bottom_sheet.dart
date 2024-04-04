@@ -11,9 +11,12 @@ import 'package:webviewx_plus/webviewx_plus.dart';
 class TermsRegisterBottomSheetsUtil {
   final BuildContext context;
   final String language;
-  TermsRegisterBottomSheetsUtil({required this.language, required this.context});
+  TermsRegisterBottomSheetsUtil(
+      {required this.language, required this.context});
 
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
+    Factory(() => EagerGestureRecognizer())
+  };
   late WebViewXController controller;
 
   Future bottomSheet({required Function() approved}) async {
@@ -31,14 +34,13 @@ class TermsRegisterBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding:
+              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
                 children: [
-                  const SizedBox(
-                    width: 50,
-                  ),
+                  const SizedBox(width: 50),
                   const Expanded(child: SizedBox()),
                   CustomText(
                     title: AppLocalizations.of(context)!.termsandconditions,
@@ -66,22 +68,27 @@ class TermsRegisterBottomSheetsUtil {
                 ),
               ),
               Container(
-                height: 300,
+                height: 350,
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+                decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xff444444))),
                 child: WebViewAware(
                   child: WebViewX(
                     initialSourceType: SourceType.url,
+                    ignoreAllGestures: true,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
-                    onPageStarted: (value) {},
-                    onWebViewCreated: (contr) {
+                    onWebViewCreated: (contr) async {
                       controller = contr;
                       controller.loadContent(
-                        language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink,
+                        language == "ar"
+                            ? AppConstant.termsLinkAR
+                            : AppConstant.termsLink,
                         sourceType: SourceType.url,
                       );
+
+                      //TODO: this webview not scrollable in mobile
                     },
                   ),
                 ),
@@ -91,6 +98,7 @@ class TermsRegisterBottomSheetsUtil {
                 buttonTitle: AppLocalizations.of(context)!.acceptandcontinue,
                 onTap: () {
                   Navigator.pop(context);
+                  approved();
                 },
               ),
             ],
@@ -99,40 +107,4 @@ class TermsRegisterBottomSheetsUtil {
       },
     );
   }
-
-  // Future termsBottomSheet({required Function() openNext}) async {
-  //   if (kIsWeb) {
-  //     //   // ignore: undefined_prefixed_name
-  //     //   ui.platformViewRegistry.registerViewFactory(
-  //     //       'terms-html',
-  //     //       (int viewId) => IFrameElement()
-  //     //         ..width = '640'
-  //     //         ..height = '360'
-  //     //         ..src = AppConstant.termsLink
-  //     //         ..style.border = 'none');
-  //   }
-
-  //   return await showModalBottomSheet(
-  //       isScrollControlled: true,
-  //       shape: const RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.vertical(
-  //           top: Radius.circular(25),
-  //         ),
-  //       ),
-  //       enableDrag: true,
-  //       useRootNavigator: true,
-  //       context: context,
-  //       backgroundColor: Colors.white,
-  //       clipBehavior: Clip.antiAliasWithSaveLayer,
-  //       builder: (context) {
-  //         return Padding(
-  //           padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
-  //           child: Wrap(
-  //             children: [
-
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
 }

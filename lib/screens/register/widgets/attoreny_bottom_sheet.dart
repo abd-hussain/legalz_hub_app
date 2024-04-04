@@ -11,9 +11,11 @@ class RegisterAttorneyBottomSheetsUtil {
   final BuildContext context;
   final String language;
 
-  RegisterAttorneyBottomSheetsUtil({required this.language, required this.context});
+  RegisterAttorneyBottomSheetsUtil(
+      {required this.language, required this.context});
 
-  Future infoBottomSheet({required int step, required Function() openNext}) async {
+  Future infoBottomSheet(
+      {required int step, required Function() openNext}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -28,7 +30,8 @@ class RegisterAttorneyBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding:
+              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
@@ -82,7 +85,9 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep1,
                 textColor: step >= 1 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  TermsRegisterBottomSheetsUtil(context: context, language: language).bottomSheet(approved: () {});
+                  TermsRegisterBottomSheetsUtil(
+                          context: context, language: language)
+                      .bottomSheet(approved: () {});
                 },
               ),
               const SizedBox(height: 20),
@@ -91,7 +96,8 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep2,
                 textColor: step >= 2 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze1Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -100,7 +106,8 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep3,
                 textColor: step >= 3 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze2Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze2Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -109,7 +116,8 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep4,
                 textColor: step >= 4 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze3Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze3Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -118,7 +126,8 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep5,
                 textColor: step >= 5 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze4Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze4Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -127,7 +136,8 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep6,
                 textColor: step >= 6 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze5Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -136,7 +146,8 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep7,
                 textColor: step >= 7 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfinalfazeScreen);
                 },
               ),
               CustomButton(
