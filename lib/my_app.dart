@@ -6,6 +6,7 @@ import 'package:legalz_hub_app/main_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
+import 'package:legalz_hub_app/utils/custom_gusture.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 BuildContext? buildContext;
@@ -56,12 +57,11 @@ class MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      scrollBehavior: MyCustomScrollBehavior(),
       onGenerateRoute: (settings) {
         return PageRouteBuilder(
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            transitionsBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation, Widget child) {
               return SlideTransition(
                 position: Tween<Offset>(
                   begin: const Offset(1.0, 0.0),

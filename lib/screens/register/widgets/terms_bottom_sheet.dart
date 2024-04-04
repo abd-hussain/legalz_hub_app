@@ -4,18 +4,19 @@ import 'package:flutter/gestures.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:lottie/lottie.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class TermsRegisterBottomSheetsUtil {
   final BuildContext context;
+  final String language;
+  TermsRegisterBottomSheetsUtil({required this.language, required this.context});
 
-  TermsRegisterBottomSheetsUtil({required this.context});
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
+  late WebViewXController controller;
 
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
-    Factory(() => EagerGestureRecognizer())
-  };
-
-  Future bottomSheet() async {
+  Future bottomSheet({required Function() approved}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -30,8 +31,7 @@ class TermsRegisterBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding:
-              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
@@ -65,26 +65,27 @@ class TermsRegisterBottomSheetsUtil {
                   ),
                 ),
               ),
-              //               Container(
-              //                 height: 300,
-              //                 margin: const EdgeInsets.all(15.0),
-              //                 padding: const EdgeInsets.all(3.0),
-              //                 decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
-              //                 child: kIsWeb
-              //                     ? const HtmlElementView(viewType: 'terms-html')
-              //                     : WebView(
-              //                         initialUrl: language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink,
-              //                         gestureRecognizers: gestureRecognizers,
-              //                         navigationDelegate: (NavigationRequest request) {
-              //                           return NavigationDecision.navigate;
-              //                         },
-              //                         onWebViewCreated: (WebViewController webViewController) {
-              //                           webViewController = webViewController;
-              //                           webViewController
-              //                               .loadUrl(language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink);
-              //                         },
-              //                       ),
-              //               ),
+              Container(
+                height: 300,
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+                child: WebViewAware(
+                  child: WebViewX(
+                    initialSourceType: SourceType.url,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    onPageStarted: (value) {},
+                    onWebViewCreated: (contr) {
+                      controller = contr;
+                      controller.loadContent(
+                        language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink,
+                        sourceType: SourceType.url,
+                      );
+                    },
+                  ),
+                ),
+              ),
               CustomButton(
                 enableButton: true,
                 buttonTitle: AppLocalizations.of(context)!.acceptandcontinue,

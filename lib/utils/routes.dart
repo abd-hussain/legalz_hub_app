@@ -14,11 +14,14 @@ class RoutesConstants {
   static const String callScreen = 'callScreen';
   static const String calenderScreen = 'calenderScreen';
   static const String accountScreen = 'accountScreen';
-  static const String registerfaze2Screen = 'registerfaze2Screen';
-  static const String registerfaze3Screen = 'registerfaze3Screen';
-  static const String registerfaze4Screen = 'registerfaze4Screen';
-  static const String registerfaze5Screen = 'registerfaze5Screen';
-  static const String registerfaze6Screen = 'registerfaze6Screen';
+  static const String registerAttornyFaze1Screen = 'registerAttornyFaze1Screen';
+  static const String registerAttornyFaze2Screen = 'registerAttornyFaze2Screen';
+  static const String registerAttornyFaze3Screen = 'registerAttornyFaze3Screen';
+  static const String registerAttornyFaze4Screen = 'registerAttornyFaze4Screen';
+  static const String registerAttornyFaze5Screen = 'registerAttornyFaze5Screen';
+  static const String registerCustomerFaze1Screen = 'registerAttornyFaze5Screen';
+  static const String registerCustomerFaze2Screen = 'registerAttornyFaze5Screen';
+
   static const String registerfinalfazeScreen = 'registerfinalfazeScreen';
   static const String notificationsScreen = 'notificationsScreen';
   static const String webViewScreen = 'webViewScreen';
@@ -33,8 +36,7 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
-  static const String forgotPasswordConfirmationScreen =
-      'forgotPasswordConfirmationScreen';
+  static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
   static const String insideCallScreen = 'InsideCallScreen';
   static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
 }
@@ -44,8 +46,7 @@ final Map<String, Widget> routes = {
   RoutesConstants.loginScreen: const LoginScreen(),
   RoutesConstants.tutorialsScreen: const TutorialsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
-  RoutesConstants.forgotPasswordConfirmationScreen:
-      const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
   //TODO
 
   // RoutesConstants.mainContainer: const MainContainer(),

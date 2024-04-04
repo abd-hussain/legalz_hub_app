@@ -48,13 +48,15 @@ class _InitialScreenState extends State<InitialScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
-              child: CustomText(
-                title: AppLocalizations.of(context)!.appshortdesc,
-                fontSize: 20,
-                textColor: const Color(0xff034061),
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.center,
-                maxLins: 3,
+              child: Center(
+                child: CustomText(
+                  title: AppLocalizations.of(context)!.appshortdesc,
+                  fontSize: 20,
+                  textColor: const Color(0xff034061),
+                  fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.center,
+                  maxLins: 3,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -68,8 +70,7 @@ class _InitialScreenState extends State<InitialScreen> {
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async =>
-                        await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             Padding(
@@ -78,8 +79,7 @@ class _InitialScreenState extends State<InitialScreen> {
             ),
             const SizedBox(height: 20),
             const TitleTableWidget(),
-            ListOfCountriesWidget(
-                countriesListNotifier: _bloc.countriesListNotifier),
+            ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
           ],
         ),
       ),
