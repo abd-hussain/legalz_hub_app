@@ -4,7 +4,9 @@ import 'package:legalz_hub_app/screens/login/login_bloc.dart';
 import 'package:legalz_hub_app/screens/login/widgets/biometric_login_view.dart';
 import 'package:legalz_hub_app/screens/login/widgets/forgot_password_widget.dart';
 import 'package:legalz_hub_app/screens/login/widgets/save_password_view.dart';
-import 'package:legalz_hub_app/screens/register/widgets/info_bottom_sheet.dart';
+import 'package:legalz_hub_app/screens/register/widgets/attoreny_bottom_sheet.dart';
+import 'package:legalz_hub_app/screens/register/widgets/customer_bottom_sheet.dart';
+import 'package:legalz_hub_app/screens/register/widgets/select_user_type_bottom_sheet.dart';
 import 'package:legalz_hub_app/shared_widget/background_container.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
@@ -14,6 +16,7 @@ import 'package:legalz_hub_app/shared_widget/password_field.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -210,58 +213,80 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.fromLTRB(50, 0, 50, 16),
                               child: InkWell(
                                 onTap: () {
-                                  final String step = bloc.box.get(
-                                          DatabaseFieldConstant
-                                              .registrationStep) ??
-                                      "0";
-                                  final int stepNum = int.parse(step);
-
-                                  final bottomsheet =
-                                      RegisterInfoBottomSheetsUtil(
-                                    context: context,
-                                    language: bloc.box.get(
-                                            DatabaseFieldConstant.language) ??
-                                        "",
-                                  );
-
-                                  //TODO
-                                  // bottomsheet.infoBottomSheet(
-                                  //     step: stepNum,
-                                  //     openNext: () {
-                                  //   switch (stepNum) {
-                                  //     case 2:
-                                  //       Navigator.of(context, rootNavigator: true)
-                                  //           .pushNamed(RoutesConstants.registerfaze2Screen);
-                                  //       break;
-                                  //     case 3:
-                                  //       Navigator.of(context, rootNavigator: true)
-                                  //           .pushNamed(RoutesConstants.registerfaze3Screen);
-                                  //       break;
-                                  //     case 4:
-                                  //       Navigator.of(context, rootNavigator: true)
-                                  //           .pushNamed(RoutesConstants.registerfaze4Screen);
-                                  //       break;
-                                  //     case 5:
-                                  //       Navigator.of(context, rootNavigator: true)
-                                  //           .pushNamed(RoutesConstants.registerfaze5Screen);
-                                  //       break;
-                                  //     case 6:
-                                  //       Navigator.of(context, rootNavigator: true)
-                                  //           .pushNamed(RoutesConstants.registerfaze6Screen);
-                                  //       break;
-                                  //     case 7:
-                                  //       Navigator.of(context, rootNavigator: true)
-                                  //           .pushNamed(RoutesConstants.registerfinalfazeScreen);
-                                  //       break;
-                                  //     default:
-                                  //       bottomsheet.termsBottomSheet(openNext: () {
-                                  //         bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
-                                  //         Navigator.of(context, rootNavigator: true)
-                                  //             .pushNamed(RoutesConstants.registerfaze2Screen);
-                                  //       });
-                                  //       break;
-                                  //   }
-                                  // });
+                                  final selectUserTypeBottomsheet =
+                                      SelectUserTypeRegisterBottomSheetsUtil(
+                                          context: context);
+                                  selectUserTypeBottomsheet.infoBottomSheet(
+                                      openNext: (userType) {
+                                    switch (userType) {
+                                      case UserType.attorney:
+                                        final String step = bloc.box.get(
+                                                DatabaseFieldConstant
+                                                    .attorneyRegistrationStep) ??
+                                            "0";
+                                        final int stepNum = int.parse(step);
+                                        final bottomsheet =
+                                            RegisterAttorneyBottomSheetsUtil(
+                                          context: context,
+                                          language: bloc.box.get(
+                                                  DatabaseFieldConstant
+                                                      .language) ??
+                                              "",
+                                        );
+                                        bottomsheet.infoBottomSheet(
+                                            step: stepNum, openNext: () {});
+                                      case UserType.customer:
+                                        final String step = bloc.box.get(
+                                                DatabaseFieldConstant
+                                                    .customerRegistrationStep) ??
+                                            "0";
+                                        final int stepNum = int.parse(step);
+                                        final bottomsheet =
+                                            RegisterCustomerBottomSheetsUtil(
+                                          context: context,
+                                          language: bloc.box.get(
+                                                  DatabaseFieldConstant
+                                                      .language) ??
+                                              "",
+                                        );
+                                        bottomsheet.infoBottomSheet(
+                                            step: stepNum, openNext: () {});
+                                    }
+                                    //TODO
+                                    //   switch (stepNum) {
+                                    //     case 2:
+                                    //       Navigator.of(context, rootNavigator: true)
+                                    //           .pushNamed(RoutesConstants.registerfaze2Screen);
+                                    //       break;
+                                    //     case 3:
+                                    //       Navigator.of(context, rootNavigator: true)
+                                    //           .pushNamed(RoutesConstants.registerfaze3Screen);
+                                    //       break;
+                                    //     case 4:
+                                    //       Navigator.of(context, rootNavigator: true)
+                                    //           .pushNamed(RoutesConstants.registerfaze4Screen);
+                                    //       break;
+                                    //     case 5:
+                                    //       Navigator.of(context, rootNavigator: true)
+                                    //           .pushNamed(RoutesConstants.registerfaze5Screen);
+                                    //       break;
+                                    //     case 6:
+                                    //       Navigator.of(context, rootNavigator: true)
+                                    //           .pushNamed(RoutesConstants.registerfaze6Screen);
+                                    //       break;
+                                    //     case 7:
+                                    //       Navigator.of(context, rootNavigator: true)
+                                    //           .pushNamed(RoutesConstants.registerfinalfazeScreen);
+                                    //       break;
+                                    //     default:
+                                    //       bottomsheet.termsBottomSheet(openNext: () {
+                                    //         bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
+                                    //         Navigator.of(context, rootNavigator: true)
+                                    //             .pushNamed(RoutesConstants.registerfaze2Screen);
+                                    //       });
+                                    //       break;
+                                    //   }
+                                  });
                                 },
                                 child: CustomText(
                                   textAlign: TextAlign.center,

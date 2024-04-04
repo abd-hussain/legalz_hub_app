@@ -160,7 +160,10 @@
     "options" : "More Options",
     "reportevent" : "Report Event",
     "reportstory" : "Do you want to report this story ?",
+    "registertypetitle" : "Register under type",
+    "registertypedesc" : "From this step you should identify under which type of user you want to register",
     "registertitle" : "The Registration Will Take 10 Minutes To Complete",
+    "registertitlecustomer" : "The Registration Will Take 3-5 Minutes To Complete",
     "registertitledesc" : "We Will Help you in saving your steps",
     "registerstep1" : "Read and Accept our Terms And Conditions",
     "registerstep2" : "Fill Information about you",    
@@ -317,5 +320,8 @@
     "invitationcodeinvite" : "Get points if any one use your code to register new account using your invitation code",
     "messageforsharementor" : "Download LegalzHub application now and open new account to get more money by consulting customers legals issues, Also dont forgot to use this invitation code to give me points",
     "messageforshareclient" : "Download LegalzHub application now and consult our best specialist about any legal issue you have, Also don't forget to use this invitation code to give me points",
-    "selectfavlanguage" : "Select Your Favorite Language"
+    "selectfavlanguage" : "Select Your Favorite Language",
+    "attorneyuser" : "Attorney / Lawyer", 
+    "customeruser" : "Client / Customer",
+    "cancelRegistration" : "Cancel Registration"
 }
