@@ -14,6 +14,7 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/email_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/password_field.dart';
+import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -278,8 +279,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
                   break;
                 case 6:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerfinalfazeScreen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(
+                      RoutesConstants.registerfinalfazeScreen,
+                      arguments: {AppConstant.userType: UserType.attorney});
                   break;
                 default:
                   TermsRegisterBottomSheetsUtil(
@@ -315,6 +317,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 case 2:
                   Navigator.of(context, rootNavigator: true)
                       .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
+                  break;
+                case 3:
+                  Navigator.of(context, rootNavigator: true).pushNamed(
+                      RoutesConstants.registerfinalfazeScreen,
+                      arguments: {AppConstant.userType: UserType.customer});
                   break;
                 default:
                   TermsRegisterBottomSheetsUtil(

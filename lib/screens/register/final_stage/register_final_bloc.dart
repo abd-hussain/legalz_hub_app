@@ -1,21 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/attoreny_register_model.dart';
+import 'package:legalz_hub_app/models/https/customer_register_model.dart';
 import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_register_service.dart';
+import 'package:legalz_hub_app/services/customer/customer_register_service.dart';
+import 'package:legalz_hub_app/services/filter_services.dart';
+import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/gender_format.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 import 'package:legalz_hub_app/utils/version.dart';
 
-class RegisterFinalBloc extends Bloc<AttorneyRegisterService> {
+class RegisterFinalBloc extends Bloc<FilterService> {
   ValueNotifier<LoadingStatus> loadingStatus =
       ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  Future<dynamic> handleCreatingTheProfile(BuildContext context) async {
+  UserType? userType;
+
+  void handleReadingArguments({required Object? arguments}) {
+    if (arguments != null) {
+      final newArguments = arguments as Map<String, dynamic>;
+      userType = newArguments[AppConstant.userType] as UserType?;
+    }
+  }
+
+  Future<dynamic> handleCreatingTheCustomerProfile(BuildContext context) async {
+    String? version = await Version().getApplicationVersion();
+    int gender = 0;
+    if (context.mounted) {
+      gender = GenderFormat().convertStringToIndex(
+          context, box.get(TempFieldToRegistrtCustomerConstant.gender));
+    }
+
+    final model = CustomerRegister(
+      appVersion: version,
+      gender: gender,
+      firstName: box.get(TempFieldToRegistrtCustomerConstant.firstName) ?? "",
+      lastName: box.get(TempFieldToRegistrtCustomerConstant.lastName) ?? "",
+      dateOfBirth:
+          box.get(TempFieldToRegistrtCustomerConstant.dateOfBirth) ?? "",
+      password: box.get(TempFieldToRegistrtCustomerConstant.password) ?? "",
+      countryId: box.get(TempFieldToRegistrtCustomerConstant.country) ?? "",
+      email: box.get(TempFieldToRegistrtCustomerConstant.email) ?? "",
+      mobileNumber:
+          box.get(TempFieldToRegistrtCustomerConstant.phoneNumber) ?? "",
+      referalCode:
+          box.get(TempFieldToRegistrtCustomerConstant.referalCode) ?? "",
+      profileImg: box.get(TempFieldToRegistrtCustomerConstant.profileImage),
+      pushToken: box.get(DatabaseFieldConstant.pushNotificationToken),
+    );
+
+    return await locator<CustomerRegisterService>().callRegister(data: model);
+  }
+
+  Future<dynamic> handleCreatingTheAttorneyProfile(BuildContext context) async {
     String? version = await Version().getApplicationVersion();
     int gender = 0;
     if (context.mounted) {
@@ -100,10 +144,26 @@ class RegisterFinalBloc extends Bloc<AttorneyRegisterService> {
           box.get(TempFieldToRegistrtAttorneyConstant.experianceSince) ?? "",
     );
 
-    return await service.callRegister(data: model);
+    return await locator<AttorneyRegisterService>().callRegister(data: model);
   }
 
-  Future<void> clearRegistrationData() async {
+  Future<void> clearCustomerRegistrationData() async {
+    await box.deleteAll([
+      TempFieldToRegistrtCustomerConstant.gender,
+      TempFieldToRegistrtCustomerConstant.firstName,
+      TempFieldToRegistrtCustomerConstant.lastName,
+      TempFieldToRegistrtCustomerConstant.dateOfBirth,
+      TempFieldToRegistrtCustomerConstant.password,
+      TempFieldToRegistrtCustomerConstant.country,
+      TempFieldToRegistrtCustomerConstant.email,
+      TempFieldToRegistrtCustomerConstant.phoneNumber,
+      TempFieldToRegistrtCustomerConstant.referalCode,
+      TempFieldToRegistrtCustomerConstant.profileImage,
+      DatabaseFieldConstant.customerRegistrationStep
+    ]);
+  }
+
+  Future<void> clearAttorneyRegistrationData() async {
     await box.deleteAll([
       TempFieldToRegistrtAttorneyConstant.gender,
       TempFieldToRegistrtAttorneyConstant.suffix,

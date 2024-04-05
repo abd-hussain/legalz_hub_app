@@ -7,6 +7,7 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:lottie/lottie.dart';
@@ -29,6 +30,9 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
         FirebaseCloudMessagingUtil.initConfigure(context);
       });
     });
+
+    bloc.handleReadingArguments(
+        arguments: ModalRoute.of(context)!.settings.arguments);
     super.didChangeDependencies();
   }
 
@@ -73,40 +77,80 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                             final localization = AppLocalizations.of(context)!;
                             bloc.loadingStatus.value = LoadingStatus.inprogress;
 
-                            try {
-                              await bloc
-                                  .handleCreatingTheProfile(context)
-                                  .then((value) async {
+                            if (bloc.userType == UserType.attorney) {
+                              try {
+                                await bloc
+                                    .handleCreatingTheAttorneyProfile(context)
+                                    .then((value) async {
+                                  bloc.loadingStatus.value =
+                                      LoadingStatus.finish;
+                                  scaffoldMessenger.showSnackBar(
+                                    SnackBar(
+                                        content: Text(localization
+                                            .accountcreatedsuccessfully)),
+                                  );
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricU,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtAttorneyConstant
+                                              .email));
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricP,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtAttorneyConstant
+                                              .password));
+                                  await bloc.clearAttorneyRegistrationData();
+
+                                  navigation.pushReplacement(
+                                      MaterialPageRoute(builder: (ctx) {
+                                    return const LoginScreen();
+                                  }));
+                                });
+                              } on DioException catch (e) {
+                                final error = e.error as HttpException;
                                 bloc.loadingStatus.value = LoadingStatus.finish;
                                 scaffoldMessenger.showSnackBar(
                                   SnackBar(
-                                      content: Text(localization
-                                          .accountcreatedsuccessfully)),
+                                      content: Text(error.message.toString())),
                                 );
-                                await bloc.box.put(
-                                    DatabaseFieldConstant.biometricU,
-                                    bloc.box.get(
-                                        TempFieldToRegistrtAttorneyConstant
-                                            .email));
-                                await bloc.box.put(
-                                    DatabaseFieldConstant.biometricP,
-                                    bloc.box.get(
-                                        TempFieldToRegistrtAttorneyConstant
-                                            .password));
-                                await bloc.clearRegistrationData();
+                              }
+                            } else {
+                              try {
+                                await bloc
+                                    .handleCreatingTheCustomerProfile(context)
+                                    .then((value) async {
+                                  bloc.loadingStatus.value =
+                                      LoadingStatus.finish;
+                                  scaffoldMessenger.showSnackBar(
+                                    SnackBar(
+                                        content: Text(localization
+                                            .accountcreatedsuccessfully)),
+                                  );
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricU,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtCustomerConstant
+                                              .email));
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricP,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtCustomerConstant
+                                              .password));
+                                  await bloc.clearCustomerRegistrationData();
 
-                                navigation.pushReplacement(
-                                    MaterialPageRoute(builder: (ctx) {
-                                  return const LoginScreen();
-                                }));
-                              });
-                            } on DioException catch (e) {
-                              final error = e.error as HttpException;
-                              bloc.loadingStatus.value = LoadingStatus.finish;
-                              scaffoldMessenger.showSnackBar(
-                                SnackBar(
-                                    content: Text(error.message.toString())),
-                              );
+                                  navigation.pushReplacement(
+                                      MaterialPageRoute(builder: (ctx) {
+                                    return const LoginScreen();
+                                  }));
+                                });
+                              } on DioException catch (e) {
+                                final error = e.error as HttpException;
+                                bloc.loadingStatus.value = LoadingStatus.finish;
+                                scaffoldMessenger.showSnackBar(
+                                  SnackBar(
+                                      content: Text(error.message.toString())),
+                                );
+                              }
                             }
                           }),
                     ],

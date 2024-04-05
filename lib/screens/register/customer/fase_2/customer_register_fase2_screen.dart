@@ -10,7 +10,9 @@ import 'package:legalz_hub_app/shared_widget/email_header.dart';
 import 'package:legalz_hub_app/shared_widget/password_complexity.dart';
 import 'package:legalz_hub_app/shared_widget/password_field.dart';
 import 'package:legalz_hub_app/shared_widget/save_password_view.dart';
+import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
@@ -81,8 +83,9 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
                       bloc.passwordController.text);
 
                   await bloc.box
-                      .put(DatabaseFieldConstant.customerRegistrationStep, "2");
-                  navigator.pushNamed(RoutesConstants.registerfinalfazeScreen);
+                      .put(DatabaseFieldConstant.customerRegistrationStep, "3");
+                  navigator.pushNamed(RoutesConstants.registerfinalfazeScreen,
+                      arguments: {AppConstant.userType: UserType.customer});
                 },
               );
             }),

@@ -3,6 +3,8 @@ import 'package:legalz_hub_app/screens/register/widgets/points_view.dart';
 import 'package:legalz_hub_app/screens/register/widgets/terms_bottom_sheet.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
+import 'package:legalz_hub_app/utils/constants/constant.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -146,8 +148,9 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep7,
                 textColor: step >= 7 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerfinalfazeScreen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(
+                      RoutesConstants.registerfinalfazeScreen,
+                      arguments: {AppConstant.userType: UserType.attorney});
                 },
               ),
               CustomButton(
