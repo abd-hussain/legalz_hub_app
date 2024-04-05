@@ -253,7 +253,6 @@
     "passwordmorethan8char" : "Password More than 8 character",
     "passwordhavenumbers" : "Password Have Numbers",
     "version_details" : "Versions Details",
-    "majors" : "Majors",
     "experience_since" : "Experience Since",
     "certificate" : "Certificate",
     "meetingstatus" : "Session Status",

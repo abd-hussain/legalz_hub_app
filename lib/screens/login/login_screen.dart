@@ -220,101 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           context: context);
                                   selectUserTypeBottomsheet.infoBottomSheet(
                                       openNext: (userType) {
-                                    switch (userType) {
-                                      case UserType.attorney:
-                                        final String step = bloc.box.get(
-                                                DatabaseFieldConstant
-                                                    .attorneyRegistrationStep) ??
-                                            "0";
-                                        final int stepNum = int.parse(step);
-                                        final bottomsheet =
-                                            RegisterAttorneyBottomSheetsUtil(
-                                          context: context,
-                                          language: bloc.box.get(
-                                                  DatabaseFieldConstant
-                                                      .language) ??
-                                              "",
-                                        );
-
-                                        print(stepNum);
-                                        bottomsheet.infoBottomSheet(
-                                            step: stepNum,
-                                            openNext: () {
-                                              switch (stepNum) {
-                                                case 1:
-                                                  Navigator.of(context,
-                                                          rootNavigator: true)
-                                                      .pushNamed(RoutesConstants
-                                                          .registerAttornyFaze1Screen);
-                                                  break;
-                                                case 2:
-                                                  Navigator.of(context,
-                                                          rootNavigator: true)
-                                                      .pushNamed(RoutesConstants
-                                                          .registerAttornyFaze2Screen);
-                                                  break;
-                                                case 3:
-                                                  Navigator.of(context,
-                                                          rootNavigator: true)
-                                                      .pushNamed(RoutesConstants
-                                                          .registerAttornyFaze3Screen);
-                                                  break;
-                                                case 4:
-                                                  Navigator.of(context,
-                                                          rootNavigator: true)
-                                                      .pushNamed(RoutesConstants
-                                                          .registerAttornyFaze4Screen);
-                                                  break;
-                                                case 5:
-                                                  Navigator.of(context,
-                                                          rootNavigator: true)
-                                                      .pushNamed(RoutesConstants
-                                                          .registerAttornyFaze5Screen);
-                                                  break;
-                                                case 6:
-                                                  Navigator.of(context,
-                                                          rootNavigator: true)
-                                                      .pushNamed(RoutesConstants
-                                                          .registerfinalfazeScreen);
-                                                  break;
-                                                default:
-                                                  TermsRegisterBottomSheetsUtil(
-                                                          context: context,
-                                                          language: bloc.box.get(
-                                                                  DatabaseFieldConstant
-                                                                      .language) ??
-                                                              "")
-                                                      .bottomSheet(
-                                                          approved: () {
-                                                    bloc.box.put(
-                                                        DatabaseFieldConstant
-                                                            .attorneyRegistrationStep,
-                                                        "1");
-                                                    Navigator.of(context,
-                                                            rootNavigator: true)
-                                                        .pushNamed(RoutesConstants
-                                                            .registerAttornyFaze1Screen);
-                                                  });
-                                                  break;
-                                              }
-                                            });
-                                      case UserType.customer:
-                                        final String step = bloc.box.get(
-                                                DatabaseFieldConstant
-                                                    .customerRegistrationStep) ??
-                                            "0";
-                                        final int stepNum = int.parse(step);
-                                        final bottomsheet =
-                                            RegisterCustomerBottomSheetsUtil(
-                                          context: context,
-                                          language: bloc.box.get(
-                                                  DatabaseFieldConstant
-                                                      .language) ??
-                                              "",
-                                        );
-                                        bottomsheet.infoBottomSheet(
-                                            step: stepNum, openNext: () {});
-                                    }
+                                    whereToGo(userType, context);
                                   });
                                 },
                                 child: CustomText(
@@ -334,5 +240,97 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void whereToGo(UserType userType, BuildContext context) {
+    switch (userType) {
+      case UserType.attorney:
+        final String step =
+            bloc.box.get(DatabaseFieldConstant.attorneyRegistrationStep) ?? "0";
+        final int stepNum = int.parse(step);
+        final bottomsheet = RegisterAttorneyBottomSheetsUtil(
+          context: context,
+          language: bloc.box.get(DatabaseFieldConstant.language) ?? "",
+        );
+
+        bottomsheet.infoBottomSheet(
+            step: stepNum,
+            openNext: () {
+              switch (stepNum) {
+                case 1:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
+                  break;
+                case 2:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze2Screen);
+                  break;
+                case 3:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze3Screen);
+                  break;
+                case 4:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze4Screen);
+                  break;
+                case 5:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
+                  break;
+                case 6:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfinalfazeScreen);
+                  break;
+                default:
+                  TermsRegisterBottomSheetsUtil(
+                          context: context,
+                          language:
+                              bloc.box.get(DatabaseFieldConstant.language) ??
+                                  "")
+                      .bottomSheet(approved: () {
+                    bloc.box.put(
+                        DatabaseFieldConstant.attorneyRegistrationStep, "1");
+                    Navigator.of(context, rootNavigator: true)
+                        .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
+                  });
+                  break;
+              }
+            });
+      case UserType.customer:
+        final String step =
+            bloc.box.get(DatabaseFieldConstant.customerRegistrationStep) ?? "0";
+        final int stepNum = int.parse(step);
+        final bottomsheet = RegisterCustomerBottomSheetsUtil(
+          context: context,
+          language: bloc.box.get(DatabaseFieldConstant.language) ?? "",
+        );
+        bottomsheet.infoBottomSheet(
+            step: stepNum,
+            openNext: () {
+              switch (stepNum) {
+                case 1:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerCustomerFaze1Screen);
+                  break;
+                case 2:
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
+                  break;
+                default:
+                  TermsRegisterBottomSheetsUtil(
+                          context: context,
+                          language:
+                              bloc.box.get(DatabaseFieldConstant.language) ??
+                                  "")
+                      .bottomSheet(approved: () {
+                    bloc.box.put(
+                        DatabaseFieldConstant.customerRegistrationStep, "1");
+                    Navigator.of(context, rootNavigator: true)
+                        .pushNamed(RoutesConstants.registerCustomerFaze1Screen);
+                  });
+                  break;
+              }
+            });
+    }
   }
 }

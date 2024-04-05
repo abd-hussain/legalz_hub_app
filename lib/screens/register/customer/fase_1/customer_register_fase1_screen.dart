@@ -3,38 +3,35 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
-import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_bloc.dart';
 import 'package:legalz_hub_app/shared_widget/mobile_header.dart';
 import 'package:legalz_hub_app/shared_widget/mobile_number_widget.dart';
+import 'package:legalz_hub_app/screens/register/customer/fase_1/customer_register_fase1_bloc.dart';
 import 'package:legalz_hub_app/screens/register/widgets/footer_view.dart';
 import 'package:legalz_hub_app/shared_widget/country_field.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
-import 'package:legalz_hub_app/shared_widget/custom_attach_textfield.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 import 'package:legalz_hub_app/shared_widget/date_of_birth/date_of_birth_view.dart';
 import 'package:legalz_hub_app/shared_widget/gender_field.dart';
 import 'package:legalz_hub_app/shared_widget/image_holder_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
-import 'package:legalz_hub_app/shared_widget/suffix_field.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
-class AttorneyRegister1Screen extends StatefulWidget {
-  const AttorneyRegister1Screen({super.key});
+class CustomerRegister1Screen extends StatefulWidget {
+  const CustomerRegister1Screen({super.key});
 
   @override
-  State<AttorneyRegister1Screen> createState() =>
-      _AttorneyRegister1ScreenState();
+  State<CustomerRegister1Screen> createState() =>
+      _CustomerRegister1ScreenState();
 }
 
-class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
-  final bloc = AttorneyRegister1Bloc();
+class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
+  final bloc = CustomerRegister1Bloc();
 
   @override
   void didChangeDependencies() {
-    bloc.getlistOfSuffix();
     bloc.getlistOfCountries();
     super.didChangeDependencies();
   }
@@ -54,42 +51,40 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
           builder: (context, snapshot) {
             return RegistrationFooterView(
               pageCount: 1,
+              maxpageCount: 3,
               pageTitle: AppLocalizations.of(context)!.personaldetails,
-              nextPageTitle: AppLocalizations.of(context)!.experiences,
+              nextPageTitle: AppLocalizations.of(context)!.setuppassword,
               enableNextButton: snapshot.data!,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.suffix,
-                    bloc.suffixNameController.text);
                 await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.firstName,
+                    TempFieldToRegistrtCustomerConstant.firstName,
                     bloc.firstNameController.text);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.lastName,
+                await bloc.box.put(TempFieldToRegistrtCustomerConstant.lastName,
                     bloc.lastNameController.text);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.country,
+                await bloc.box.put(TempFieldToRegistrtCustomerConstant.country,
                     bloc.selectedCountry!.id.toString());
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.gender,
+                await bloc.box.put(TempFieldToRegistrtCustomerConstant.gender,
                     bloc.genderController.text);
                 await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.profileImage,
+                    TempFieldToRegistrtCustomerConstant.profileImage,
                     bloc.profileImage != null ? bloc.profileImage!.path : "");
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.idImage,
-                    bloc.iDImage != null ? bloc.iDImage!.path : "");
                 await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.dateOfBirth,
+                    TempFieldToRegistrtCustomerConstant.dateOfBirth,
                     bloc.selectedDate);
                 await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.phoneNumber,
+                    TempFieldToRegistrtCustomerConstant.phoneNumber,
                     bloc.countryCode + bloc.mobileController);
 
                 await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.referalCode,
+                    TempFieldToRegistrtCustomerConstant.referalCode,
                     bloc.validateReferalCode.value == true
                         ? bloc.referalCodeController.text
                         : "");
                 await bloc.box
-                    .put(DatabaseFieldConstant.attorneyRegistrationStep, "2");
-                navigator.pushNamed(RoutesConstants.registerAttornyFaze2Screen);
+                    .put(DatabaseFieldConstant.customerRegistrationStep, "2");
+                navigator
+                    .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
               },
             );
           }),
@@ -139,22 +134,6 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                   Expanded(
                                     child: Column(
                                       children: [
-                                        ValueListenableBuilder<Object>(
-                                            valueListenable: bloc.listOfSuffix,
-                                            builder:
-                                                (context, snapshot, child) {
-                                              return SuffixField(
-                                                controller:
-                                                    bloc.suffixNameController,
-                                                listOfSuffix:
-                                                    bloc.listOfSuffix.value,
-                                                selectedSuffix: (p0) {
-                                                  bloc.selectedSuffix = p0;
-                                                  bloc.validateFieldsForFaze1();
-                                                },
-                                              );
-                                            }),
-                                        const SizedBox(height: 10),
                                         CustomTextField(
                                           controller: bloc.firstNameController,
                                           hintText:
@@ -204,45 +183,26 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
-                                  CustomAttachTextField(
-                                      isFromNetwork: bloc.iDImageUrl != "",
-                                      urlImage: bloc.iDImageUrl == ""
-                                          ? null
-                                          : bloc.iDImageUrl,
-                                      onAddImage: (file) {
-                                        bloc.iDImage = file;
-                                        bloc.validateFieldsForFaze1();
-                                      },
-                                      onDeleteImage: () {
-                                        bloc.iDImage = null;
-                                        bloc.iDImageUrl = "";
-                                        bloc.validateFieldsForFaze1();
-                                      }),
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        ValueListenableBuilder<List<Country>>(
-                                            valueListenable:
-                                                bloc.listOfCountries,
-                                            builder:
-                                                (context, snapshot, child) {
-                                              return CountryField(
-                                                controller:
-                                                    bloc.countryController,
-                                                listOfCountries: snapshot,
-                                                selectedCountry: (p0) {
-                                                  bloc.selectedCountry = p0;
-                                                  bloc.validateFieldsForFaze1();
-                                                },
-                                              );
-                                            }),
-                                        const SizedBox(height: 10),
-                                        GenderField(
-                                          controller: bloc.genderController,
-                                          onChange: (p0) =>
-                                              bloc.validateFieldsForFaze1(),
-                                        ),
-                                      ],
+                                    child: ValueListenableBuilder<
+                                            List<Country>>(
+                                        valueListenable: bloc.listOfCountries,
+                                        builder: (context, snapshot, child) {
+                                          return CountryField(
+                                            controller: bloc.countryController,
+                                            listOfCountries: snapshot,
+                                            selectedCountry: (p0) {
+                                              bloc.selectedCountry = p0;
+                                              bloc.validateFieldsForFaze1();
+                                            },
+                                          );
+                                        }),
+                                  ),
+                                  Expanded(
+                                    child: GenderField(
+                                      controller: bloc.genderController,
+                                      onChange: (p0) =>
+                                          bloc.validateFieldsForFaze1(),
                                     ),
                                   ),
                                 ],
