@@ -3,11 +3,11 @@ import 'package:legalz_hub_app/shared_widget/custom_text_style.dart';
 import 'package:legalz_hub_app/shared_widget/date_of_birth/date_of_birth_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class NewDateOfBirthField extends StatefulWidget {
+class DateOfBirthField extends StatefulWidget {
   final String language;
   final String? selectedDate;
   final Function(String) dateSelected;
-  const NewDateOfBirthField({
+  const DateOfBirthField({
     super.key,
     required this.language,
     required this.selectedDate,
@@ -15,10 +15,10 @@ class NewDateOfBirthField extends StatefulWidget {
   });
 
   @override
-  State<NewDateOfBirthField> createState() => _NewDateOfBirthFieldState();
+  State<DateOfBirthField> createState() => _DateOfBirthFieldState();
 }
 
-class _NewDateOfBirthFieldState extends State<NewDateOfBirthField> {
+class _DateOfBirthFieldState extends State<DateOfBirthField> {
   final bloc = DateofBirthBloc();
 
   @override
@@ -34,6 +34,9 @@ class _NewDateOfBirthFieldState extends State<NewDateOfBirthField> {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: TextField(
+        onTapOutside: (_) {
+          bloc.focusNode.unfocus();
+        },
         readOnly: true,
         autocorrect: false,
         enableSuggestions: false,
@@ -41,6 +44,7 @@ class _NewDateOfBirthFieldState extends State<NewDateOfBirthField> {
         controller: bloc.dobController,
         cursorWidth: 1,
         cursorColor: const Color(0xff100C31),
+        focusNode: bloc.focusNode,
         textAlign: TextAlign.justify,
         textAlignVertical: TextAlignVertical.center,
         style:
@@ -72,14 +76,15 @@ class _NewDateOfBirthFieldState extends State<NewDateOfBirthField> {
     DateTime? datePicked = await showDatePicker(
       context: context,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      initialDate: bloc.parseDate(bloc.dobController.text) ?? DateTime(2000),
+      initialDate: bloc.dobController.text.isNotEmpty
+          ? bloc.parseDate(bloc.dobController.text) ?? DateTime(2000)
+          : DateTime(2000),
       firstDate: DateTime(1945, 01, 01),
       lastDate: DateTime(DateTime.now().year - 18, 1, 1),
       locale: Locale(widget.language),
       confirmText: AppLocalizations.of(context)!.ok,
       cancelText: AppLocalizations.of(context)!.cancel,
     );
-
     if (datePicked != null) {
       setState(() {
         bloc.format(datePicked);

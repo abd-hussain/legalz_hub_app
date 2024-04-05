@@ -52,11 +52,7 @@ class MyAppState extends State<MyApp> {
         Locale('en', ''),
         Locale('ar', ''),
       ],
-      theme: ThemeData(
-        useMaterial3: false,
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: ThemeData(useMaterial3: false),
       scrollBehavior: MyCustomScrollBehavior(),
       onGenerateRoute: (settings) {
         return PageRouteBuilder(

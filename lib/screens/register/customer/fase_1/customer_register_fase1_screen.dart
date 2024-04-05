@@ -259,7 +259,6 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                 height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              //TODO: Keyboard not open in android
                               padding:
                                   const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
@@ -270,7 +269,7 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            NewDateOfBirthField(
+                            DateOfBirthField(
                               language:
                                   bloc.box.get(DatabaseFieldConstant.language),
                               selectedDate: bloc.selectedDate,
