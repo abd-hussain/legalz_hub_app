@@ -11,6 +11,7 @@ import 'package:legalz_hub_app/screens/register/attorney/fase_5/attorney_registe
 import 'package:legalz_hub_app/screens/register/customer/fase_1/customer_register_fase1_screen.dart';
 import 'package:legalz_hub_app/screens/register/customer/fase_2/customer_register_fase2_screen.dart';
 import 'package:legalz_hub_app/screens/register/final_stage/register_final_screen.dart';
+import 'package:legalz_hub_app/screens/register/terms/terms_screen.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
 
 class RoutesConstants {
@@ -27,10 +28,9 @@ class RoutesConstants {
   static const String registerAttornyFaze3Screen = 'registerAttornyFaze3Screen';
   static const String registerAttornyFaze4Screen = 'registerAttornyFaze4Screen';
   static const String registerAttornyFaze5Screen = 'registerAttornyFaze5Screen';
-  static const String registerCustomerFaze1Screen =
-      'registerCustomerFaze1Screen';
-  static const String registerCustomerFaze2Screen =
-      'registerCustomerFaze2Screen';
+  static const String registerCustomerFaze1Screen = 'registerCustomerFaze1Screen';
+  static const String registerCustomerFaze2Screen = 'registerCustomerFaze2Screen';
+  static const String registerTermsAndConditionScreen = 'registerTermsAndConditionScreen';
 
   static const String registerfinalfazeScreen = 'registerfinalfazeScreen';
   static const String notificationsScreen = 'notificationsScreen';
@@ -46,8 +46,7 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
-  static const String forgotPasswordConfirmationScreen =
-      'forgotPasswordConfirmationScreen';
+  static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
   static const String insideCallScreen = 'InsideCallScreen';
   static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
 }
@@ -57,8 +56,7 @@ final Map<String, Widget> routes = {
   RoutesConstants.loginScreen: const LoginScreen(),
   RoutesConstants.tutorialsScreen: const TutorialsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
-  RoutesConstants.forgotPasswordConfirmationScreen:
-      const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
   RoutesConstants.registerAttornyFaze1Screen: const AttorneyRegister1Screen(),
   RoutesConstants.registerAttornyFaze2Screen: const AttorneyRegister2Screen(),
   RoutesConstants.registerAttornyFaze3Screen: const AttorneyRegister3Screen(),
@@ -67,6 +65,8 @@ final Map<String, Widget> routes = {
 
   RoutesConstants.registerCustomerFaze1Screen: const CustomerRegister1Screen(),
   RoutesConstants.registerCustomerFaze2Screen: const CustomerRegister2Screen(),
+
+  RoutesConstants.registerTermsAndConditionScreen: const TermsAndConditionScreen(),
 
   RoutesConstants.registerfinalfazeScreen: const RegisterFinalScreen(),
 

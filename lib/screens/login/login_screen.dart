@@ -7,7 +7,6 @@ import 'package:legalz_hub_app/screens/login/widgets/save_password_view.dart';
 import 'package:legalz_hub_app/screens/register/widgets/attoreny_bottom_sheet.dart';
 import 'package:legalz_hub_app/screens/register/widgets/customer_bottom_sheet.dart';
 import 'package:legalz_hub_app/screens/register/widgets/select_user_type_bottom_sheet.dart';
-import 'package:legalz_hub_app/screens/register/widgets/terms_bottom_sheet.dart';
 import 'package:legalz_hub_app/shared_widget/background_container.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
@@ -77,43 +76,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: bloc.emailController,
                                     onClear: () {
                                       bloc.emailController.clear();
-                                      bloc.showHideEmailClearNotifier.value =
-                                          false;
+                                      bloc.showHideEmailClearNotifier.value = false;
                                       bloc.fieldsValidations.value = false;
                                     },
                                     onchange: () => bloc.fieldValidation(),
-                                    onEditingComplete: () => FocusManager
-                                        .instance.primaryFocus
-                                        ?.unfocus(),
-                                    showHideEmailClearNotifier:
-                                        bloc.showHideEmailClearNotifier,
+                                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                    showHideEmailClearNotifier: bloc.showHideEmailClearNotifier,
                                   ),
                                   const SizedBox(height: 20),
                                   PasswordField(
                                     controller: bloc.passwordController,
                                     onClear: () {
                                       bloc.passwordController.clear();
-                                      bloc.showHidePasswordClearNotifier.value =
-                                          false;
+                                      bloc.showHidePasswordClearNotifier.value = false;
                                       bloc.fieldsValidations.value = false;
                                     },
                                     onchange: () => bloc.fieldValidation(),
-                                    showHidePasswordClearNotifier:
-                                        bloc.showHidePasswordClearNotifier,
-                                    onEditingComplete: () => FocusManager
-                                        .instance.primaryFocus
-                                        ?.unfocus(),
+                                    showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
+                                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
                                   ),
                                   SavePasswordLoginView(
-                                    initialValue: bloc.box.get(
-                                            DatabaseFieldConstant
-                                                .saveEmailAndPassword) ??
-                                        false,
+                                    initialValue: bloc.box.get(DatabaseFieldConstant.saveEmailAndPassword) ?? false,
                                     selectedStatus: (val) {
-                                      bloc.box.put(
-                                          DatabaseFieldConstant
-                                              .saveEmailAndPassword,
-                                          val);
+                                      bloc.box.put(DatabaseFieldConstant.saveEmailAndPassword, val);
                                     },
                                   ),
                                   Padding(
@@ -136,59 +121,39 @@ class _LoginScreenState extends State<LoginScreen> {
                                       valueListenable: bloc.fieldsValidations,
                                       builder: (context, snapshot, child) {
                                         return CustomButton(
-                                          padding: const EdgeInsets.only(
-                                              left: 16, right: 16),
-                                          buttonTitle:
-                                              AppLocalizations.of(context)!
-                                                  .login,
+                                          padding: const EdgeInsets.only(left: 16, right: 16),
+                                          buttonTitle: AppLocalizations.of(context)!.login,
                                           enableButton: snapshot,
                                           onTap: () {
-                                            FocusScope.of(context)
-                                                .requestFocus(FocusNode());
+                                            FocusScope.of(context).requestFocus(FocusNode());
                                             bloc.doLoginCall(
                                               context: context,
-                                              userName: bloc
-                                                  .emailController.text
-                                                  .trim(),
-                                              password:
-                                                  bloc.passwordController.text,
+                                              userName: bloc.emailController.text.trim(),
+                                              password: bloc.passwordController.text,
                                             );
                                           },
                                         );
                                       }),
-                                  ValueListenableBuilder<
-                                          AuthenticationBiometricType>(
-                                      valueListenable:
-                                          bloc.biometricResultNotifier,
+                                  ValueListenableBuilder<AuthenticationBiometricType>(
+                                      valueListenable: bloc.biometricResultNotifier,
                                       builder: (context, snapshot, child) {
-                                        return (snapshot.isAvailable &&
-                                                bloc.biometricStatus)
+                                        return (snapshot.isAvailable && bloc.biometricStatus)
                                             ? BiometrincLoginView(
                                                 biometricType: snapshot.type,
                                                 onPress: () async {
-                                                  final contextScafold =
-                                                      ScaffoldMessenger.of(
-                                                          context);
+                                                  final contextScafold = ScaffoldMessenger.of(context);
 
-                                                  if (!bloc
-                                                      .isBiometricAppeared) {
+                                                  if (!bloc.isBiometricAppeared) {
                                                     if (context.mounted) {
-                                                      await bloc.box.get(
-                                                                  DatabaseFieldConstant
-                                                                      .biometricStatus) ==
+                                                      await bloc.box.get(DatabaseFieldConstant.biometricStatus) ==
                                                               'true'
                                                           // ignore: use_build_context_synchronously
-                                                          ? await bloc
-                                                              .tryToAuthintecateUserByBiometric(
-                                                                  context)
-                                                          : contextScafold
-                                                              .showSnackBar(
+                                                          ? await bloc.tryToAuthintecateUserByBiometric(context)
+                                                          : contextScafold.showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
                                                                     // ignore: use_build_context_synchronously
-                                                                    AppLocalizations.of(
-                                                                            context)!
-                                                                        .biometricsisdisable),
+                                                                    AppLocalizations.of(context)!.biometricsisdisable),
                                                               ),
                                                             );
                                                     }
@@ -206,8 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.fromLTRB(50, 16, 50, 5),
                               child: CustomText(
                                 textAlign: TextAlign.center,
-                                title: AppLocalizations.of(context)!
-                                    .dontHaveAccount,
+                                title: AppLocalizations.of(context)!.dontHaveAccount,
                                 textColor: const Color(0xff212C34),
                                 fontSize: 14,
                               ),
@@ -217,10 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: InkWell(
                                 onTap: () {
                                   final selectUserTypeBottomsheet =
-                                      SelectUserTypeRegisterBottomSheetsUtil(
-                                          context: context);
-                                  selectUserTypeBottomsheet.infoBottomSheet(
-                                      openNext: (userType) {
+                                      SelectUserTypeRegisterBottomSheetsUtil(context: context);
+                                  selectUserTypeBottomsheet.infoBottomSheet(openNext: (userType) {
                                     whereToGo(userType, context);
                                   });
                                 },
@@ -228,8 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textAlign: TextAlign.center,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  title: AppLocalizations.of(context)!
-                                      .registerAccount,
+                                  title: AppLocalizations.of(context)!.registerAccount,
                                   textColor: const Color(0xff0059FF),
                                 ),
                               ),
@@ -246,8 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void whereToGo(UserType userType, BuildContext context) {
     switch (userType) {
       case UserType.attorney:
-        final String step =
-            bloc.box.get(DatabaseFieldConstant.attorneyRegistrationStep) ?? "0";
+        final String step = bloc.box.get(DatabaseFieldConstant.attorneyRegistrationStep) ?? "0";
         final int stepNum = int.parse(step);
         final bottomsheet = RegisterAttorneyBottomSheetsUtil(
           context: context,
@@ -259,48 +219,32 @@ class _LoginScreenState extends State<LoginScreen> {
             openNext: () {
               switch (stepNum) {
                 case 1:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze1Screen);
                   break;
                 case 2:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze2Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze2Screen);
                   break;
                 case 3:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze3Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze3Screen);
                   break;
                 case 4:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze4Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze4Screen);
                   break;
                 case 5:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze5Screen);
                   break;
                 case 6:
-                  Navigator.of(context, rootNavigator: true).pushNamed(
-                      RoutesConstants.registerfinalfazeScreen,
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.attorney});
                   break;
                 default:
-                  TermsRegisterBottomSheetsUtil(
-                          context: context,
-                          language:
-                              bloc.box.get(DatabaseFieldConstant.language) ??
-                                  "")
-                      .bottomSheet(approved: () {
-                    bloc.box.put(
-                        DatabaseFieldConstant.attorneyRegistrationStep, "1");
-                    Navigator.of(context, rootNavigator: true)
-                        .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
-                  });
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerTermsAndConditionScreen,
+                      arguments: {AppConstant.userType: UserType.attorney});
                   break;
               }
             });
       case UserType.customer:
-        final String step =
-            bloc.box.get(DatabaseFieldConstant.customerRegistrationStep) ?? "0";
+        final String step = bloc.box.get(DatabaseFieldConstant.customerRegistrationStep) ?? "0";
         final int stepNum = int.parse(step);
         final bottomsheet = RegisterCustomerBottomSheetsUtil(
           context: context,
@@ -311,30 +255,18 @@ class _LoginScreenState extends State<LoginScreen> {
             openNext: () {
               switch (stepNum) {
                 case 1:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerCustomerFaze1Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerCustomerFaze1Screen);
                   break;
                 case 2:
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerCustomerFaze2Screen);
                   break;
                 case 3:
-                  Navigator.of(context, rootNavigator: true).pushNamed(
-                      RoutesConstants.registerfinalfazeScreen,
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.customer});
                   break;
                 default:
-                  TermsRegisterBottomSheetsUtil(
-                          context: context,
-                          language:
-                              bloc.box.get(DatabaseFieldConstant.language) ??
-                                  "")
-                      .bottomSheet(approved: () {
-                    bloc.box.put(
-                        DatabaseFieldConstant.customerRegistrationStep, "1");
-                    Navigator.of(context, rootNavigator: true)
-                        .pushNamed(RoutesConstants.registerCustomerFaze1Screen);
-                  });
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerTermsAndConditionScreen,
+                      arguments: {AppConstant.userType: UserType.customer});
                   break;
               }
             });

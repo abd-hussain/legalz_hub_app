@@ -7,6 +7,7 @@ import 'package:legalz_hub_app/services/attorney/attorney_appointments_service.d
 import 'package:legalz_hub_app/services/attorney/attorney_hour_rate_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_settings_service.dart';
 import 'package:legalz_hub_app/services/auth_services.dart';
+import 'package:legalz_hub_app/services/customer/customer_register_service.dart';
 import 'package:legalz_hub_app/services/discount_service.dart';
 import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/services/general/authentication_service.dart';
@@ -38,20 +39,16 @@ Future<void> setupLocator() async {
   locator.registerFactory<NotificationsService>(() => NotificationsService());
   locator.registerFactory<ReportService>(() => ReportService());
   locator.registerFactory<SettingService>(() => SettingService());
+  locator.registerFactory<CustomerRegisterService>(() => CustomerRegisterService());
+  locator.registerFactory<AttorneyRegisterService>(() => AttorneyRegisterService());
 
-  locator.registerFactory<AttorneyAccountExperianceService>(
-      () => AttorneyAccountExperianceService());
-  locator
-      .registerFactory<AttorneyAccountService>(() => AttorneyAccountService());
-  locator.registerFactory<AttorneyAppointmentsService>(
-      () => AttorneyAppointmentsService());
-  locator.registerFactory<AttorneyHourRateService>(
-      () => AttorneyHourRateService());
+  locator.registerFactory<AttorneyAccountExperianceService>(() => AttorneyAccountExperianceService());
+  locator.registerFactory<AttorneyAccountService>(() => AttorneyAccountService());
+  locator.registerFactory<AttorneyAppointmentsService>(() => AttorneyAppointmentsService());
+  locator.registerFactory<AttorneyHourRateService>(() => AttorneyHourRateService());
   locator.registerFactory<PaymentService>(() => PaymentService());
-  locator.registerFactory<AttorneyRegisterService>(
-      () => AttorneyRegisterService());
-  locator.registerFactory<AttorneySettingsService>(
-      () => AttorneySettingsService());
+
+  locator.registerFactory<AttorneySettingsService>(() => AttorneySettingsService());
   locator.registerFactory<WorkingHoursService>(() => WorkingHoursService());
 
   locator.registerLazySingleton(() => AuthenticationService());
