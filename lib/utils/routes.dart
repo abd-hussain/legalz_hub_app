@@ -3,6 +3,7 @@ import 'package:legalz_hub_app/screens/forgot_password/forgot_password_confirmat
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
+import 'package:legalz_hub_app/screens/main_container/main_container.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_screen.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_2/attorney_register_fase2_screen.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_3/attorney_register_fase3_screen.dart';
@@ -12,17 +13,22 @@ import 'package:legalz_hub_app/screens/register/customer/fase_1/customer_registe
 import 'package:legalz_hub_app/screens/register/customer/fase_2/customer_register_fase2_screen.dart';
 import 'package:legalz_hub_app/screens/register/final_stage/register_final_screen.dart';
 import 'package:legalz_hub_app/screens/register/terms/terms_screen.dart';
+import 'package:legalz_hub_app/screens/tabs/account_tab/account_screen.dart';
+import 'package:legalz_hub_app/screens/tabs/calender_tab/calender_screen.dart';
+import 'package:legalz_hub_app/screens/tabs/call_tab/call_screen.dart';
+import 'package:legalz_hub_app/screens/tabs/category_tab/category_screen.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/home_screen.dart';
+import 'package:legalz_hub_app/screens/tabs/payment_tab/payment_screen.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
   static const String loginScreen = 'loginScreen';
-  static const String reportScreen = 'reportScreen';
+  static const String tutorialsScreen = 'tutorialsScreen';
   static const String mainContainer = 'mainContainer';
-  static const String homeScreen = 'homeScreen';
-  static const String callScreen = 'callScreen';
-  static const String calenderScreen = 'calenderScreen';
-  static const String accountScreen = 'accountScreen';
+  static const String forgotPasswordScreen = 'forgotPasswordScreen';
+  static const String forgotPasswordConfirmationScreen =
+      'forgotPasswordConfirmationScreen';
   static const String registerAttornyFaze1Screen = 'registerAttornyFaze1Screen';
   static const String registerAttornyFaze2Screen = 'registerAttornyFaze2Screen';
   static const String registerAttornyFaze3Screen = 'registerAttornyFaze3Screen';
@@ -34,23 +40,23 @@ class RoutesConstants {
       'registerCustomerFaze2Screen';
   static const String registerTermsAndConditionScreen =
       'registerTermsAndConditionScreen';
-
   static const String registerfinalfazeScreen = 'registerfinalfazeScreen';
+
+  static const String reportScreen = 'reportScreen';
+  static const String homeScreen = 'homeScreen';
+  static const String callScreen = 'callScreen';
+  static const String calenderScreen = 'calenderScreen';
+  static const String accountScreen = 'accountScreen';
   static const String notificationsScreen = 'notificationsScreen';
   static const String webViewScreen = 'webViewScreen';
   static const String inviteFriendScreen = 'inviteFriendScreen';
-  static const String tutorialsScreen = 'tutorialsScreen';
   static const String changePasswordScreen = 'changePasswordScreen';
   static const String editProfileScreen = 'editProfileScreen';
   static const String editExperienceScreen = 'editExperienceScreen';
   static const String workingHoursScreen = 'workingHoursScreen';
   static const String ratePerHourScreen = 'ratePerHourScreen';
-
+  static const String categoriesScreen = 'categoriesScreen';
   static const String paymentsScreen = 'paymentsScreen';
-  static const String forgotPasswordScreen = 'forgotPasswordScreen';
-  static const String eventDetailsScreen = 'eventDetailsScreen';
-  static const String forgotPasswordConfirmationScreen =
-      'forgotPasswordConfirmationScreen';
   static const String insideCallScreen = 'InsideCallScreen';
   static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
 }
@@ -75,15 +81,18 @@ final Map<String, Widget> routes = {
       const TermsAndConditionScreen(),
 
   RoutesConstants.registerfinalfazeScreen: const RegisterFinalScreen(),
+  RoutesConstants.mainContainer: const MainContainer(),
+
+  RoutesConstants.homeScreen: const HomeTabScreen(),
+  RoutesConstants.callScreen: const CallTabScreen(),
+  RoutesConstants.calenderScreen: const CalenderTabScreen(),
+  RoutesConstants.accountScreen: const AccountTabScreen(),
+  RoutesConstants.paymentsScreen: const PaymentTabScreen(),
+  RoutesConstants.categoriesScreen: const CategoryTabScreen(),
 
   //TODO
 
-  // RoutesConstants.mainContainer: const MainContainer(),
-  // RoutesConstants.homeScreen: const HomeScreen(),
-  // RoutesConstants.callScreen: const CallScreen(),
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
-  // RoutesConstants.calenderScreen: const CalenderScreen(),
-  // RoutesConstants.accountScreen: const AccountScreen(),
   // RoutesConstants.webViewScreen: const WebViewScreen(),
   // RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
   // RoutesConstants.reportScreen: const ReportScreen(),
@@ -93,7 +102,7 @@ final Map<String, Widget> routes = {
   // RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
   // RoutesConstants.workingHoursScreen: const WorkingHoursScreen(),
   // RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
-  // RoutesConstants.paymentsScreen: const PaymentsScreen(),
+  //
   // RoutesConstants.notificationsScreen: const NotificationsScreen(),
   // RoutesConstants.ratingAndReviewScreen: const RatingAndReviewScreen()
 };

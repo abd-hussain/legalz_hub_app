@@ -174,10 +174,12 @@ class LoginBloc extends Bloc<AuthService> {
   _saveValuesInMemory(
       {required String userName,
       required String password,
-      required String token}) async {
+      required String token,
+      required String userType}) async {
     await box.put(DatabaseFieldConstant.token, token);
     await box.put(DatabaseFieldConstant.biometricU, userName);
     await box.put(DatabaseFieldConstant.biometricP, password);
+    await box.put(DatabaseFieldConstant.userType, userType);
 
     await getUserIdFromJWT(token);
   }
@@ -202,7 +204,10 @@ class LoginBloc extends Bloc<AuthService> {
     try {
       final info = await service.login(loginData: loginData);
       await _saveValuesInMemory(
-          userName: userName, password: password, token: info["data"]);
+          userName: userName,
+          password: password,
+          token: info["data"]["Bearer"],
+          userType: info["data"]["user"]);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openMainScreen(maincontext!);
     } on DioException catch (e) {

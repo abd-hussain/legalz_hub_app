@@ -4,6 +4,7 @@ class DatabaseBoxConstant {
 
 class DatabaseFieldConstant {
   static const String apikey = "apikey";
+  static const String userType = "userType";
   static const String token = "token";
   static const String language = "language";
   static const String userid = "userid";

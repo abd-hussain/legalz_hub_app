@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:legalz_hub_app/main_context.dart';
+import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_account_experiance_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_account_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_appointments_service.dart';
@@ -70,6 +71,5 @@ Future<void> setupLocator() async {
   // await remoteConfigService.initInstance();
 
   // locator.registerLazySingleton(() => remoteConfigService);
-  //TODO
-  // locator.registerSingleton<MainContainerBloc>(MainContainerBloc());
+  locator.registerFactory<MainContainerBloc>(() => MainContainerBloc());
 }
