@@ -33,9 +33,12 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
 
   ValueNotifier<bool?> validateReferalCode = ValueNotifier<bool?>(null);
 
-  ValueNotifier<List<Country>> listOfCountries = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
-  StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
+  ValueNotifier<List<Country>> listOfCountries =
+      ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<SuffixData>> listOfSuffix =
+      ValueNotifier<List<SuffixData>>([]);
+  StreamController<LoadingStatus> loadingStatusController =
+      StreamController<LoadingStatus>();
   ValueNotifier<bool> mobileNumberErrorMessage = ValueNotifier<bool>(false);
 
   String countryCode = "";
@@ -48,14 +51,17 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
 
   tryToFillTheFields() {
     if (box.get(TempFieldToRegistrtAttorneyConstant.suffix) != null) {
-      suffixNameController.text = box.get(TempFieldToRegistrtAttorneyConstant.suffix);
+      suffixNameController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.suffix);
     }
     if (box.get(TempFieldToRegistrtAttorneyConstant.firstName) != null) {
-      firstNameController.text = box.get(TempFieldToRegistrtAttorneyConstant.firstName);
+      firstNameController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.firstName);
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.lastName) != null) {
-      lastNameController.text = box.get(TempFieldToRegistrtAttorneyConstant.lastName);
+      lastNameController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.lastName);
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.dateOfBirth) != null) {
@@ -63,11 +69,13 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.gender) != null) {
-      genderController.text = box.get(TempFieldToRegistrtAttorneyConstant.gender);
+      genderController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.gender);
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.profileImage) != null) {
-      profileImageUrl = box.get(TempFieldToRegistrtAttorneyConstant.profileImage);
+      profileImageUrl =
+          box.get(TempFieldToRegistrtAttorneyConstant.profileImage);
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.idImage) != null) {
@@ -75,25 +83,44 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.referalCode) != null) {
-      referalCodeController.text = box.get(TempFieldToRegistrtAttorneyConstant.referalCode);
+      referalCodeController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.referalCode);
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.country) != null) {
       var id = int.parse(box.get(TempFieldToRegistrtAttorneyConstant.country));
       selectedCountry = Country(
         id: id,
-        flagImage: listOfCountries.value.firstWhere((element) => element.id == id).flagImage,
-        name: listOfCountries.value.firstWhere((element) => element.id == id).name,
-        currency: listOfCountries.value.firstWhere((element) => element.id == id).currency,
-        dialCode: listOfCountries.value.firstWhere((element) => element.id == id).dialCode,
-        maxLength: listOfCountries.value.firstWhere((element) => element.id == id).maxLength,
-        minLength: listOfCountries.value.firstWhere((element) => element.id == id).minLength,
+        flagImage: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .flagImage,
+        name: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .name,
+        currency: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .currency,
+        dialCode: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .dialCode,
+        maxLength: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .maxLength,
+        minLength: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .minLength,
       );
 
       country = selectedCountry;
 
-      countryCode = listOfCountries.value.firstWhere((element) => element.id == id).dialCode ?? "";
-      countryController.text = listOfCountries.value.firstWhere((element) => element.id == id).name ?? "";
+      countryCode = listOfCountries.value
+              .firstWhere((element) => element.id == id)
+              .dialCode ??
+          "";
+      countryController.text = listOfCountries.value
+              .firstWhere((element) => element.id == id)
+              .name ??
+          "";
     }
     loadingStatusController.sink.add(LoadingStatus.finish);
   }
@@ -131,8 +158,10 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
       name: box.get(DatabaseFieldConstant.selectedCountryName),
       currency: box.get(DatabaseFieldConstant.selectedCountryCurrency),
       dialCode: box.get(DatabaseFieldConstant.selectedCountryDialCode),
-      maxLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
-      minLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
+      maxLength:
+          int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
+      minLength:
+          int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
     );
     return country!;
   }
@@ -148,7 +177,8 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
   void getlistOfCountries() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
     service.countries().then((value) {
-      listOfCountries.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountries.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
 
       tryToFillTheFields();
     });

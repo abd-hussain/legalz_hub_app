@@ -31,7 +31,8 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
       });
     });
 
-    bloc.handleReadingArguments(arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(
+        arguments: ModalRoute.of(context)!.settings.arguments);
     super.didChangeDependencies();
   }
 
@@ -70,27 +71,39 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                       CustomButton(
                           enableButton: true,
                           onTap: () async {
-                            final scaffoldMessenger = ScaffoldMessenger.of(context);
+                            final scaffoldMessenger =
+                                ScaffoldMessenger.of(context);
                             final navigation = Navigator.of(context);
                             final localization = AppLocalizations.of(context)!;
                             bloc.loadingStatus.value = LoadingStatus.inprogress;
 
                             if (bloc.userType == UserType.attorney) {
                               try {
-                                await bloc.handleCreatingTheAttorneyProfile(context).then((value) async {
-                                  bloc.loadingStatus.value = LoadingStatus.finish;
+                                await bloc
+                                    .handleCreatingTheAttorneyProfile(context)
+                                    .then((value) async {
+                                  bloc.loadingStatus.value =
+                                      LoadingStatus.finish;
                                   scaffoldMessenger.showSnackBar(
                                     SnackBar(
-                                      content: Text(localization.accountcreatedsuccessfully),
+                                      content: Text(localization
+                                          .accountcreatedsuccessfully),
                                     ),
                                   );
-                                  await bloc.box.put(DatabaseFieldConstant.biometricU,
-                                      bloc.box.get(TempFieldToRegistrtAttorneyConstant.email));
-                                  await bloc.box.put(DatabaseFieldConstant.biometricP,
-                                      bloc.box.get(TempFieldToRegistrtAttorneyConstant.password));
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricU,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtAttorneyConstant
+                                              .email));
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricP,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtAttorneyConstant
+                                              .password));
                                   await bloc.clearAttorneyRegistrationData();
 
-                                  navigation.pushReplacement(MaterialPageRoute(builder: (ctx) {
+                                  navigation.pushReplacement(
+                                      MaterialPageRoute(builder: (ctx) {
                                     return const LoginScreen();
                                   }));
                                 });
@@ -105,20 +118,31 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                               }
                             } else {
                               try {
-                                await bloc.handleCreatingTheCustomerProfile(context).then((value) async {
-                                  bloc.loadingStatus.value = LoadingStatus.finish;
+                                await bloc
+                                    .handleCreatingTheCustomerProfile(context)
+                                    .then((value) async {
+                                  bloc.loadingStatus.value =
+                                      LoadingStatus.finish;
                                   scaffoldMessenger.showSnackBar(
                                     SnackBar(
-                                      content: Text(localization.accountcreatedsuccessfully),
+                                      content: Text(localization
+                                          .accountcreatedsuccessfully),
                                     ),
                                   );
-                                  await bloc.box.put(DatabaseFieldConstant.biometricU,
-                                      bloc.box.get(TempFieldToRegistrtCustomerConstant.email));
-                                  await bloc.box.put(DatabaseFieldConstant.biometricP,
-                                      bloc.box.get(TempFieldToRegistrtCustomerConstant.password));
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricU,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtCustomerConstant
+                                              .email));
+                                  await bloc.box.put(
+                                      DatabaseFieldConstant.biometricP,
+                                      bloc.box.get(
+                                          TempFieldToRegistrtCustomerConstant
+                                              .password));
                                   await bloc.clearCustomerRegistrationData();
 
-                                  navigation.pushReplacement(MaterialPageRoute(builder: (ctx) {
+                                  navigation.pushReplacement(
+                                      MaterialPageRoute(builder: (ctx) {
                                     return const LoginScreen();
                                   }));
                                 });
@@ -135,7 +159,9 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                           }),
                     ],
                   ),
-                  snapshot == LoadingStatus.inprogress ? const LoadingView(fullScreen: true) : Container()
+                  snapshot == LoadingStatus.inprogress
+                      ? const LoadingView(fullScreen: true)
+                      : Container()
                 ],
               );
             }),

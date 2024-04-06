@@ -57,10 +57,13 @@ class HttpInterceptor extends InterceptorsWrapper {
           error: response.statusCode,
           message: "response.data ${response.data.toString()}",
         );
+
         throw DioException(
             error: HttpException(
                 status: response.statusCode!,
-                message: response.data["detail"] ?? response.data.toString(),
+                message: response.data["detail"] ?? response.data != null
+                    ? response.data.toString()
+                    : "",
                 requestId: ""),
             requestOptions: response.requestOptions);
       default:

@@ -12,9 +12,11 @@ class RegisterCustomerBottomSheetsUtil {
   final BuildContext context;
   final String language;
 
-  RegisterCustomerBottomSheetsUtil({required this.language, required this.context});
+  RegisterCustomerBottomSheetsUtil(
+      {required this.language, required this.context});
 
-  Future infoBottomSheet({required int step, required Function() openNext}) async {
+  Future infoBottomSheet(
+      {required int step, required Function() openNext}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -29,7 +31,8 @@ class RegisterCustomerBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding:
+              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
@@ -83,7 +86,8 @@ class RegisterCustomerBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep1,
                 textColor: step >= 1 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerTermsAndConditionScreen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(
+                      RoutesConstants.registerTermsAndConditionScreen);
                 },
               ),
               const SizedBox(height: 20),
@@ -92,7 +96,8 @@ class RegisterCustomerBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep2,
                 textColor: step >= 2 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerCustomerFaze1Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerCustomerFaze1Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -101,7 +106,8 @@ class RegisterCustomerBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep6,
                 textColor: step >= 3 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerCustomerFaze2Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -110,7 +116,8 @@ class RegisterCustomerBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep7,
                 textColor: step >= 4 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen,
+                  Navigator.of(context, rootNavigator: true).pushNamed(
+                      RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.customer});
                 },
               ),

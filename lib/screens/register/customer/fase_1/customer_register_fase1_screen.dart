@@ -23,7 +23,8 @@ class CustomerRegister1Screen extends StatefulWidget {
   const CustomerRegister1Screen({super.key});
 
   @override
-  State<CustomerRegister1Screen> createState() => _CustomerRegister1ScreenState();
+  State<CustomerRegister1Screen> createState() =>
+      _CustomerRegister1ScreenState();
 }
 
 class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
@@ -56,20 +57,34 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
               enableNextButton: snapshot.data!,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.firstName, bloc.firstNameController.text);
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.lastName, bloc.lastNameController.text);
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.country, bloc.selectedCountry!.id.toString());
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.gender, bloc.genderController.text);
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.profileImage,
+                await bloc.box.put(
+                    TempFieldToRegistrtCustomerConstant.firstName,
+                    bloc.firstNameController.text);
+                await bloc.box.put(TempFieldToRegistrtCustomerConstant.lastName,
+                    bloc.lastNameController.text);
+                await bloc.box.put(TempFieldToRegistrtCustomerConstant.country,
+                    bloc.selectedCountry!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtCustomerConstant.gender,
+                    bloc.genderController.text);
+                await bloc.box.put(
+                    TempFieldToRegistrtCustomerConstant.profileImage,
                     bloc.profileImage != null ? bloc.profileImage!.path : "");
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.dateOfBirth, bloc.selectedDate);
-                await bloc.box
-                    .put(TempFieldToRegistrtCustomerConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
+                await bloc.box.put(
+                    TempFieldToRegistrtCustomerConstant.dateOfBirth,
+                    bloc.selectedDate);
+                await bloc.box.put(
+                    TempFieldToRegistrtCustomerConstant.phoneNumber,
+                    bloc.countryCode + bloc.mobileController);
 
-                await bloc.box.put(TempFieldToRegistrtCustomerConstant.referalCode,
-                    bloc.validateReferalCode.value == true ? bloc.referalCodeController.text : "");
-                await bloc.box.put(DatabaseFieldConstant.customerRegistrationStep, "2");
-                navigator.pushNamed(RoutesConstants.registerCustomerFaze2Screen);
+                await bloc.box.put(
+                    TempFieldToRegistrtCustomerConstant.referalCode,
+                    bloc.validateReferalCode.value == true
+                        ? bloc.referalCodeController.text
+                        : "");
+                await bloc.box
+                    .put(DatabaseFieldConstant.customerRegistrationStep, "2");
+                navigator
+                    .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
               },
             );
           }),
@@ -95,14 +110,18 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                           children: [
                             const SizedBox(height: 20),
                             Padding(
-                              padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                              padding: bloc.box.get(
+                                          DatabaseFieldConstant.language) ==
+                                      "ar"
                                   ? const EdgeInsets.only(right: 16)
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
                                   ImageHolderField(
                                       isFromNetwork: bloc.profileImageUrl != "",
-                                      urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
+                                      urlImage: bloc.profileImageUrl == ""
+                                          ? null
+                                          : bloc.profileImageUrl,
                                       onAddImage: (file) {
                                         bloc.profileImage = file;
                                         bloc.validateFieldsForFaze1();
@@ -117,20 +136,34 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                       children: [
                                         CustomTextField(
                                           controller: bloc.firstNameController,
-                                          hintText: AppLocalizations.of(context)!.firstnameprofile,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .firstnameprofile,
                                           keyboardType: TextInputType.name,
-                                          inputFormatters: [LengthLimitingTextInputFormatter(45)],
-                                          onChange: (text) => bloc.validateFieldsForFaze1(),
-                                          onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(45)
+                                          ],
+                                          onChange: (text) =>
+                                              bloc.validateFieldsForFaze1(),
+                                          onEditingComplete: () => FocusManager
+                                              .instance.primaryFocus
+                                              ?.unfocus(),
                                         ),
                                         const SizedBox(height: 10),
                                         CustomTextField(
                                           controller: bloc.lastNameController,
-                                          hintText: AppLocalizations.of(context)!.lastnameprofile,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .lastnameprofile,
                                           keyboardType: TextInputType.name,
-                                          inputFormatters: [LengthLimitingTextInputFormatter(45)],
-                                          onChange: (text) => bloc.validateFieldsForFaze1(),
-                                          onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(45)
+                                          ],
+                                          onChange: (text) =>
+                                              bloc.validateFieldsForFaze1(),
+                                          onEditingComplete: () => FocusManager
+                                              .instance.primaryFocus
+                                              ?.unfocus(),
                                         ),
                                       ],
                                     ),
@@ -139,16 +172,20 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                              padding: bloc.box.get(
+                                          DatabaseFieldConstant.language) ==
+                                      "ar"
                                   ? const EdgeInsets.only(right: 16)
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: ValueListenableBuilder<List<Country>>(
+                                    child: ValueListenableBuilder<
+                                            List<Country>>(
                                         valueListenable: bloc.listOfCountries,
                                         builder: (context, snapshot, child) {
                                           return CountryField(
@@ -164,33 +201,40 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                   Expanded(
                                     child: GenderField(
                                       controller: bloc.genderController,
-                                      onChange: (p0) => bloc.validateFieldsForFaze1(),
+                                      onChange: (p0) =>
+                                          bloc.validateFieldsForFaze1(),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             const MobileHeader(),
                             ValueListenableBuilder<List<Country>>(
                                 valueListenable: bloc.listOfCountries,
                                 builder: (context, snapshot, child) {
                                   return MobileNumberField(
-                                      initialCountry: bloc.returnSelectedCountryFromDatabase(),
+                                      initialCountry: bloc
+                                          .returnSelectedCountryFromDatabase(),
                                       countryList: snapshot,
                                       selectedCountryCode: (selectedCode) {
                                         if (selectedCode != null) {
                                           bloc.country = selectedCode;
-                                          bloc.countryCode = selectedCode.dialCode!;
+                                          bloc.countryCode =
+                                              selectedCode.dialCode!;
                                         }
                                         bloc.validateFieldsForFaze1();
                                       },
                                       enteredPhoneNumber: (mobileNumber) {
-                                        if (bloc.country!.maxLength == mobileNumber.length) {
+                                        if (bloc.country!.maxLength ==
+                                            mobileNumber.length) {
                                           bloc.mobileController = mobileNumber;
-                                          bloc.validateMobileNumber(bloc.country!.dialCode! + bloc.mobileController);
+                                          bloc.validateMobileNumber(
+                                              bloc.country!.dialCode! +
+                                                  bloc.mobileController);
                                         }
                                       },
                                       validatePhoneNumber: (value) {
@@ -202,16 +246,21 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                 valueListenable: bloc.mobileNumberErrorMessage,
                                 builder: (context, snapshot, child) {
                                   return CustomText(
-                                    title: snapshot ? AppLocalizations.of(context)!.mobilenumberalreadyinuse : "",
+                                    title: snapshot
+                                        ? AppLocalizations.of(context)!
+                                            .mobilenumberalreadyinuse
+                                        : "",
                                     fontSize: 14,
                                     textColor: Colors.red,
                                   );
                                 }),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.dbprofile,
                                 textAlign: TextAlign.start,
@@ -221,7 +270,8 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                             ),
                             const SizedBox(height: 10),
                             DateOfBirthField(
-                              language: bloc.box.get(DatabaseFieldConstant.language),
+                              language:
+                                  bloc.box.get(DatabaseFieldConstant.language),
                               selectedDate: bloc.selectedDate,
                               dateSelected: (p0) {
                                 bloc.selectedDate = p0;
@@ -229,10 +279,12 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                               },
                             ),
                             const SizedBox(height: 16),
-                            Container(color: const Color(0xffE8E8E8), height: 1),
+                            Container(
+                                color: const Color(0xffE8E8E8), height: 1),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.optional,
                                 textAlign: TextAlign.start,
@@ -243,12 +295,16 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                             const SizedBox(height: 10),
                             CustomTextField(
                               controller: bloc.referalCodeController,
-                              hintText: AppLocalizations.of(context)!.referalcodeprofile,
+                              hintText: AppLocalizations.of(context)!
+                                  .referalcodeprofile,
                               keyboardType: TextInputType.number,
-                              inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(6)
+                              ],
                               onChange: (text) => bloc.validateFieldsForFaze1(),
                               onEditingComplete: () {
-                                bloc.validateReferal(bloc.referalCodeController.text);
+                                bloc.validateReferal(
+                                    bloc.referalCodeController.text);
                                 FocusManager.instance.primaryFocus?.unfocus();
                               },
                             ),
@@ -261,13 +317,18 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                     return Row(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 20, right: 20),
+                                          padding: const EdgeInsets.only(
+                                              left: 20, right: 20),
                                           child: CustomText(
                                             title: snapshot
-                                                ? AppLocalizations.of(context)!.codevalid
-                                                : AppLocalizations.of(context)!.codenotvalid,
+                                                ? AppLocalizations.of(context)!
+                                                    .codevalid
+                                                : AppLocalizations.of(context)!
+                                                    .codenotvalid,
                                             fontSize: 12,
-                                            textColor: snapshot ? Colors.green : Colors.red,
+                                            textColor: snapshot
+                                                ? Colors.green
+                                                : Colors.red,
                                           ),
                                         ),
                                       ],

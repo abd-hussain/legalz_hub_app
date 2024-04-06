@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/forgot_password_request.dart';
@@ -7,7 +6,6 @@ import 'package:legalz_hub_app/services/settings_service.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:legalz_hub_app/utils/routes.dart';
 
 class ForgotPasswordBloc extends Bloc<AuthService> {
   final TextEditingController emailFieldController = TextEditingController();
@@ -46,27 +44,9 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
     return (!regex.hasMatch(value)) ? false : true;
   }
 
-  void doForgotPasswordCall() async {
-    loadingStatusNotifier.value = LoadingStatus.inprogress;
-    try {
-      await locator<SettingService>().forgotPassword(
-          data: ForgotPasswordRequest(email: emailFieldController.text));
-      loadingStatusNotifier.value = LoadingStatus.finish;
-      _openConfirmScreen(maincontext!);
-    } on DioException catch (_) {
-      // final error = e.error as HttpException;
-      loadingStatusNotifier.value = LoadingStatus.finish;
-      errorMessage.value = AppLocalizations.of(maincontext!)!.wrongemail;
-    }
-  }
-
-  void _openConfirmScreen(BuildContext context) {
-    Navigator.of(context, rootNavigator: true).pushNamed(
-      RoutesConstants.forgotPasswordConfirmationScreen,
-      arguments: {
-        "email": emailFieldController.text,
-      },
-    );
+  Future<dynamic> doForgotPasswordCall() async {
+    return await locator<SettingService>().forgotPassword(
+        data: ForgotPasswordRequest(email: emailFieldController.text));
   }
 
   @override

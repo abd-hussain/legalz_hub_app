@@ -14,11 +14,15 @@ class AttorneyRegister5Bloc extends Bloc<FilterService> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  ValueNotifier<bool> showHidePasswordClearNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<bool> showHideConfirmPasswordClearNotifier = ValueNotifier<bool>(false);
+  ValueNotifier<bool> showHidePasswordClearNotifier =
+      ValueNotifier<bool>(false);
+  ValueNotifier<bool> showHideConfirmPasswordClearNotifier =
+      ValueNotifier<bool>(false);
 
-  ValueNotifier<bool> passwordEquilConfirmPasswordNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<bool> passwordMoreThan8CharNotifier = ValueNotifier<bool>(false);
+  ValueNotifier<bool> passwordEquilConfirmPasswordNotifier =
+      ValueNotifier<bool>(false);
+  ValueNotifier<bool> passwordMoreThan8CharNotifier =
+      ValueNotifier<bool>(false);
   ValueNotifier<bool> passwordHaveNumberNotifier = ValueNotifier<bool>(false);
 
   TextEditingController emailController = TextEditingController();
@@ -29,8 +33,10 @@ class AttorneyRegister5Bloc extends Bloc<FilterService> {
       emailController.text = box.get(TempFieldToRegistrtAttorneyConstant.email);
     }
     if (box.get(TempFieldToRegistrtAttorneyConstant.password) != null) {
-      passwordController.text = box.get(TempFieldToRegistrtAttorneyConstant.password);
-      confirmPasswordController.text = box.get(TempFieldToRegistrtAttorneyConstant.password);
+      passwordController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.password);
+      confirmPasswordController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.password);
     }
 
     validateFieldsForFaze5();
@@ -47,7 +53,8 @@ class AttorneyRegister5Bloc extends Bloc<FilterService> {
   }
 
   void _confirmPasswordListen() {
-    showHideConfirmPasswordClearNotifier.value = confirmPasswordController.text.isNotEmpty;
+    showHideConfirmPasswordClearNotifier.value =
+        confirmPasswordController.text.isNotEmpty;
     validateFieldsForFaze5();
   }
 
@@ -61,7 +68,9 @@ class AttorneyRegister5Bloc extends Bloc<FilterService> {
   }
 
   validateEmailRegix() {
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailController.text)) {
+    if (RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text)) {
       return true;
     }
 
@@ -80,12 +89,16 @@ class AttorneyRegister5Bloc extends Bloc<FilterService> {
   }
 
   validateFieldsForFaze5() {
-    if (passwordController.text.isNotEmpty && confirmPasswordController.text.isNotEmpty) {
-      passwordEquilConfirmPasswordNotifier.value = (passwordController.text == confirmPasswordController.text);
+    if (passwordController.text.isNotEmpty &&
+        confirmPasswordController.text.isNotEmpty) {
+      passwordEquilConfirmPasswordNotifier.value =
+          (passwordController.text == confirmPasswordController.text);
       passwordMoreThan8CharNotifier.value =
-          (passwordController.text.length >= 8 || confirmPasswordController.text.length >= 8);
-      passwordHaveNumberNotifier.value = (passwordController.text.contains(RegExp(r'[0-9]')) ||
-          confirmPasswordController.text.contains(RegExp(r'[0-9]')));
+          (passwordController.text.length >= 8 ||
+              confirmPasswordController.text.length >= 8);
+      passwordHaveNumberNotifier.value =
+          (passwordController.text.contains(RegExp(r'[0-9]')) ||
+              confirmPasswordController.text.contains(RegExp(r'[0-9]')));
 
       enableNextBtn.value = passwordEquilConfirmPasswordNotifier.value &&
           passwordMoreThan8CharNotifier.value &&

@@ -20,7 +20,8 @@ class AttorneyRegister5Screen extends StatefulWidget {
   const AttorneyRegister5Screen({super.key});
 
   @override
-  State<AttorneyRegister5Screen> createState() => _AttorneyRegister5ScreenState();
+  State<AttorneyRegister5Screen> createState() =>
+      _AttorneyRegister5ScreenState();
 }
 
 class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
@@ -68,14 +69,21 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.email, bloc.emailController.text);
-                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.password, bloc.passwordController.text);
+                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.email,
+                      bloc.emailController.text);
+                  await bloc.box.put(
+                      TempFieldToRegistrtAttorneyConstant.password,
+                      bloc.passwordController.text);
 
-                  await bloc.box.put(DatabaseFieldConstant.saveEmailAndPassword, bloc.statusOfSaveEmailAndPassword);
+                  await bloc.box.put(DatabaseFieldConstant.saveEmailAndPassword,
+                      bloc.statusOfSaveEmailAndPassword);
 
-                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.password, bloc.passwordController.text);
+                  await bloc.box.put(
+                      TempFieldToRegistrtAttorneyConstant.password,
+                      bloc.passwordController.text);
 
-                  await bloc.box.put(DatabaseFieldConstant.attorneyRegistrationStep, "6");
+                  await bloc.box
+                      .put(DatabaseFieldConstant.attorneyRegistrationStep, "6");
                   navigator.pushNamed(RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.attorney});
                 },
@@ -96,7 +104,8 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                   onChange: (text) {
                     bloc.validateFieldsForFaze5();
                   },
-                  onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                  onEditingComplete: () =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                 ),
                 ValueListenableBuilder<String>(
                     valueListenable: bloc.validateEmail,
@@ -107,11 +116,16 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                         return Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
                               child: CustomText(
-                                title: snapshot == "" ? AppLocalizations.of(context)!.emailformatvalid : snapshot,
+                                title: snapshot == ""
+                                    ? AppLocalizations.of(context)!
+                                        .emailformatvalid
+                                    : snapshot,
                                 fontSize: 12,
-                                textColor: snapshot == "" ? Colors.green : Colors.red,
+                                textColor:
+                                    snapshot == "" ? Colors.green : Colors.red,
                               ),
                             ),
                           ],
@@ -121,31 +135,37 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                 const SizedBox(height: 30),
                 PasswordField(
                   controller: bloc.passwordController,
-                  showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
+                  showHidePasswordClearNotifier:
+                      bloc.showHidePasswordClearNotifier,
                   onClear: () {
                     bloc.passwordController.clear();
                     bloc.showHidePasswordClearNotifier.value = false;
                   },
                   onchange: () => bloc.validateFieldsForFaze5(),
-                  onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                  onEditingComplete: () =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                 ),
                 const SizedBox(height: 20),
                 PasswordField(
                   controller: bloc.confirmPasswordController,
                   hintText: AppLocalizations.of(context)!.confirmpassword,
-                  showHidePasswordClearNotifier: bloc.showHideConfirmPasswordClearNotifier,
+                  showHidePasswordClearNotifier:
+                      bloc.showHideConfirmPasswordClearNotifier,
                   onClear: () {
                     bloc.confirmPasswordController.clear();
                     bloc.showHideConfirmPasswordClearNotifier.value = false;
                   },
                   onchange: () => bloc.validateFieldsForFaze5(),
-                  onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                  onEditingComplete: () =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                 ),
                 const SizedBox(height: 20),
                 PasswordComplexity(
-                  passwordEquilConfirmPasswordNotifier: bloc.passwordEquilConfirmPasswordNotifier,
+                  passwordEquilConfirmPasswordNotifier:
+                      bloc.passwordEquilConfirmPasswordNotifier,
                   passwordHaveNumberNotifier: bloc.passwordHaveNumberNotifier,
-                  passwordMoreThan8CharNotifier: bloc.passwordMoreThan8CharNotifier,
+                  passwordMoreThan8CharNotifier:
+                      bloc.passwordMoreThan8CharNotifier,
                 ),
                 SavePasswordView(
                   selectedStatus: (val) {

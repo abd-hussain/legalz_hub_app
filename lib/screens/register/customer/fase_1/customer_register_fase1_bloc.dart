@@ -28,8 +28,10 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
 
   ValueNotifier<bool?> validateReferalCode = ValueNotifier<bool?>(null);
 
-  ValueNotifier<List<Country>> listOfCountries = ValueNotifier<List<Country>>([]);
-  StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
+  ValueNotifier<List<Country>> listOfCountries =
+      ValueNotifier<List<Country>>([]);
+  StreamController<LoadingStatus> loadingStatusController =
+      StreamController<LoadingStatus>();
   ValueNotifier<bool> mobileNumberErrorMessage = ValueNotifier<bool>(false);
 
   String countryCode = "";
@@ -42,33 +44,55 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
 
   tryToFillTheFields() {
     if (box.get(TempFieldToRegistrtCustomerConstant.firstName) != null) {
-      firstNameController.text = box.get(TempFieldToRegistrtCustomerConstant.firstName);
+      firstNameController.text =
+          box.get(TempFieldToRegistrtCustomerConstant.firstName);
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.lastName) != null) {
-      lastNameController.text = box.get(TempFieldToRegistrtCustomerConstant.lastName);
+      lastNameController.text =
+          box.get(TempFieldToRegistrtCustomerConstant.lastName);
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.country) != null) {
       var id = int.parse(box.get(TempFieldToRegistrtCustomerConstant.country));
       selectedCountry = Country(
         id: id,
-        flagImage: listOfCountries.value.firstWhere((element) => element.id == id).flagImage,
-        name: listOfCountries.value.firstWhere((element) => element.id == id).name,
-        currency: listOfCountries.value.firstWhere((element) => element.id == id).currency,
-        dialCode: listOfCountries.value.firstWhere((element) => element.id == id).dialCode,
-        maxLength: listOfCountries.value.firstWhere((element) => element.id == id).maxLength,
-        minLength: listOfCountries.value.firstWhere((element) => element.id == id).minLength,
+        flagImage: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .flagImage,
+        name: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .name,
+        currency: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .currency,
+        dialCode: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .dialCode,
+        maxLength: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .maxLength,
+        minLength: listOfCountries.value
+            .firstWhere((element) => element.id == id)
+            .minLength,
       );
 
       country = selectedCountry;
 
-      countryCode = listOfCountries.value.firstWhere((element) => element.id == id).dialCode ?? "";
-      countryController.text = listOfCountries.value.firstWhere((element) => element.id == id).name ?? "";
+      countryCode = listOfCountries.value
+              .firstWhere((element) => element.id == id)
+              .dialCode ??
+          "";
+      countryController.text = listOfCountries.value
+              .firstWhere((element) => element.id == id)
+              .name ??
+          "";
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.phoneNumber) != null) {
-      mobileController = box.get(TempFieldToRegistrtCustomerConstant.phoneNumber).replaceAll(countryCode, "");
+      mobileController = box
+          .get(TempFieldToRegistrtCustomerConstant.phoneNumber)
+          .replaceAll(countryCode, "");
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.dateOfBirth) != null) {
@@ -76,15 +100,18 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.gender) != null) {
-      genderController.text = box.get(TempFieldToRegistrtCustomerConstant.gender);
+      genderController.text =
+          box.get(TempFieldToRegistrtCustomerConstant.gender);
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.profileImage) != null) {
-      profileImageUrl = box.get(TempFieldToRegistrtCustomerConstant.profileImage);
+      profileImageUrl =
+          box.get(TempFieldToRegistrtCustomerConstant.profileImage);
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.referalCode) != null) {
-      referalCodeController.text = box.get(TempFieldToRegistrtCustomerConstant.referalCode);
+      referalCodeController.text =
+          box.get(TempFieldToRegistrtCustomerConstant.referalCode);
     }
 
     loadingStatusController.sink.add(LoadingStatus.finish);
@@ -121,8 +148,10 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
       name: box.get(DatabaseFieldConstant.selectedCountryName),
       currency: box.get(DatabaseFieldConstant.selectedCountryCurrency),
       dialCode: box.get(DatabaseFieldConstant.selectedCountryDialCode),
-      maxLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
-      minLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
+      maxLength:
+          int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
+      minLength:
+          int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
     );
     return country!;
   }
@@ -130,7 +159,8 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
   getlistOfCountries() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
     service.countries().then((value) {
-      listOfCountries.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountries.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
       tryToFillTheFields();
     });
   }

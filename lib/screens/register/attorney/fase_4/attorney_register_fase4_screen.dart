@@ -14,7 +14,8 @@ class AttorneyRegister4Screen extends StatefulWidget {
   const AttorneyRegister4Screen({super.key});
 
   @override
-  State<AttorneyRegister4Screen> createState() => _AttorneyRegister4ScreenState();
+  State<AttorneyRegister4Screen> createState() =>
+      _AttorneyRegister4ScreenState();
 }
 
 class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
@@ -55,11 +56,16 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.ratePerHour, bloc.ratePerHourController.text);
-                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.iban, bloc.ibanController.text);
+                  await bloc.box.put(
+                      TempFieldToRegistrtAttorneyConstant.ratePerHour,
+                      bloc.ratePerHourController.text);
+                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.iban,
+                      bloc.ibanController.text);
 
-                  await bloc.box.put(DatabaseFieldConstant.attorneyRegistrationStep, "5");
-                  navigator.pushNamed(RoutesConstants.registerAttornyFaze5Screen);
+                  await bloc.box
+                      .put(DatabaseFieldConstant.attorneyRegistrationStep, "5");
+                  navigator
+                      .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
                 },
               );
             }),
@@ -134,9 +140,13 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                           flex: 2,
                           child: CustomTextField(
                             controller: bloc.ratePerHourController,
-                            hintText: AppLocalizations.of(context)!.rateperhourtitle,
-                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                            inputFormatters: [LengthLimitingTextInputFormatter(4)],
+                            hintText:
+                                AppLocalizations.of(context)!.rateperhourtitle,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(4)
+                            ],
                             fontSize: 18,
                             textAlign: TextAlign.center,
                             padding: const EdgeInsets.all(0),
@@ -173,7 +183,8 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     keyboardType: TextInputType.name,
                     inputFormatters: [LengthLimitingTextInputFormatter(30)],
                     onChange: (text) => bloc.validateFieldsForFaze4(),
-                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                    onEditingComplete: () =>
+                        FocusManager.instance.primaryFocus?.unfocus(),
                   ),
                   const SizedBox(height: 10),
                 ],

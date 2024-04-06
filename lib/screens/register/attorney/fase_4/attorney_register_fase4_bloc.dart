@@ -20,7 +20,8 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.ratePerHour) != null) {
-      ratePerHourController.text = box.get(TempFieldToRegistrtAttorneyConstant.ratePerHour);
+      ratePerHourController.text =
+          box.get(TempFieldToRegistrtAttorneyConstant.ratePerHour);
     }
     validateFieldsForFaze4();
   }

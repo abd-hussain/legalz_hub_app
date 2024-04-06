@@ -15,7 +15,8 @@ class TermsAndConditionScreen extends StatefulWidget {
   const TermsAndConditionScreen({super.key});
 
   @override
-  State<TermsAndConditionScreen> createState() => _TermsAndConditionScreenState();
+  State<TermsAndConditionScreen> createState() =>
+      _TermsAndConditionScreenState();
 }
 
 class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
@@ -29,7 +30,8 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
       });
     });
 
-    bloc.handleReadingArguments(arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(
+        arguments: ModalRoute.of(context)!.settings.arguments);
     super.didChangeDependencies();
   }
 
@@ -41,7 +43,8 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppLocalizations.of(context)!.termsandconditions),
+      appBar:
+          customAppBar(title: AppLocalizations.of(context)!.termsandconditions),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -58,7 +61,8 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
             child: Container(
               margin: const EdgeInsets.all(15.0),
               padding: const EdgeInsets.all(3.0),
-              decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+              decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xff444444))),
               child: WebViewAware(
                 child: WebViewX(
                   key: const ValueKey('webviewx'),
@@ -87,11 +91,15 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
 
               if (bloc.userType != null) {
                 if (bloc.userType == UserType.attorney) {
-                  bloc.box.put(DatabaseFieldConstant.attorneyRegistrationStep, "1");
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze1Screen);
+                  bloc.box
+                      .put(DatabaseFieldConstant.attorneyRegistrationStep, "1");
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
                 } else {
-                  bloc.box.put(DatabaseFieldConstant.customerRegistrationStep, "1");
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerCustomerFaze1Screen);
+                  bloc.box
+                      .put(DatabaseFieldConstant.customerRegistrationStep, "1");
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerCustomerFaze1Screen);
                 }
               }
             },

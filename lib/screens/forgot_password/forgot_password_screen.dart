@@ -8,6 +8,7 @@ import 'package:legalz_hub_app/shared_widget/email_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/utils/routes.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -99,10 +100,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       padding: const EdgeInsets.only(
                                           left: 16, right: 16),
                                       enableButton: snapshot,
-                                      onTap: () {
+                                      onTap: () async {
+                                        final navigation =
+                                            Navigator.of(context);
+
                                         FocusScope.of(context)
                                             .requestFocus(FocusNode());
-                                        bloc.doForgotPasswordCall();
+                                        bloc.loadingStatusNotifier.value =
+                                            LoadingStatus.inprogress;
+
+                                        await bloc.doForgotPasswordCall();
+                                        bloc.loadingStatusNotifier.value =
+                                            LoadingStatus.finish;
+                                        navigation.pushNamed(
+                                          RoutesConstants
+                                              .forgotPasswordConfirmationScreen,
+                                          arguments: {
+                                            "email":
+                                                bloc.emailFieldController.text,
+                                          },
+                                        );
                                       },
                                     );
                                   }),

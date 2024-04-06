@@ -25,7 +25,8 @@ class AttorneyRegister1Screen extends StatefulWidget {
   const AttorneyRegister1Screen({super.key});
 
   @override
-  State<AttorneyRegister1Screen> createState() => _AttorneyRegister1ScreenState();
+  State<AttorneyRegister1Screen> createState() =>
+      _AttorneyRegister1ScreenState();
 }
 
 class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
@@ -58,22 +59,36 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
               enableNextButton: snapshot.data!,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.suffix, bloc.suffixNameController.text);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.firstName, bloc.firstNameController.text);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.lastName, bloc.lastNameController.text);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.country, bloc.selectedCountry!.id.toString());
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.gender, bloc.genderController.text);
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.profileImage,
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.suffix,
+                    bloc.suffixNameController.text);
+                await bloc.box.put(
+                    TempFieldToRegistrtAttorneyConstant.firstName,
+                    bloc.firstNameController.text);
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.lastName,
+                    bloc.lastNameController.text);
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.country,
+                    bloc.selectedCountry!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.gender,
+                    bloc.genderController.text);
+                await bloc.box.put(
+                    TempFieldToRegistrtAttorneyConstant.profileImage,
                     bloc.profileImage != null ? bloc.profileImage!.path : "");
-                await bloc.box
-                    .put(TempFieldToRegistrtAttorneyConstant.idImage, bloc.iDImage != null ? bloc.iDImage!.path : "");
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.dateOfBirth, bloc.selectedDate);
-                await bloc.box
-                    .put(TempFieldToRegistrtAttorneyConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.idImage,
+                    bloc.iDImage != null ? bloc.iDImage!.path : "");
+                await bloc.box.put(
+                    TempFieldToRegistrtAttorneyConstant.dateOfBirth,
+                    bloc.selectedDate);
+                await bloc.box.put(
+                    TempFieldToRegistrtAttorneyConstant.phoneNumber,
+                    bloc.countryCode + bloc.mobileController);
 
-                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.referalCode,
-                    bloc.validateReferalCode.value == true ? bloc.referalCodeController.text : "");
-                await bloc.box.put(DatabaseFieldConstant.attorneyRegistrationStep, "2");
+                await bloc.box.put(
+                    TempFieldToRegistrtAttorneyConstant.referalCode,
+                    bloc.validateReferalCode.value == true
+                        ? bloc.referalCodeController.text
+                        : "");
+                await bloc.box
+                    .put(DatabaseFieldConstant.attorneyRegistrationStep, "2");
                 navigator.pushNamed(RoutesConstants.registerAttornyFaze2Screen);
               },
             );
@@ -100,14 +115,18 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                           children: [
                             const SizedBox(height: 20),
                             Padding(
-                              padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                              padding: bloc.box.get(
+                                          DatabaseFieldConstant.language) ==
+                                      "ar"
                                   ? const EdgeInsets.only(right: 16)
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
                                   ImageHolderField(
                                       isFromNetwork: bloc.profileImageUrl != "",
-                                      urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
+                                      urlImage: bloc.profileImageUrl == ""
+                                          ? null
+                                          : bloc.profileImageUrl,
                                       onAddImage: (file) {
                                         bloc.profileImage = file;
                                         bloc.validateFieldsForFaze1();
@@ -123,10 +142,13 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                       children: [
                                         ValueListenableBuilder<Object>(
                                             valueListenable: bloc.listOfSuffix,
-                                            builder: (context, snapshot, child) {
+                                            builder:
+                                                (context, snapshot, child) {
                                               return SuffixField(
-                                                controller: bloc.suffixNameController,
-                                                listOfSuffix: bloc.listOfSuffix.value,
+                                                controller:
+                                                    bloc.suffixNameController,
+                                                listOfSuffix:
+                                                    bloc.listOfSuffix.value,
                                                 selectedSuffix: (p0) {
                                                   bloc.selectedSuffix = p0;
                                                   bloc.validateFieldsForFaze1();
@@ -136,20 +158,34 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                         const SizedBox(height: 10),
                                         CustomTextField(
                                           controller: bloc.firstNameController,
-                                          hintText: AppLocalizations.of(context)!.firstnameprofile,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .firstnameprofile,
                                           keyboardType: TextInputType.name,
-                                          inputFormatters: [LengthLimitingTextInputFormatter(45)],
-                                          onChange: (text) => bloc.validateFieldsForFaze1(),
-                                          onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(45)
+                                          ],
+                                          onChange: (text) =>
+                                              bloc.validateFieldsForFaze1(),
+                                          onEditingComplete: () => FocusManager
+                                              .instance.primaryFocus
+                                              ?.unfocus(),
                                         ),
                                         const SizedBox(height: 10),
                                         CustomTextField(
                                           controller: bloc.lastNameController,
-                                          hintText: AppLocalizations.of(context)!.lastnameprofile,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .lastnameprofile,
                                           keyboardType: TextInputType.name,
-                                          inputFormatters: [LengthLimitingTextInputFormatter(45)],
-                                          onChange: (text) => bloc.validateFieldsForFaze1(),
-                                          onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(45)
+                                          ],
+                                          onChange: (text) =>
+                                              bloc.validateFieldsForFaze1(),
+                                          onEditingComplete: () => FocusManager
+                                              .instance.primaryFocus
+                                              ?.unfocus(),
                                         ),
                                       ],
                                     ),
@@ -158,17 +194,22 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                              padding: bloc.box.get(
+                                          DatabaseFieldConstant.language) ==
+                                      "ar"
                                   ? const EdgeInsets.only(right: 16)
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
                                   CustomAttachTextField(
                                       isFromNetwork: bloc.iDImageUrl != "",
-                                      urlImage: bloc.iDImageUrl == "" ? null : bloc.iDImageUrl,
+                                      urlImage: bloc.iDImageUrl == ""
+                                          ? null
+                                          : bloc.iDImageUrl,
                                       onAddImage: (file) {
                                         bloc.iDImage = file;
                                         bloc.validateFieldsForFaze1();
@@ -183,10 +224,13 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                     child: Column(
                                       children: [
                                         ValueListenableBuilder<List<Country>>(
-                                            valueListenable: bloc.listOfCountries,
-                                            builder: (context, snapshot, child) {
+                                            valueListenable:
+                                                bloc.listOfCountries,
+                                            builder:
+                                                (context, snapshot, child) {
                                               return CountryField(
-                                                controller: bloc.countryController,
+                                                controller:
+                                                    bloc.countryController,
                                                 listOfCountries: snapshot,
                                                 selectedCountry: (p0) {
                                                   bloc.selectedCountry = p0;
@@ -197,7 +241,8 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                         const SizedBox(height: 10),
                                         GenderField(
                                           controller: bloc.genderController,
-                                          onChange: (p0) => bloc.validateFieldsForFaze1(),
+                                          onChange: (p0) =>
+                                              bloc.validateFieldsForFaze1(),
                                         ),
                                       ],
                                     ),
@@ -206,26 +251,32 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             const MobileHeader(),
                             ValueListenableBuilder<List<Country>>(
                                 valueListenable: bloc.listOfCountries,
                                 builder: (context, snapshot, child) {
                                   return MobileNumberField(
-                                      initialCountry: bloc.returnSelectedCountryFromDatabase(),
+                                      initialCountry: bloc
+                                          .returnSelectedCountryFromDatabase(),
                                       countryList: snapshot,
                                       selectedCountryCode: (selectedCode) {
                                         if (selectedCode != null) {
                                           bloc.country = selectedCode;
-                                          bloc.countryCode = selectedCode.dialCode!;
+                                          bloc.countryCode =
+                                              selectedCode.dialCode!;
                                         }
                                         bloc.validateFieldsForFaze1();
                                       },
                                       enteredPhoneNumber: (mobileNumber) {
-                                        if (bloc.country!.maxLength == mobileNumber.length) {
+                                        if (bloc.country!.maxLength ==
+                                            mobileNumber.length) {
                                           bloc.mobileController = mobileNumber;
-                                          bloc.validateMobileNumber(bloc.country!.dialCode! + bloc.mobileController);
+                                          bloc.validateMobileNumber(
+                                              bloc.country!.dialCode! +
+                                                  bloc.mobileController);
                                         }
                                       },
                                       validatePhoneNumber: (value) {
@@ -237,16 +288,21 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                 valueListenable: bloc.mobileNumberErrorMessage,
                                 builder: (context, snapshot, child) {
                                   return CustomText(
-                                    title: snapshot ? AppLocalizations.of(context)!.mobilenumberalreadyinuse : "",
+                                    title: snapshot
+                                        ? AppLocalizations.of(context)!
+                                            .mobilenumberalreadyinuse
+                                        : "",
                                     fontSize: 14,
                                     textColor: Colors.red,
                                   );
                                 }),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.dbprofile,
                                 textAlign: TextAlign.start,
@@ -256,7 +312,8 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                             ),
                             const SizedBox(height: 10),
                             DateOfBirthField(
-                              language: bloc.box.get(DatabaseFieldConstant.language),
+                              language:
+                                  bloc.box.get(DatabaseFieldConstant.language),
                               selectedDate: bloc.selectedDate,
                               dateSelected: (p0) {
                                 bloc.selectedDate = p0;
@@ -264,10 +321,12 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                               },
                             ),
                             const SizedBox(height: 16),
-                            Container(color: const Color(0xffE8E8E8), height: 1),
+                            Container(
+                                color: const Color(0xffE8E8E8), height: 1),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.optional,
                                 textAlign: TextAlign.start,
@@ -278,12 +337,16 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                             const SizedBox(height: 10),
                             CustomTextField(
                               controller: bloc.referalCodeController,
-                              hintText: AppLocalizations.of(context)!.referalcodeprofile,
+                              hintText: AppLocalizations.of(context)!
+                                  .referalcodeprofile,
                               keyboardType: TextInputType.number,
-                              inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(6)
+                              ],
                               onChange: (text) => bloc.validateFieldsForFaze1(),
                               onEditingComplete: () {
-                                bloc.validateReferal(bloc.referalCodeController.text);
+                                bloc.validateReferal(
+                                    bloc.referalCodeController.text);
                                 FocusManager.instance.primaryFocus?.unfocus();
                               },
                             ),
@@ -296,13 +359,18 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                     return Row(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 20, right: 20),
+                                          padding: const EdgeInsets.only(
+                                              left: 20, right: 20),
                                           child: CustomText(
                                             title: snapshot
-                                                ? AppLocalizations.of(context)!.codevalid
-                                                : AppLocalizations.of(context)!.codenotvalid,
+                                                ? AppLocalizations.of(context)!
+                                                    .codevalid
+                                                : AppLocalizations.of(context)!
+                                                    .codenotvalid,
                                             fontSize: 12,
-                                            textColor: snapshot ? Colors.green : Colors.red,
+                                            textColor: snapshot
+                                                ? Colors.green
+                                                : Colors.red,
                                           ),
                                         ),
                                       ],
