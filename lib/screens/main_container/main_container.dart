@@ -20,8 +20,9 @@ class _MainContainerState extends State<MainContainer> {
   void initState() {
     locator<MainContext>().mainContext = context;
 
-    _bloc.userType =
-        _bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
+    _bloc.userType = _bloc.box.get(DatabaseFieldConstant.userType) == "customer"
+        ? UserType.customer
+        : UserType.attorney;
 
     setState(() {});
     super.initState();
@@ -35,7 +36,9 @@ class _MainContainerState extends State<MainContainer> {
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
-        backgroundColor: _bloc.userType == UserType.customer ? const Color(0xff034061) : const Color(0xff292929),
+        backgroundColor: _bloc.userType == UserType.customer
+            ? const Color(0xff034061)
+            : const Color(0xff292929),
       ),
       body: SafeArea(
           child: _bloc.userType == UserType.attorney
@@ -65,17 +68,27 @@ class _MainContainerState extends State<MainContainer> {
         height: 60,
         style: TabStyle.fixedCircle,
         items: [
-          TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
-          TabItem(icon: Icons.payments_outlined, title: AppLocalizations.of(context)!.payments),
+          TabItem(
+              icon: Icons.home,
+              title: AppLocalizations.of(context)!.containerHomeIconTitle),
+          TabItem(
+              icon: Icons.payments_outlined,
+              title: AppLocalizations.of(context)!.payments),
           const TabItem(icon: Icons.call),
-          TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-          TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),
+          TabItem(
+              icon: Icons.calendar_month,
+              title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+          TabItem(
+              icon: Icons.person,
+              title: AppLocalizations.of(context)!.containerAccountIconTitle),
         ],
         onTap: (int index) {
           if (_bloc.userType == UserType.attorney) {
-            _bloc.attornyCurrentTabIndexNotifier.value = _bloc.returnAttornySelectedtypeDependOnIndex(index);
+            _bloc.attornyCurrentTabIndexNotifier.value =
+                _bloc.returnAttornySelectedtypeDependOnIndex(index);
           } else {
-            _bloc.customerCurrentTabIndexNotifier.value = _bloc.returnCustomerSelectedtypeDependOnIndex(index);
+            _bloc.customerCurrentTabIndexNotifier.value =
+                _bloc.returnCustomerSelectedtypeDependOnIndex(index);
           }
         },
       ),

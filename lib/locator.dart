@@ -40,16 +40,23 @@ Future<void> setupLocator() async {
   locator.registerFactory<NotificationsService>(() => NotificationsService());
   locator.registerFactory<ReportService>(() => ReportService());
   locator.registerFactory<SettingService>(() => SettingService());
-  locator.registerFactory<CustomerRegisterService>(() => CustomerRegisterService());
-  locator.registerFactory<AttorneyRegisterService>(() => AttorneyRegisterService());
+  locator.registerFactory<CustomerRegisterService>(
+      () => CustomerRegisterService());
+  locator.registerFactory<AttorneyRegisterService>(
+      () => AttorneyRegisterService());
 
-  locator.registerFactory<AttorneyAccountExperianceService>(() => AttorneyAccountExperianceService());
-  locator.registerFactory<AttorneyAccountService>(() => AttorneyAccountService());
-  locator.registerFactory<AttorneyAppointmentsService>(() => AttorneyAppointmentsService());
-  locator.registerFactory<AttorneyHourRateService>(() => AttorneyHourRateService());
+  locator.registerFactory<AttorneyAccountExperianceService>(
+      () => AttorneyAccountExperianceService());
+  locator
+      .registerFactory<AttorneyAccountService>(() => AttorneyAccountService());
+  locator.registerFactory<AttorneyAppointmentsService>(
+      () => AttorneyAppointmentsService());
+  locator.registerFactory<AttorneyHourRateService>(
+      () => AttorneyHourRateService());
   locator.registerFactory<PaymentService>(() => PaymentService());
 
-  locator.registerFactory<AttorneySettingsService>(() => AttorneySettingsService());
+  locator.registerFactory<AttorneySettingsService>(
+      () => AttorneySettingsService());
   locator.registerFactory<WorkingHoursService>(() => WorkingHoursService());
 
   locator.registerLazySingleton(() => AuthenticationService());

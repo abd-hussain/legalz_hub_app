@@ -13,6 +13,7 @@ import 'package:legalz_hub_app/screens/register/customer/fase_1/customer_registe
 import 'package:legalz_hub_app/screens/register/customer/fase_2/customer_register_fase2_screen.dart';
 import 'package:legalz_hub_app/screens/register/final_stage/register_final_screen.dart';
 import 'package:legalz_hub_app/screens/register/terms/terms_screen.dart';
+import 'package:legalz_hub_app/screens/report/report_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/account_tab/account_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/calender_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/call_tab/call_screen.dart';
@@ -20,6 +21,7 @@ import 'package:legalz_hub_app/screens/tabs/category_tab/category_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/payment_tab/payment_screen.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
+import 'package:legalz_hub_app/screens/web_view/web_view_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
@@ -89,13 +91,13 @@ final Map<String, Widget> routes = {
   RoutesConstants.accountScreen: const AccountTabScreen(),
   RoutesConstants.paymentsScreen: const PaymentTabScreen(),
   RoutesConstants.categoriesScreen: const CategoryTabScreen(),
+  RoutesConstants.webViewScreen: const WebViewScreen(),
+  RoutesConstants.reportScreen: const ReportScreen(),
 
   //TODO
 
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
-  // RoutesConstants.webViewScreen: const WebViewScreen(),
   // RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
-  // RoutesConstants.reportScreen: const ReportScreen(),
 
   // RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
   // RoutesConstants.editProfileScreen: const EditProfileScreen(),

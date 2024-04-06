@@ -1,0 +1,4 @@
+enum ReportPageType {
+  issue,
+  suggestion,
+}

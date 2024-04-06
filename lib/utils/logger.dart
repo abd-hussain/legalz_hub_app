@@ -7,7 +7,8 @@ dynamic logDebugMessage({required String message}) {
   logger.d(message);
 }
 
-dynamic logErrorMessageCrashlytics({required dynamic error, required String message}) {
+dynamic logErrorMessageCrashlytics(
+    {required dynamic error, required String message}) {
   logger.e("## ERROR - $message", error: error);
   // FirebaseCrashlytics.instance.recordError(error, StackTrace.current);
 }

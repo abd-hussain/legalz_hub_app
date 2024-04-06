@@ -9,7 +9,9 @@ class HomeService with Service {
     final response = await repository.callRequest(
       requestType: RequestType.get,
       methodName: MethodNameConstant.home,
-      queryParam: {"userType": userType == UserType.attorney ? "attorney" : "customer"},
+      queryParam: {
+        "userType": userType == UserType.attorney ? "attorney" : "customer"
+      },
     );
     return HomeResponse.fromJson(response);
   }
