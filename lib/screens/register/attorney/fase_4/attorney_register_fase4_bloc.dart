@@ -14,6 +14,17 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
 
   String ibanRes = "";
 
+  tryToFillTheFields() {
+    if (box.get(TempFieldToRegistrtAttorneyConstant.iban) != null) {
+      ibanController.text = box.get(TempFieldToRegistrtAttorneyConstant.iban);
+    }
+
+    if (box.get(TempFieldToRegistrtAttorneyConstant.ratePerHour) != null) {
+      ratePerHourController.text = box.get(TempFieldToRegistrtAttorneyConstant.ratePerHour);
+    }
+    validateFieldsForFaze4();
+  }
+
   String getUserCurrency() {
     return box.get(DatabaseFieldConstant.selectedCountryCurrency) ?? "\$";
   }

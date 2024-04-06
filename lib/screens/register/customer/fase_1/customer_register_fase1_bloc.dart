@@ -51,7 +51,6 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
 
     if (box.get(TempFieldToRegistrtCustomerConstant.country) != null) {
       var id = int.parse(box.get(TempFieldToRegistrtCustomerConstant.country));
-      print(listOfCountries.value.firstWhere((element) => element.id == id).flagImage);
       selectedCountry = Country(
         id: id,
         flagImage: listOfCountries.value.firstWhere((element) => element.id == id).flagImage,
@@ -65,6 +64,7 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
       country = selectedCountry;
 
       countryCode = listOfCountries.value.firstWhere((element) => element.id == id).dialCode ?? "";
+      countryController.text = listOfCountries.value.firstWhere((element) => element.id == id).name ?? "";
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.phoneNumber) != null) {
@@ -80,7 +80,7 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.profileImage) != null) {
-      profileImage = File(box.get(TempFieldToRegistrtCustomerConstant.profileImage));
+      profileImageUrl = box.get(TempFieldToRegistrtCustomerConstant.profileImage);
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.referalCode) != null) {

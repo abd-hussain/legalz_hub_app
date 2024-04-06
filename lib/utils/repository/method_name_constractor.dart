@@ -19,7 +19,7 @@ class MethodNameConstant {
   static const String attorneyWorkingHours = "working_hours/";
   static const String attorneyRatingAndReviews = "attorney-settings/review";
   static const String attorneyRespondOnReviews = "attorney-settings/review-response";
-  static const String attorneyRegister = "attorney/register";
+  static const String attorneyRegister = "attorney/register/";
   static const String payments = "attorney-payments/";
   static const String paymentReport = "attorney-payments/report";
   static const String attorneyHourRate = "hour-rate/";

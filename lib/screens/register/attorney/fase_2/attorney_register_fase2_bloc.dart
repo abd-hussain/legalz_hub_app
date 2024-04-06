@@ -24,12 +24,46 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
   Category? selectedCategory;
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
-  ValueNotifier<List<Category>> listOfCategories =
-      ValueNotifier<List<Category>>([]);
-  StreamController<LoadingStatus> loadingStatusController =
-      StreamController<LoadingStatus>();
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
-      ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<Category>> listOfCategories = ValueNotifier<List<Category>>([]);
+  StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+
+  tryToFillTheFields() {
+    if (box.get(TempFieldToRegistrtAttorneyConstant.bio) != null) {
+      bioController.text = box.get(TempFieldToRegistrtAttorneyConstant.bio);
+    }
+
+    if (box.get(TempFieldToRegistrtAttorneyConstant.experianceSince) != null) {
+      experianceSinceController.text = box.get(TempFieldToRegistrtAttorneyConstant.experianceSince);
+    }
+
+    if (box.get(TempFieldToRegistrtAttorneyConstant.category) != null) {
+      var id = int.parse(box.get(TempFieldToRegistrtAttorneyConstant.category));
+      selectedCategory = Category(
+        id: id,
+        name: listOfCategories.value.firstWhere((element) => element.id == id).name,
+        icon: listOfCategories.value.firstWhere((element) => element.id == id).icon,
+      );
+
+      categoryController.text = listOfCategories.value.firstWhere((element) => element.id == id).name ?? "";
+    }
+
+    if (box.get(TempFieldToRegistrtAttorneyConstant.speakingLanguages) != null) {
+      var originalList = _prepareList();
+
+      for (var item in originalList) {
+        for (var lang in box.get(TempFieldToRegistrtAttorneyConstant.speakingLanguages)) {
+          if (item.value == lang) {
+            item.isEnable = true;
+          }
+        }
+      }
+
+      listOfSpeakingLanguageNotifier.value = originalList;
+    }
+
+    loadingStatusController.sink.add(LoadingStatus.finish);
+  }
 
   validateFieldsForFaze2() {
     enableNextBtn.value = false;
@@ -47,10 +81,10 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
 
     service.categories().then((value) {
-      listOfCategories.value = value.data!
-        ..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCategories.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
       listOfSpeakingLanguageNotifier.value = _prepareList();
-      loadingStatusController.sink.add(LoadingStatus.finish);
+
+      tryToFillTheFields();
     });
   }
 
