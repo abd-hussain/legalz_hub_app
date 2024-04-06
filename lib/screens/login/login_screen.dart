@@ -27,8 +27,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-//TODO identify the login for mentor and client
-
 class _LoginScreenState extends State<LoginScreen> {
   final bloc = LoginBloc();
 

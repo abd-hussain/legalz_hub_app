@@ -214,12 +214,14 @@ class LoginBloc extends Bloc<AuthService> {
       final error = e.error as HttpException;
       loadingStatusNotifier.value = LoadingStatus.finish;
 
-      if (error.message.toString() == "Invalid Credentials") {
+      if (error.message.toString() == "Invalid Attorney Password" ||
+          error.message.toString() == "Invalid Credentials") {
         errorMessage.value =
             AppLocalizations.of(maincontext!)!.wrongemailorpassword;
-      } else if (error.message.toString() == "User Blocked") {
+      } else if (error.message.toString() == "Attorney Blocked" ||
+          error.message.toString() == "customer Blocked") {
         errorMessage.value = AppLocalizations.of(maincontext!)!.userblocked;
-      } else if (error.message.toString() == "User Under Review") {
+      } else if (error.message.toString() == "Attorney Under Review") {
         errorMessage.value =
             AppLocalizations.of(maincontext!)!.userstillunderreview;
       } else {
