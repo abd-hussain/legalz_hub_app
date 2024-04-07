@@ -3,6 +3,7 @@ import 'package:legalz_hub_app/screens/change_password/change_password_screen.da
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
+import 'package:legalz_hub_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_screen.dart';
@@ -95,11 +96,11 @@ final Map<String, Widget> routes = {
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.reportScreen: const ReportScreen(),
   RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
+  RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
 
   //TODO
 
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
-  // RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
 
   // RoutesConstants.editProfileScreen: const EditProfileScreen(),
   // RoutesConstants.editExperienceScreen: const EditExperienceScreen(),

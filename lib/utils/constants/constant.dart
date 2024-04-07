@@ -39,7 +39,7 @@ class AppConstant {
   static const String whatsappNumber = "+962795190663";
   static const String appName = "LegalzHub";
   static const String appLinkIos =
-      "https://apps.apple.com/us/app/helpera-mentor/id6474047303";
+      "https://apps.apple.com/us/app/legalzhub/id6480351301";
   static const String appLinkAndroid =
-      "https://play.google.com/apps/internaltest/4701396781860140433";
+      "https://play.google.com/store/apps/details?id=com.legalzhub.app";
 }
