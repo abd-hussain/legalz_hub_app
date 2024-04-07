@@ -16,6 +16,8 @@ import 'package:legalz_hub_app/utils/logger.dart';
 //TODO: FIX PIPLINE iOS
 //TODO: FIX PIPLINE Web
 
+//TODO check all of iO and make it disaple for web
+
 void main() {
   runZonedGuarded(() async {
     logDebugMessage(message: 'Application Started ...');

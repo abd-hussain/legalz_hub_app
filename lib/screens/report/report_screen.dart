@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/report/report_bloc.dart';
@@ -75,11 +76,13 @@ class _ReportScreenState extends State<ReportScreen> {
                           ),
                         ),
                       )),
-                      ReportAttatchment(
-                        attach1: (file) => bloc.attach1 = file,
-                        attach2: (file) => bloc.attach2 = file,
-                        attach3: (file) => bloc.attach3 = file,
-                      ),
+                      kIsWeb
+                          ? Container()
+                          : ReportAttatchment(
+                              attach1: (file) => bloc.attach1 = file,
+                              attach2: (file) => bloc.attach2 = file,
+                              attach3: (file) => bloc.attach3 = file,
+                            ),
                       ValueListenableBuilder<bool>(
                           valueListenable: bloc.enableSubmitBtn,
                           builder: (context, snapshot, child) {

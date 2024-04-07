@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/profile_options.dart';
 import 'package:legalz_hub_app/my_app.dart';
+import 'package:legalz_hub_app/services/settings_service.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_switch.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
@@ -206,23 +208,29 @@ class AccountBloc {
 
   void _deleteAccountView(BuildContext context) {
     //TODO
-    //   var nav = Navigator.of(context, rootNavigator: true);
+    var nav = Navigator.of(context, rootNavigator: true);
 
-    //   BottomSheetsUtil().areYouShoureButtomSheet(
-    //       context: context,
-    //       message: AppLocalizations.of(context)!.areyousuredeleteaccount,
-    //       sure: () async {
-    //         BottomSheetsUtil().areYouShoureButtomSheet(
-    //             context: context,
-    //             message: AppLocalizations.of(context)!.accountInformationwillbedeleted,
-    //             sure: () async {
-    //               locator<MentorSettingsService>().removeAccount().whenComplete(() async {
-    //                 await _deleteAllUserData();
+    BottomSheetsUtil().areYouShoureButtomSheet(
+        context: context,
+        message: AppLocalizations.of(context)!.areyousuredeleteaccount,
+        sure: () async {
+          BottomSheetsUtil().areYouShoureButtomSheet(
+              context: context,
+              message:
+                  AppLocalizations.of(context)!.accountInformationwillbedeleted,
+              sure: () async {
+                locator<SettingService>()
+                    .removeAccount(userType)
+                    .then((c) async {
+                  print("c");
+                  print(c);
+                  //TODO
+                  // await _deleteAllUserData();
 
-    //                 await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
-    //               });
-    //             });
-    //       });
+                  // await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
+                });
+              });
+        });
   }
 
   void _logoutView(BuildContext context) {
@@ -237,29 +245,31 @@ class AccountBloc {
     //       });
   }
 
-  // Future<void> _deleteAllUserData() {
-  //   return box.deleteAll([
-  //     DatabaseFieldConstant.apikey,
-  //     DatabaseFieldConstant.token,
-  //     DatabaseFieldConstant.language,
-  //     DatabaseFieldConstant.userid,
-  //     DatabaseFieldConstant.selectedCountryId,
-  //     DatabaseFieldConstant.selectedCountryFlag,
-  //     DatabaseFieldConstant.isUserLoggedIn,
-  //     DatabaseFieldConstant.registrationStep,
-  //     DatabaseFieldConstant.biometricU,
-  //     DatabaseFieldConstant.biometricP,
-  //     DatabaseFieldConstant.biometricStatus,
-  //     DatabaseFieldConstant.selectedCountryId,
-  //     DatabaseFieldConstant.selectedCountryFlag,
-  //     DatabaseFieldConstant.selectedCountryName,
-  //     DatabaseFieldConstant.selectedCountryCurrency,
-  //     DatabaseFieldConstant.selectedCountryDialCode,
-  //     DatabaseFieldConstant.selectedCountryMinLenght,
-  //     DatabaseFieldConstant.selectedCountryMaxLenght,
-  //     DatabaseFieldConstant.pushNotificationToken,
-  //   ]);
-  // }
+  Future<void> _deleteAllUserData() {
+    return box.deleteAll([
+      DatabaseFieldConstant.apikey,
+      DatabaseFieldConstant.userType,
+      DatabaseFieldConstant.token,
+      DatabaseFieldConstant.language,
+      DatabaseFieldConstant.userid,
+      DatabaseFieldConstant.selectedCountryId,
+      DatabaseFieldConstant.selectedCountryFlag,
+      DatabaseFieldConstant.attorneyRegistrationStep,
+      DatabaseFieldConstant.customerRegistrationStep,
+      DatabaseFieldConstant.saveEmailAndPassword,
+      DatabaseFieldConstant.biometricU,
+      DatabaseFieldConstant.biometricP,
+      DatabaseFieldConstant.biometricStatus,
+      DatabaseFieldConstant.selectedCountryId,
+      DatabaseFieldConstant.selectedCountryFlag,
+      DatabaseFieldConstant.selectedCountryName,
+      DatabaseFieldConstant.selectedCountryCurrency,
+      DatabaseFieldConstant.selectedCountryDialCode,
+      DatabaseFieldConstant.selectedCountryMinLenght,
+      DatabaseFieldConstant.selectedCountryMaxLenght,
+      DatabaseFieldConstant.pushNotificationToken,
+    ]);
+  }
 
   void _openInviteFriends(BuildContext context) {
     Navigator.of(context, rootNavigator: true)

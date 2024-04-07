@@ -46,9 +46,9 @@ class ReportBloc extends Bloc<ReportService> {
     final model = ReportRequest(
       content: textController.text,
       userId: box.get(DatabaseFieldConstant.userid).toString(),
-      image1: attach1,
-      image2: attach2,
-      image3: attach3,
+      attach1: attach1,
+      attach2: attach2,
+      attach3: attach3,
       userType: userType,
     );
 

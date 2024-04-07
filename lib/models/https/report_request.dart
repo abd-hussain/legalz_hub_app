@@ -6,16 +6,16 @@ class ReportRequest {
   String userId;
   UserType userType;
   String content;
-  File? image1;
-  File? image2;
-  File? image3;
+  File? attach1;
+  File? attach2;
+  File? attach3;
 
   ReportRequest({
     required this.userId,
     required this.content,
     required this.userType,
-    this.image1,
-    this.image2,
-    this.image3,
+    this.attach1,
+    this.attach2,
+    this.attach3,
   });
 }
