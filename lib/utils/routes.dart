@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legalz_hub_app/screens/change_password/change_password_screen.dart';
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
@@ -93,13 +94,13 @@ final Map<String, Widget> routes = {
   RoutesConstants.categoriesScreen: const CategoryTabScreen(),
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.reportScreen: const ReportScreen(),
+  RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
 
   //TODO
 
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
   // RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
 
-  // RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
   // RoutesConstants.editProfileScreen: const EditProfileScreen(),
   // RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
   // RoutesConstants.workingHoursScreen: const WorkingHoursScreen(),

@@ -207,7 +207,6 @@ class AccountBloc {
   }
 
   void _deleteAccountView(BuildContext context) {
-    //TODO
     var nav = Navigator.of(context, rootNavigator: true);
 
     BottomSheetsUtil().areYouShoureButtomSheet(
@@ -222,27 +221,26 @@ class AccountBloc {
                 locator<SettingService>()
                     .removeAccount(userType)
                     .then((c) async {
-                  print("c");
-                  print(c);
-                  //TODO
-                  // await _deleteAllUserData();
-
-                  // await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
+                  await _deleteAllUserData().then((value) async {
+                    await nav.pushNamedAndRemoveUntil(
+                        RoutesConstants.initialRoute,
+                        (Route<dynamic> route) => true);
+                  });
                 });
               });
         });
   }
 
   void _logoutView(BuildContext context) {
-    //TODO
-    //   var nav = Navigator.of(context, rootNavigator: true);
-    //   BottomSheetsUtil().areYouShoureButtomSheet(
-    //       context: context,
-    //       message: AppLocalizations.of(context)!.areyousurelogout,
-    //       sure: () async {
-    //         await _deleteAllUserData();
-    //         await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
-    //       });
+    var nav = Navigator.of(context, rootNavigator: true);
+    BottomSheetsUtil().areYouShoureButtomSheet(
+        context: context,
+        message: AppLocalizations.of(context)!.areyousurelogout,
+        sure: () async {
+          await _deleteAllUserData();
+          await nav.pushNamedAndRemoveUntil(
+              RoutesConstants.initialRoute, (Route<dynamic> route) => true);
+        });
   }
 
   Future<void> _deleteAllUserData() {
