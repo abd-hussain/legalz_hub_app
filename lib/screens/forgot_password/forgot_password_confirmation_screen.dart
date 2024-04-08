@@ -3,6 +3,7 @@ import 'package:legalz_hub_app/shared_widget/background_container.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
 class ForgotPasswordConfirmationScreen extends StatefulWidget {
   const ForgotPasswordConfirmationScreen({super.key});
@@ -29,7 +30,9 @@ class _ForgotPasswordConfirmationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-          title: AppLocalizations.of(context)!.forgotpasswordconfirmation),
+        title: AppLocalizations.of(context)!.forgotpasswordconfirmation,
+        userType: UserType.customer,
+      ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Container(

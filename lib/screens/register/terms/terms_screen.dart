@@ -43,8 +43,10 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          customAppBar(title: AppLocalizations.of(context)!.termsandconditions),
+      appBar: customAppBar(
+        title: AppLocalizations.of(context)!.termsandconditions,
+        userType: bloc.userType ?? UserType.customer,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

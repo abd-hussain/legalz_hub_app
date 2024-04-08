@@ -29,9 +29,9 @@ class CustomerAccountService with Service {
     if (account.countryId != null) {
       formData.fields.add(MapEntry("country_id", account.countryId.toString()));
     }
-    if (account.referalCode != null) {
-      formData.fields.add(MapEntry("referral_code", account.referalCode!));
-    }
+    // if (account.referalCode != null) {
+    //   formData.fields.add(MapEntry("referral_code", account.referalCode!));
+    // }
     if (account.email != null) {
       formData.fields.add(MapEntry("email", account.email!));
     }

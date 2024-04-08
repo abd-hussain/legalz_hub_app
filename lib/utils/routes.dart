@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/screens/change_password/change_password_screen.dart';
+import 'package:legalz_hub_app/screens/edit_experience/edit_experience_screen.dart';
+import 'package:legalz_hub_app/screens/edit_profile/edit_profile_screen.dart';
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
 import 'package:legalz_hub_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container.dart';
+import 'package:legalz_hub_app/screens/rate_per_hour/rate_per_hour_screen.dart';
+import 'package:legalz_hub_app/screens/rating_and_review/rating_and_review_screen.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_screen.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_2/attorney_register_fase2_screen.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_3/attorney_register_fase3_screen.dart';
@@ -24,6 +28,7 @@ import 'package:legalz_hub_app/screens/tabs/home_tab/home_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/payment_tab/payment_screen.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
 import 'package:legalz_hub_app/screens/web_view/web_view_screen.dart';
+import 'package:legalz_hub_app/screens/working_hours/working_hours_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
@@ -97,16 +102,19 @@ final Map<String, Widget> routes = {
   RoutesConstants.reportScreen: const ReportScreen(),
   RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
   RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
+  RoutesConstants.ratingAndReviewScreen: const RatingAndReviewScreen(),
+  RoutesConstants.workingHoursScreen: const WorkingHoursScreen(),
+  RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
+  RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
+  RoutesConstants.editProfileScreen: const EditProfileScreen(),
 
   //TODO
 
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
 
-  // RoutesConstants.editProfileScreen: const EditProfileScreen(),
-  // RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
-  // RoutesConstants.workingHoursScreen: const WorkingHoursScreen(),
-  // RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
-  //
   // RoutesConstants.notificationsScreen: const NotificationsScreen(),
-  // RoutesConstants.ratingAndReviewScreen: const RatingAndReviewScreen()
+
+  // RoutesConstants.mentorProfileScreen: const MentorProfileScreen(),
+  // RoutesConstants.bookingScreen: const BookingScreen(),
+  // RoutesConstants.noInternetScreen: const NoInternetScreen(),
 };

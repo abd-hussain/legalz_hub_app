@@ -16,6 +16,7 @@ import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/speaking_language_field.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
@@ -50,7 +51,7 @@ class _AttorneyRegister2ScreenState extends State<AttorneyRegister2Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: ""),
+      appBar: customAppBar(title: "", userType: UserType.attorney),
       bottomNavigationBar: ValueListenableBuilder<bool>(
           valueListenable: bloc.enableNextBtn,
           builder: (context, snapshot, child) {

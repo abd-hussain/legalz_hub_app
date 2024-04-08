@@ -44,7 +44,8 @@ class _ReportScreenState extends State<ReportScreen> {
         appBar: customAppBar(
             title: bloc.pageType == ReportPageType.issue
                 ? AppLocalizations.of(context)!.reportanproblem
-                : AppLocalizations.of(context)!.reportansuggestion),
+                : AppLocalizations.of(context)!.reportansuggestion,
+            userType: bloc.userType),
         body: ValueListenableBuilder<LoadingStatus>(
             valueListenable: bloc.loadingStatus,
             builder: (context, loadingsnapshot, child) {

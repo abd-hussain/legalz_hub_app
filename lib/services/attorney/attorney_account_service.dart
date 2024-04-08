@@ -15,7 +15,7 @@ class AttorneyAccountService with Service {
   }
 
   Future<AttorneyAccountInfo> updateProfileInfo(
-      {required UpdateAccountRequest account}) async {
+      {required UpdateAttorneyAccountRequest account}) async {
     FormData formData = FormData();
     formData.fields.add(MapEntry("suffixe_name", account.suffix));
     formData.fields.add(MapEntry("first_name", account.firstName));

@@ -8,6 +8,7 @@ import 'package:legalz_hub_app/shared_widget/email_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -36,7 +37,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppLocalizations.of(context)!.forgotpassword),
+      appBar: customAppBar(
+        title: AppLocalizations.of(context)!.forgotpassword,
+        userType: UserType.customer,
+      ),
       body: ValueListenableBuilder<LoadingStatus>(
           valueListenable: bloc.loadingStatusNotifier,
           builder: (context, snapshot, child) {

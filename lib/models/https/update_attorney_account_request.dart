@@ -1,6 +1,6 @@
 import 'dart:io';
 
-class UpdateAccountRequest {
+class UpdateAttorneyAccountRequest {
   String suffix;
   String firstName;
   String lastName;
@@ -12,7 +12,7 @@ class UpdateAccountRequest {
   String dateOfBirth;
   String bio;
 
-  UpdateAccountRequest({
+  UpdateAttorneyAccountRequest({
     required this.suffix,
     required this.firstName,
     required this.lastName,

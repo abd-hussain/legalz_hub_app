@@ -7,6 +7,7 @@ import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
@@ -45,7 +46,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
         bloc.validateFieldsForFaze4();
       },
       child: Scaffold(
-        appBar: customAppBar(title: ""),
+        appBar: customAppBar(title: "", userType: UserType.attorney),
         bottomNavigationBar: ValueListenableBuilder<bool>(
             valueListenable: bloc.enableNextBtn,
             builder: (context, snapshot, child) {

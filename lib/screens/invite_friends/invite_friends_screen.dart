@@ -38,7 +38,9 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppLocalizations.of(context)!.invite_friends),
+      appBar: customAppBar(
+          title: AppLocalizations.of(context)!.invite_friends,
+          userType: _bloc.userType),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

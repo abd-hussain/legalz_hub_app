@@ -50,8 +50,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       child: Scaffold(
         backgroundColor: const Color(0xffF3F4F5),
         resizeToAvoidBottomInset: false,
-        appBar:
-            customAppBar(title: AppLocalizations.of(context)!.changepassword),
+        appBar: customAppBar(
+            title: AppLocalizations.of(context)!.changepassword,
+            userType: bloc.userType),
         body: SafeArea(
           child: ValueListenableBuilder<LoadingStatus>(
               valueListenable: bloc.loadingStatus,

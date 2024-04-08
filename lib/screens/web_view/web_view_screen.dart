@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/screens/web_view/web_view_bloc.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
 class WebViewScreen extends StatefulWidget {
@@ -17,7 +19,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   void didChangeDependencies() {
     bloc.extractArguments(context);
-
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
+        ? UserType.customer
+        : UserType.attorney;
     super.didChangeDependencies();
   }
 
@@ -30,7 +34,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: bloc.pageTitle),
+      appBar: customAppBar(
+        title: bloc.pageTitle,
+        userType: UserType.attorney,
+      ),
       body: ValueListenableBuilder<LoadingStatus>(
           valueListenable: bloc.loadingStatus,
           builder: (context, loadingsnapshot, child) {

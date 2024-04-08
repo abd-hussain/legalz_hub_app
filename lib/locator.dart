@@ -8,6 +8,10 @@ import 'package:legalz_hub_app/services/attorney/attorney_appointments_service.d
 import 'package:legalz_hub_app/services/attorney/attorney_hour_rate_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_settings_service.dart';
 import 'package:legalz_hub_app/services/auth_services.dart';
+import 'package:legalz_hub_app/services/customer/attorney_details_service.dart';
+import 'package:legalz_hub_app/services/customer/attorney_list_service.dart';
+import 'package:legalz_hub_app/services/customer/customer_account_service.dart';
+import 'package:legalz_hub_app/services/customer/customer_appointments_service.dart';
 import 'package:legalz_hub_app/services/customer/customer_register_service.dart';
 import 'package:legalz_hub_app/services/discount_service.dart';
 import 'package:legalz_hub_app/services/filter_services.dart';
@@ -49,11 +53,20 @@ Future<void> setupLocator() async {
       () => AttorneyAccountExperianceService());
   locator
       .registerFactory<AttorneyAccountService>(() => AttorneyAccountService());
+
+  locator
+      .registerFactory<CustomerAccountService>(() => CustomerAccountService());
+  locator.registerFactory<AttorneyListService>(() => AttorneyListService());
+
   locator.registerFactory<AttorneyAppointmentsService>(
       () => AttorneyAppointmentsService());
   locator.registerFactory<AttorneyHourRateService>(
       () => AttorneyHourRateService());
   locator.registerFactory<PaymentService>(() => PaymentService());
+  locator.registerFactory<CustomerAppointmentsService>(
+      () => CustomerAppointmentsService());
+  locator
+      .registerFactory<AttorneyDetailsService>(() => AttorneyDetailsService());
 
   locator.registerFactory<AttorneySettingsService>(
       () => AttorneySettingsService());

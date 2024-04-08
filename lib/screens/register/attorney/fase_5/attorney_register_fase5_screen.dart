@@ -58,7 +58,7 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
         }
       },
       child: Scaffold(
-        appBar: customAppBar(title: ""),
+        appBar: customAppBar(title: "", userType: UserType.attorney),
         bottomNavigationBar: ValueListenableBuilder<bool>(
             valueListenable: bloc.enableNextBtn,
             builder: (context, snapshot, child) {

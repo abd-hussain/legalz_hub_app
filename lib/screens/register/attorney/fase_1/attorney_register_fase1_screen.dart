@@ -19,6 +19,7 @@ import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/suffix_field.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 class AttorneyRegister1Screen extends StatefulWidget {
@@ -47,7 +48,7 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: ""),
+      appBar: customAppBar(title: "", userType: UserType.attorney),
       bottomNavigationBar: StreamBuilder<bool?>(
           initialData: false,
           stream: bloc.enableNextBtn.stream,

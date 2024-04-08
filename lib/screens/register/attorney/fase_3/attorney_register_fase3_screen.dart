@@ -9,6 +9,8 @@ import 'package:legalz_hub_app/shared_widget/working_hours.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
+import '../../../../utils/enums/user_type.dart';
+
 class AttorneyRegister3Screen extends StatefulWidget {
   const AttorneyRegister3Screen({super.key});
 
@@ -35,7 +37,7 @@ class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: ""),
+      appBar: customAppBar(title: "", userType: UserType.attorney),
       bottomNavigationBar: ValueListenableBuilder<bool>(
           valueListenable: bloc.enableNextBtn,
           builder: (context, snapshot, child) {
