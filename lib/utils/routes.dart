@@ -8,6 +8,7 @@ import 'package:legalz_hub_app/screens/initial/initial_screen.dart';
 import 'package:legalz_hub_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container.dart';
+import 'package:legalz_hub_app/screens/notifications/notifications_screen.dart';
 import 'package:legalz_hub_app/screens/rate_per_hour/rate_per_hour_screen.dart';
 import 'package:legalz_hub_app/screens/rating_and_review/rating_and_review_screen.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_screen.dart';
@@ -107,12 +108,11 @@ final Map<String, Widget> routes = {
   RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
   RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
   RoutesConstants.editProfileScreen: const EditProfileScreen(),
+  RoutesConstants.notificationsScreen: const NotificationsScreen(),
 
   //TODO
 
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
-
-  // RoutesConstants.notificationsScreen: const NotificationsScreen(),
 
   // RoutesConstants.mentorProfileScreen: const MentorProfileScreen(),
   // RoutesConstants.bookingScreen: const BookingScreen(),
