@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/attorney_appointment.dart';
 import 'package:legalz_hub_app/models/https/customer_appointment.dart';
+import 'package:legalz_hub_app/models/https/note_appointment_request.dart';
+import 'package:legalz_hub_app/services/attorney/attorney_appointments_service.dart';
+import 'package:legalz_hub_app/services/customer/customer_appointments_service.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
@@ -15,83 +19,80 @@ class CalenderBloc {
       ValueNotifier<List<CustomerAppointmentData>>([]);
   UserType userType = UserType.customer;
 
-  //TODO
+  void getAppointments(BuildContext context) async {
+    if (userType == UserType.attorney) {
+      locator<AttorneyAppointmentsService>()
+          .getAttorneyAppointments()
+          .then((value) {
+        if (value.data != null) {
+          attorneyAppointmentsListNotifier.value =
+              handleAttorneyTimingFromUTC(value.data!);
+        }
+      });
+    } else {
+      locator<CustomerAppointmentsService>()
+          .getCustomerAppointments()
+          .then((value) {
+        if (value.data != null) {
+          customerAppointmentsListNotifier.value =
+              handleCustomerTimingFromUTC(value.data!);
+        }
+      });
+    }
+  }
 
-  void getAppointments(BuildContext context) async {}
+  List<AttorneyAppointmentsData> handleAttorneyTimingFromUTC(
+      List<AttorneyAppointmentsData> data) {
+    int offset = DateTime.now().timeZoneOffset.inHours;
 
-  // void getMentorAppointments(BuildContext context) async {
-  //   await service.getMentorAppointments().then((value) {
-  //     if (value.data != null) {
-  //       meetingsListNotifier.value = handleTimingFromUTC(value.data!);
-  //     }
-  //   });
-  // }
+    for (var appoint in data) {
+      appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
+      appoint.dateTo = _adjustDate(appoint.dateTo, offset);
+    }
 
-  // List<AppointmentData> handleTimingFromUTC(List<AppointmentData> data) {
-  //   int offset = DateTime.now().timeZoneOffset.inHours;
+    return data;
+  }
 
-  //   for (var appoint in data) {
-  //     appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
-  //     appoint.dateTo = _adjustDate(appoint.dateTo, offset);
-  //   }
+  List<CustomerAppointmentData> handleCustomerTimingFromUTC(
+      List<CustomerAppointmentData> data) {
+    int offset = DateTime.now().timeZoneOffset.inHours;
 
-  //   return data;
-  // }
+    for (var appoint in data) {
+      appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
+      appoint.dateTo = _adjustDate(appoint.dateTo, offset);
+    }
 
-  // String _adjustDate(String? dateString, int offset) {
-  //   if (dateString == null) return '';
+    return data;
+  }
 
-  //   final DateTime date = DateTime.parse(dateString);
-  //   final DateTime adjustedDate = date.add(Duration(hours: offset));
+  String _adjustDate(String? dateString, int offset) {
+    if (dateString == null) return '';
 
-  //   return adjustedDate.toString();
-  // }
+    final DateTime date = DateTime.parse(dateString);
+    final DateTime adjustedDate = date.add(Duration(hours: offset));
 
-  // Future<dynamic> cancelMeeting(int meetingId) async {
-  //   return service.cancelAppointment(id: meetingId);
-  // }
+    return adjustedDate.toString();
+  }
 
-  // Future<dynamic> addNote(AddCommentToAppointment body) async {
-  //   return service.addCommentToAppointment(body: body);
-  // }
+  Future<dynamic> customerCancelMeeting(int meetingId) async {
+    return locator<CustomerAppointmentsService>()
+        .cancelAppointment(id: meetingId);
+  }
 
-  // Future<void> getClientAppointments(BuildContext context) async {
-  //   await service.getClientAppointments().then((value) {
-  //     if (value.data != null) {
-  //       meetingsListNotifier.value = handleTimingFromUTC(value.data!);
-  //     }
-  //   });
-  // }
+  Future<dynamic> attorneyCancelMeeting(int meetingId) async {
+    return locator<AttorneyAppointmentsService>()
+        .cancelAppointment(id: meetingId);
+  }
 
-  // List<AppointmentData> handleTimingFromUTC(List<AppointmentData> data) {
-  //   int offset = DateTime.now().timeZoneOffset.inHours;
+  Future<dynamic> customerEditNoteMeeting(
+      {required NoteAppointmentRequest body}) async {
+    return locator<CustomerAppointmentsService>()
+        .editNoteAppointment(noteAppointment: body);
+  }
 
-  //   for (var appoint in data) {
-  //     appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
-  //     appoint.dateTo = _adjustDate(appoint.dateTo, offset);
-  //   }
-
-  //   return data;
-  // }
-
-  // String _adjustDate(String? dateString, int offset) {
-  //   if (dateString == null) return '';
-
-  //   final DateTime date = DateTime.parse(dateString);
-  //   final DateTime adjustedDate = date.add(Duration(hours: offset));
-
-  //   return adjustedDate.toString();
-  // }
-
-  // Future<dynamic> cancelMeeting(int meetingId) async {
-  //   return locator<AppointmentsService>().cancelAppointment(id: meetingId);
-  // }
-
-  // Future<dynamic> editNoteMeeting({required int meetingId, required String note}) async {
-  //   return locator<AppointmentsService>().editNoteAppointment(
-  //       noteAppointment: NoteAppointmentRequest(
-  //     id: meetingId,
-  //     comment: note,
-  //   ));
-  // }
+  Future<dynamic> attorneyEditNoteMeeting(
+      {required NoteAppointmentRequest body}) async {
+    return locator<AttorneyAppointmentsService>()
+        .editNoteAppointment(body: body);
+  }
 }

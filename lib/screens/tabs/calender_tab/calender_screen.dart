@@ -30,7 +30,6 @@ class _CalenderTabScreenState extends State<CalenderTabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO
     return Column(
       children: [
         MainHeaderView(
@@ -43,11 +42,32 @@ class _CalenderTabScreenState extends State<CalenderTabScreen> {
         Expanded(
           child: bloc.userType == UserType.attorney
               ? AttorneyCalenderView(
+                  language: bloc.box.get(DatabaseFieldConstant.language),
                   valueNotifier: bloc.attorneyAppointmentsListNotifier,
+                  cancelMeeting: (id) {
+                    bloc.attorneyCancelMeeting(id).then((value) {
+                      bloc.getAppointments(context);
+                    });
+                  },
+                  addNote: (item) {
+                    bloc.attorneyEditNoteMeeting(body: item).then((value) {
+                      bloc.getAppointments(context);
+                    });
+                  },
                 )
               : CustomerCalenderView(
+                  language: bloc.box.get(DatabaseFieldConstant.language),
                   valueNotifier: bloc.customerAppointmentsListNotifier,
-                ),
+                  cancelMeeting: (id) {
+                    bloc.customerCancelMeeting(id).then((value) {
+                      bloc.getAppointments(context);
+                    });
+                  },
+                  addNote: (item) {
+                    bloc.customerEditNoteMeeting(body: item).then((value) {
+                      bloc.getAppointments(context);
+                    });
+                  }),
         ),
       ],
     );

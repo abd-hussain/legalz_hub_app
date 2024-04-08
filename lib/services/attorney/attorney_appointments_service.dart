@@ -1,5 +1,5 @@
-import 'package:legalz_hub_app/models/https/add_comment_appointment.dart';
 import 'package:legalz_hub_app/models/https/attorney_appointment.dart';
+import 'package:legalz_hub_app/models/https/note_appointment_request.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 import 'package:legalz_hub_app/utils/repository/http_repository.dart';
 import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
@@ -23,7 +23,7 @@ class AttorneyAppointmentsService with Service {
     return AttorneyAppointments.fromJson(response);
   }
 
-  Future<void> attorneyCancelAppointment({required int id}) async {
+  Future<void> cancelAppointment({required int id}) async {
     final response = await repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.attorneyCancelAppointment,
@@ -54,8 +54,8 @@ class AttorneyAppointmentsService with Service {
     return response;
   }
 
-  Future<void> attorneyAddCommentToAppointment(
-      {required AddCommentToAppointment body}) async {
+  Future<void> editNoteAppointment(
+      {required NoteAppointmentRequest body}) async {
     final response = await repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.attorneyCommentAppointment,

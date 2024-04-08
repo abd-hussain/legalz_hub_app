@@ -13,6 +13,7 @@
     "sure" : "Sure",
     "areyousure" : "Are You Sure",
     "cancel" : "cancel",
+    "category" : "Category",
     "pickimagefromstudio" : "Choose from Library",
     "pickimagefromcamera" : "Choose from Camera",
     "pickimageremoveimage" : "Remove image",
