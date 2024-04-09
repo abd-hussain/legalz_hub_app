@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:legalz_hub_app/models/https/attorney_appoitments_response.dart';
-import 'package:legalz_hub_app/shared_widget/booking/cell_of_booking.dart';
-import 'package:legalz_hub_app/shared_widget/booking/meeting_times_view.dart';
-import 'package:legalz_hub_app/shared_widget/booking/parser.dart';
-import 'package:legalz_hub_app/shared_widget/booking/points_in_last_view.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/cell_of_booking.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/meeting_times_view.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/parser.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/points_in_last_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/currency.dart';

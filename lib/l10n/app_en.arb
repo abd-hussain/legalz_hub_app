@@ -364,5 +364,12 @@
     "selectfavlanguage" : "Select Your Favorite Language",
     "attorneyuser" : "Attorney / Lawyer", 
     "customeruser" : "Client / Customer",
-    "cancelRegistration" : "Cancel Registration"
+    "cancelRegistration" : "Cancel Registration",
+    "moneyconversion" : "Currency Converter",
+    "moneyconversiondesc" : "Please note your currency is different than this Attorney Currency, so we will convert the total amount to Dollars and you will pay that amount in dollar.",
+    "confirm" : "Confirm",
+    "newtotalamount" : "New Total Amount",
+    "meetingnow" : "Instant session",
+    "specialist" : "specialist",
+    "total" : "Total"
 }

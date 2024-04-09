@@ -148,6 +148,8 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
       name: box.get(DatabaseFieldConstant.selectedCountryName),
       currency: box.get(DatabaseFieldConstant.selectedCountryCurrency),
       dialCode: box.get(DatabaseFieldConstant.selectedCountryDialCode),
+      currencyCode: box.get(DatabaseFieldConstant.selectedCurrencyCode),
+      countryCode: box.get(DatabaseFieldConstant.selectedCountryCode),
       maxLength:
           int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
       minLength:

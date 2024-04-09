@@ -4,7 +4,7 @@ import 'package:legalz_hub_app/models/https/note_appointment_request.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/widgets/bottom_sheet/main_bottom_sheet.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/widgets/bottom_sheet/note_botom_sheet.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/widgets/datasource/customer_datasource.dart';
-import 'package:legalz_hub_app/shared_widget/cancel_booking_bottom_sheet.dart';
+import 'package:legalz_hub_app/shared_widget/booking/cancel_booking_bottom_sheet.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/gender_format.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';

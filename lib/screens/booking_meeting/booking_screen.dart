@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/booking_bloc.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/bill_details_view.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/discount_view.dart';
@@ -9,12 +11,16 @@ import 'package:legalz_hub_app/screens/booking_meeting/widgets/meeting_timing_vi
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/no_mentor_found_view.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/note_view.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/schedule_booking_view.dart';
+import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
+import 'package:legalz_hub_app/shared_widget/booking/payment_bottom_sheet.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -240,35 +246,51 @@ class _BookingScreenState extends State<BookingScreen> {
                                     buttonTitle:
                                         AppLocalizations.of(context)!.pay,
                                     onTap: () async {
-                                      //TODO
-                                      // if (bloc.calculateTotalAmountVariable > 0) {
-                                      //   final bottomSheet = PaymentBottomSheetsUtil();
-
-                                      //   if (bloc.currencyCode !=
-                                      //       bloc.box.get(DatabaseFieldConstant.selectedCurrencyCode)) {
-                                      //     double dollerEquavilant = await bloc.currencyConversion(bloc.currencyCode!);
-                                      //     if (context.mounted) {
-                                      //       await bottomSheet.moneyConversionBottomSheet(
-                                      //         context: context,
-                                      //         mentorCurrency: bloc.currencyCode!,
-                                      //         dollerEquvilant: dollerEquavilant,
-                                      //         totalAmount: bloc.calculateTotalAmountVariable,
-                                      //         onSelectionDone: (newValue) async {
-                                      //           await callPaymentBottomSheet(
-                                      //               totalAmount: newValue, currency: "USD", countryCode: "US");
-                                      //         },
-                                      //       );
-                                      //     }
-                                      //   } else {
-                                      //     await callPaymentBottomSheet(
-                                      //       totalAmount: bloc.calculateTotalAmountVariable,
-                                      //       currency: bloc.box.get(DatabaseFieldConstant.selectedCurrencyCode),
-                                      //       countryCode: bloc.box.get(DatabaseFieldConstant.selectedCountryCode),
-                                      //     );
-                                      //   }
-                                      // } else {
-                                      //   await callRequest(PaymentTypeMethod.freeCall);
-                                      // }
+                                      if (bloc.calculateTotalAmountVariable >
+                                          0) {
+                                        final bottomSheet =
+                                            PaymentBottomSheetsUtil();
+                                        //TODO
+                                        if (bloc.currencyCode !=
+                                            bloc.box.get(DatabaseFieldConstant
+                                                .selectedCurrencyCode)) {
+                                          double dollerEquavilant =
+                                              await bloc.currencyConversion(
+                                                  bloc.currencyCode!);
+                                          if (context.mounted) {
+                                            await bottomSheet
+                                                .moneyConversionBottomSheet(
+                                              context: context,
+                                              mentorCurrency:
+                                                  bloc.currencyCode!,
+                                              dollerEquvilant: dollerEquavilant,
+                                              totalAmount: bloc
+                                                  .calculateTotalAmountVariable,
+                                              onSelectionDone:
+                                                  (newValue) async {
+                                                await callPaymentBottomSheet(
+                                                    totalAmount: newValue,
+                                                    currency: "USD",
+                                                    countryCode: "US");
+                                              },
+                                            );
+                                          }
+                                        } else {
+                                          await callPaymentBottomSheet(
+                                            totalAmount: bloc
+                                                .calculateTotalAmountVariable,
+                                            currency: bloc.box.get(
+                                                DatabaseFieldConstant
+                                                    .selectedCurrencyCode),
+                                            countryCode: bloc.box.get(
+                                                DatabaseFieldConstant
+                                                    .selectedCountryCode),
+                                          );
+                                        }
+                                      } else {
+                                        await callRequest(
+                                            PaymentTypeMethod.freeCall);
+                                      }
                                     },
                                   ),
                                 ],
@@ -290,5 +312,55 @@ class _BookingScreenState extends State<BookingScreen> {
             }),
       ),
     );
+  }
+
+  Future<dynamic> callPaymentBottomSheet(
+      {required double totalAmount,
+      required String currency,
+      required String countryCode}) async {
+    final bottomSheet = PaymentBottomSheetsUtil();
+
+    await bottomSheet.paymentBottomSheet(
+      context: context,
+      totalAmount: totalAmount,
+      countryCode: countryCode,
+      currency: currency,
+      onSelectionDone: (paymentType) async {
+        switch (paymentType) {
+          case PaymentType.apple:
+            await callRequest(PaymentTypeMethod.apple);
+            break;
+          case PaymentType.google:
+            await callRequest(PaymentTypeMethod.google);
+            break;
+        }
+      },
+    );
+  }
+
+  Future<void> callRequest(PaymentTypeMethod type) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    try {
+      await bloc.bookMeetingRequest(type);
+      _backAfterRequest();
+    } on DioException catch (e) {
+      final error = e.error as HttpException;
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
+    }
+  }
+
+  _backAfterRequest() {
+    if (bloc.bookingType == BookingType.schudule) {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      locator<MainContainerBloc>().appBarKey.currentState!.animateTo(3);
+      locator<MainContainerBloc>().customerCurrentTabIndexNotifier.value =
+          CustomerSelectedTab.calender;
+    } else {
+      Navigator.of(context).pop();
+    }
   }
 }

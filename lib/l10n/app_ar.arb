@@ -364,7 +364,14 @@
     "selectfavlanguage" : "اختر لغتك المفضلة",
     "attorneyuser" : "محامي / مقدم خدمه", 
     "customeruser" : "عميل / مستخدم",
-    "cancelRegistration" : "الغاء التسجيل"
+    "cancelRegistration" : "الغاء التسجيل",
+    "moneyconversion" : "محول العملات",
+    "moneyconversiondesc" : "يرجى ملاحظة أن عملتك مختلفة عن عملة المحامي لذلك سنقوم بتحويل المبلغ الإجمالي إلى الدولار وستدفع هذا المبلغ بالدولار.",
+    "confirm" : "موافق",
+    "newtotalamount" : "المجموع الكلي الجديد",
+    "meetingnow" : "جلسة فورية",
+    "specialist" : "الاختصاص",
+    "total" : "المجموع"
 
 
 

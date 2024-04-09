@@ -23,9 +23,11 @@ class DatabaseFieldConstant {
   static const String selectedCountryFlag = "selectedCountryFlag";
   static const String selectedCountryName = "selectedCountryName";
   static const String selectedCountryCurrency = "selectedCountryCurrency";
+  static const String selectedCountryCode = "selectedCountryCode";
   static const String selectedCountryDialCode = "selectedCountryDialCode";
   static const String selectedCountryMinLenght = "selectedCountryMinLenght";
   static const String selectedCountryMaxLenght = "selectedCountryMaxLenght";
+  static const String selectedCurrencyCode = "selectedCurrencyCode";
 
   static const String pushNotificationToken = "pushNotificationToken";
 }

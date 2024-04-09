@@ -262,6 +262,8 @@ class AccountBloc {
       DatabaseFieldConstant.selectedCountryFlag,
       DatabaseFieldConstant.selectedCountryName,
       DatabaseFieldConstant.selectedCountryCurrency,
+      DatabaseFieldConstant.selectedCountryCode,
+      DatabaseFieldConstant.selectedCurrencyCode,
       DatabaseFieldConstant.selectedCountryDialCode,
       DatabaseFieldConstant.selectedCountryMinLenght,
       DatabaseFieldConstant.selectedCountryMaxLenght,

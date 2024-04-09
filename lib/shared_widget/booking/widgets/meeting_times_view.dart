@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/attorney_appoitments_response.dart';
-import 'package:legalz_hub_app/shared_widget/booking/cell_of_booking.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/cell_of_booking.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 

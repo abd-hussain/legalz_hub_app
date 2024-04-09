@@ -23,6 +23,8 @@ class Country {
   String? name;
   String? currency;
   String? dialCode;
+  String? countryCode;
+  String? currencyCode;
   int? minLength;
   int? maxLength;
 
@@ -32,6 +34,8 @@ class Country {
       this.name,
       this.currency,
       this.dialCode,
+      this.countryCode,
+      this.currencyCode,
       this.maxLength,
       this.minLength});
 
@@ -41,6 +45,8 @@ class Country {
     name = json['name'];
     currency = json['currency'];
     dialCode = json['dialCode'];
+    countryCode = json['country_code'];
+    currencyCode = json['currency_code'];
     minLength = json['minLength'];
     maxLength = json['maxLength'];
   }
