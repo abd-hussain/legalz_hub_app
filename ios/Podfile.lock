@@ -806,7 +806,7 @@ PODS:
     - "gRPC-C++ (~> 1.50.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseInstallations (10.23.0):
+  - FirebaseInstallations (10.20.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
