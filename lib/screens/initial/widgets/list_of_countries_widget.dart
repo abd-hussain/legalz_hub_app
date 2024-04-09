@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
 import 'package:legalz_hub_app/screens/tutorials/tutorials_screen.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
-import 'package:legalz_hub_app/shared_widget/shimmer_list.dart';
+import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_list.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 

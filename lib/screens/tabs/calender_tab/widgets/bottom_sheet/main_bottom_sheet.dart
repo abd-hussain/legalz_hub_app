@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:legalz_hub_app/models/https/attorney_appointment.dart';
-import 'package:legalz_hub_app/screens/tabs/calender_tab/widgets/other_user_info_view.dart';
+import 'package:legalz_hub_app/shared_widget/other_user_info_view.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/widgets/price_view.dart';
 import 'package:legalz_hub_app/shared_widget/appointment_details_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';

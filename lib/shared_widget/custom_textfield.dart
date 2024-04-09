@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final bool enabled;
   final bool obscureText;
   final double fontSize;
+  final int maxLine;
   final EdgeInsetsGeometry padding;
   final Widget? suffixWidget;
   final TextInputType? keyboardType;
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
       this.obscureText = false,
       this.enabled = true,
       this.fontSize = 14,
+      this.maxLine = 1,
       this.suffixWidget,
       this.keyboardType,
       this.inputFormatters,
@@ -46,6 +48,7 @@ class CustomTextField extends StatelessWidget {
           enableSuggestions: false,
           keyboardType: keyboardType,
           autocorrect: false,
+          maxLines: maxLine,
           controller: controller,
           style: CustomTextStyle().regular(
               color:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:legalz_hub_app/screens/attorney_profile/attorney_profile_screen.dart';
+import 'package:legalz_hub_app/screens/booking_meeting/booking_screen.dart';
 import 'package:legalz_hub_app/screens/change_password/change_password_screen.dart';
 import 'package:legalz_hub_app/screens/edit_experience/edit_experience_screen.dart';
 import 'package:legalz_hub_app/screens/edit_profile/edit_profile_screen.dart';
@@ -69,6 +71,8 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String insideCallScreen = 'InsideCallScreen';
   static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
+  static const String attorneyProfileScreen = 'attorneyProfileScreen';
+  static const String bookingScreen = 'bookingScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -109,12 +113,11 @@ final Map<String, Widget> routes = {
   RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
   RoutesConstants.editProfileScreen: const EditProfileScreen(),
   RoutesConstants.notificationsScreen: const NotificationsScreen(),
+  RoutesConstants.attorneyProfileScreen: const AttorneyProfileScreen(),
+  RoutesConstants.bookingScreen: const BookingScreen(),
 
   //TODO
 
   // RoutesConstants.insideCallScreen: const InsideCallScreen(),
-
-  // RoutesConstants.mentorProfileScreen: const MentorProfileScreen(),
-  // RoutesConstants.bookingScreen: const BookingScreen(),
   // RoutesConstants.noInternetScreen: const NoInternetScreen(),
 };

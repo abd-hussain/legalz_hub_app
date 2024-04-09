@@ -8,6 +8,7 @@ import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum CustomerSelectedTab { home, categories, call, calender, account }
 
@@ -39,6 +40,42 @@ class MainContainerBloc {
     TabNavigator(initialRoute: RoutesConstants.calenderScreen),
     TabNavigator(initialRoute: RoutesConstants.accountScreen)
   ];
+
+  List<TabItem<dynamic>> customerItems(BuildContext context) {
+    return [
+      TabItem(
+          icon: Icons.home,
+          title: AppLocalizations.of(context)!.containerHomeIconTitle),
+      TabItem(
+          icon: Icons.category_rounded,
+          title: AppLocalizations.of(context)!.category),
+      const TabItem(icon: Icons.call),
+      TabItem(
+          icon: Icons.calendar_month,
+          title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+      TabItem(
+          icon: Icons.person,
+          title: AppLocalizations.of(context)!.containerAccountIconTitle),
+    ];
+  }
+
+  List<TabItem<dynamic>> attorneyItems(BuildContext context) {
+    return [
+      TabItem(
+          icon: Icons.home,
+          title: AppLocalizations.of(context)!.containerHomeIconTitle),
+      TabItem(
+          icon: Icons.payments_outlined,
+          title: AppLocalizations.of(context)!.payments),
+      const TabItem(icon: Icons.call),
+      TabItem(
+          icon: Icons.calendar_month,
+          title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+      TabItem(
+          icon: Icons.person,
+          title: AppLocalizations.of(context)!.containerAccountIconTitle),
+    ];
+  }
 
   AttorneySelectedTab returnAttornySelectedtypeDependOnIndex(int index) {
     switch (index) {

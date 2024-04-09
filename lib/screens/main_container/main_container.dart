@@ -1,6 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/main_context.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
@@ -67,21 +66,9 @@ class _MainContainerState extends State<MainContainer> {
         cornerRadius: 8,
         height: 60,
         style: TabStyle.fixedCircle,
-        items: [
-          TabItem(
-              icon: Icons.home,
-              title: AppLocalizations.of(context)!.containerHomeIconTitle),
-          TabItem(
-              icon: Icons.payments_outlined,
-              title: AppLocalizations.of(context)!.payments),
-          const TabItem(icon: Icons.call),
-          TabItem(
-              icon: Icons.calendar_month,
-              title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-          TabItem(
-              icon: Icons.person,
-              title: AppLocalizations.of(context)!.containerAccountIconTitle),
-        ],
+        items: _bloc.userType == UserType.attorney
+            ? _bloc.attorneyItems(context)
+            : _bloc.customerItems(context),
         onTap: (int index) {
           if (_bloc.userType == UserType.attorney) {
             _bloc.attornyCurrentTabIndexNotifier.value =
