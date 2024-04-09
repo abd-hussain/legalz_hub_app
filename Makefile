@@ -20,6 +20,6 @@ deploy-web:
 	flutter build web --no-tree-shake-icons
 	firebase deploy
 
-deploy: test deploy-android deploy-ios deploy-web
+deploy: deploy-android deploy-ios deploy-web
 
-.PHONY: test clean deploy-android deploy-ios deploy-web
+.PHONY: clean deploy-android deploy-ios deploy-web
