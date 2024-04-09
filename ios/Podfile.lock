@@ -757,7 +757,7 @@ PODS:
     - Firebase/RemoteConfig (= 10.15.0)
     - firebase_core
     - Flutter
-  - FirebaseABTesting (10.23.0):
+  - FirebaseABTesting (10.20.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.15.0):
     - FirebaseAnalytics/AdIdSupport (= 10.15.0)
