@@ -57,7 +57,7 @@ jobs:
           uses: subosito/flutter-action@v2
           with:
             flutter-version: '3.16.0'
-            cache: true
+            # cache: true
 
         - name: Set up App Store Connect
           run: |
