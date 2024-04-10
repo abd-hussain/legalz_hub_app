@@ -973,7 +973,7 @@ PODS:
     - Flutter
   - iris_method_channel (0.0.1):
     - Flutter
-  - leveldb-library (1.22.4)
+  - leveldb-library (1.22.2)
   - local_auth_darwin (0.0.1):
     - Flutter
   - nanopb (2.30909.1):
@@ -988,7 +988,7 @@ PODS:
     - FlutterMacOS
   - pay_ios (0.0.1):
     - Flutter
-  - permission_handler_apple (9.3.0):
+  - permission_handler_apple (9.1.1):
     - Flutter
   - pointer_interceptor_ios (0.0.1):
     - Flutter
@@ -997,7 +997,7 @@ PODS:
     - PromisesObjC (= 2.3.1)
   - rate_my_app (2.0.0):
     - Flutter
-  - ReachabilitySwift (5.2.1)
+  - ReachabilitySwift (5.0.0)
   - SDWebImage (5.19.1):
     - SDWebImage/Core (= 5.19.1)
   - SDWebImage/Core (5.19.1)
