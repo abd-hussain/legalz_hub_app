@@ -988,7 +988,7 @@ PODS:
     - FlutterMacOS
   - pay_ios (0.0.1):
     - Flutter
-  - permission_handler_apple (9.1.1):
+  - permission_handler_apple (9.3.0):
     - Flutter
   - pointer_interceptor_ios (0.0.1):
     - Flutter
@@ -997,7 +997,7 @@ PODS:
     - PromisesObjC (= 2.3.1)
   - rate_my_app (2.0.0):
     - Flutter
-  - ReachabilitySwift (5.0.0)
+  - ReachabilitySwift (5.2.1)
   - SDWebImage (5.19.1):
     - SDWebImage/Core (= 5.19.1)
   - SDWebImage/Core (5.19.1)
