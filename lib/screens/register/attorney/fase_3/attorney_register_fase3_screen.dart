@@ -15,8 +15,7 @@ class AttorneyRegister3Screen extends StatefulWidget {
   const AttorneyRegister3Screen({super.key});
 
   @override
-  State<AttorneyRegister3Screen> createState() =>
-      _AttorneyRegister3ScreenState();
+  State<AttorneyRegister3Screen> createState() => _AttorneyRegister3ScreenState();
 }
 
 class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
@@ -28,6 +27,8 @@ class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
 
     super.didChangeDependencies();
   }
+
+  //TODO: Disaple working hour and make it always free
 
   @override
   void dispose() {
@@ -49,27 +50,22 @@ class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
               nextPressed: () async {
                 final navigator = Navigator.of(context);
                 final localization = AppLocalizations.of(context)!;
-                await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.saturdayWH,
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.saturdayWH,
                     bloc.filterListOfTiming(dayName: localization.saturday));
                 await bloc.box.put(TempFieldToRegistrtAttorneyConstant.sundayWH,
                     bloc.filterListOfTiming(dayName: localization.sunday));
                 await bloc.box.put(TempFieldToRegistrtAttorneyConstant.mondayWH,
                     bloc.filterListOfTiming(dayName: localization.monday));
-                await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.tuesdayWH,
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.tuesdayWH,
                     bloc.filterListOfTiming(dayName: localization.tuesday));
-                await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.wednesdayWH,
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.wednesdayWH,
                     bloc.filterListOfTiming(dayName: localization.wednesday));
-                await bloc.box.put(
-                    TempFieldToRegistrtAttorneyConstant.thursdayWH,
+                await bloc.box.put(TempFieldToRegistrtAttorneyConstant.thursdayWH,
                     bloc.filterListOfTiming(dayName: localization.thursday));
                 await bloc.box.put(TempFieldToRegistrtAttorneyConstant.fridayWH,
                     bloc.filterListOfTiming(dayName: localization.friday));
 
-                await bloc.box
-                    .put(DatabaseFieldConstant.attorneyRegistrationStep, "4");
+                await bloc.box.put(DatabaseFieldConstant.attorneyRegistrationStep, "4");
                 navigator.pushNamed(RoutesConstants.registerAttornyFaze4Screen);
               },
             );
@@ -86,23 +82,17 @@ class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
                   itemCount: bloc.listOfWorkingHourNotifier.value.length,
                   itemBuilder: (context, index) {
                     return WorkingHoursWidget(
-                      workingHours:
-                          bloc.listOfWorkingHourNotifier.value[index].list,
-                      dayName:
-                          bloc.listOfWorkingHourNotifier.value[index].dayName,
+                      workingHours: bloc.listOfWorkingHourNotifier.value[index].list,
+                      dayName: bloc.listOfWorkingHourNotifier.value[index].dayName,
                       onSave: () {
                         EditWorkingHourBottomSheetsUtil().workingHour(
                           context: context,
-                          dayname: bloc
-                              .listOfWorkingHourNotifier.value[index].dayName,
-                          listOfWorkingHour:
-                              bloc.listOfWorkingHourNotifier.value[index].list,
+                          dayname: bloc.listOfWorkingHourNotifier.value[index].dayName,
+                          listOfWorkingHour: bloc.listOfWorkingHourNotifier.value[index].list,
                           onSave: (newList) {
-                            bloc.listOfWorkingHourNotifier.value[index] =
-                                WorkingHourModel(
-                                    list: bloc.prepareList(context, newList),
-                                    dayName: bloc.listOfWorkingHourNotifier
-                                        .value[index].dayName);
+                            bloc.listOfWorkingHourNotifier.value[index] = WorkingHourModel(
+                                list: bloc.prepareList(context, newList),
+                                dayName: bloc.listOfWorkingHourNotifier.value[index].dayName);
 
                             bloc.validateFieldsForFaze3();
                             setState(() {});

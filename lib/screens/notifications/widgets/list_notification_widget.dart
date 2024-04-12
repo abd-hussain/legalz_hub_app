@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/notifications_response.dart';
-import 'package:legalz_hub_app/screens/notifications/widgets/shimmer_notifications.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
+import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_notifications.dart';
 
 class NotificationsList extends StatefulWidget {
-  final ValueNotifier<List<NotificationsResponseData>?>
-      notificationsListNotifier;
+  final ValueNotifier<List<NotificationsResponseData>?> notificationsListNotifier;
   const NotificationsList({super.key, required this.notificationsListNotifier});
 
   @override
@@ -37,8 +36,7 @@ class _NotificationsListState extends State<NotificationsList> {
         });
   }
 
-  Widget notificationTile(
-      BuildContext context, NotificationsResponseData item, int index) {
+  Widget notificationTile(BuildContext context, NotificationsResponseData item, int index) {
     var parsedDate = DateTime.parse(item.createdAt!);
     var dateLocal = parsedDate.toLocal();
 
@@ -68,8 +66,7 @@ class _NotificationsListState extends State<NotificationsList> {
                     color: Color(0xff444444),
                   ),
                   CustomText(
-                    title:
-                        "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
+                    title: "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
                     fontSize: 9,
                     textColor: const Color(0xff444444),
                   ),
