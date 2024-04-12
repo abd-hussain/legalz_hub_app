@@ -32,8 +32,8 @@ class MyContact {
     data['full_name'] = fullName ?? "";
     data['mobile_number'] = mobileNumber ?? "";
     data['email'] = email ?? "";
-    data['customers_owner_id'] = customersOwnerId ?? 0;
-    data['attorney_owner_id'] = attorneyOwnerId ?? 0;
+    data['customers_owner_id'] = customersOwnerId;
+    data['attorney_owner_id'] = attorneyOwnerId;
     return data;
   }
 }

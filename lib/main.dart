@@ -29,7 +29,8 @@ void main() {
     if (!kIsWeb) {
       await MobileAds.instance.initialize();
       await MobileAds.instance.updateRequestConfiguration(
-        RequestConfiguration(testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
+        RequestConfiguration(
+            testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
       );
 
       await _setupFirebase();
@@ -62,7 +63,8 @@ Future<bool> _setupFirebase() async {
   if (hasConnectivity) {
     await Firebase.initializeApp();
   } else {
-    networkInfoService.firebaseInitNetworkStateStreamControler.stream.listen((event) async {
+    networkInfoService.firebaseInitNetworkStateStreamControler.stream
+        .listen((event) async {
       if (event && Firebase.apps.isEmpty) {
         await Firebase.initializeApp();
       }

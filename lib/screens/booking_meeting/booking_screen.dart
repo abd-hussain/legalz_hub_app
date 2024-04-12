@@ -34,7 +34,8 @@ class _BookingScreenState extends State<BookingScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleReadingArguments(context, arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(context,
+        arguments: ModalRoute.of(context)!.settings.arguments);
     bloc.handleLisinnerOfDiscountController();
     super.didChangeDependencies();
   }
@@ -49,7 +50,9 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFAFAFA),
-      appBar: customAppBar(title: AppLocalizations.of(context)!.booknow, userType: UserType.customer),
+      appBar: customAppBar(
+          title: AppLocalizations.of(context)!.booknow,
+          userType: UserType.customer),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: ValueListenableBuilder<LoadingStatus>(
@@ -67,151 +70,226 @@ class _BookingScreenState extends State<BookingScreen> {
                                 children: [
                                   bloc.bookingType == BookingType.schudule
                                       ? ScheduleBookingView(
-                                          profileImg: bloc.scheduleAttorneyProfileImageUrl,
+                                          profileImg: bloc
+                                              .scheduleAttorneyProfileImageUrl,
                                           flagImage: bloc.attorneyCountryFlag,
                                           gender: bloc.scheduleAttorneyGender,
-                                          firstName: bloc.scheduleAttorneyFirstName,
-                                          lastName: bloc.scheduleAttorneyLastName,
-                                          suffixName: bloc.scheduleAttorneySuffixName,
+                                          firstName:
+                                              bloc.scheduleAttorneyFirstName,
+                                          lastName:
+                                              bloc.scheduleAttorneyLastName,
+                                          suffixName:
+                                              bloc.scheduleAttorneySuffixName,
                                           categoryName: bloc.categoryName,
                                         )
                                       : InstanceBookingView(
-                                          avaliableAttornies: bloc.avaliableAttornies,
+                                          avaliableAttornies:
+                                              bloc.avaliableAttornies,
                                           categoryName: bloc.categoryName,
                                           onSelectAttorney: (attorneyDate) {
-                                            bloc.loadingStatus.value = LoadingStatus.inprogress;
+                                            bloc.loadingStatus.value =
+                                                LoadingStatus.inprogress;
                                             bloc.attorneyId = attorneyDate.id;
-                                            bloc.attorneyHourRate = attorneyDate.hourRate;
-                                            bloc.attorneyCurrency = attorneyDate.currency;
+                                            bloc.attorneyHourRate =
+                                                attorneyDate.hourRate;
+                                            bloc.attorneyCurrency =
+                                                attorneyDate.currency;
                                             bloc.attorneyMeetingdate =
-                                                DateFormat("yyyy-MM-dd").parse(attorneyDate.date!);
-                                            bloc.meetingDay = bloc.meetingDayNamed(bloc.attorneyMeetingdate);
-                                            bloc.attorneyMeetingtime = attorneyDate.hour!;
+                                                DateFormat("yyyy-MM-dd")
+                                                    .parse(attorneyDate.date!);
+                                            bloc.meetingDay =
+                                                bloc.meetingDayNamed(
+                                                    bloc.attorneyMeetingdate);
+                                            bloc.attorneyMeetingtime =
+                                                attorneyDate.hour!;
                                             bloc.meetingFreeCall = false;
                                             bloc.enablePayButton = true;
-                                            bloc.loadingStatus.value = LoadingStatus.finish;
+                                            bloc.loadingStatus.value =
+                                                LoadingStatus.finish;
                                           },
                                         ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                                    padding: const EdgeInsets.only(
+                                        right: 16, left: 16, bottom: 8),
                                     child: CustomText(
-                                      title: AppLocalizations.of(context)!.appointmentdetails,
+                                      title: AppLocalizations.of(context)!
+                                          .appointmentdetails,
                                       fontSize: 12,
                                       textColor: const Color(0xff554d56),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 16, right: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16),
                                     child: ItemInGrid(
-                                      title: AppLocalizations.of(context)!.meetingdate,
-                                      value: bloc.meetingDate(bloc.attorneyMeetingdate),
+                                      title: AppLocalizations.of(context)!
+                                          .meetingdate,
+                                      value: bloc.meetingDate(
+                                          bloc.attorneyMeetingdate),
                                     ),
                                   ),
                                   MeetingTimingView(
                                     date: bloc.meetingDay,
-                                    time: bloc.bookingType == BookingType.schudule
-                                        ? bloc.meetingTime(bloc.attorneyMeetingtime)
+                                    time: bloc.bookingType ==
+                                            BookingType.schudule
+                                        ? bloc.meetingTime(
+                                            bloc.attorneyMeetingtime)
                                         : "${AppLocalizations.of(context)!.within} ${bloc.attorneyMeetingtime! + 1} ${AppLocalizations.of(context)!.hour}",
                                     duration: bloc.meetingduration != null
-                                        ? bloc.meetingDurationParser(bloc.meetingduration!)
+                                        ? bloc.meetingDurationParser(
+                                            bloc.meetingduration!)
                                         : null,
                                     type: bloc.bookingType,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 16, left: 16),
-                                    child: Container(height: 0.5, color: const Color(0xff444444)),
+                                    padding: const EdgeInsets.only(
+                                        right: 16, left: 16),
+                                    child: Container(
+                                        height: 0.5,
+                                        color: const Color(0xff444444)),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 8),
+                                    padding: const EdgeInsets.only(
+                                        top: 16,
+                                        right: 16,
+                                        left: 16,
+                                        bottom: 8),
                                     child: CustomText(
-                                      title: AppLocalizations.of(context)!.writenoteformentor,
+                                      title: AppLocalizations.of(context)!
+                                          .writenoteformentor,
                                       fontSize: 12,
                                       textColor: const Color(0xff554d56),
                                     ),
                                   ),
                                   NoteView(controller: bloc.noteController),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16, bottom: 8),
                                     child: CustomText(
-                                      title: AppLocalizations.of(context)!.writenoteformentorsmallMessage,
+                                      title: AppLocalizations.of(context)!
+                                          .writenoteformentorsmallMessage,
                                       fontSize: 12,
                                       textColor: const Color(0xff554d56),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 16, left: 16),
-                                    child: Container(height: 0.5, color: const Color(0xff444444)),
+                                    padding: const EdgeInsets.only(
+                                        right: 16, left: 16),
+                                    child: Container(
+                                        height: 0.5,
+                                        color: const Color(0xff444444)),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 8),
+                                    padding: const EdgeInsets.only(
+                                        top: 16,
+                                        right: 16,
+                                        left: 16,
+                                        bottom: 8),
                                     child: CustomText(
-                                      title: AppLocalizations.of(context)!.billdetails,
+                                      title: AppLocalizations.of(context)!
+                                          .billdetails,
                                       fontSize: 12,
                                       textColor: const Color(0xff554d56),
                                     ),
                                   ),
                                   ValueListenableBuilder<String>(
-                                      valueListenable: bloc.discountErrorMessage,
-                                      builder: (context, discountErrorsnapshot, child) {
+                                      valueListenable:
+                                          bloc.discountErrorMessage,
+                                      builder: (context, discountErrorsnapshot,
+                                          child) {
                                         return BillDetailsView(
                                           currency: bloc.attorneyCurrency,
-                                          meetingCostAmount: bloc.calculateMeetingCost(
-                                              hourRate: bloc.attorneyHourRate,
-                                              duration: bloc.meetingduration,
-                                              freeCall: bloc.meetingFreeCall),
-                                          totalAmount: bloc.calculateTotalAmount(
-                                              hourRate: bloc.attorneyHourRate,
-                                              duration: bloc.meetingduration,
-                                              discount: discountErrorsnapshot,
-                                              freeCall: bloc.meetingFreeCall),
-                                          discountPercent: bloc.calculateDiscountPercent(discountErrorsnapshot),
+                                          meetingCostAmount:
+                                              bloc.calculateMeetingCost(
+                                                  hourRate:
+                                                      bloc.attorneyHourRate,
+                                                  duration:
+                                                      bloc.meetingduration,
+                                                  freeCall:
+                                                      bloc.meetingFreeCall),
+                                          totalAmount:
+                                              bloc.calculateTotalAmount(
+                                                  hourRate:
+                                                      bloc.attorneyHourRate,
+                                                  duration:
+                                                      bloc.meetingduration,
+                                                  discount:
+                                                      discountErrorsnapshot,
+                                                  freeCall:
+                                                      bloc.meetingFreeCall),
+                                          discountPercent:
+                                              bloc.calculateDiscountPercent(
+                                                  discountErrorsnapshot),
                                         );
                                       }),
                                   const SizedBox(height: 8),
                                   DiscountView(
                                     controller: bloc.discountController,
-                                    discountErrorMessage: bloc.discountErrorMessage,
-                                    applyDiscountButton: bloc.applyDiscountButton,
+                                    discountErrorMessage:
+                                        bloc.discountErrorMessage,
+                                    applyDiscountButton:
+                                        bloc.applyDiscountButton,
                                     applyDiscountButtonCallBack: () {
                                       bloc.verifyCode();
                                       bloc.applyDiscountButton.value = false;
                                     },
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 16, left: 16, top: 8),
-                                    child: Container(height: 0.5, color: const Color(0xff444444)),
+                                    padding: const EdgeInsets.only(
+                                        right: 16, left: 16, top: 8),
+                                    child: Container(
+                                        height: 0.5,
+                                        color: const Color(0xff444444)),
                                   ),
                                   CustomButton(
                                     enableButton: bloc.enablePayButton,
-                                    buttonTitle: AppLocalizations.of(context)!.pay,
+                                    buttonTitle:
+                                        AppLocalizations.of(context)!.pay,
                                     onTap: () async {
-                                      if (bloc.calculateTotalAmountVariable > 0) {
-                                        final bottomSheet = PaymentBottomSheetsUtil();
+                                      if (bloc.calculateTotalAmountVariable >
+                                          0) {
+                                        final bottomSheet =
+                                            PaymentBottomSheetsUtil();
 
                                         if (bloc.currencyCode !=
-                                            bloc.box.get(DatabaseFieldConstant.selectedCurrencyCode)) {
-                                          double dollerEquavilant = await bloc.currencyConversion(bloc.currencyCode!);
+                                            bloc.box.get(DatabaseFieldConstant
+                                                .selectedCurrencyCode)) {
+                                          double dollerEquavilant =
+                                              await bloc.currencyConversion(
+                                                  bloc.currencyCode!);
                                           if (context.mounted) {
-                                            await bottomSheet.moneyConversionBottomSheet(
+                                            await bottomSheet
+                                                .moneyConversionBottomSheet(
                                               context: context,
-                                              mentorCurrency: bloc.currencyCode!,
+                                              mentorCurrency:
+                                                  bloc.currencyCode!,
                                               dollerEquvilant: dollerEquavilant,
-                                              totalAmount: bloc.calculateTotalAmountVariable,
-                                              onSelectionDone: (newValue) async {
+                                              totalAmount: bloc
+                                                  .calculateTotalAmountVariable,
+                                              onSelectionDone:
+                                                  (newValue) async {
                                                 await callPaymentBottomSheet(
-                                                    totalAmount: newValue, currency: "USD", countryCode: "US");
+                                                    totalAmount: newValue,
+                                                    currency: "USD",
+                                                    countryCode: "US");
                                               },
                                             );
                                           }
                                         } else {
                                           await callPaymentBottomSheet(
-                                            totalAmount: bloc.calculateTotalAmountVariable,
-                                            currency: bloc.box.get(DatabaseFieldConstant.selectedCurrencyCode),
-                                            countryCode: bloc.box.get(DatabaseFieldConstant.selectedCountryCode),
+                                            totalAmount: bloc
+                                                .calculateTotalAmountVariable,
+                                            currency: bloc.box.get(
+                                                DatabaseFieldConstant
+                                                    .selectedCurrencyCode),
+                                            countryCode: bloc.box.get(
+                                                DatabaseFieldConstant
+                                                    .selectedCountryCode),
                                           );
                                         }
                                       } else {
-                                        await callRequest(PaymentTypeMethod.freeCall);
+                                        await callRequest(
+                                            PaymentTypeMethod.freeCall);
                                       }
                                     },
                                   ),
@@ -237,7 +315,9 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   Future<dynamic> callPaymentBottomSheet(
-      {required double totalAmount, required String currency, required String countryCode}) async {
+      {required double totalAmount,
+      required String currency,
+      required String countryCode}) async {
     final bottomSheet = PaymentBottomSheetsUtil();
 
     await bottomSheet.paymentBottomSheet(
@@ -277,7 +357,8 @@ class _BookingScreenState extends State<BookingScreen> {
       Navigator.of(context).pop();
       Navigator.of(context).pop();
       locator<MainContainerBloc>().appBarKey.currentState!.animateTo(3);
-      locator<MainContainerBloc>().customerCurrentTabIndexNotifier.value = CustomerSelectedTab.calender;
+      locator<MainContainerBloc>().customerCurrentTabIndexNotifier.value =
+          CustomerSelectedTab.calender;
     } else {
       Navigator.of(context).pop();
     }
