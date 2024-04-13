@@ -44,7 +44,7 @@ class CustomerAppointmentsService with Service {
     return response;
   }
 
-  Future<dynamic> joinCall(
+  Future<dynamic> customerJoinCall(
       {required int id, required String channelName}) async {
     final response = await repository.callRequest(
       requestType: RequestType.put,
@@ -55,7 +55,7 @@ class CustomerAppointmentsService with Service {
     return response;
   }
 
-  Future<void> exitCall({required int id}) async {
+  Future<void> customerEndCall({required int id}) async {
     final response = await repository.callRequest(
       requestType: RequestType.put,
       methodName: MethodNameConstant.customerAppointmentsEndCall,

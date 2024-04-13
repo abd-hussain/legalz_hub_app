@@ -11,6 +11,7 @@ import 'package:legalz_hub_app/screens/inside_call/inside_call_screen.dart';
 import 'package:legalz_hub_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container.dart';
+import 'package:legalz_hub_app/screens/no_internet/no_internet_screen.dart';
 import 'package:legalz_hub_app/screens/notifications/notifications_screen.dart';
 import 'package:legalz_hub_app/screens/rate_per_hour/rate_per_hour_screen.dart';
 import 'package:legalz_hub_app/screens/rating_and_review/rating_and_review_screen.dart';
@@ -74,6 +75,7 @@ class RoutesConstants {
   static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
   static const String attorneyProfileScreen = 'attorneyProfileScreen';
   static const String bookingScreen = 'bookingScreen';
+  static const String noInternetScreen = 'noInternetScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -88,16 +90,12 @@ final Map<String, Widget> routes = {
   RoutesConstants.registerAttornyFaze3Screen: const AttorneyRegister3Screen(),
   RoutesConstants.registerAttornyFaze4Screen: const AttorneyRegister4Screen(),
   RoutesConstants.registerAttornyFaze5Screen: const AttorneyRegister5Screen(),
-
   RoutesConstants.registerCustomerFaze1Screen: const CustomerRegister1Screen(),
   RoutesConstants.registerCustomerFaze2Screen: const CustomerRegister2Screen(),
-
   RoutesConstants.registerTermsAndConditionScreen:
       const TermsAndConditionScreen(),
-
   RoutesConstants.registerfinalfazeScreen: const RegisterFinalScreen(),
   RoutesConstants.mainContainer: const MainContainer(),
-
   RoutesConstants.homeScreen: const HomeTabScreen(),
   RoutesConstants.callScreen: const CallTabScreen(),
   RoutesConstants.calenderScreen: const CalenderTabScreen(),
@@ -117,6 +115,5 @@ final Map<String, Widget> routes = {
   RoutesConstants.attorneyProfileScreen: const AttorneyProfileScreen(),
   RoutesConstants.bookingScreen: const BookingScreen(),
   RoutesConstants.insideCallScreen: const InsideCallScreen(),
-  //TODO
-  // RoutesConstants.noInternetScreen: const NoInternetScreen(),
+  RoutesConstants.noInternetScreen: const NoInternetScreen(),
 };

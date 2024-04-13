@@ -16,16 +16,20 @@ import 'package:legalz_hub_app/utils/logger.dart';
 //TODO: FIX PIPLINE iOS
 //TODO: FIX PIPLINE Web
 //TODO: Upgrade flutter verison and all of the packages
-//TODO check all of iO and make it disaple for web
+//TODO: check all of iO and make it disaple for web
+//TODO: handle internet coneection checkup inside application
 
 void main() {
   runZonedGuarded(() async {
     logDebugMessage(message: 'Application Started ...');
     WidgetsFlutterBinding.ensureInitialized();
 
+    await Hive.initFlutter();
+    await Hive.openBox(DatabaseBoxConstant.userInfo);
+    bool hasConnectivity = await _initInternetConnection();
+
     await setupLocator();
 
-    await Hive.initFlutter();
     if (!kIsWeb) {
       await MobileAds.instance.initialize();
       await MobileAds.instance.updateRequestConfiguration(
@@ -35,13 +39,13 @@ void main() {
 
       await _setupFirebase();
     }
-    await Hive.openBox(DatabaseBoxConstant.userInfo);
-
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    runApp(const MyApp());
+    runApp(
+      MyApp(isConnected: hasConnectivity),
+    );
   }, (error, stackTrace) {
     if (error is DioException) {
       final exception = error.error;
@@ -53,6 +57,12 @@ void main() {
       }
     }
   });
+}
+
+Future<bool> _initInternetConnection() async {
+  NetworkInfoService networkInfoService = NetworkInfoService();
+  networkInfoService.initNetworkConnectionCheck();
+  return await networkInfoService.checkConnectivityonLunching();
 }
 
 Future<bool> _setupFirebase() async {

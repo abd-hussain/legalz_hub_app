@@ -48,7 +48,6 @@ class _CallTabScreenState extends State<CallTabScreen> {
             bloc.getActiveAppointments();
           },
         ),
-        const SizedBox(height: 8),
         Expanded(
           child: SingleChildScrollView(
             child: bloc.userType == UserType.attorney

@@ -12,7 +12,12 @@ import 'package:legalz_hub_app/utils/routes.dart';
 BuildContext? buildContext;
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool isConnected;
+
+  const MyApp({
+    super.key,
+    required this.isConnected,
+  });
 
   static MyAppState? of(BuildContext context) {
     buildContext = context;
@@ -72,11 +77,13 @@ class MyAppState extends State<MyApp> {
             transitionDuration: const Duration(milliseconds: 100),
             pageBuilder: (_, __, ___) => routes[settings.name]!);
       },
-      initialRoute: myBox.get(DatabaseFieldConstant.selectedCountryId) != null
-          ? myBox.get(DatabaseFieldConstant.skipTutorials) != null
-              ? RoutesConstants.loginScreen
-              : RoutesConstants.tutorialsScreen
-          : RoutesConstants.initialRoute,
+      initialRoute: widget.isConnected
+          ? myBox.get(DatabaseFieldConstant.selectedCountryId) != null
+              ? myBox.get(DatabaseFieldConstant.skipTutorials) != null
+                  ? RoutesConstants.loginScreen
+                  : RoutesConstants.tutorialsScreen
+              : RoutesConstants.initialRoute
+          : RoutesConstants.noInternetScreen,
     );
   }
 }

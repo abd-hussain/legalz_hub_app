@@ -343,7 +343,9 @@
     "announcements" : "Announcements",
     "meetingwith" : "Meeting With",
     "pleasewaitforclient" : "Please wait for Client to join the call",
+    "pleasewaitformentor" :"Please wait for Attorney to join the call",
     "pleasewaitforclientdesc" : "Don't close the call, if the client not join until the time is finish then the call will be closed automaticlly and you will recive your payment, if you close the call from the red button bellow then it will appear like you miss the call",
+    "pleasewaitformentordesc" : "Don't close the call, if the Attorney not join until the time is finish then the call will be closed automaticlly and you will recive your payment, if you close the call from the red button bellow then it will appear like you miss the call",
     "readytogo" : "You will be ready to go",
     "ibaninfo" : "Your Bank IBAN informations",
     "accountcreatedsuccessfully" : "Your account Successfully created",
@@ -374,5 +376,8 @@
     "newtotalamount" : "New Total Amount",
     "meetingnow" : "Instant session",
     "specialist" : "specialist",
-    "total" : "Total"
+    "total" : "Total",
+    "retry" : "Retry",
+    "nointernetconnection" : "No Internet Connection",
+    "nointernetconnectiondesc" : "Please check your internet settings or reset your connection to proceed"
 }
