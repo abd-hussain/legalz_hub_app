@@ -33,7 +33,7 @@ platform :ios do
 
     match(
       type: "appstore",
-      readonly: is_ci,
+      # readonly: is_ci,
     )
 
     build_app(
