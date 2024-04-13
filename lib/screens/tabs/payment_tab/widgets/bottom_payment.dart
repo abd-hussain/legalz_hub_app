@@ -20,7 +20,8 @@ class PaymentBottomSheetsUtil {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
+            padding:
+                const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
             child: Wrap(
               spacing: 8,
               children: [

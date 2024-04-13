@@ -22,9 +22,11 @@ class PaymentHeaderView extends StatelessWidget {
         height: 70,
         child: Row(
           children: [
-            item(AppLocalizations.of(context)!.pending, pendingAmount, Colors.orange),
+            item(AppLocalizations.of(context)!.pending, pendingAmount,
+                Colors.orange),
             const SizedBox(width: 16),
-            item(AppLocalizations.of(context)!.recived, recivedAmount, Colors.green),
+            item(AppLocalizations.of(context)!.recived, recivedAmount,
+                Colors.green),
           ],
         ),
       ),

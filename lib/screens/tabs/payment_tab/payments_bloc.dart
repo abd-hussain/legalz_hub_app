@@ -7,7 +7,8 @@ import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class PaymentsBloc extends Bloc<PaymentService> {
-  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier = ValueNotifier<List<PaymentResponseData>>([]);
+  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier =
+      ValueNotifier<List<PaymentResponseData>>([]);
   double pendingTotalAmount = 0;
   double recivedTotalAmount = 0;
   String currency = "";
@@ -22,15 +23,19 @@ class PaymentsBloc extends Bloc<PaymentService> {
           if (item.appointmentIsFree == false) {
             if (item.paymentStatus == 1) {
               if (item.appointmentDiscountId != null) {
-                pendingTotalAmount = pendingTotalAmount + item.appointmentTotalPrice!;
+                pendingTotalAmount =
+                    pendingTotalAmount + item.appointmentTotalPrice!;
               } else {
-                pendingTotalAmount = pendingTotalAmount + item.appointmentPrice!;
+                pendingTotalAmount =
+                    pendingTotalAmount + item.appointmentPrice!;
               }
             } else {
               if (item.appointmentDiscountId != null) {
-                recivedTotalAmount = recivedTotalAmount + item.appointmentTotalPrice!;
+                recivedTotalAmount =
+                    recivedTotalAmount + item.appointmentTotalPrice!;
               } else {
-                recivedTotalAmount = recivedTotalAmount + item.appointmentPrice!;
+                recivedTotalAmount =
+                    recivedTotalAmount + item.appointmentPrice!;
               }
             }
           }
@@ -44,7 +49,8 @@ class PaymentsBloc extends Bloc<PaymentService> {
   }
 
   Future<dynamic> reportPayment(int id, String message) async {
-    PaymentReportRequest data = PaymentReportRequest(message: message, paymentId: id);
+    PaymentReportRequest data =
+        PaymentReportRequest(message: message, paymentId: id);
     return service.reportPayment(data);
   }
 

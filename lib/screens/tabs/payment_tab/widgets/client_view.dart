@@ -55,9 +55,12 @@ class ClientView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           child: clientProfileImg != ""
                               ? FadeInImage(
-                                  placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                                  image:
-                                      NetworkImage(AppConstant.imagesBaseURLForCustomer + clientProfileImg, scale: 1),
+                                  placeholder: const AssetImage(
+                                      "assets/images/avatar.jpeg"),
+                                  image: NetworkImage(
+                                      AppConstant.imagesBaseURLForCustomer +
+                                          clientProfileImg,
+                                      scale: 1),
                                 )
                               : Image.asset(
                                   'assets/images/avatar.jpeg',
@@ -77,8 +80,11 @@ class ClientView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: clientCountryFlag != ""
                                 ? FadeInImage(
-                                    placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                                    image: NetworkImage(AppConstant.imagesBaseURLForCountries + clientCountryFlag,
+                                    placeholder: const AssetImage(
+                                        "assets/images/avatar.jpeg"),
+                                    image: NetworkImage(
+                                        AppConstant.imagesBaseURLForCountries +
+                                            clientCountryFlag,
                                         scale: 1),
                                   )
                                 : Image.asset(
