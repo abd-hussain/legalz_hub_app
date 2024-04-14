@@ -74,9 +74,7 @@ jobs:
             flutter pub get
             make deploy-ios
           env:
-            FASTLANE_USER: aboud.masoud.92@gmail.com
-            FASTLANE_PASSWORD: ${{ vars.FASTLANE_PASSWORD }}
-            MATCH_PASSWORD: ${{ vars.MATCH_PASSWORD }}
+            MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
             MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
 
   web:
