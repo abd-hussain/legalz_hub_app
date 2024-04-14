@@ -3,7 +3,7 @@ git_url("https://github.com/abd-hussain/legalz_hub_app_certificate")
 storage_mode("git")
 
 type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
-
+clone_branch_directly(true)
 app_identifier(["com.legalzhub.app"])
 username("aboud.masoud.92@gmail.com") # Your Apple Developer Portal username
 

@@ -22,7 +22,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
     NotificationManager.init(context: context);
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
+        ? UserType.customer
+        : UserType.attorney;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
         FirebaseCloudMessagingUtil.initConfigure(context);
@@ -48,7 +50,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
         children: [
           HomeHeaderView(userType: bloc.userType),
           const SizedBox(height: 8),
-          bloc.userType == UserType.customer ? const AddNewPostView() : Container(),
+          bloc.userType == UserType.customer
+              ? const AddNewPostView()
+              : Container(),
         ],
       ),
     );
