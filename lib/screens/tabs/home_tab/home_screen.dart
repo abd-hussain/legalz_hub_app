@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/post_view.dart';
+import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
@@ -53,6 +57,17 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
           bloc.userType == UserType.customer
               ? const AddNewPostView()
               : Container(),
+          FutureBuilder<List<HomeBannerResponseData>?>(
+              initialData: const [],
+              future: bloc.getHomeBanners(),
+              builder: (context, snapshot) {
+                if (snapshot.data == null && snapshot.hasData) {
+                  return const SizedBox(height: 250, child: LoadingView());
+                } else {
+                  return MainBannerHomePage(bannerList: snapshot.data ?? []);
+                }
+              }),
+          Expanded(child: PostsView()),
         ],
       ),
     );

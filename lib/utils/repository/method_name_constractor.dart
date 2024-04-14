@@ -58,7 +58,16 @@ class MethodNameConstant {
   static const String referalCode = "filter/referalcode";
   static const String currencyConverter = "filter/currency-converter";
   // #home#
-  static const String home = "home/";
+  static const String homeBanners = "home/banners";
+  static const String homePosts = "home/posts";
+  // #Posts#
+  static const String reportPost = "posts/report";
+  static const String addPost = "posts/add";
+  static const String editPost = "posts/edit";
+  static const String deletePost = "posts/delete";
+  // #Post Comments#
+  static const String postComments = "posts/comment";
+
   // #notifications#
   static const String registerToken = "notifications/register-token";
   static const String notifications = "notifications/";
