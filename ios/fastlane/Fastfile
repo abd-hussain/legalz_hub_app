@@ -31,14 +31,9 @@ platform :ios do
 
     cocoapods(clean_install: true)
 
-    pilot(
-      username: ENV['FASTLANE_USER'],
-      password: ENV['FASTLANE_PASSWORD']  # Ensuring it uses the environment variable
-    )
-
     match(
       type: "appstore",
-      readonly: false,
+      readonly: is_ci,
     )
 
     build_app(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_bloc.dart';
-import 'package:legalz_hub_app/shared_widget/main_header_view.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_view.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
@@ -45,13 +46,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Column(
         children: [
-          MainHeaderView(
-            userType: UserType.customer,
-            refreshCallBack: () {
-              //TODO
-            },
-          ),
+          HomeHeaderView(userType: bloc.userType),
           const SizedBox(height: 8),
+          bloc.userType == UserType.customer ? const AddNewPostView() : Container(),
         ],
       ),
     );
