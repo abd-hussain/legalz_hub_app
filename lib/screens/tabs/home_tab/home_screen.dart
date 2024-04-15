@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/models/https/home_banners_response.dart';
+import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
@@ -26,9 +27,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
     NotificationManager.init(context: context);
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
-        ? UserType.customer
-        : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
         FirebaseCloudMessagingUtil.initConfigure(context);
@@ -36,6 +35,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
     });
 
     bloc.callRegisterTokenRequest();
+    //TODO : handle pagination
+    bloc.getHomePosts(catId: 0, skip: 0);
     super.didChangeDependencies();
   }
 
@@ -47,16 +48,14 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO
+    //TODO: handle category tab
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Column(
         children: [
           HomeHeaderView(userType: bloc.userType),
           const SizedBox(height: 8),
-          bloc.userType == UserType.customer
-              ? const AddNewPostView()
-              : Container(),
+          bloc.userType == UserType.customer ? const AddNewPostView() : Container(),
           FutureBuilder<List<HomeBannerResponseData>?>(
               initialData: const [],
               future: bloc.getHomeBanners(),
@@ -67,7 +66,16 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                   return MainBannerHomePage(bannerList: snapshot.data ?? []);
                 }
               }),
-          Expanded(child: PostsView()),
+          Expanded(
+            child: StreamBuilder<List<PostResponseData>?>(
+                initialData: const [],
+                stream: bloc.postsStreamController.stream,
+                builder: (context, snapshot) {
+                  return PostsView(
+                    postsList: snapshot.data,
+                  );
+                }),
+          ),
         ],
       ),
     );

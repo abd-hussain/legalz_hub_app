@@ -68,11 +68,10 @@ jobs:
           with:
             ruby-version: 3.2.2
             rubygems: latest
+            bundler-cache: true # Optionally cache gems, recommended if you use Bundler
 
-        - name: Set up Ruby
-          uses: ruby/setup-ruby@v1
-          with:
-              ruby-version: 2.7 # Specify the Ruby version if needed
+        - name: Install specific CocoaPods version
+          run: gem install cocoapods -v 1.15.2
     
         - name: Build and Deploy
           run: |
