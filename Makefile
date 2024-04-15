@@ -19,6 +19,9 @@ deploy-web:
 	@echo "╠ Sending Build to Firebase Hosting..."
 	flutter build web --no-tree-shake-icons
 	firebase deploy
+	
+splash:
+	dart run flutter_native_splash:create --path=pubspec.yaml
 
 deploy: deploy-android deploy-ios deploy-web
 

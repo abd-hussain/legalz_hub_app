@@ -24,8 +24,11 @@ platform :ios do
 
   desc "Push a new beta build to TestFlight"
   lane :deploy do
+
     set_full_version()
+
     setup_ci if is_ci
+
     cocoapods(clean_install: is_ci)
 
     match(
