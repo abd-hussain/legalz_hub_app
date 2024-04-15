@@ -71,11 +71,14 @@ jobs:
     
         - name: Build and Deploy
           run: |
-            flutter pub get
+            make clean
             make deploy-ios
           env:
             MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
             MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
+            FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+            MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+            MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
 
   web:
     runs-on: ubuntu-latest

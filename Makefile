@@ -1,4 +1,5 @@
 clean:
+	@echo "╠ Cleaning before we start"
 	flutter clean
 	cd ios && rm -rf Podfile.lock
 	cd ios && rm -rf Pods
