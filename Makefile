@@ -4,6 +4,7 @@ clean:
 	cd ios && rm -rf Podfile.lock
 	cd ios && rm -rf Pods
 	flutter pub get
+	cd ios && gem update cocoapods
 	cd ios && pod install
 
 deploy-android:
