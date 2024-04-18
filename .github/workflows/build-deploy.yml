@@ -71,7 +71,7 @@ jobs:
             bundler-cache: true # Optionally cache gems, recommended if you use Bundler
 
         - name: Install specific CocoaPods version
-          run: gem install cocoapods -v 1.15.2
+          run: gem install cocoapods -v 1.14.3
     
         - name: Build and Deploy
           run: |
