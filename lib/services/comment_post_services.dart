@@ -24,7 +24,8 @@ class CommentPostService with Service {
     return response;
   }
 
-  Future<dynamic> removeCommentOnPost({required String commentId, required UserType userType}) async {
+  Future<dynamic> removeCommentOnPost(
+      {required String commentId, required UserType userType}) async {
     final response = await repository.callRequest(
       requestType: RequestType.delete,
       methodName: MethodNameConstant.postComments,

@@ -18,6 +18,7 @@ class _MainContainerState extends State<MainContainer> {
   @override
   void initState() {
     locator<MainContext>().mainContext = context;
+    _bloc.getlistOfCategories(context);
 
     _bloc.userType = _bloc.box.get(DatabaseFieldConstant.userType) == "customer"
         ? UserType.customer

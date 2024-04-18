@@ -378,6 +378,7 @@
     "specialist" : "specialist",
     "total" : "Total",
     "retry" : "Retry",
+    "all" : "All",
     "nointernetconnection" : "No Internet Connection",
     "nointernetconnectiondesc" : "Please check your internet settings or reset your connection to proceed"
 }

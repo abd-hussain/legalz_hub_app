@@ -3,7 +3,9 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
+import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/screens/main_container/widgets/tab_navigator.dart';
+import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
@@ -19,6 +21,8 @@ class MainContainerBloc {
       ValueNotifier<CustomerSelectedTab>(CustomerSelectedTab.home);
   final ValueNotifier<AttorneySelectedTab> attornyCurrentTabIndexNotifier =
       ValueNotifier<AttorneySelectedTab>(AttorneySelectedTab.home);
+  StreamController<List<Category>> listOfCategoriesStreamController =
+      StreamController<List<Category>>.broadcast();
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   UserType userType = UserType.attorney;
@@ -146,5 +150,19 @@ class MainContainerBloc {
     if (token != null && token != "") {
       await locator<NotificationsService>().registerToken(token, userType);
     }
+  }
+
+  void getlistOfCategories(BuildContext context) {
+    locator<FilterService>().categories().then((value) {
+      List<Category> list = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+
+      print("list.length");
+      print(list.length);
+
+      list.insert(0, Category(id: 0, name: AppLocalizations.of(context)!.all));
+      print("list.length");
+      print(list.length);
+      listOfCategoriesStreamController.add(list);
+    });
   }
 }

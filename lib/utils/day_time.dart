@@ -16,6 +16,12 @@ class DayTime {
     return formatter.format(parsedDate);
   }
 
+  String dateFormatterWithTime(String dateAsString) {
+    var parsedDate = DateTime.parse(dateAsString);
+    final DateFormat formatter = DateFormat('yyyy/MM/dd hh:mm a');
+    return formatter.format(parsedDate);
+  }
+
   String convertingTimingToRealTime(int time) {
     if (time > 0 && time <= 9) {
       return "0$time:00 am";

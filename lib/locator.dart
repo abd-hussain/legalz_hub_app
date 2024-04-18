@@ -36,6 +36,7 @@ GetIt locator = GetIt.instance;
 Future<void> setupLocator() async {
   locator.pushNewScope();
   locator.registerLazySingleton(() => MainContext());
+  locator.registerSingleton<MainContainerBloc>(MainContainerBloc());
 
   locator.registerSingleton<NetworkInfoService>(NetworkInfoService());
 
@@ -83,5 +84,4 @@ Future<void> setupLocator() async {
   locator.registerFactory<Dio>(() => Dio());
   locator.registerFactory<HttpInterceptor>(() => HttpInterceptor());
   locator.registerSingleton<HttpRepository>(HttpRepository());
-  locator.registerFactory<MainContainerBloc>(() => MainContainerBloc());
 }

@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/home_banners_response.dart';
@@ -14,8 +14,10 @@ import 'package:legalz_hub_app/utils/mixins.dart';
 class HomeBloc extends Bloc<HomeService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   UserType userType = UserType.customer;
+  TabController? tabController;
 
-  StreamController<List<PostResponseData>?> postsStreamController = StreamController<List<PostResponseData>?>();
+  StreamController<List<PostResponseData>?> postsStreamController =
+      StreamController<List<PostResponseData>?>.broadcast();
 
   Future<List<HomeBannerResponseData>?> getHomeBanners() async {
     final value = await service.getHomeBanners(userType);
@@ -27,7 +29,8 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<void> getHomePosts({required int catId, required int skip}) async {
-    final value = await locator<PostService>().getHomePosts(catId: catId, skip: skip);
+    final value =
+        await locator<PostService>().getHomePosts(catId: catId, skip: skip);
     if (value.data != null) {
       postsStreamController.sink.add(value.data);
     }
@@ -38,6 +41,14 @@ class HomeBloc extends Bloc<HomeService> {
     await locator<NotificationsService>().registerToken(token, userType);
   }
 
+  void handleTapControllerListener() {
+    tabController!.addListener(() async {
+      getHomePosts(catId: tabController!.index, skip: 0);
+    });
+  }
+
   @override
-  onDispose() {}
+  onDispose() {
+    tabController?.dispose();
+  }
 }

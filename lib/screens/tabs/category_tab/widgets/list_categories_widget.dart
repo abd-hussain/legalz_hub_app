@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
-import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_categories.dart';
 
 class CategoriesList extends StatefulWidget {
-  final ValueNotifier<List<Category>> categoriesListNotifier;
+  final List<Category> categoriesList;
   final Function(Category) onTap;
 
   const CategoriesList(
-      {super.key, required this.categoriesListNotifier, required this.onTap});
+      {super.key, required this.categoriesList, required this.onTap});
 
   @override
   State<CategoriesList> createState() => _CategoriesListState();
@@ -21,16 +20,11 @@ class _CategoriesListState extends State<CategoriesList> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 100,
-      child: ValueListenableBuilder<List<Category>>(
-          valueListenable: widget.categoriesListNotifier,
-          builder: (context, data, child) {
-            return data.isEmpty
-                ? const ShimmerCategoriesView()
-                : ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (ctx, index) {
-                      return categoriesTile(context, data[index], index);
-                    });
+      child: ListView.builder(
+          itemCount: widget.categoriesList.length - 1,
+          itemBuilder: (ctx, index) {
+            return categoriesTile(
+                context, widget.categoriesList[index + 1], index);
           }),
     );
   }
@@ -47,7 +41,7 @@ class _CategoriesListState extends State<CategoriesList> {
             valueListenable: selectedIndex,
             builder: (context, snapshot, child) {
               return Container(
-                height: 100,
+                height: 110,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
