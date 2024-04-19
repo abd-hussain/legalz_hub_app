@@ -379,6 +379,7 @@
     "total" : "Total",
     "retry" : "Retry",
     "all" : "All",
+    "agreedup" : "Up",
     "nointernetconnection" : "No Internet Connection",
     "nointernetconnectiondesc" : "Please check your internet settings or reset your connection to proceed"
 }

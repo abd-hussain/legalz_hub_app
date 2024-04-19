@@ -26,8 +26,8 @@ class PostsView extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
+                  spreadRadius: 2,
+                  blurRadius: 3,
                   offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
@@ -129,85 +129,13 @@ class PostsView extends StatelessWidget {
                 ),
                 PostViewBottomControllersView(
                   currentUserType: currentUserType,
+                  numberOfUpRate: postsList![index].totalUp!,
                   upAction: () {},
                   downAction: () {},
                   commentAction: () {},
                   reportAction: () {},
                 ),
-                SizedBox(
-                  height: 50,
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 10),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: currentUserType == UserType.attorney
-                                  ? const Color(0xff292929)
-                                  : const Color(0xff034061)),
-                          borderRadius: const BorderRadius.all(Radius.circular(50)),
-                        ),
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.arrow_circle_up_rounded,
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: CustomText(
-                                  title: "${postsList![index].totalUp!}",
-                                  textColor: const Color(0xff444444),
-                                  fontSize: 12,
-                                  textAlign: TextAlign.center,
-                                  maxLins: 1,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: currentUserType == UserType.attorney
-                                  ? const Color(0xff292929)
-                                  : const Color(0xff034061)),
-                          borderRadius: const BorderRadius.all(Radius.circular(50)),
-                        ),
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.arrow_circle_down_rounded,
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: CustomText(
-                                  title: "${postsList![index].totalDown!}",
-                                  textColor: const Color(0xff444444),
-                                  fontSize: 12,
-                                  textAlign: TextAlign.center,
-                                  maxLins: 1,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8)
+                const SizedBox(height: 4)
               ],
             ),
           ),
