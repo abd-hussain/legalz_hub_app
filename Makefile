@@ -13,8 +13,11 @@ deploy-android:
 
 deploy-ios:
 	@echo "╠ Sending iOS Build to TestFlight..."
+	@echo "╠ Step 1"
 	cd ios/fastlane && bundle install
+	@echo "╠ Step 2"
 	cd ios/fastlane && bundle exec fastlane deploy
+	@echo "╠ Finished"
 
 deploy-web:
 	@echo "╠ Sending Build to Firebase Hosting..."
