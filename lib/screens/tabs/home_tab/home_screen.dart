@@ -27,17 +27,14 @@ class HomeTabScreen extends StatefulWidget {
   State<HomeTabScreen> createState() => _HomeTabScreenState();
 }
 
-class _HomeTabScreenState extends State<HomeTabScreen>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final bloc = HomeBloc();
 
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
     NotificationManager.init(context: context);
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
-        ? UserType.customer
-        : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
         FirebaseCloudMessagingUtil.initConfigure(context);
@@ -63,18 +60,18 @@ class _HomeTabScreenState extends State<HomeTabScreen>
       child: SingleChildScrollView(
         child: Column(
           children: [
-            HomeHeaderView(userType: bloc.userType),
+            HomeHeaderView(
+              userType: bloc.userType,
+              addPost: ({required catId, required content, postImg}) async {
+                await bloc.addNewPost(catId: catId, content: content, postImg: postImg);
+              },
+            ),
             StreamBuilder<List<Category>>(
                 initialData: const [],
-                stream: locator<MainContainerBloc>()
-                    .listOfCategoriesStreamController
-                    .stream,
+                stream: locator<MainContainerBloc>().listOfCategoriesStreamController.stream,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    bloc.tabController = TabController(
-                        initialIndex: 0,
-                        length: snapshot.data!.length,
-                        vsync: this);
+                    bloc.tabController = TabController(initialIndex: 0, length: snapshot.data!.length, vsync: this);
                     bloc.handleTapControllerListener();
                     return DefaultTabController(
                       length: snapshot.data!.length,
@@ -89,8 +86,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                               tabs: List.generate(
                                 snapshot.data!.length,
                                 (index) {
-                                  return CustomTab(
-                                      tabName: snapshot.data![index].name!);
+                                  return CustomTab(tabName: snapshot.data![index].name!);
                                 },
                               ),
                             ),
@@ -125,7 +121,11 @@ class _HomeTabScreenState extends State<HomeTabScreen>
         child: Column(
           children: [
             bloc.userType == UserType.customer
-                ? const AddNewPostView()
+                ? AddNewPostView(
+                    addPost: ({required catId, required content, postImg}) async {
+                      await bloc.addNewPost(catId: catId, content: content, postImg: postImg);
+                    },
+                  )
                 : Container(),
             const SizedBox(height: 8),
             item.id! == 0
@@ -134,11 +134,9 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                     future: bloc.getHomeBanners(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null && snapshot.hasData) {
-                        return const SizedBox(
-                            height: 220, child: LoadingView());
+                        return const SizedBox(height: 220, child: LoadingView());
                       } else {
-                        return MainBannerHomePage(
-                            bannerList: snapshot.data ?? []);
+                        return MainBannerHomePage(bannerList: snapshot.data ?? []);
                       }
                     })
                 : Container(),

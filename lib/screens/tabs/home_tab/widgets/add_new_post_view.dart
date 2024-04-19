@@ -4,12 +4,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class AddNewPostView extends StatelessWidget {
-  const AddNewPostView({super.key});
+  final Function({required int catId, required String content, String? postImg}) addPost;
+  const AddNewPostView({super.key, required this.addPost});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => AddPostBottomSheetsUtil().bottomSheet(context),
+      onTap: () => AddPostBottomSheetsUtil().bottomSheet(
+        context: context,
+        addPost: ({required catId, required content, postImg}) {
+          addPost(catId: catId, content: content, postImg: postImg);
+        },
+      ),
       child: Container(
         height: 80,
         color: Colors.grey[200],
@@ -41,11 +47,9 @@ class AddNewPostView extends StatelessWidget {
                           ),
                           child: Center(
                             child: CustomText(
-                              title: AppLocalizations.of(context)!
-                                  .whatdoyouwanttoask,
+                              title: AppLocalizations.of(context)!.whatdoyouwanttoask,
                               fontSize: 11,
-                              textColor:
-                                  const Color.fromARGB(255, 148, 148, 148),
+                              textColor: const Color.fromARGB(255, 148, 148, 148),
                             ),
                           ),
                         ),
@@ -58,25 +62,19 @@ class AddNewPostView extends StatelessWidget {
                 height: 20,
                 child: Row(
                   children: [
-                    infoView(
-                        text: AppLocalizations.of(context)!.ask,
-                        icon: Icons.question_mark_rounded),
+                    infoView(text: AppLocalizations.of(context)!.ask, icon: Icons.question_mark_rounded),
                     Container(
                       width: 0.5,
                       height: 15,
                       color: const Color(0xff444444),
                     ),
-                    infoView(
-                        text: AppLocalizations.of(context)!.answer,
-                        icon: Icons.question_answer_outlined),
+                    infoView(text: AppLocalizations.of(context)!.answer, icon: Icons.question_answer_outlined),
                     Container(
                       width: 0.5,
                       height: 15,
                       color: const Color(0xff444444),
                     ),
-                    infoView(
-                        text: AppLocalizations.of(context)!.share,
-                        icon: Icons.share),
+                    infoView(text: AppLocalizations.of(context)!.share, icon: Icons.share),
                   ],
                 ),
               )

@@ -5,7 +5,9 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 //TODO
 class AddPostBottomSheetsUtil {
-  Future bottomSheet(BuildContext context) {
+  Future bottomSheet(
+      {required BuildContext context,
+      required Function({required int catId, required String content, String? postImg}) addPost}) {
     return showModalBottomSheet(
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(

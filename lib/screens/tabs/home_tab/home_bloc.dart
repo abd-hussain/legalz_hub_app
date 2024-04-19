@@ -29,8 +29,7 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<void> getHomePosts({required int catId, required int skip}) async {
-    final value =
-        await locator<PostService>().getHomePosts(catId: catId, skip: skip);
+    final value = await locator<PostService>().getHomePosts(catId: catId, skip: skip);
     if (value.data != null) {
       postsStreamController.sink.add(value.data);
     }
@@ -44,6 +43,12 @@ class HomeBloc extends Bloc<HomeService> {
   void handleTapControllerListener() {
     tabController!.addListener(() async {
       getHomePosts(catId: tabController!.index, skip: 0);
+    });
+  }
+
+  Future<void> addNewPost({required int catId, required String content, String? postImg}) async {
+    locator<PostService>().addPost(catId: catId.toString(), content: content, postImg: postImg).then((value) async {
+      await getHomePosts(catId: catId, skip: 0);
     });
   }
 
