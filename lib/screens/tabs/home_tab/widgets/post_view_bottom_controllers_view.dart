@@ -43,7 +43,9 @@ class PostViewBottomControllersView extends StatelessWidget {
                   icon: Icon(
                     Icons.arrow_circle_up_rounded,
                     size: 20,
-                    color: currentUserType == UserType.attorney ? const Color(0xff292929) : const Color(0xff034061),
+                    color: currentUserType == UserType.attorney
+                        ? const Color(0xff292929)
+                        : const Color(0xff034061),
                   ),
                 ),
                 CustomText(
@@ -77,7 +79,9 @@ class PostViewBottomControllersView extends StatelessWidget {
                   icon: Icon(
                     Icons.arrow_circle_down_rounded,
                     size: 20,
-                    color: currentUserType == UserType.attorney ? const Color(0xff292929) : const Color(0xff034061),
+                    color: currentUserType == UserType.attorney
+                        ? const Color(0xff292929)
+                        : const Color(0xff034061),
                   ),
                 ),
               ],
@@ -88,7 +92,9 @@ class PostViewBottomControllersView extends StatelessWidget {
             icon: Icon(
               Ionicons.chatbubble_ellipses_outline,
               size: 20,
-              color: currentUserType == UserType.attorney ? const Color(0xff292929) : const Color(0xff034061),
+              color: currentUserType == UserType.attorney
+                  ? const Color(0xff292929)
+                  : const Color(0xff034061),
             ),
           ),
           Expanded(child: Container()),
@@ -97,7 +103,9 @@ class PostViewBottomControllersView extends StatelessWidget {
             icon: Icon(
               Icons.report_gmailerrorred_rounded,
               size: 20,
-              color: currentUserType == UserType.attorney ? const Color(0xff292929) : const Color(0xff034061),
+              color: currentUserType == UserType.attorney
+                  ? const Color(0xff292929)
+                  : const Color(0xff034061),
             ),
           ),
         ],

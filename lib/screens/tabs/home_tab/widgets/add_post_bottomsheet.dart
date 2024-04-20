@@ -1,13 +1,28 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/models/https/categories_model.dart';
+import 'package:legalz_hub_app/shared_widget/bio_field.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/cell_of_booking.dart';
+import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
-//TODO
+//TODO keyboard problem
+//TODO category design and space
 class AddPostBottomSheetsUtil {
+  ValueNotifier<Category?> selectedCategory = ValueNotifier<Category?>(null);
+
+  TextEditingController textController = TextEditingController();
+
   Future bottomSheet(
       {required BuildContext context,
-      required Function({required int catId, required String content, String? postImg}) addPost}) {
+      required List<Category> categories,
+      required Function(
+              {required int catId, required String content, String? postImg})
+          addPost}) {
+    List<Category> listOfCategories =
+        categories.where((s) => s.id != 0).toList();
+
     return showModalBottomSheet(
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
@@ -25,7 +40,7 @@ class AddPostBottomSheetsUtil {
                 Row(
                   children: [
                     SizedBox(
-                      width: 60,
+                      width: 100,
                       child: IconButton(
                         onPressed: () => Navigator.of(context).pop(),
                         icon: const Icon(Icons.close),
@@ -33,132 +48,119 @@ class AddPostBottomSheetsUtil {
                     ),
                     Expanded(
                       child: CustomText(
-                        title: "ADD NEW Question",
+                        title: AppLocalizations.of(context)!.addnewquestion,
                         textColor: const Color(0xff444444),
                         textAlign: TextAlign.center,
                         fontSize: 18,
                       ),
                     ),
                     SizedBox(
-                      width: 60,
-                      child: TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: CustomText(
-                            title: AppLocalizations.of(context)!.submit,
-                            fontSize: 12,
-                            textColor: const Color(0xff444444),
-                          )),
+                      width: 100,
+                      child: CustomButton(
+                          enableButton: true,
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          }),
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
-                //           TextButton(
-                //             onPressed: () {
-                //               deleteCallBack();
-                //             },
-                //             child: Row(
-                //               children: [
-                //                 const Icon(
-                //                   Icons.hide_image,
-                //                   color: Color(0xff4CB6EA),
-                //                 ),
-                //                 const SizedBox(width: 10),
-                //                 CustomText(
-                //                   title: AppLocalizations.of(context)!.pickimageremoveimage,
-                //                   textColor: Colors.red,
-                //                   fontSize: 16,
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //           const SizedBox(height: 22),
-                //         ],
-                //       )
-                //     : Column(
-                //         mainAxisSize: MainAxisSize.min,
-                //         children: [
-                //           CustomText(
-                //             title: title2,
-                //             textColor: Colors.black,
-                //             fontSize: 18,
-                //           ),
-                //           const SizedBox(height: 27.0),
-                //           SizedBox(
-                //             height: 100,
-                //             child: Column(
-                //               children: [
-                //                 InkWell(
-                //                   onTap: () {
-                //                     Navigator.of(context).pop();
-                //                     galleryCallBack();
-                //                   },
-                //                   child: SizedBox(
-                //                     height: 50,
-                //                     child: Row(
-                //                       children: [
-                //                         const SizedBox(
-                //                           width: 40,
-                //                           height: 40,
-                //                           child: Icon(
-                //                             Icons.image_outlined,
-                //                             color: Color(0xff444444),
-                //                           ),
-                //                         ),
-                //                         const SizedBox(width: 8),
-                //                         Expanded(
-                //                           child: CustomText(
-                //                             title: AppLocalizations.of(context)!.pickimagefromstudio,
-                //                             fontSize: 16,
-                //                             textColor: const Color(0xff444444),
-                //                           ),
-                //                         ),
-                //                         const Icon(
-                //                           Icons.arrow_forward_ios,
-                //                           size: 15,
-                //                         )
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //                 InkWell(
-                //                   onTap: () {
-                //                     Navigator.of(context).pop();
-                //                     cameraCallBack();
-                //                   },
-                //                   child: SizedBox(
-                //                     height: 50,
-                //                     child: Row(
-                //                       children: [
-                //                         const SizedBox(
-                //                             width: 40,
-                //                             height: 40,
-                //                             child: Icon(
-                //                               Icons.camera_alt_outlined,
-                //                               color: Color(0xff444444),
-                //                             )),
-                //                         const SizedBox(width: 8),
-                //                         Expanded(
-                //                           child: CustomText(
-                //                             title: AppLocalizations.of(context)!.pickimagefromcamera,
-                //                             fontSize: 16,
-                //                             textColor: const Color(0xff444444),
-                //                           ),
-                //                         ),
-                //                         const Icon(
-                //                           Icons.arrow_forward_ios,
-                //                           size: 15,
-                //                         )
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                const SizedBox(height: 22),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[100],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            title: AppLocalizations.of(context)!
+                                .tipsfornewquestiontitle,
+                            textColor: const Color(0xff444444),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            maxLins: 2,
+                          ),
+                          CustomText(
+                            title:
+                                "- ${AppLocalizations.of(context)!.tipsfornewquestion1}",
+                            textColor: const Color(0xff444444),
+                            fontSize: 11,
+                            maxLins: 2,
+                          ),
+                          CustomText(
+                            title:
+                                "- ${AppLocalizations.of(context)!.tipsfornewquestion2}",
+                            textColor: const Color(0xff444444),
+                            fontSize: 11,
+                            maxLins: 2,
+                          ),
+                          CustomText(
+                            title:
+                                "- ${AppLocalizations.of(context)!.tipsfornewquestion3}",
+                            textColor: const Color(0xff444444),
+                            maxLins: 2,
+                            fontSize: 11,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ValueListenableBuilder<Category?>(
+                    valueListenable: selectedCategory,
+                    builder: (context, selectedCategoriesSnapshot, child) {
+                      return SizedBox(
+                        child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              mainAxisSpacing: 0,
+                              crossAxisSpacing: 0,
+                              childAspectRatio: 1,
+                            ),
+                            itemCount: listOfCategories.length,
+                            itemBuilder: (context, index) {
+                              return BookingCell(
+                                title: listOfCategories[index].name!,
+                                isSelected: selectedCategoriesSnapshot != null
+                                    ? selectedCategoriesSnapshot ==
+                                        listOfCategories[index]
+                                    : false,
+                                onPress: () {
+                                  selectedCategory.value =
+                                      listOfCategories[index];
+                                },
+                              );
+                            }),
+                      );
+                    }),
+                BioField(
+                  bioController: textController,
+                  title: AppLocalizations.of(context)!.whatdoyouwanttoask,
+                  onChanged: (text) => validateFields(),
+                ),
+                const SizedBox(height: 10),
               ],
             ),
           );
         });
   }
+
+  validateFields() {}
 }

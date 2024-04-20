@@ -380,6 +380,11 @@
     "retry" : "اعادة المحاولة",
     "all" : "الكل",
     "agreedup" : "أؤيد",
+    "addnewquestion" : "اضافة سؤال",
+    "tipsfornewquestiontitle" : "نصائح للحصول على إجابات جيدة بسرعة",
+    "tipsfornewquestion1" : "اختر الفئة الصحيحة",
+    "tipsfornewquestion2" : "اجعل سؤالك قصيرًا ومحددًا",
+    "tipsfornewquestion3" : "سيتم مراجعة السؤال قبل نشره، لذا لا تتوقع رؤيته مباشرةً",
     "nointernetconnection" : "لا يوجد اتصال بالإنترنت",
     "nointernetconnectiondesc" : "يرجى التحقق من إعدادات الإنترنت لديك أو إعادة ضبط الاتصال للمتابعة"
 

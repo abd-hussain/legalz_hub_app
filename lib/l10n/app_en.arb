@@ -380,6 +380,11 @@
     "retry" : "Retry",
     "all" : "All",
     "agreedup" : "Up",
+    "addnewquestion" : "Add New Question",
+    "tipsfornewquestiontitle" : "Tips on getting good answers quickly",
+    "tipsfornewquestion1" : "Select Correct Category",
+    "tipsfornewquestion2" : "Keep your question short and to the point",
+    "tipsfornewquestion3" : "The question will reviewed before posting, so don't expect to see it directly",
     "nointernetconnection" : "No Internet Connection",
     "nointernetconnectiondesc" : "Please check your internet settings or reset your connection to proceed"
 }
