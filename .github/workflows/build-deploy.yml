@@ -71,7 +71,7 @@ jobs:
     
         - name: Build and Deploy
           run: |
-            flutter pub get
+            clean
             make deploy-ios
           env:
             MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
