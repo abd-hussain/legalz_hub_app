@@ -11,9 +11,10 @@ import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_view.d
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/post_view.dart';
-// import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/tab_bar.dart';
+// import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
+import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_home_page.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
@@ -105,8 +106,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
                       ),
                     );
                   } else {
-                    //TODO: replace with shimmer
-                    return LoadingView();
+                    return const ShimmerHomePage();
                   }
                 }),
           ],
