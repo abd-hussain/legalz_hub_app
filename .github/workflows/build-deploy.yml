@@ -56,7 +56,7 @@ jobs:
         - name: Setup Flutter
           uses: subosito/flutter-action@v2
           with:
-            flutter-version: '3.19.0'
+            flutter-version: '3.19.1'
             cache: true
 
         - name: Set up App Store Connect
@@ -66,7 +66,7 @@ jobs:
         - name: Setup Fastlane
           uses: ruby/setup-ruby@v1
           with:
-            ruby-version: 3.2.2
+            ruby-version: 2.6.1
             rubygems: latest
     
         - name: Build and Deploy
