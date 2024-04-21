@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_post_bottomsheet.dart';
@@ -8,7 +10,7 @@ class HomeHeaderView extends StatefulWidget {
   final UserType userType;
   final List<Category> listOfCategories;
 
-  final Function({required int catId, required String content, String? postImg})
+  final Function({required int catId, required String content, File? postImg})
       addPost;
   const HomeHeaderView(
       {super.key,

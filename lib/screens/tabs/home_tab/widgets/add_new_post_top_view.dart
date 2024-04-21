@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_post_bottomsheet.dart';
@@ -6,7 +8,7 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class AddNewPostTopView extends StatelessWidget {
   final List<Category> listOfCategories;
-  final Function({required int catId, required String content, String? postImg})
+  final Function({required int catId, required String content, File? postImg})
       addPost;
   const AddNewPostTopView(
       {super.key, required this.addPost, required this.listOfCategories});

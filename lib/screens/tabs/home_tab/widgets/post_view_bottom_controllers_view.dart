@@ -10,16 +10,15 @@ class PostViewBottomControllersView extends StatelessWidget {
   final Function() upAction;
   final Function() downAction;
   final Function() commentAction;
-  final Function() reportAction;
 
-  const PostViewBottomControllersView(
-      {super.key,
-      required this.currentUserType,
-      required this.numberOfUpRate,
-      required this.upAction,
-      required this.downAction,
-      required this.commentAction,
-      required this.reportAction});
+  const PostViewBottomControllersView({
+    super.key,
+    required this.currentUserType,
+    required this.numberOfUpRate,
+    required this.upAction,
+    required this.downAction,
+    required this.commentAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,21 +86,11 @@ class PostViewBottomControllersView extends StatelessWidget {
               ],
             ),
           ),
+          Expanded(child: Container()),
           IconButton(
             onPressed: () => commentAction(),
             icon: Icon(
               Ionicons.chatbubble_ellipses_outline,
-              size: 20,
-              color: currentUserType == UserType.attorney
-                  ? const Color(0xff292929)
-                  : const Color(0xff034061),
-            ),
-          ),
-          Expanded(child: Container()),
-          IconButton(
-            onPressed: () => reportAction(),
-            icon: Icon(
-              Icons.report_gmailerrorred_rounded,
               size: 20,
               color: currentUserType == UserType.attorney
                   ? const Color(0xff292929)

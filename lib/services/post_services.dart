@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
@@ -31,19 +33,19 @@ class PostService with Service {
   }
 
   Future<dynamic> addPost(
-      {required String catId, required String content, String? postImg}) async {
+      {required String catId, required String content, File? postImg}) async {
     FormData formData = FormData();
 
     formData.fields.add(MapEntry("content", content));
     formData.fields.add(MapEntry("cat_id", catId));
 
     if (postImg != null) {
-      String fileName = postImg.split('/').last;
+      String fileName = postImg.path.split('/').last;
       formData.files.add(
         MapEntry(
           "post_img",
           MultipartFile.fromFileSync(
-            postImg,
+            postImg.path,
             filename: fileName,
             contentType: MediaType('image', fileName.split('.').last),
           ),

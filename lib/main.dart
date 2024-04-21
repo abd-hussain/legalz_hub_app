@@ -13,7 +13,6 @@ import 'package:legalz_hub_app/services/general/network_info_service.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
 
-//TODO: FIX PIPLINE iOS
 //TODO: FIX PIPLINE Web
 //TODO: Upgrade flutter verison and all of the packages
 //TODO: check all of iO and make it disaple for web

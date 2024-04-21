@@ -17,7 +17,8 @@ class AppConstant {
       "${AppConstant.applicationMainURL}static/customersProfileImg/";
   static const String imagesIDBaseURLForAttorney =
       "${AppConstant.applicationMainURL}static/attorneyIDs/";
-
+  static const String imagesIDBaseURLForPosts =
+      "${AppConstant.applicationMainURL}static/posts/";
   static const String termsLink =
       "${AppConstant.applicationMainURL}static/web/terms.html";
   static const String termsLinkAR =

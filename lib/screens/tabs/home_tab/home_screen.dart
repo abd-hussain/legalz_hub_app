@@ -3,16 +3,13 @@ import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
-// import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_top_view.dart';
-// import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/post_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/tab_bar.dart';
-// import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_home_page.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
@@ -168,6 +165,18 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                   return PostsView(
                     currentUserType: bloc.userType,
                     postsList: snapshot.data,
+                    upAction: (postId) {
+                      //TODO
+                    },
+                    downAction: (postId) {
+                      //TODO
+                    },
+                    commentsAction: (postId) {
+                      //TODO
+                    },
+                    reportAction: (postId) {
+                      //TODO
+                    },
                   );
                 }),
           ],

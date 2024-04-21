@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
@@ -48,12 +49,9 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<void> addNewPost(
-      {required int catId, required String content, String? postImg}) async {
-    locator<PostService>()
-        .addPost(catId: catId.toString(), content: content, postImg: postImg)
-        .then((value) async {
-      await getHomePosts(catId: catId, skip: 0);
-    });
+      {required int catId, required String content, File? postImg}) async {
+    await locator<PostService>()
+        .addPost(catId: catId.toString(), content: content, postImg: postImg);
   }
 
   @override

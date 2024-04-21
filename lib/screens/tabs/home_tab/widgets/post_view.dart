@@ -7,11 +7,25 @@ import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+//TODO: handle edit post
+//TODO: handle remove post
+
 class PostsView extends StatelessWidget {
   final List<PostResponseData>? postsList;
   final UserType currentUserType;
+  final Function(int id) upAction;
+  final Function(int id) downAction;
+  final Function(int id) commentsAction;
+  final Function(int id) reportAction;
+
   const PostsView(
-      {super.key, required this.postsList, required this.currentUserType});
+      {super.key,
+      required this.postsList,
+      required this.currentUserType,
+      required this.upAction,
+      required this.downAction,
+      required this.commentsAction,
+      required this.reportAction});
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +140,18 @@ class PostsView extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            Expanded(child: Container()),
+                            IconButton(
+                              onPressed: () =>
+                                  reportAction(postsList![index].id!),
+                              icon: Icon(
+                                Icons.report_gmailerrorred_rounded,
+                                size: 20,
+                                color: currentUserType == UserType.attorney
+                                    ? const Color(0xff292929)
+                                    : const Color(0xff034061),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -140,13 +166,27 @@ class PostsView extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      postsList![index].postImg != null
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                  child: FadeInImage(
+                                placeholder: const AssetImage(
+                                    "assets/images/avatar.jpeg"),
+                                image: NetworkImage(
+                                    AppConstant.imagesIDBaseURLForPosts +
+                                        postsList![index].postImg!),
+                                fit: BoxFit.fill,
+                              )),
+                            )
+                          : Container(),
                       PostViewBottomControllersView(
                         currentUserType: currentUserType,
                         numberOfUpRate: postsList![index].totalUp!,
-                        upAction: () {},
-                        downAction: () {},
-                        commentAction: () {},
-                        reportAction: () {},
+                        upAction: () => upAction(postsList![index].id!),
+                        downAction: () => downAction(postsList![index].id!),
+                        commentAction: () =>
+                            commentsAction(postsList![index].id!),
                       ),
                       const SizedBox(height: 8)
                     ],
