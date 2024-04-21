@@ -45,7 +45,8 @@ class PostsListView extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 3,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -65,9 +66,12 @@ class PostsListView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     child: postsList![index].profileImg != ""
                                         ? FadeInImage(
-                                            placeholder: const AssetImage("assets/images/avatar.jpeg"),
+                                            placeholder: const AssetImage(
+                                                "assets/images/avatar.jpeg"),
                                             image: NetworkImage(
-                                              AppConstant.imagesBaseURLForCustomer + postsList![index].profileImg!,
+                                              AppConstant
+                                                      .imagesBaseURLForCustomer +
+                                                  postsList![index].profileImg!,
                                               scale: 1,
                                             ))
                                         : Image.asset(
@@ -88,9 +92,13 @@ class PostsListView extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(20),
                                       child: postsList![index].flagImage != ""
                                           ? FadeInImage(
-                                              placeholder: const AssetImage("assets/images/avatar.jpeg"),
+                                              placeholder: const AssetImage(
+                                                  "assets/images/avatar.jpeg"),
                                               image: NetworkImage(
-                                                  AppConstant.imagesBaseURLForCountries + postsList![index].flagImage!,
+                                                  AppConstant
+                                                          .imagesBaseURLForCountries +
+                                                      postsList![index]
+                                                          .flagImage!,
                                                   scale: 1),
                                             )
                                           : Image.asset(
@@ -109,7 +117,8 @@ class PostsListView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  title: "${postsList![index].firstName} ${postsList![index].lastName}",
+                                  title:
+                                      "${postsList![index].firstName} ${postsList![index].lastName}",
                                   textColor: const Color(0xff444444),
                                   fontSize: 12,
                                   textAlign: TextAlign.center,
@@ -120,7 +129,8 @@ class PostsListView extends StatelessWidget {
                                 Directionality(
                                   textDirection: TextDirection.ltr,
                                   child: CustomText(
-                                    title: DayTime().dateFormatterWithTime(postsList![index].createdAt!),
+                                    title: DayTime().dateFormatterWithTime(
+                                        postsList![index].createdAt!),
                                     textColor: const Color(0xff444444),
                                     fontSize: 10,
                                     textAlign: TextAlign.center,
@@ -132,7 +142,8 @@ class PostsListView extends StatelessWidget {
                             ),
                             Expanded(child: Container()),
                             IconButton(
-                              onPressed: () => reportAction(postsList![index].id!),
+                              onPressed: () =>
+                                  reportAction(postsList![index].id!),
                               icon: Icon(
                                 Icons.report_gmailerrorred_rounded,
                                 size: 20,
@@ -160,8 +171,11 @@ class PostsListView extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                   child: FadeInImage(
-                                placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                                image: NetworkImage(AppConstant.imagesIDBaseURLForPosts + postsList![index].postImg!),
+                                placeholder: const AssetImage(
+                                    "assets/images/avatar.jpeg"),
+                                image: NetworkImage(
+                                    AppConstant.imagesIDBaseURLForPosts +
+                                        postsList![index].postImg!),
                                 fit: BoxFit.fill,
                               )),
                             )
@@ -171,7 +185,8 @@ class PostsListView extends StatelessWidget {
                         numberOfUpRate: postsList![index].totalUp!,
                         upAction: () => upAction(postsList![index].id!),
                         downAction: () => downAction(postsList![index].id!),
-                        commentAction: () => commentsAction(postsList![index].id!),
+                        commentAction: () =>
+                            commentsAction(postsList![index].id!),
                       ),
                       const SizedBox(height: 8)
                     ],

@@ -26,19 +26,23 @@ class HomeTabScreen extends StatefulWidget {
   State<HomeTabScreen> createState() => _HomeTabScreenState();
 }
 
-class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _HomeTabScreenState extends State<HomeTabScreen>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final bloc = HomeBloc();
 
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
     NotificationManager.init(context: context);
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
+        ? UserType.customer
+        : UserType.attorney;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
         FirebaseCloudMessagingUtil.initConfigure(context);
       });
     });
+    bloc.reportList = bloc.fillReportList(context);
     bloc.callRegisterTokenRequest();
     //TODO : handle pagination
     bloc.getHomePosts(catId: 0, skip: 0);
@@ -62,15 +66,20 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
             future: locator<MainContainerBloc>().getlistOfCategories(context),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                bloc.tabController = TabController(initialIndex: 0, length: snapshot.data!.length, vsync: this);
+                bloc.tabController = TabController(
+                    initialIndex: 0,
+                    length: snapshot.data!.length,
+                    vsync: this);
                 bloc.handleTapControllerListener();
                 return Column(
                   children: [
                     HomeHeaderView(
                       userType: bloc.userType,
                       listOfCategories: snapshot.data!,
-                      addPost: ({required catId, required content, postImg}) async {
-                        await bloc.addNewPost(catId: catId, content: content, postImg: postImg);
+                      addPost: (
+                          {required catId, required content, postImg}) async {
+                        await bloc.addNewPost(
+                            catId: catId, content: content, postImg: postImg);
                       },
                     ),
                     DefaultTabController(
@@ -86,7 +95,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
                               tabs: List.generate(
                                 snapshot.data!.length,
                                 (index) {
-                                  return CustomTab(tabName: snapshot.data![index].name!);
+                                  return CustomTab(
+                                      tabName: snapshot.data![index].name!);
                                 },
                               ),
                             ),
@@ -97,7 +107,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
                             child: TabBarView(
                               controller: bloc.tabController,
                               children: snapshot.data!.map((sub) {
-                                return _tabBarView(listOfCategories: snapshot.data!, item: sub);
+                                return _tabBarView(
+                                    listOfCategories: snapshot.data!,
+                                    item: sub);
                               }).toList(),
                             ),
                           ),
@@ -114,7 +126,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
     );
   }
 
-  Widget _tabBarView({required List<Category> listOfCategories, required Category item}) {
+  Widget _tabBarView(
+      {required List<Category> listOfCategories, required Category item}) {
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -122,8 +135,10 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
             bloc.userType == UserType.customer
                 ? AddNewPostTopView(
                     listOfCategories: listOfCategories,
-                    addPost: ({required catId, required content, postImg}) async {
-                      await bloc.addNewPost(catId: catId, content: content, postImg: postImg);
+                    addPost: (
+                        {required catId, required content, postImg}) async {
+                      await bloc.addNewPost(
+                          catId: catId, content: content, postImg: postImg);
                     },
                   )
                 : Container(),
@@ -134,9 +149,11 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
                     future: bloc.getHomeBanners(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null && snapshot.hasData) {
-                        return const SizedBox(height: 220, child: LoadingView());
+                        return const SizedBox(
+                            height: 220, child: LoadingView());
                       } else {
-                        return MainBannerHomePage(bannerList: snapshot.data ?? []);
+                        return MainBannerHomePage(
+                            bannerList: snapshot.data ?? []);
                       }
                     })
                 : Container(),
@@ -158,8 +175,14 @@ class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateM
                       //TODO
                     },
                     reportAction: (postId) {
-                      ReportPostBottomSheetsUtil()
-                          .bottomSheet(context: context, reportTitles: ["s", "e", "f"], reportAction: (title) {});
+                      ReportPostBottomSheetsUtil().bottomSheet(
+                          context: context,
+                          reporsList: bloc.reportList,
+                          reportAction: (report) async {
+                            await bloc.reportPost(
+                                postId: postId,
+                                reason: '${report.title} : ${report.desc}');
+                          });
                     },
                   );
                 }),

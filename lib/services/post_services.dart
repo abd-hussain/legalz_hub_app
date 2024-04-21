@@ -10,13 +10,15 @@ import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
 class PostService with Service {
   Future<dynamic> reportPost(
-      int postId, UserType userType, String reason) async {
+      {required int postId,
+      required UserType userType,
+      required String reason}) async {
     return await repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.reportPost,
       queryParam: {
         "post_id": postId,
-        "userType": userType == UserType.attorney ? "attorney" : "customer",
+        "user_type": userType == UserType.attorney ? "attorney" : "customer",
         "reason": reason
       },
     );

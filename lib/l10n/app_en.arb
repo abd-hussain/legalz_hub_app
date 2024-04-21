@@ -387,5 +387,19 @@
     "tipsfornewquestion2" : "Keep your question short and to the point",
     "tipsfornewquestion3" : "The question will reviewed before posting, so don't expect to see it directly",
     "nointernetconnection" : "No Internet Connection",
-    "nointernetconnectiondesc" : "Please check your internet settings or reset your connection to proceed"
+    "nointernetconnectiondesc" : "Please check your internet settings or reset your connection to proceed",
+    "reporttitle1" : "Spam",
+    "reportdesc1" : "Selling illegal goods, money scams etc.",
+    "reporttitle2" : "Hate Speech",
+    "reportdesc2" : "Serious attach on a group",
+    "reporttitle3" : "Harassment and bullying",
+    "reportdesc3" : "Harassing or threatening an individual",
+    "reporttitle4" : "Harmful activities",
+    "reportdesc4" : "Glorifying violence including self-harm or intent to seriously harm others",
+    "reporttitle5" : "Adult content",
+    "reportdesc5" : "Nudity/Sexual content",
+    "reporttitle6" : "Poorly written",
+    "reportdesc6" : "Not in Language or has very bad formatting, grammar, and spelling",
+    "reporttitle7" : "Other",
+    "reportdesc7" : "Ex. Illegal content (Upon clicking you will be directed to a form where you can provide details)"
 }

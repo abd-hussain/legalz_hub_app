@@ -46,21 +46,37 @@ class MainContainerBloc {
 
   List<TabItem<dynamic>> customerItems(BuildContext context) {
     return [
-      TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
-      TabItem(icon: Icons.category_rounded, title: AppLocalizations.of(context)!.category),
+      TabItem(
+          icon: Icons.home,
+          title: AppLocalizations.of(context)!.containerHomeIconTitle),
+      TabItem(
+          icon: Icons.category_rounded,
+          title: AppLocalizations.of(context)!.category),
       const TabItem(icon: Icons.call),
-      TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-      TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),
+      TabItem(
+          icon: Icons.calendar_month,
+          title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+      TabItem(
+          icon: Icons.person,
+          title: AppLocalizations.of(context)!.containerAccountIconTitle),
     ];
   }
 
   List<TabItem<dynamic>> attorneyItems(BuildContext context) {
     return [
-      TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
-      TabItem(icon: Icons.payments_outlined, title: AppLocalizations.of(context)!.payments),
+      TabItem(
+          icon: Icons.home,
+          title: AppLocalizations.of(context)!.containerHomeIconTitle),
+      TabItem(
+          icon: Icons.payments_outlined,
+          title: AppLocalizations.of(context)!.payments),
       const TabItem(icon: Icons.call),
-      TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-      TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),
+      TabItem(
+          icon: Icons.calendar_month,
+          title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+      TabItem(
+          icon: Icons.person,
+          title: AppLocalizations.of(context)!.containerAccountIconTitle),
     ];
   }
 

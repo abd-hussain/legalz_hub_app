@@ -8,8 +8,10 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class AddNewPostTopView extends StatelessWidget {
   final List<Category> listOfCategories;
-  final Function({required int catId, required String content, File? postImg}) addPost;
-  const AddNewPostTopView({super.key, required this.addPost, required this.listOfCategories});
+  final Function({required int catId, required String content, File? postImg})
+      addPost;
+  const AddNewPostTopView(
+      {super.key, required this.addPost, required this.listOfCategories});
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,11 @@ class AddNewPostTopView extends StatelessWidget {
                           ),
                           child: Center(
                             child: CustomText(
-                              title: AppLocalizations.of(context)!.whatdoyouwanttoask,
+                              title: AppLocalizations.of(context)!
+                                  .whatdoyouwanttoask,
                               fontSize: 11,
-                              textColor: const Color.fromARGB(255, 148, 148, 148),
+                              textColor:
+                                  const Color.fromARGB(255, 148, 148, 148),
                             ),
                           ),
                         ),
@@ -67,19 +71,25 @@ class AddNewPostTopView extends StatelessWidget {
                 height: 20,
                 child: Row(
                   children: [
-                    infoView(text: AppLocalizations.of(context)!.ask, icon: Icons.question_mark_rounded),
+                    infoView(
+                        text: AppLocalizations.of(context)!.ask,
+                        icon: Icons.question_mark_rounded),
                     Container(
                       width: 0.5,
                       height: 15,
                       color: const Color(0xff444444),
                     ),
-                    infoView(text: AppLocalizations.of(context)!.answer, icon: Icons.question_answer_outlined),
+                    infoView(
+                        text: AppLocalizations.of(context)!.answer,
+                        icon: Icons.question_answer_outlined),
                     Container(
                       width: 0.5,
                       height: 15,
                       color: const Color(0xff444444),
                     ),
-                    infoView(text: AppLocalizations.of(context)!.share, icon: Icons.share),
+                    infoView(
+                        text: AppLocalizations.of(context)!.share,
+                        icon: Icons.share),
                   ],
                 ),
               )

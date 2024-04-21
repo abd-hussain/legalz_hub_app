@@ -67,8 +67,10 @@ class _CategoryTabScreenState extends State<CategoryTabScreen> {
                             valueListenable: _bloc.selectedCategoryNotifier,
                             builder: (context, snapshot, chuld) {
                               if (snapshot != null) {
-                                return ValueListenableBuilder<List<AttorneyModelData>?>(
-                                    valueListenable: _bloc.attorniesListNotifier,
+                                return ValueListenableBuilder<
+                                        List<AttorneyModelData>?>(
+                                    valueListenable:
+                                        _bloc.attorniesListNotifier,
                                     builder: (context, snapshot2, child) {
                                       return CategoryMainView(
                                         selectedCategory: snapshot,
