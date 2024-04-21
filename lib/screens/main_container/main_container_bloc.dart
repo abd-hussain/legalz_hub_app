@@ -21,8 +21,7 @@ class MainContainerBloc {
       ValueNotifier<CustomerSelectedTab>(CustomerSelectedTab.home);
   final ValueNotifier<AttorneySelectedTab> attornyCurrentTabIndexNotifier =
       ValueNotifier<AttorneySelectedTab>(AttorneySelectedTab.home);
-  StreamController<List<Category>> listOfCategoriesStreamController =
-      StreamController<List<Category>>.broadcast();
+  // StreamController<List<Category>> listOfCategoriesStreamController = StreamController<List<Category>>.broadcast();
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   UserType userType = UserType.attorney;
@@ -47,37 +46,21 @@ class MainContainerBloc {
 
   List<TabItem<dynamic>> customerItems(BuildContext context) {
     return [
-      TabItem(
-          icon: Icons.home,
-          title: AppLocalizations.of(context)!.containerHomeIconTitle),
-      TabItem(
-          icon: Icons.category_rounded,
-          title: AppLocalizations.of(context)!.category),
+      TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
+      TabItem(icon: Icons.category_rounded, title: AppLocalizations.of(context)!.category),
       const TabItem(icon: Icons.call),
-      TabItem(
-          icon: Icons.calendar_month,
-          title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-      TabItem(
-          icon: Icons.person,
-          title: AppLocalizations.of(context)!.containerAccountIconTitle),
+      TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+      TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),
     ];
   }
 
   List<TabItem<dynamic>> attorneyItems(BuildContext context) {
     return [
-      TabItem(
-          icon: Icons.home,
-          title: AppLocalizations.of(context)!.containerHomeIconTitle),
-      TabItem(
-          icon: Icons.payments_outlined,
-          title: AppLocalizations.of(context)!.payments),
+      TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
+      TabItem(icon: Icons.payments_outlined, title: AppLocalizations.of(context)!.payments),
       const TabItem(icon: Icons.call),
-      TabItem(
-          icon: Icons.calendar_month,
-          title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-      TabItem(
-          icon: Icons.person,
-          title: AppLocalizations.of(context)!.containerAccountIconTitle),
+      TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+      TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),
     ];
   }
 
@@ -152,17 +135,14 @@ class MainContainerBloc {
     }
   }
 
-  void getlistOfCategories(BuildContext context) {
-    locator<FilterService>().categories().then((value) {
+  Future<List<Category>> getlistOfCategories(BuildContext context) async {
+    return await locator<FilterService>().categories().then((value) {
       List<Category> list = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
 
-      print("list.length");
-      print(list.length);
-
       list.insert(0, Category(id: 0, name: AppLocalizations.of(context)!.all));
-      print("list.length");
-      print(list.length);
-      listOfCategoriesStreamController.add(list);
+
+      return list;
+      // listOfCategoriesStreamController.add(list);
     });
   }
 }

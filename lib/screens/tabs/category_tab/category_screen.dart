@@ -37,11 +37,9 @@ class _CategoryTabScreenState extends State<CategoryTabScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: StreamBuilder<List<Category>>(
+      child: FutureBuilder<List<Category>>(
           initialData: const [],
-          stream: locator<MainContainerBloc>()
-              .listOfCategoriesStreamController
-              .stream,
+          future: locator<MainContainerBloc>().getlistOfCategories(context),
           builder: (context, snapshotCategory) {
             if (snapshotCategory.hasData) {
               _bloc.setupScreen(snapshotCategory.data![1]);
@@ -69,10 +67,8 @@ class _CategoryTabScreenState extends State<CategoryTabScreen> {
                             valueListenable: _bloc.selectedCategoryNotifier,
                             builder: (context, snapshot, chuld) {
                               if (snapshot != null) {
-                                return ValueListenableBuilder<
-                                        List<AttorneyModelData>?>(
-                                    valueListenable:
-                                        _bloc.attorniesListNotifier,
+                                return ValueListenableBuilder<List<AttorneyModelData>?>(
+                                    valueListenable: _bloc.attorniesListNotifier,
                                     builder: (context, snapshot2, child) {
                                       return CategoryMainView(
                                         selectedCategory: snapshot,

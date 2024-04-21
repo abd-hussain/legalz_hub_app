@@ -5,10 +5,11 @@ import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_bloc.dart';
-import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_new_post_top_view.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/bottom_sheets/report_post_bottomsheet.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/posts/add_new_post_top_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
-import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/post_view.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/posts/post_list_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/tab_bar.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_home_page.dart';
@@ -25,17 +26,14 @@ class HomeTabScreen extends StatefulWidget {
   State<HomeTabScreen> createState() => _HomeTabScreenState();
 }
 
-class _HomeTabScreenState extends State<HomeTabScreen>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _HomeTabScreenState extends State<HomeTabScreen> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final bloc = HomeBloc();
 
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
     NotificationManager.init(context: context);
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
-        ? UserType.customer
-        : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
         FirebaseCloudMessagingUtil.initConfigure(context);
@@ -59,27 +57,20 @@ class _HomeTabScreenState extends State<HomeTabScreen>
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: SingleChildScrollView(
-        child: StreamBuilder<List<Category>>(
+        child: FutureBuilder<List<Category>>(
             initialData: const [],
-            stream: locator<MainContainerBloc>()
-                .listOfCategoriesStreamController
-                .stream,
+            future: locator<MainContainerBloc>().getlistOfCategories(context),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                bloc.tabController = TabController(
-                    initialIndex: 0,
-                    length: snapshot.data!.length,
-                    vsync: this);
+                bloc.tabController = TabController(initialIndex: 0, length: snapshot.data!.length, vsync: this);
                 bloc.handleTapControllerListener();
                 return Column(
                   children: [
                     HomeHeaderView(
                       userType: bloc.userType,
                       listOfCategories: snapshot.data!,
-                      addPost: (
-                          {required catId, required content, postImg}) async {
-                        await bloc.addNewPost(
-                            catId: catId, content: content, postImg: postImg);
+                      addPost: ({required catId, required content, postImg}) async {
+                        await bloc.addNewPost(catId: catId, content: content, postImg: postImg);
                       },
                     ),
                     DefaultTabController(
@@ -95,8 +86,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                               tabs: List.generate(
                                 snapshot.data!.length,
                                 (index) {
-                                  return CustomTab(
-                                      tabName: snapshot.data![index].name!);
+                                  return CustomTab(tabName: snapshot.data![index].name!);
                                 },
                               ),
                             ),
@@ -107,9 +97,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                             child: TabBarView(
                               controller: bloc.tabController,
                               children: snapshot.data!.map((sub) {
-                                return _tabBarView(
-                                    listOfCategories: snapshot.data!,
-                                    item: sub);
+                                return _tabBarView(listOfCategories: snapshot.data!, item: sub);
                               }).toList(),
                             ),
                           ),
@@ -126,8 +114,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
     );
   }
 
-  Widget _tabBarView(
-      {required List<Category> listOfCategories, required Category item}) {
+  Widget _tabBarView({required List<Category> listOfCategories, required Category item}) {
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -135,10 +122,8 @@ class _HomeTabScreenState extends State<HomeTabScreen>
             bloc.userType == UserType.customer
                 ? AddNewPostTopView(
                     listOfCategories: listOfCategories,
-                    addPost: (
-                        {required catId, required content, postImg}) async {
-                      await bloc.addNewPost(
-                          catId: catId, content: content, postImg: postImg);
+                    addPost: ({required catId, required content, postImg}) async {
+                      await bloc.addNewPost(catId: catId, content: content, postImg: postImg);
                     },
                   )
                 : Container(),
@@ -149,11 +134,9 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                     future: bloc.getHomeBanners(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null && snapshot.hasData) {
-                        return const SizedBox(
-                            height: 220, child: LoadingView());
+                        return const SizedBox(height: 220, child: LoadingView());
                       } else {
-                        return MainBannerHomePage(
-                            bannerList: snapshot.data ?? []);
+                        return MainBannerHomePage(bannerList: snapshot.data ?? []);
                       }
                     })
                 : Container(),
@@ -162,7 +145,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                 initialData: const [],
                 stream: bloc.postsStreamController.stream,
                 builder: (context, snapshot) {
-                  return PostsView(
+                  return PostsListView(
                     currentUserType: bloc.userType,
                     postsList: snapshot.data,
                     upAction: (postId) {
@@ -175,7 +158,8 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                       //TODO
                     },
                     reportAction: (postId) {
-                      //TODO
+                      ReportPostBottomSheetsUtil()
+                          .bottomSheet(context: context, reportTitles: ["s", "e", "f"], reportAction: (title) {});
                     },
                   );
                 }),

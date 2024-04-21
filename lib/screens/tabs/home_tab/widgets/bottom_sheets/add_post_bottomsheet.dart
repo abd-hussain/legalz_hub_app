@@ -5,28 +5,23 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:legalz_hub_app/models/add_post_model.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
-import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/add_post_category_bottomsheet.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/bottom_sheets/add_post_category_bottomsheet.dart';
 import 'package:legalz_hub_app/shared_widget/bio_field.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class AddPostBottomSheetsUtil {
-  StreamController<AddPostModel> refreshPage =
-      StreamController<AddPostModel>.broadcast();
-  AddPostModel refreshObj =
-      AddPostModel(categorySelected: null, attachment: null, content: null);
+  StreamController<AddPostModel> refreshPage = StreamController<AddPostModel>.broadcast();
+  AddPostModel refreshObj = AddPostModel(categorySelected: null, attachment: null, content: null);
   TextEditingController textController = TextEditingController();
   File? image;
 
   Future bottomSheet(
       {required BuildContext context,
       required List<Category> categories,
-      required Function(
-              {required int catId, required String content, File? postImg})
-          addPost}) {
-    List<Category> listOfCategories =
-        categories.where((s) => s.id != 0).toList();
+      required Function({required int catId, required String content, File? postImg}) addPost}) {
+    List<Category> listOfCategories = categories.where((s) => s.id != 0).toList();
 
     return showModalBottomSheet(
         isScrollControlled: true,
@@ -39,12 +34,10 @@ class AddPostBottomSheetsUtil {
         builder: (context) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               child: StreamBuilder<AddPostModel>(
                   stream: refreshPage.stream,
                   builder: (context, refreshPageSnapshot) {
-                    print("refreshPageSnapshot");
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -59,8 +52,7 @@ class AddPostBottomSheetsUtil {
                             ),
                             Expanded(
                               child: CustomText(
-                                title: AppLocalizations.of(context)!
-                                    .addnewquestion,
+                                title: AppLocalizations.of(context)!.addnewquestion,
                                 textColor: const Color(0xff444444),
                                 textAlign: TextAlign.center,
                                 fontSize: 18,
@@ -69,17 +61,13 @@ class AddPostBottomSheetsUtil {
                             SizedBox(
                               width: 100,
                               child: CustomButton(
-                                  enableButton:
-                                      validateFields(refreshPageSnapshot.data),
+                                  enableButton: validateFields(refreshPageSnapshot.data),
                                   onTap: () {
                                     Navigator.of(context).pop();
                                     addPost(
-                                      catId: refreshPageSnapshot
-                                          .data!.categorySelected!.id!,
-                                      content:
-                                          refreshPageSnapshot.data!.content!,
-                                      postImg:
-                                          refreshPageSnapshot.data!.attachment,
+                                      catId: refreshPageSnapshot.data!.categorySelected!.id!,
+                                      content: refreshPageSnapshot.data!.content!,
+                                      postImg: refreshPageSnapshot.data!.attachment,
                                     );
                                   }),
                             )
@@ -96,8 +84,7 @@ class AddPostBottomSheetsUtil {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 3,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
+                                  offset: const Offset(0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -107,30 +94,26 @@ class AddPostBottomSheetsUtil {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    title: AppLocalizations.of(context)!
-                                        .tipsfornewquestiontitle,
+                                    title: AppLocalizations.of(context)!.tipsfornewquestiontitle,
                                     textColor: const Color(0xff444444),
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                     maxLins: 2,
                                   ),
                                   CustomText(
-                                    title:
-                                        "- ${AppLocalizations.of(context)!.tipsfornewquestion1}",
+                                    title: "- ${AppLocalizations.of(context)!.tipsfornewquestion1}",
                                     textColor: const Color(0xff444444),
                                     fontSize: 11,
                                     maxLins: 2,
                                   ),
                                   CustomText(
-                                    title:
-                                        "- ${AppLocalizations.of(context)!.tipsfornewquestion2}",
+                                    title: "- ${AppLocalizations.of(context)!.tipsfornewquestion2}",
                                     textColor: const Color(0xff444444),
                                     fontSize: 11,
                                     maxLins: 2,
                                   ),
                                   CustomText(
-                                    title:
-                                        "- ${AppLocalizations.of(context)!.tipsfornewquestion3}",
+                                    title: "- ${AppLocalizations.of(context)!.tipsfornewquestion3}",
                                     textColor: const Color(0xff444444),
                                     maxLins: 2,
                                     fontSize: 11,
@@ -141,8 +124,7 @@ class AddPostBottomSheetsUtil {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 16, bottom: 8),
+                          padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
                           child: InkWell(
                             child: Row(
                               children: [
@@ -164,20 +146,16 @@ class AddPostBottomSheetsUtil {
                                     border: Border.all(
                                       color: const Color(0xFFEEEEEE),
                                     ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
+                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       children: [
                                         CustomText(
-                                          title: refreshObj.categorySelected ==
-                                                  null
-                                              ? AppLocalizations.of(context)!
-                                                  .selectCategory
-                                              : refreshObj
-                                                  .categorySelected!.name!,
+                                          title: refreshObj.categorySelected == null
+                                              ? AppLocalizations.of(context)!.selectCategory
+                                              : refreshObj.categorySelected!.name!,
                                           textColor: const Color(0xff444444),
                                           fontSize: 11,
                                         ),
@@ -204,8 +182,7 @@ class AddPostBottomSheetsUtil {
                           padding: const EdgeInsets.only(left: 8, right: 8),
                           child: BioField(
                             bioController: textController,
-                            title: AppLocalizations.of(context)!
-                                .whatdoyouwanttoask,
+                            title: AppLocalizations.of(context)!.whatdoyouwanttoask,
                             onChanged: (text) {
                               refreshObj.content = text;
                               refreshPage.sink.add(refreshObj);
@@ -219,8 +196,7 @@ class AddPostBottomSheetsUtil {
                               BottomSheetsUtil().addImageBottomSheet(
                                 context,
                                 image != null,
-                                AppLocalizations.of(context)!
-                                    .profilephotosetting,
+                                AppLocalizations.of(context)!.profilephotosetting,
                                 AppLocalizations.of(context)!.setprofilephoto,
                                 deleteCallBack: () {
                                   image = null;
@@ -257,8 +233,7 @@ class AddPostBottomSheetsUtil {
                                     ? Padding(
                                         padding: const EdgeInsets.all(5),
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                           child: Image.file(
                                             image!,
                                             width: 60,
