@@ -10,37 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - name: Checkout Code
+        - name: 📚 Git Checkout
           uses: actions/checkout@v2
 
-        - name: Setup Flutter
+        - name: 🐦 Setup Flutter
           uses: subosito/flutter-action@v2
           with:
             flutter-version: '3.19.0'
             cache: true
     
-        - name: Set up key.properties
+        - name: 📦 Set up key.properties
           run: |
             echo "keyPassword=${{ secrets.KEY_PASSWORD }}" > android/key.properties
             echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
             echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
             echo "${{ secrets.KEY_STORE }}" | base64 --decode > android/androidkeystore.jks
     
-        - name: Set up local.properties
+        - name: 📦 Set up local.properties
           run: |
               echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
     
-        - name: Set up Play Store Secret
+        - name: 📦 Set up Play Store Secret
           run: |
               echo "${{ secrets.GOOGLE_PLAY_STORE_KEY }}" | base64 --decode > android/play_store_secret.json
     
-        - name: Setup Fastlane
+        - name: 🎯 Setup Fastlane
           uses: ruby/setup-ruby@v1
           with:
             ruby-version: 2.6
             rubygems: latest
     
-        - name: Build and Deploy
+        - name: 🛠️ Build and Deploy
           run: |
             flutter pub get
             make deploy-android
@@ -49,26 +49,26 @@ jobs:
     runs-on: macOS-13
 
     steps:
-        - name: Checkout Code
+        - name: 📚 Git Checkout
           uses: actions/checkout@v3
 
-        - name: Setup Flutter
+        - name: 🐦 Setup Flutter
           uses: subosito/flutter-action@v2
           with:
             flutter-version: '3.19.1'
             cache: true
 
-        - name: Set up App Store Connect
+        - name: 📦 Set up App Store Connect
           run: |
               echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
 
-        - name: Setup Fastlane
+        - name: 🎯 Setup Fastlane
           uses: ruby/setup-ruby@v1
           with:
             ruby-version: 2.6.1
             rubygems: 3.2.3
 
-        - name: Cleaning before we start
+        - name: 📦 Cleaning before we start
           run: |
               flutter clean
               cd ios && rm -rf Podfile.lock
@@ -78,11 +78,11 @@ jobs:
               flutter pub get
               cd ios && pod install
 
-        - name: Update Fastlane
+        - name: 📦 Update Fastlane
           run: |
               cd ios && bundle update fastlane
     
-        - name: Build and Deploy
+        - name: 🛠️ Build and Deploy
           run: |
             make deploy-ios
           env:
@@ -96,24 +96,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: 📚 Git Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Flutter
+      - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.0'
           cache: true
 
-      - name: Make Web Build
+      - name: 📦 Install Dependencies
         run: |
-          flutter pub get
-          flutter build web --no-tree-shake-icons
+            flutter pub global activate very_good_cli
+            very_good --analytics false
+            very_good packages get --recursive
 
-      # - name: Deploy Web Build
-      #   uses: FirebaseExtended/action-hosting-deploy@v0
-      #   with:
-      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
-      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHECKLIST_6A64E }}'
-      #     channelId: live
-      #     projectId: checklist-6a64e
+      - name: 🛠️ Build the application
+        run: flutter build web -t lib/main.dart
+      
+      - name: ⬇️ Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/web
+
+      - name: ⬇️ Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/web
+
+      - name: 🎯 Deploy to firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGALZHUB }}"
+          channelId: live
+          projectId: legalzhub

@@ -25,18 +25,21 @@ void main() {
 
     await Hive.initFlutter();
     await Hive.openBox(DatabaseBoxConstant.userInfo);
-    bool hasConnectivity = await _initInternetConnection();
-
+    bool hasConnectivity = true;
     await setupLocator();
 
     if (!kIsWeb) {
+      hasConnectivity = await _initInternetConnection();
+
       await MobileAds.instance.initialize();
       await MobileAds.instance.updateRequestConfiguration(
         RequestConfiguration(
             testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
       );
 
-      await _setupFirebase();
+      await _setupMobileFirebase();
+    } else {
+      await _setupWebFirebase();
     }
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -64,7 +67,20 @@ Future<bool> _initInternetConnection() async {
   return await networkInfoService.checkConnectivityonLunching();
 }
 
-Future<bool> _setupFirebase() async {
+Future<dynamic> _setupWebFirebase() async {
+  return await Firebase.initializeApp(
+    options: const FirebaseOptions(
+        projectId: "legalzhub",
+        messagingSenderId: "427308149539",
+        appId: "1:427308149539:web:18904d6b50e62afef7fa96",
+        apiKey: "AIzaSyBRfHMFQFMDlefTp2Am4Srb3tj7lax7V-Q",
+        authDomain: "legalzhub.firebaseapp.com",
+        storageBucket: "legalzhub.appspot.com",
+        measurementId: "G-FYY1QV12GF"),
+  );
+}
+
+Future<bool> _setupMobileFirebase() async {
   NetworkInfoService networkInfoService = NetworkInfoService();
   bool hasConnectivity;
   hasConnectivity = await networkInfoService.checkConnectivityonLunching();
