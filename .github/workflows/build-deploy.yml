@@ -78,6 +78,10 @@ jobs:
               cd ..
               flutter pub get
               cd ios && pod install
+
+        - name: Update Fastlane
+          run: |
+              cd ios && bundle update fastlane
     
         - name: Build and Deploy
           run: |

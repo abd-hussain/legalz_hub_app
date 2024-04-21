@@ -112,40 +112,75 @@ class AddPostBottomSheetsUtil {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
-                ValueListenableBuilder<Category?>(
-                    valueListenable: selectedCategory,
-                    builder: (context, selectedCategoriesSnapshot, child) {
-                      return SizedBox(
-                        child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 5,
-                              mainAxisSpacing: 0,
-                              crossAxisSpacing: 0,
-                              childAspectRatio: 1,
-                            ),
-                            itemCount: listOfCategories.length,
-                            itemBuilder: (context, index) {
-                              return BookingCell(
-                                title: listOfCategories[index].name!,
-                                isSelected: selectedCategoriesSnapshot != null
-                                    ? selectedCategoriesSnapshot == listOfCategories[index]
-                                    : false,
-                                onPress: () {
-                                  selectedCategory.value = listOfCategories[index];
-                                },
-                              );
-                            }),
-                      );
-                    }),
-                BioField(
-                  bioController: textController,
-                  title: AppLocalizations.of(context)!.whatdoyouwanttoask,
-                  onChanged: (text) => validateFields(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset(
+                          "assets/images/avatar.jpeg",
+                          width: 30,
+                        ),
+                      ),
+                      const Icon(Icons.arrow_drop_down_sharp),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          border: Border.all(
+                            color: Color(0xFFEEEEEE),
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomText(
+                            title: "Select category",
+                            textColor: const Color(0xff444444),
+                            maxLins: 2,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 10),
+
+                // ValueListenableBuilder<Category?>(
+                //     valueListenable: selectedCategory,
+                //     builder: (context, selectedCategoriesSnapshot, child) {
+                //       return SizedBox(
+                //         child: GridView.builder(
+                //             shrinkWrap: true,
+                //             physics: const NeverScrollableScrollPhysics(),
+                //             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //               crossAxisCount: 5,
+                //               mainAxisSpacing: 0,
+                //               crossAxisSpacing: 0,
+                //               childAspectRatio: 1,
+                //             ),
+                //             itemCount: listOfCategories.length,
+                //             itemBuilder: (context, index) {
+                //               return BookingCell(
+                //                 title: listOfCategories[index].name!,
+                //                 isSelected: selectedCategoriesSnapshot != null
+                //                     ? selectedCategoriesSnapshot == listOfCategories[index]
+                //                     : false,
+                //                 onPress: () {
+                //                   selectedCategory.value = listOfCategories[index];
+                //                 },
+                //               );
+                //             }),
+                //       );
+                //     }),
+                Padding(
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: BioField(
+                    bioController: textController,
+                    title: AppLocalizations.of(context)!.whatdoyouwanttoask,
+                    onChanged: (text) => validateFields(),
+                  ),
+                ),
               ],
             ),
           );
