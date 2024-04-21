@@ -67,7 +67,7 @@ jobs:
           uses: ruby/setup-ruby@v1
           with:
             ruby-version: 2.6.1
-            rubygems: latest
+            rubygems: 3.2.3
 
         - name: Cleaning before we start
           run: |
@@ -75,6 +75,7 @@ jobs:
               cd ios && rm -rf Podfile.lock
               cd ios && rm -rf Pods
               cd ios && pod install
+              cd ..
               flutter pub get
               cd ios && pod install
     
