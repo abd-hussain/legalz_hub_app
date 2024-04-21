@@ -9,6 +9,7 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 //TODO keyboard problem
 //TODO category design and space
+//TODO: validate button before submit
 class AddPostBottomSheetsUtil {
   ValueNotifier<Category?> selectedCategory = ValueNotifier<Category?>(null);
 
@@ -17,11 +18,8 @@ class AddPostBottomSheetsUtil {
   Future bottomSheet(
       {required BuildContext context,
       required List<Category> categories,
-      required Function(
-              {required int catId, required String content, String? postImg})
-          addPost}) {
-    List<Category> listOfCategories =
-        categories.where((s) => s.id != 0).toList();
+      required Function({required int catId, required String content, String? postImg}) addPost}) {
+    List<Category> listOfCategories = categories.where((s) => s.id != 0).toList();
 
     return showModalBottomSheet(
         isScrollControlled: true,
@@ -75,8 +73,7 @@ class AddPostBottomSheetsUtil {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 3,
-                          offset:
-                              const Offset(0, 3), // changes position of shadow
+                          offset: const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
@@ -86,30 +83,26 @@ class AddPostBottomSheetsUtil {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            title: AppLocalizations.of(context)!
-                                .tipsfornewquestiontitle,
+                            title: AppLocalizations.of(context)!.tipsfornewquestiontitle,
                             textColor: const Color(0xff444444),
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             maxLins: 2,
                           ),
                           CustomText(
-                            title:
-                                "- ${AppLocalizations.of(context)!.tipsfornewquestion1}",
+                            title: "- ${AppLocalizations.of(context)!.tipsfornewquestion1}",
                             textColor: const Color(0xff444444),
                             fontSize: 11,
                             maxLins: 2,
                           ),
                           CustomText(
-                            title:
-                                "- ${AppLocalizations.of(context)!.tipsfornewquestion2}",
+                            title: "- ${AppLocalizations.of(context)!.tipsfornewquestion2}",
                             textColor: const Color(0xff444444),
                             fontSize: 11,
                             maxLins: 2,
                           ),
                           CustomText(
-                            title:
-                                "- ${AppLocalizations.of(context)!.tipsfornewquestion3}",
+                            title: "- ${AppLocalizations.of(context)!.tipsfornewquestion3}",
                             textColor: const Color(0xff444444),
                             maxLins: 2,
                             fontSize: 11,
@@ -127,8 +120,7 @@ class AddPostBottomSheetsUtil {
                         child: GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 5,
                               mainAxisSpacing: 0,
                               crossAxisSpacing: 0,
@@ -139,12 +131,10 @@ class AddPostBottomSheetsUtil {
                               return BookingCell(
                                 title: listOfCategories[index].name!,
                                 isSelected: selectedCategoriesSnapshot != null
-                                    ? selectedCategoriesSnapshot ==
-                                        listOfCategories[index]
+                                    ? selectedCategoriesSnapshot == listOfCategories[index]
                                     : false,
                                 onPress: () {
-                                  selectedCategory.value =
-                                      listOfCategories[index];
+                                  selectedCategory.value = listOfCategories[index];
                                 },
                               );
                             }),

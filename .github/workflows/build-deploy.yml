@@ -68,10 +68,18 @@ jobs:
           with:
             ruby-version: 2.6.1
             rubygems: latest
+
+        - name: Cleaning before we start
+          run: |
+              flutter clean
+              cd ios && rm -rf Podfile.lock
+              cd ios && rm -rf Pods
+              cd ios && pod install
+              flutter pub get
+              cd ios && pod install
     
         - name: Build and Deploy
           run: |
-            clean
             make deploy-ios
           env:
             MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
