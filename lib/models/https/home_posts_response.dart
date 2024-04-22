@@ -29,25 +29,22 @@ class PostResponseData {
   String? profileImg;
   String? flagImage;
   int? commentCount;
-  int? totalUp;
-  int? totalDown;
 
-  PostResponseData(
-      {this.id,
-      this.content,
-      this.postImg,
-      this.reportCount,
-      this.customersOwnerId,
-      this.published,
-      this.categoryId,
-      this.createdAt,
-      this.firstName,
-      this.lastName,
-      this.profileImg,
-      this.flagImage,
-      this.commentCount,
-      this.totalUp,
-      this.totalDown});
+  PostResponseData({
+    this.id,
+    this.content,
+    this.postImg,
+    this.reportCount,
+    this.customersOwnerId,
+    this.published,
+    this.categoryId,
+    this.createdAt,
+    this.firstName,
+    this.lastName,
+    this.profileImg,
+    this.flagImage,
+    this.commentCount,
+  });
 
   PostResponseData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -63,7 +60,5 @@ class PostResponseData {
     profileImg = json['profile_img'];
     flagImage = json['flag_image'];
     commentCount = json['comment_count'];
-    totalUp = json['total_up'] ?? 0;
-    totalDown = json['total_down'] ?? 0;
   }
 }

@@ -164,15 +164,16 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                 builder: (context, snapshot) {
                   return PostsListView(
                     currentUserType: bloc.userType,
+                    box: bloc.box,
                     postsList: snapshot.data,
-                    upAction: (postId) {
-                      //TODO
-                    },
-                    downAction: (postId) {
-                      //TODO
-                    },
                     commentsAction: (postId) {
                       //TODO
+                    },
+                    editPostAction: (postId) {
+                      //TODO: handle edit post
+                    },
+                    deleteAction: (postId) {
+                      //TODO: handle remove post
                     },
                     reportAction: (postId) {
                       ReportPostBottomSheetsUtil().bottomSheet(
@@ -181,7 +182,8 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                           reportAction: (report) async {
                             await bloc.reportPost(
                                 postId: postId,
-                                reason: '${report.title} : ${report.desc}');
+                                reason:
+                                    '${report.title} : ${report.desc} : ${report.otherNote}');
                           });
                     },
                   );

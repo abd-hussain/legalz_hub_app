@@ -13,10 +13,11 @@ import 'package:legalz_hub_app/services/general/network_info_service.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
 
-//TODO: FIX PIPLINE Web
 //TODO: Upgrade flutter verison and all of the packages
 //TODO: check all of iO and make it disaple for web
 //TODO: handle internet coneection checkup inside application
+
+//TODO: Mixed Content: The page at 'https://legalzhub.firebaseapp.com/' was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 'http://167.99.212.137/filter/countries'. This request has been blocked; the content must be served over HTTPS.
 
 void main() {
   runZonedGuarded(() async {

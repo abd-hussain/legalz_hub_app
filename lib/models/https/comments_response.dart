@@ -19,8 +19,6 @@ class CommentsResponseData {
   int? id;
   String? content;
   String? createdAt;
-  int? up;
-  int? down;
   int? postId;
   int? customersOwnerId;
   int? attorneyOwnerId;
@@ -37,8 +35,6 @@ class CommentsResponseData {
       {this.id,
       this.content,
       this.createdAt,
-      this.up,
-      this.down,
       this.postId,
       this.customersOwnerId,
       this.attorneyOwnerId,
@@ -55,8 +51,6 @@ class CommentsResponseData {
     id = json['id'];
     content = json['content'];
     createdAt = json['created_at'];
-    up = json['up'];
-    down = json['down'];
     postId = json['post_id'];
     customersOwnerId = json['customers_owner_id'];
     attorneyOwnerId = json['attorney_owner_id'];

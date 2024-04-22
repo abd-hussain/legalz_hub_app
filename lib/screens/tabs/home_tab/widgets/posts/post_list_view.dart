@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/posts/post_view_bottom_controllers_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-//TODO: handle edit post
-//TODO: handle remove post
-
 class PostsListView extends StatelessWidget {
   final List<PostResponseData>? postsList;
   final UserType currentUserType;
-  final Function(int id) upAction;
-  final Function(int id) downAction;
+  final Box<dynamic> box;
   final Function(int id) commentsAction;
+  final Function(int id) editPostAction;
+  final Function(int id) deleteAction;
   final Function(int id) reportAction;
 
   const PostsListView(
       {super.key,
+      required this.box,
       required this.postsList,
       required this.currentUserType,
-      required this.upAction,
-      required this.downAction,
       required this.commentsAction,
+      required this.editPostAction,
+      required this.deleteAction,
       required this.reportAction});
 
   @override
@@ -141,17 +143,61 @@ class PostsListView extends StatelessWidget {
                               ],
                             ),
                             Expanded(child: Container()),
-                            IconButton(
-                              onPressed: () =>
-                                  reportAction(postsList![index].id!),
-                              icon: Icon(
-                                Icons.report_gmailerrorred_rounded,
-                                size: 20,
-                                color: currentUserType == UserType.attorney
-                                    ? const Color(0xff292929)
-                                    : const Color(0xff034061),
-                              ),
-                            ),
+                            currentUserType == UserType.attorney
+                                ? IconButton(
+                                    onPressed: () =>
+                                        reportAction(postsList![index].id!),
+                                    icon: Icon(
+                                      Icons.report_gmailerrorred_rounded,
+                                      size: 20,
+                                      color:
+                                          currentUserType == UserType.attorney
+                                              ? const Color(0xff292929)
+                                              : const Color(0xff034061),
+                                    ),
+                                  )
+                                : postsList![index].customersOwnerId ==
+                                        box.get(DatabaseFieldConstant.userid)
+                                    ? Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () => reportAction(
+                                                postsList![index].id!),
+                                            icon: Icon(
+                                              Ionicons.create_outline,
+                                              size: 20,
+                                              color: currentUserType ==
+                                                      UserType.attorney
+                                                  ? const Color(0xff292929)
+                                                  : const Color(0xff034061),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () => editPostAction(
+                                                postsList![index].id!),
+                                            icon: Icon(
+                                              Icons.close,
+                                              size: 20,
+                                              color: currentUserType ==
+                                                      UserType.attorney
+                                                  ? const Color(0xff292929)
+                                                  : const Color(0xff034061),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : IconButton(
+                                        onPressed: () =>
+                                            deleteAction(postsList![index].id!),
+                                        icon: Icon(
+                                          Icons.report_gmailerrorred_rounded,
+                                          size: 20,
+                                          color: currentUserType ==
+                                                  UserType.attorney
+                                              ? const Color(0xff292929)
+                                              : const Color(0xff034061),
+                                        ),
+                                      )
                           ],
                         ),
                       ),
@@ -182,9 +228,7 @@ class PostsListView extends StatelessWidget {
                           : Container(),
                       PostViewBottomControllersView(
                         currentUserType: currentUserType,
-                        numberOfUpRate: postsList![index].totalUp!,
-                        upAction: () => upAction(postsList![index].id!),
-                        downAction: () => downAction(postsList![index].id!),
+                        numberComment: postsList![index].commentCount!,
                         commentAction: () =>
                             commentsAction(postsList![index].id!),
                       ),

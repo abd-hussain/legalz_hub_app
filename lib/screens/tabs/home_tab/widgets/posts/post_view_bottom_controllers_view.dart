@@ -6,17 +6,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostViewBottomControllersView extends StatelessWidget {
   final UserType currentUserType;
-  final int numberOfUpRate;
-  final Function() upAction;
-  final Function() downAction;
+  final int numberComment;
+
   final Function() commentAction;
 
   const PostViewBottomControllersView({
     super.key,
     required this.currentUserType,
-    required this.numberOfUpRate,
-    required this.upAction,
-    required this.downAction,
+    required this.numberComment,
     required this.commentAction,
   });
 
@@ -38,9 +35,9 @@ class PostViewBottomControllersView extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () => upAction(),
+                  onPressed: () => commentAction(),
                   icon: Icon(
-                    Icons.arrow_circle_up_rounded,
+                    Ionicons.chatbubble_ellipses_outline,
                     size: 20,
                     color: currentUserType == UserType.attorney
                         ? const Color(0xff292929)
@@ -48,24 +45,10 @@ class PostViewBottomControllersView extends StatelessWidget {
                   ),
                 ),
                 CustomText(
-                  title: AppLocalizations.of(context)!.agreedup,
+                  title: AppLocalizations.of(context)!.commentsonposts,
                   textColor: const Color(0xff444444),
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
-                ),
-                const SizedBox(width: 8),
-                const CustomText(
-                  title: "-",
-                  textColor: Color(0xff444444),
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-                const SizedBox(width: 8),
-                CustomText(
-                  title: "$numberOfUpRate",
-                  textColor: const Color(0xff444444),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500,
                 ),
                 const SizedBox(width: 8),
                 Container(
@@ -73,28 +56,21 @@ class PostViewBottomControllersView extends StatelessWidget {
                   width: 1,
                   color: const Color.fromARGB(255, 214, 214, 214),
                 ),
-                IconButton(
-                  onPressed: () => downAction(),
-                  icon: Icon(
-                    Icons.arrow_circle_down_rounded,
-                    size: 20,
-                    color: currentUserType == UserType.attorney
-                        ? const Color(0xff292929)
-                        : const Color(0xff034061),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: SizedBox(
+                    width: 20,
+                    child: Center(
+                      child: CustomText(
+                        title: "$numberComment",
+                        textColor: const Color(0xff444444),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
               ],
-            ),
-          ),
-          Expanded(child: Container()),
-          IconButton(
-            onPressed: () => commentAction(),
-            icon: Icon(
-              Ionicons.chatbubble_ellipses_outline,
-              size: 20,
-              color: currentUserType == UserType.attorney
-                  ? const Color(0xff292929)
-                  : const Color(0xff034061),
             ),
           ),
         ],
