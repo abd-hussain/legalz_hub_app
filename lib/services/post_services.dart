@@ -94,7 +94,7 @@ class PostService with Service {
     );
   }
 
-  Future<dynamic> removePost({required String postId}) async {
+  Future<dynamic> removePost({required int postId}) async {
     final response = await repository.callRequest(
       requestType: RequestType.delete,
       methodName: MethodNameConstant.deletePost,

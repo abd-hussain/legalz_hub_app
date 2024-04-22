@@ -161,7 +161,7 @@ class PostsListView extends StatelessWidget {
                                     ? Row(
                                         children: [
                                           IconButton(
-                                            onPressed: () => reportAction(
+                                            onPressed: () => editPostAction(
                                                 postsList![index].id!),
                                             icon: Icon(
                                               Ionicons.create_outline,
@@ -173,7 +173,7 @@ class PostsListView extends StatelessWidget {
                                             ),
                                           ),
                                           IconButton(
-                                            onPressed: () => editPostAction(
+                                            onPressed: () => deleteAction(
                                                 postsList![index].id!),
                                             icon: Icon(
                                               Icons.close,
@@ -188,7 +188,7 @@ class PostsListView extends StatelessWidget {
                                       )
                                     : IconButton(
                                         onPressed: () =>
-                                            deleteAction(postsList![index].id!),
+                                            reportAction(postsList![index].id!),
                                         icon: Icon(
                                           Icons.report_gmailerrorred_rounded,
                                           size: 20,

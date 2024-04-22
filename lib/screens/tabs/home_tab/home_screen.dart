@@ -11,6 +11,7 @@ import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.da
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/main_banner.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/posts/post_list_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/tab_bar.dart';
+import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_home_page.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
@@ -18,6 +19,7 @@ import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:legalz_hub_app/utils/push_notifications/notification_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeTabScreen extends StatefulWidget {
   const HomeTabScreen({super.key});
@@ -60,69 +62,65 @@ class _HomeTabScreenState extends State<HomeTabScreen>
     super.build(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: SingleChildScrollView(
-        child: FutureBuilder<List<Category>>(
-            initialData: const [],
-            future: locator<MainContainerBloc>().getlistOfCategories(context),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                bloc.tabController = TabController(
-                    initialIndex: 0,
+      child: FutureBuilder<List<Category>>(
+          initialData: const [],
+          future: locator<MainContainerBloc>().getlistOfCategories(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              bloc.tabController = TabController(
+                  initialIndex: 0, length: snapshot.data!.length, vsync: this);
+              bloc.handleTapControllerListener();
+              return Column(
+                children: [
+                  HomeHeaderView(
+                    userType: bloc.userType,
+                    listOfCategories: snapshot.data!,
+                    addPost: (
+                        {required catId, required content, postImg}) async {
+                      await bloc.addNewPost(
+                          catId: catId, content: content, postImg: postImg);
+                    },
+                  ),
+                  DefaultTabController(
                     length: snapshot.data!.length,
-                    vsync: this);
-                bloc.handleTapControllerListener();
-                return Column(
-                  children: [
-                    HomeHeaderView(
-                      userType: bloc.userType,
-                      listOfCategories: snapshot.data!,
-                      addPost: (
-                          {required catId, required content, postImg}) async {
-                        await bloc.addNewPost(
-                            catId: catId, content: content, postImg: postImg);
-                      },
-                    ),
-                    DefaultTabController(
-                      length: snapshot.data!.length,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            child: CustomTabBar(
-                              tabController: bloc.tabController,
-                              userType: bloc.userType,
-                              tabs: List.generate(
-                                snapshot.data!.length,
-                                (index) {
-                                  return CustomTab(
-                                      tabName: snapshot.data![index].name!);
-                                },
-                              ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        SizedBox(
+                          height: 40,
+                          child: CustomTabBar(
+                            tabController: bloc.tabController,
+                            userType: bloc.userType,
+                            tabs: List.generate(
+                              snapshot.data!.length,
+                              (index) {
+                                return CustomTab(
+                                    tabName: snapshot.data![index].name!);
+                              },
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height,
-                            child: TabBarView(
-                              controller: bloc.tabController,
-                              children: snapshot.data!.map((sub) {
-                                return _tabBarView(
-                                    listOfCategories: snapshot.data!,
-                                    item: sub);
-                              }).toList(),
-                            ),
+                        ),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - 198,
+                          child: TabBarView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            controller: bloc.tabController,
+                            children: snapshot.data!.map((sub) {
+                              return _tabBarView(
+                                  listOfCategories: snapshot.data!, item: sub);
+                            }).toList(),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                );
-              } else {
-                return const ShimmerHomePage();
-              }
-            }),
-      ),
+                  ),
+                ],
+              );
+            } else {
+              return const ShimmerHomePage();
+            }
+          }),
     );
   }
 
@@ -167,13 +165,21 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                     box: bloc.box,
                     postsList: snapshot.data,
                     commentsAction: (postId) {
-                      //TODO
+                      //TODO: handle comments
                     },
                     editPostAction: (postId) {
                       //TODO: handle edit post
                     },
                     deleteAction: (postId) {
-                      //TODO: handle remove post
+                      BottomSheetsUtil().areYouShoureButtomSheet(
+                          context: context,
+                          message: AppLocalizations.of(context)!
+                              .areyousuredeletepost,
+                          sure: () async {
+                            bloc.deletePost(postId: postId).then((value) {
+                              bloc.getHomePosts(catId: 0, skip: 0);
+                            });
+                          });
                     },
                     reportAction: (postId) {
                       ReportPostBottomSheetsUtil().bottomSheet(
@@ -188,6 +194,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                     },
                   );
                 }),
+            const SizedBox(height: 10)
           ],
         ),
       ),

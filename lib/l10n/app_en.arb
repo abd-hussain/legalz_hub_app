@@ -401,5 +401,7 @@
     "reporttitle6" : "Poorly written",
     "reportdesc6" : "Not in Language or has very bad formatting, grammar, and spelling",
     "reporttitle7" : "Other",
-    "reportdesc7" : "Ex. Illegal content (Upon clicking you will be directed to a form where you can provide details)"
+    "reportdesc7" : "Ex. Illegal content (Upon clicking you will be directed to a form where you can provide details)",
+    "areyousuredeletepost" : "Are you sure you want to Delete this question ?"
+
 }

@@ -110,7 +110,7 @@ class ReportPostBottomSheetsUtil {
                                 child: BioField(
                                   bioController: textController,
                                   title: AppLocalizations.of(context)!
-                                      .whatdoyouwanttoask,
+                                      .reportposttitle,
                                   onChanged: (text) {
                                     reporsList[reporsList.length - 1]
                                         .otherNote = text;

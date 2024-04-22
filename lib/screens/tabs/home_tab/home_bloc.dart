@@ -99,6 +99,10 @@ class HomeBloc extends Bloc<HomeService> {
         .reportPost(postId: postId, reason: reason, userType: userType);
   }
 
+  Future<dynamic> deletePost({required int postId}) async {
+    return await locator<PostService>().removePost(postId: postId);
+  }
+
   @override
   onDispose() {
     tabController?.dispose();
