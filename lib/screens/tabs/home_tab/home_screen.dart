@@ -5,6 +5,7 @@ import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/home_bloc.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/bottom_sheets/post_comments_bottomsheet.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/bottom_sheets/report_post_bottomsheet.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/posts/add_new_post_top_view.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/home_header_view.dart';
@@ -101,15 +102,19 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                           ),
                         ),
                         const SizedBox(height: 8),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height - 198,
-                          child: TabBarView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: bloc.tabController,
-                            children: snapshot.data!.map((sub) {
-                              return _tabBarView(
-                                  listOfCategories: snapshot.data!, item: sub);
-                            }).toList(),
+                        RefreshIndicator(
+                          onRefresh: bloc.pullRefresh,
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height - 300,
+                            child: TabBarView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              controller: bloc.tabController,
+                              children: snapshot.data!.map((sub) {
+                                return _tabBarView(
+                                    listOfCategories: snapshot.data!,
+                                    item: sub);
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ],
@@ -164,8 +169,22 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                     currentUserType: bloc.userType,
                     box: bloc.box,
                     postsList: snapshot.data,
-                    commentsAction: (postId) {
+                    commentsAction: (postId) async {
                       //TODO: handle comments
+                      bloc.getPostComments(postId: postId).then((value) async {
+                        await PostCommentsBottomSheetsUtil().bottomSheet(
+                            context: context,
+                            comments: value.data,
+                            currentUserType: bloc.userType,
+                            addCommentCallBack: (comment) async {
+                              await bloc.addNewComment(
+                                  postId: postId, content: comment);
+                            },
+                            deleteCommentCallBack: (commentId) async {
+                              //TODO: check
+                              await bloc.deleteComment(commentId: commentId);
+                            });
+                      });
                     },
                     editPostAction: (postId) {
                       //TODO: handle edit post

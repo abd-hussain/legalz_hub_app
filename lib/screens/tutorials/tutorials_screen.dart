@@ -96,13 +96,13 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
                     );
                   },
                   skipPressed: () async {
+                    final nav = Navigator.of(context, rootNavigator: true);
                     if (openFrom == TutorialOpenFrom.firstInstall) {
                       final box = Hive.box(DatabaseBoxConstant.userInfo);
                       await box.put(
                           DatabaseFieldConstant.skipTutorials, "true");
-                      Navigator.of(context, rootNavigator: true)
-                          .pushNamedAndRemoveUntil(RoutesConstants.loginScreen,
-                              (Route<dynamic> route) => false);
+                      nav.pushNamedAndRemoveUntil(RoutesConstants.loginScreen,
+                          (Route<dynamic> route) => false);
                     } else {
                       Navigator.pop(context);
                     }

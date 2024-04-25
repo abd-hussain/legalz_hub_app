@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
+import 'package:legalz_hub_app/models/https/add_comment_request.dart';
+import 'package:legalz_hub_app/models/https/comments_response.dart';
 import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/models/report_model.dart';
+import 'package:legalz_hub_app/services/comment_post_services.dart';
 import 'package:legalz_hub_app/services/home_services.dart';
 import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/services/post_services.dart';
@@ -59,6 +62,14 @@ class HomeBloc extends Bloc<HomeService> {
     ];
   }
 
+  Future<void> pullRefresh() async {
+    //TODO
+    return Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => getHomePosts(catId: tabController!.index, skip: 0),
+    );
+  }
+
   Future<List<HomeBannerResponseData>?> getHomeBanners() async {
     final value = await service.getHomeBanners(userType);
     if (value.data != null) {
@@ -101,6 +112,28 @@ class HomeBloc extends Bloc<HomeService> {
 
   Future<dynamic> deletePost({required int postId}) async {
     return await locator<PostService>().removePost(postId: postId);
+  }
+
+  Future<CommentsResponse> getPostComments({required int postId}) async {
+    return await locator<CommentPostService>()
+        .getCommentsForPost(postId: postId);
+  }
+
+  Future<dynamic> addNewComment(
+      {required int postId, required String content}) async {
+    await locator<CommentPostService>().addCommentOnPost(
+        model: AddCommentToThePost(
+      postId: postId,
+      content: content,
+      userType: userType == UserType.attorney ? "attorney" : "customer",
+    ));
+  }
+
+  Future<dynamic> deleteComment({required int commentId}) async {
+    await locator<CommentPostService>().removeCommentOnPost(
+      commentId: commentId,
+      userType: userType,
+    );
   }
 
   @override

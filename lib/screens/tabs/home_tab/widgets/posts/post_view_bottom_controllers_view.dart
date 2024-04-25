@@ -19,61 +19,63 @@ class PostViewBottomControllersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 35,
-      child: Row(
-        children: [
-          const SizedBox(width: 10),
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 239, 239, 239),
-              border: Border.all(
-                color: const Color.fromARGB(255, 214, 214, 214),
+    return InkWell(
+      onTap: () => commentAction(),
+      child: SizedBox(
+        height: 35,
+        child: Row(
+          children: [
+            const SizedBox(width: 10),
+            Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 239, 239, 239),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 214, 214, 214),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(50)),
-            ),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () => commentAction(),
-                  icon: Icon(
-                    Ionicons.chatbubble_ellipses_outline,
+              child: Row(
+                children: [
+                  const SizedBox(width: 4),
+                  Icon(
+                    Ionicons.chatbubble_ellipses,
                     size: 20,
                     color: currentUserType == UserType.attorney
                         ? const Color(0xff292929)
                         : const Color(0xff034061),
                   ),
-                ),
-                CustomText(
-                  title: AppLocalizations.of(context)!.commentsonposts,
-                  textColor: const Color(0xff444444),
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  height: 39,
-                  width: 1,
-                  color: const Color.fromARGB(255, 214, 214, 214),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: SizedBox(
-                    width: 20,
-                    child: Center(
-                      child: CustomText(
-                        title: "$numberComment",
-                        textColor: const Color(0xff444444),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
+                  const SizedBox(width: 8),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.commentsonposts,
+                    textColor: const Color(0xff444444),
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    height: 39,
+                    width: 1,
+                    color: const Color.fromARGB(255, 214, 214, 214),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    child: SizedBox(
+                      width: 20,
+                      child: Center(
+                        child: CustomText(
+                          title: "$numberComment",
+                          textColor: const Color(0xff444444),
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

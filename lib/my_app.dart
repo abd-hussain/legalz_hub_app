@@ -1,13 +1,17 @@
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/main_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:legalz_hub_app/screens/splash/splash_screen.dart';
+// import 'package:legalz_hub_app/services/general/network_info_service.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/custom_gusture.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 BuildContext? buildContext;
 
@@ -38,7 +42,11 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     locator<MainContext>().setMainContext(context);
-
+    //TODO
+    // return FutureBuilder<Object>(
+    //     future: kIsWeb ? _setupWebFirebase() : _setupMobileFirebase(),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.done) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (BuildContext context) {
@@ -84,6 +92,29 @@ class MyAppState extends State<MyApp> {
                   : RoutesConstants.tutorialsScreen
               : RoutesConstants.initialRoute
           : RoutesConstants.noInternetScreen,
+    );
+    //   } else {
+    //     return const MaterialApp(
+    //       home: SplashScreen(),
+    //     );
+    //   }
+    // });
+  }
+
+  Future<FirebaseApp> _setupMobileFirebase() async {
+    return await Firebase.initializeApp();
+  }
+
+  Future<FirebaseApp> _setupWebFirebase() async {
+    return await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          projectId: "legalzhub",
+          messagingSenderId: "427308149539",
+          appId: "1:427308149539:web:18904d6b50e62afef7fa96",
+          apiKey: "AIzaSyBRfHMFQFMDlefTp2Am4Srb3tj7lax7V-Q",
+          authDomain: "legalzhub.firebaseapp.com",
+          storageBucket: "legalzhub.appspot.com",
+          measurementId: "G-FYY1QV12GF"),
     );
   }
 }

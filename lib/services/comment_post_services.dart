@@ -12,7 +12,8 @@ class CommentPostService with Service {
       methodName: MethodNameConstant.postComments,
       queryParam: {"post_id": postId},
     );
-    return response;
+
+    return CommentsResponse.fromJson(response);
   }
 
   Future<dynamic> addCommentOnPost({required AddCommentToThePost model}) async {
@@ -25,7 +26,7 @@ class CommentPostService with Service {
   }
 
   Future<dynamic> removeCommentOnPost(
-      {required String commentId, required UserType userType}) async {
+      {required int commentId, required UserType userType}) async {
     final response = await repository.callRequest(
       requestType: RequestType.delete,
       methodName: MethodNameConstant.postComments,

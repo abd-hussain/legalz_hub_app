@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,10 +36,6 @@ void main() {
         RequestConfiguration(
             testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
       );
-
-      await _setupMobileFirebase();
-    } else {
-      await _setupWebFirebase();
     }
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -66,37 +61,4 @@ Future<bool> _initInternetConnection() async {
   NetworkInfoService networkInfoService = NetworkInfoService();
   networkInfoService.initNetworkConnectionCheck();
   return await networkInfoService.checkConnectivityonLunching();
-}
-
-Future<dynamic> _setupWebFirebase() async {
-  return await Firebase.initializeApp(
-    options: const FirebaseOptions(
-        projectId: "legalzhub",
-        messagingSenderId: "427308149539",
-        appId: "1:427308149539:web:18904d6b50e62afef7fa96",
-        apiKey: "AIzaSyBRfHMFQFMDlefTp2Am4Srb3tj7lax7V-Q",
-        authDomain: "legalzhub.firebaseapp.com",
-        storageBucket: "legalzhub.appspot.com",
-        measurementId: "G-FYY1QV12GF"),
-  );
-}
-
-Future<bool> _setupMobileFirebase() async {
-  NetworkInfoService networkInfoService = NetworkInfoService();
-  bool hasConnectivity;
-  hasConnectivity = await networkInfoService.checkConnectivityonLunching();
-
-  if (hasConnectivity) {
-    await Firebase.initializeApp();
-  } else {
-    networkInfoService.firebaseInitNetworkStateStreamControler.stream
-        .listen((event) async {
-      if (event && Firebase.apps.isEmpty) {
-        await Firebase.initializeApp();
-      }
-    });
-  }
-  networkInfoService.initNetworkConnectionCheck();
-
-  return hasConnectivity;
 }

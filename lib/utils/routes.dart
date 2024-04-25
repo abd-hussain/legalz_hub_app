@@ -25,6 +25,7 @@ import 'package:legalz_hub_app/screens/register/customer/fase_2/customer_registe
 import 'package:legalz_hub_app/screens/register/final_stage/register_final_screen.dart';
 import 'package:legalz_hub_app/screens/register/terms/terms_screen.dart';
 import 'package:legalz_hub_app/screens/report/report_screen.dart';
+import 'package:legalz_hub_app/screens/splash/splash_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/account_tab/account_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/calender_screen.dart';
 import 'package:legalz_hub_app/screens/tabs/call_tab/call_screen.dart';
@@ -76,6 +77,8 @@ class RoutesConstants {
   static const String attorneyProfileScreen = 'attorneyProfileScreen';
   static const String bookingScreen = 'bookingScreen';
   static const String noInternetScreen = 'noInternetScreen';
+
+  static const String splashScreen = 'splashScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -116,4 +119,5 @@ final Map<String, Widget> routes = {
   RoutesConstants.bookingScreen: const BookingScreen(),
   RoutesConstants.insideCallScreen: const InsideCallScreen(),
   RoutesConstants.noInternetScreen: const NoInternetScreen(),
+  RoutesConstants.splashScreen: const SplashScreen(),
 };
