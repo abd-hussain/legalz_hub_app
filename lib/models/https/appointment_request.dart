@@ -1,19 +1,6 @@
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class AppointmentRequest implements Model {
-  int attorneyId;
-  int type;
-  bool isFree;
-  int payment;
-  CustomDate dateFrom;
-  CustomDate dateTo;
-  String? note;
-  int? discountId;
-  int? countryId;
-  double attorneyHourRate;
-  double price;
-  double totalPrice;
-
   AppointmentRequest({
     required this.attorneyId,
     required this.type,
@@ -28,6 +15,18 @@ class AppointmentRequest implements Model {
     required this.price,
     required this.totalPrice,
   });
+  int attorneyId;
+  int type;
+  bool isFree;
+  int payment;
+  CustomDate dateFrom;
+  CustomDate dateTo;
+  String? note;
+  int? discountId;
+  int? countryId;
+  double attorneyHourRate;
+  double price;
+  double totalPrice;
 
   @override
   Map<String, dynamic> toJson() {
@@ -49,18 +48,12 @@ class AppointmentRequest implements Model {
 }
 
 class CustomDate {
+  CustomDate({required this.year, required this.month, required this.day, required this.hour, required this.min});
   int year;
   int month;
   int day;
   int hour;
   int min;
-
-  CustomDate(
-      {required this.year,
-      required this.month,
-      required this.day,
-      required this.hour,
-      required this.min});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};

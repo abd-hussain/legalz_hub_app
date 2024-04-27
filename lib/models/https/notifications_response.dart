@@ -1,7 +1,4 @@
 class NotificationsResponse {
-  List<NotificationsResponseData>? data;
-  String? message;
-
   NotificationsResponse({this.data, this.message});
 
   NotificationsResponse.fromJson(Map<String, dynamic> json) {
@@ -15,17 +12,12 @@ class NotificationsResponse {
     }
     message = json['message'];
   }
+  List<NotificationsResponseData>? data;
+  String? message;
 }
 
 class NotificationsResponseData {
-  int? id;
-  String? title;
-  String? content;
-  bool? readed;
-  String? createdAt;
-
-  NotificationsResponseData(
-      {this.id, this.title, this.content, this.readed, this.createdAt});
+  NotificationsResponseData({this.id, this.title, this.content, this.readed, this.createdAt});
 
   NotificationsResponseData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -34,4 +26,9 @@ class NotificationsResponseData {
     readed = json['readed'];
     createdAt = json['created_at'];
   }
+  int? id;
+  String? title;
+  String? content;
+  bool? readed;
+  String? createdAt;
 }

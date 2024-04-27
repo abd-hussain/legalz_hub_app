@@ -12,11 +12,9 @@ class RegisterAttorneyBottomSheetsUtil {
   final BuildContext context;
   final String language;
 
-  RegisterAttorneyBottomSheetsUtil(
-      {required this.language, required this.context});
+  RegisterAttorneyBottomSheetsUtil({required this.language, required this.context});
 
-  Future infoBottomSheet(
-      {required int step, required Function() openNext}) async {
+  Future infoBottomSheet({required int step, required Function() openNext}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -31,8 +29,7 @@ class RegisterAttorneyBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding:
-              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
@@ -86,8 +83,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep1,
                 textColor: step >= 1 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(
-                      RoutesConstants.registerTermsAndConditionScreen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerTermsAndConditionScreen);
                 },
               ),
               const SizedBox(height: 20),
@@ -96,8 +92,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep2,
                 textColor: step >= 2 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze1Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze1Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -106,8 +101,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep3,
                 textColor: step >= 3 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze2Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze2Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -116,8 +110,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep4,
                 textColor: step >= 4 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze3Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze3Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -126,8 +119,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep5,
                 textColor: step >= 5 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze4Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze4Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -136,8 +128,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep6,
                 textColor: step >= 6 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerAttornyFaze5Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -146,8 +137,7 @@ class RegisterAttorneyBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep7,
                 textColor: step >= 7 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(
-                      RoutesConstants.registerfinalfazeScreen,
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.attorney});
                 },
               ),
@@ -174,98 +164,4 @@ class RegisterAttorneyBottomSheetsUtil {
       },
     );
   }
-
-  // Future termsBottomSheet({required Function() openNext}) async {
-  //   if (kIsWeb) {
-  //     //   // ignore: undefined_prefixed_name
-  //     //   ui.platformViewRegistry.registerViewFactory(
-  //     //       'terms-html',
-  //     //       (int viewId) => IFrameElement()
-  //     //         ..width = '640'
-  //     //         ..height = '360'
-  //     //         ..src = AppConstant.termsLink
-  //     //         ..style.border = 'none');
-  //   }
-
-  //   return await showModalBottomSheet(
-  //       isScrollControlled: true,
-  //       shape: const RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.vertical(
-  //           top: Radius.circular(25),
-  //         ),
-  //       ),
-  //       enableDrag: true,
-  //       useRootNavigator: true,
-  //       context: context,
-  //       backgroundColor: Colors.white,
-  //       clipBehavior: Clip.antiAliasWithSaveLayer,
-  //       builder: (context) {
-  //         return Padding(
-  //           padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
-  //           child: Wrap(
-  //             children: [
-  //               Row(
-  //                 children: [
-  //                   const SizedBox(
-  //                     width: 50,
-  //                   ),
-  //                   const Expanded(child: SizedBox()),
-  //                   CustomText(
-  //                     title: AppLocalizations.of(context)!.termsandconditions,
-  //                     textColor: const Color(0xff444444),
-  //                     fontSize: 16,
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                   const Expanded(child: SizedBox()),
-  //                   IconButton(
-  //                     onPressed: () {
-  //                       Navigator.pop(context);
-  //                     },
-  //                     icon: const Icon(Icons.close),
-  //                   ),
-  //                 ],
-  //               ),
-  //               const SizedBox(height: 8),
-  //               Center(
-  //                 child: SizedBox(
-  //                   height: 120,
-  //                   width: 120,
-  //                   child: Lottie.asset(
-  //                     'assets/lottie/68469-pen-writing-lottie-animation.zip',
-  //                   ),
-  //                 ),
-  //               ),
-  //               Container(
-  //                 height: 300,
-  //                 margin: const EdgeInsets.all(15.0),
-  //                 padding: const EdgeInsets.all(3.0),
-  //                 decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
-  //                 child: kIsWeb
-  //                     ? const HtmlElementView(viewType: 'terms-html')
-  //                     : WebView(
-  //                         initialUrl: language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink,
-  //                         gestureRecognizers: gestureRecognizers,
-  //                         navigationDelegate: (NavigationRequest request) {
-  //                           return NavigationDecision.navigate;
-  //                         },
-  //                         onWebViewCreated: (WebViewController webViewController) {
-  //                           webViewController = webViewController;
-  //                           webViewController
-  //                               .loadUrl(language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink);
-  //                         },
-  //                       ),
-  //               ),
-  //               CustomButton(
-  //                 enableButton: true,
-  //                 buttonTitle: AppLocalizations.of(context)!.acceptandcontinue,
-  //                 onTap: () {
-  //                   Navigator.pop(context);
-  //                   openNext();
-  //                 },
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
 }

@@ -1,34 +1,27 @@
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class UploadContact implements Model {
-  List<MyContact> list;
-
   UploadContact({required this.list});
+  List<MyContact> list;
 
   @override
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = {};
     data['list'] = list.map((v) => v.toJson()).toList();
     return data;
   }
 }
 
 class MyContact {
+  MyContact({this.fullName, this.mobileNumber, this.email, this.customersOwnerId, this.attorneyOwnerId});
   String? fullName;
   String? mobileNumber;
   String? email;
   int? customersOwnerId;
   int? attorneyOwnerId;
 
-  MyContact(
-      {this.fullName,
-      this.mobileNumber,
-      this.email,
-      this.customersOwnerId,
-      this.attorneyOwnerId});
-
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = {};
     data['full_name'] = fullName ?? "";
     data['mobile_number'] = mobileNumber ?? "";
     data['email'] = email ?? "";

@@ -1,9 +1,6 @@
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 
 class CategoriesModel {
-  List<Category>? data;
-  String? message;
-
   CategoriesModel({this.data, this.message});
 
   CategoriesModel.fromJson(Map<String, dynamic> json) {
@@ -15,13 +12,11 @@ class CategoriesModel {
     }
     message = json['message'];
   }
+  List<Category>? data;
+  String? message;
 }
 
 class Category {
-  int? id;
-  String? name;
-  String? icon;
-
   Category({this.id, this.name, this.icon});
 
   Category.fromJson(Map<String, dynamic> json) {
@@ -29,4 +24,7 @@ class Category {
     icon = AppConstant.imagesBaseURLForCategories + json['icon'];
     name = json['name'];
   }
+  int? id;
+  String? name;
+  String? icon;
 }

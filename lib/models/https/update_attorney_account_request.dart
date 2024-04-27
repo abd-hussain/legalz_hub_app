@@ -1,17 +1,6 @@
 import 'dart:io';
 
 class UpdateAttorneyAccountRequest {
-  String suffix;
-  String firstName;
-  String lastName;
-  int gender;
-  int countryId;
-  List<String> speackingLanguage;
-  File? profileImage;
-  File? iDImage;
-  String dateOfBirth;
-  String bio;
-
   UpdateAttorneyAccountRequest({
     required this.suffix,
     required this.firstName,
@@ -24,16 +13,19 @@ class UpdateAttorneyAccountRequest {
     required this.dateOfBirth,
     required this.bio,
   });
+  String suffix;
+  String firstName;
+  String lastName;
+  int gender;
+  int countryId;
+  List<String> speackingLanguage;
+  File? profileImage;
+  File? iDImage;
+  String dateOfBirth;
+  String bio;
 }
 
 class UpdateAccountExperianceRequest {
-  String? experienceSince;
-  File? cv;
-  File? cert1;
-  File? cert2;
-  File? cert3;
-  int? categoryId;
-
   UpdateAccountExperianceRequest({
     required this.experienceSince,
     this.cv,
@@ -42,4 +34,10 @@ class UpdateAccountExperianceRequest {
     this.cert3,
     required this.categoryId,
   });
+  String? experienceSince;
+  File? cv;
+  File? cert1;
+  File? cert2;
+  File? cert3;
+  int? categoryId;
 }

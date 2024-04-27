@@ -1,7 +1,4 @@
 class AttorneyAppointmentsResponse {
-  List<AttorneyAppointmentsResponseData>? data;
-  String? message;
-
   AttorneyAppointmentsResponse({this.data, this.message});
 
   AttorneyAppointmentsResponse.fromJson(Map<String, dynamic> json) {
@@ -13,16 +10,17 @@ class AttorneyAppointmentsResponse {
     }
     message = json['message'];
   }
+  List<AttorneyAppointmentsResponseData>? data;
+  String? message;
 }
 
 class AttorneyAppointmentsResponseData {
-  String? dateFrom;
-  String? dateTo;
-
   AttorneyAppointmentsResponseData({this.dateFrom, this.dateTo});
 
   AttorneyAppointmentsResponseData.fromJson(Map<String, dynamic> json) {
     dateFrom = json['date_from'];
     dateTo = json['date_to'];
   }
+  String? dateFrom;
+  String? dateTo;
 }

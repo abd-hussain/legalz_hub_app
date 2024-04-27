@@ -1,7 +1,4 @@
 class PostResponse {
-  List<PostResponseData>? data;
-  String? message;
-
   PostResponse({this.data, this.message});
 
   PostResponse.fromJson(Map<String, dynamic> json) {
@@ -13,23 +10,11 @@ class PostResponse {
     }
     message = json['message'];
   }
+  List<PostResponseData>? data;
+  String? message;
 }
 
 class PostResponseData {
-  int? id;
-  String? content;
-  String? postImg;
-  int? reportCount;
-  int? customersOwnerId;
-  bool? published;
-  int? categoryId;
-  String? createdAt;
-  String? firstName;
-  String? lastName;
-  String? profileImg;
-  String? flagImage;
-  int? commentCount;
-
   PostResponseData({
     this.id,
     this.content,
@@ -61,4 +46,17 @@ class PostResponseData {
     flagImage = json['flag_image'];
     commentCount = json['comment_count'];
   }
+  int? id;
+  String? content;
+  String? postImg;
+  int? reportCount;
+  int? customersOwnerId;
+  bool? published;
+  int? categoryId;
+  String? createdAt;
+  String? firstName;
+  String? lastName;
+  String? profileImg;
+  String? flagImage;
+  int? commentCount;
 }

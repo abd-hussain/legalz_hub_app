@@ -1,7 +1,4 @@
 class HomeBannerResponse {
-  List<HomeBannerResponseData>? data;
-  String? message;
-
   HomeBannerResponse({this.data, this.message});
 
   HomeBannerResponse.fromJson(Map<String, dynamic> json) {
@@ -13,16 +10,17 @@ class HomeBannerResponse {
     }
     message = json['message'];
   }
+  List<HomeBannerResponseData>? data;
+  String? message;
 }
 
 class HomeBannerResponseData {
-  String? image;
-  String? actionType;
-
   HomeBannerResponseData({this.image, this.actionType});
 
   HomeBannerResponseData.fromJson(Map<String, dynamic> json) {
     image = json['image'];
     actionType = json['action_type'];
   }
+  String? image;
+  String? actionType;
 }

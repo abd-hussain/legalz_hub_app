@@ -1,11 +1,7 @@
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 
 class CountriesModel {
-  List<Country>? data;
-  String? message;
-
   CountriesModel({this.data, this.message});
-
   CountriesModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Country>[];
@@ -15,19 +11,11 @@ class CountriesModel {
     }
     message = json['message'];
   }
+  List<Country>? data;
+  String? message;
 }
 
 class Country {
-  int? id;
-  String? flagImage;
-  String? name;
-  String? currency;
-  String? dialCode;
-  String? countryCode;
-  String? currencyCode;
-  int? minLength;
-  int? maxLength;
-
   Country(
       {this.id,
       this.flagImage,
@@ -50,4 +38,13 @@ class Country {
     minLength = json['minLength'];
     maxLength = json['maxLength'];
   }
+  int? id;
+  String? flagImage;
+  String? name;
+  String? currency;
+  String? dialCode;
+  String? countryCode;
+  String? currencyCode;
+  int? minLength;
+  int? maxLength;
 }

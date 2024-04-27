@@ -13,8 +13,7 @@ import 'package:legalz_hub_app/utils/gender_format.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
-  ValueNotifier<LoadingStatus> loadingStatus =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   String? profileImageUrl;
 
   String? firstName;
@@ -51,11 +50,10 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
   List<AttorneyAppointmentsResponseData> listOfAppointments = [];
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  void handleReadingArguments(BuildContext context,
-      {required Object? arguments}) {
+  void handleReadingArguments(BuildContext context, {required Object? arguments}) {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
-      int attorneyId = newArguments["id"] as int;
+      final int attorneyId = newArguments["id"] as int;
 
       _getAttorneyInformation(context, attorneyId);
       _getAttorneyAppointments(attorneyId);
@@ -63,9 +61,7 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
   }
 
   void _getAttorneyAppointments(int id) {
-    locator<CustomerAppointmentsService>()
-        .getAttorneyAppointments(id)
-        .then((value) {
+    locator<CustomerAppointmentsService>().getAttorneyAppointments(id).then((value) {
       if (value.data != null) {
         listOfAppointments = _prepareAttorneyAppoitnmentsFromUTC(value.data!);
       }
@@ -74,8 +70,8 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
 
   List<AttorneyAppointmentsResponseData> _prepareAttorneyAppoitnmentsFromUTC(
       List<AttorneyAppointmentsResponseData> list) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
-    for (AttorneyAppointmentsResponseData appoint in list) {
+    final int offset = DateTime.now().timeZoneOffset.inHours;
+    for (final AttorneyAppointmentsResponseData appoint in list) {
       appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
       appoint.dateTo = _adjustDate(appoint.dateTo, offset);
     }
@@ -97,28 +93,28 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
     service.attorneyDetails(id).then((value) {
       if (value.data != null) {
         profileImageUrl = value.data!.profileImg;
-        firstName = value.data!.firstName!;
-        lastName = value.data!.lastName!;
-        suffixeName = value.data!.suffixeName!;
+        firstName = value.data!.firstName;
+        lastName = value.data!.lastName;
+        suffixeName = value.data!.suffixeName;
         categoryName = value.data!.categoryName;
         categoryID = value.data!.categoryID;
         totalRate = value.data!.totalRate!;
-        hourRate = value.data!.hourRate!;
+        hourRate = value.data!.hourRate;
         bio = value.data!.bio;
         attorneyId = id;
         countryCode = value.data!.countryCode;
         currencyCode = value.data!.currencyCode;
         freeCall = handleFreeCallType(value.data!.freeCall);
-        currency = value.data!.currency!;
+        currency = value.data!.currency;
         speakingLanguage = value.data!.speakingLanguage.toString();
-        genderIndex = value.data!.gender!;
+        genderIndex = value.data!.gender;
         gender = GenderFormat().convertIndexToString(context, genderIndex!);
-        countryName = value.data!.country!;
-        countryFlag = value.data!.countryFlag!;
-        dateOfBirth = value.data!.dateOfBirth!;
-        experienceSince = value.data!.experienceSince!;
+        countryName = value.data!.country;
+        countryFlag = value.data!.countryFlag;
+        dateOfBirth = value.data!.dateOfBirth;
+        experienceSince = value.data!.experienceSince;
 
-        var workingHours = DayTime().prepareTimingFromUTC(
+        final workingHours = DayTime().prepareTimingFromUTC(
             workingHoursSaturday: value.data!.workingHoursSaturday ?? [],
             workingHoursSunday: value.data!.workingHoursSunday ?? [],
             workingHoursMonday: value.data!.workingHoursMonday ?? [],
@@ -127,34 +123,13 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
             workingHoursThursday: value.data!.workingHoursThursday ?? [],
             workingHoursFriday: value.data!.workingHoursFriday ?? []);
 
-        workingHoursSaturday = workingHours
-            .where((element) => element.dayName == DayNameEnum.saturday)
-            .first
-            .list;
-        workingHoursSunday = workingHours
-            .where((element) => element.dayName == DayNameEnum.sunday)
-            .first
-            .list;
-        workingHoursMonday = workingHours
-            .where((element) => element.dayName == DayNameEnum.monday)
-            .first
-            .list;
-        workingHoursTuesday = workingHours
-            .where((element) => element.dayName == DayNameEnum.tuesday)
-            .first
-            .list;
-        workingHoursWednesday = workingHours
-            .where((element) => element.dayName == DayNameEnum.wednesday)
-            .first
-            .list;
-        workingHoursThursday = workingHours
-            .where((element) => element.dayName == DayNameEnum.thursday)
-            .first
-            .list;
-        workingHoursFriday = workingHours
-            .where((element) => element.dayName == DayNameEnum.friday)
-            .first
-            .list;
+        workingHoursSaturday = workingHours.where((element) => element.dayName == DayNameEnum.saturday).first.list;
+        workingHoursSunday = workingHours.where((element) => element.dayName == DayNameEnum.sunday).first.list;
+        workingHoursMonday = workingHours.where((element) => element.dayName == DayNameEnum.monday).first.list;
+        workingHoursTuesday = workingHours.where((element) => element.dayName == DayNameEnum.tuesday).first.list;
+        workingHoursWednesday = workingHours.where((element) => element.dayName == DayNameEnum.wednesday).first.list;
+        workingHoursThursday = workingHours.where((element) => element.dayName == DayNameEnum.thursday).first.list;
+        workingHoursFriday = workingHours.where((element) => element.dayName == DayNameEnum.friday).first.list;
 
         reviews = value.data!.reviews!;
         loadingStatus.value = LoadingStatus.finish;
@@ -176,9 +151,9 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
 
   String calculateExperience(String? experienceSince) {
     if (experienceSince != null) {
-      int intExperienceSince = int.tryParse(experienceSince) ?? 0;
+      final int intExperienceSince = int.tryParse(experienceSince) ?? 0;
       final now = DateTime.now();
-      int intCurrentYear = now.year;
+      final int intCurrentYear = now.year;
       return "${intCurrentYear - intExperienceSince}";
     } else {
       return "0";
@@ -186,7 +161,7 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     loadingStatus.dispose();
   }
 }

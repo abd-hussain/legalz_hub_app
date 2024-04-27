@@ -1,9 +1,6 @@
 import 'package:legalz_hub_app/models/model_checker.dart';
 
 class PaymentResponse {
-  List<PaymentResponseData>? data;
-  String? message;
-
   PaymentResponse({this.data, this.message});
 
   PaymentResponse.fromJson(Map<String, dynamic> json) {
@@ -15,34 +12,11 @@ class PaymentResponse {
     }
     message = json['message'];
   }
+  List<PaymentResponseData>? data;
+  String? message;
 }
 
 class PaymentResponseData with ModelChecker {
-  int? id;
-  int? attorneyId;
-  int? appointmentId;
-  int? paymentStatus;
-  String? createdAt;
-  String? paymentReportedMessage;
-  int? customersId;
-  int? appointmentType;
-  String? appointmentDateFrom;
-  String? appointmentDateTo;
-  int? appointmentState;
-  bool? appointmentIsFree;
-  double? appointmentPrice;
-  double? appointmentTotalPrice;
-  String? currency;
-  double? attorneyHourRate;
-  String? noteFromCustomer;
-  String? noteFromAttorney;
-  int? appointmentDiscountId;
-  String? customerFirstName;
-  String? customerLastName;
-  String? customerProfileImg;
-  int? customerCountryId;
-  String? customerFlagImg;
-
   PaymentResponseData({
     this.id,
     this.attorneyId,
@@ -96,4 +70,28 @@ class PaymentResponseData with ModelChecker {
     customerCountryId = json['customer_country_id'];
     customerFlagImg = json['customer_flag_img'];
   }
+  int? id;
+  int? attorneyId;
+  int? appointmentId;
+  int? paymentStatus;
+  String? createdAt;
+  String? paymentReportedMessage;
+  int? customersId;
+  int? appointmentType;
+  String? appointmentDateFrom;
+  String? appointmentDateTo;
+  int? appointmentState;
+  bool? appointmentIsFree;
+  double? appointmentPrice;
+  double? appointmentTotalPrice;
+  String? currency;
+  double? attorneyHourRate;
+  String? noteFromCustomer;
+  String? noteFromAttorney;
+  int? appointmentDiscountId;
+  String? customerFirstName;
+  String? customerLastName;
+  String? customerProfileImg;
+  int? customerCountryId;
+  String? customerFlagImg;
 }

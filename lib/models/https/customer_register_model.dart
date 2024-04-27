@@ -1,17 +1,4 @@
 class CustomerRegister {
-  final String firstName;
-  final String lastName;
-  final String mobileNumber;
-  final String email;
-  final String password;
-  final int gender;
-  final String? referalCode;
-  final String? profileImg;
-  final String dateOfBirth;
-  final String? pushToken;
-  final String appVersion;
-  final String countryId;
-
   CustomerRegister({
     required this.firstName,
     required this.lastName,
@@ -26,4 +13,16 @@ class CustomerRegister {
     this.pushToken,
     this.profileImg,
   });
+  final String firstName;
+  final String lastName;
+  final String mobileNumber;
+  final String email;
+  final String password;
+  final int gender;
+  final String? referalCode;
+  final String? profileImg;
+  final String dateOfBirth;
+  final String? pushToken;
+  final String appVersion;
+  final String countryId;
 }

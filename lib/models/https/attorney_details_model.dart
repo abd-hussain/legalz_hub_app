@@ -1,49 +1,17 @@
 import 'package:legalz_hub_app/models/model_checker.dart';
 
 class AttorneyDetailsResponse {
-  AttorneyDetailsResponseData? data;
-  String? message;
-
   AttorneyDetailsResponse({this.data, this.message});
 
   AttorneyDetailsResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null
-        ? AttorneyDetailsResponseData.fromJson(json['data'])
-        : null;
+    data = json['data'] != null ? AttorneyDetailsResponseData.fromJson(json['data']) : null;
     message = json['message'];
   }
+  AttorneyDetailsResponseData? data;
+  String? message;
 }
 
 class AttorneyDetailsResponseData with ModelChecker {
-  int? id;
-  String? suffixeName;
-  String? firstName;
-  String? lastName;
-  int? gender;
-  String? bio;
-  List<String>? speakingLanguage;
-  double? hourRate;
-  int? freeCall;
-  String? currency;
-  String? currencyCode;
-  String? countryCode;
-  String? profileImg;
-  String? dateOfBirth;
-  String? experienceSince;
-  String? categoryName;
-  int? categoryID;
-  String? country;
-  String? countryFlag;
-  double? totalRate;
-  List<int>? workingHoursSaturday;
-  List<int>? workingHoursSunday;
-  List<int>? workingHoursMonday;
-  List<int>? workingHoursTuesday;
-  List<int>? workingHoursWednesday;
-  List<int>? workingHoursThursday;
-  List<int>? workingHoursFriday;
-  List<Reviews>? reviews;
-
   AttorneyDetailsResponseData(
       {this.id,
       this.suffixeName,
@@ -107,20 +75,37 @@ class AttorneyDetailsResponseData with ModelChecker {
       reviews!.add(Reviews.fromJson(v));
     });
   }
+  int? id;
+  String? suffixeName;
+  String? firstName;
+  String? lastName;
+  int? gender;
+  String? bio;
+  List<String>? speakingLanguage;
+  double? hourRate;
+  int? freeCall;
+  String? currency;
+  String? currencyCode;
+  String? countryCode;
+  String? profileImg;
+  String? dateOfBirth;
+  String? experienceSince;
+  String? categoryName;
+  int? categoryID;
+  String? country;
+  String? countryFlag;
+  double? totalRate;
+  List<int>? workingHoursSaturday;
+  List<int>? workingHoursSunday;
+  List<int>? workingHoursMonday;
+  List<int>? workingHoursTuesday;
+  List<int>? workingHoursWednesday;
+  List<int>? workingHoursThursday;
+  List<int>? workingHoursFriday;
+  List<Reviews>? reviews;
 }
 
 class Reviews with ModelChecker {
-  int? id;
-  String? customerFirstName;
-  String? customerLastName;
-  String? customerProfileImg;
-  int? attorneyId;
-  double? stars;
-  String? comments;
-  String? attorneyResponse;
-  String? flagImage;
-  String? createdAt;
-
   Reviews(
       {this.id,
       this.customerFirstName,
@@ -145,4 +130,14 @@ class Reviews with ModelChecker {
     flagImage = convertToString(json['flag_image']);
     createdAt = convertToString(json['created_at']);
   }
+  int? id;
+  String? customerFirstName;
+  String? customerLastName;
+  String? customerProfileImg;
+  int? attorneyId;
+  double? stars;
+  String? comments;
+  String? attorneyResponse;
+  String? flagImage;
+  String? createdAt;
 }

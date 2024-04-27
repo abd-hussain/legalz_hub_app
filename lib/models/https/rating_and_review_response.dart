@@ -1,7 +1,4 @@
 class RatingAndReviewResponse {
-  List<RatingAndReviewResponseData>? data;
-  String? message;
-
   RatingAndReviewResponse({this.data, this.message});
 
   RatingAndReviewResponse.fromJson(Map<String, dynamic> json) {
@@ -13,21 +10,11 @@ class RatingAndReviewResponse {
     }
     message = json['message'];
   }
+  List<RatingAndReviewResponseData>? data;
+  String? message;
 }
 
 class RatingAndReviewResponseData {
-  int? id;
-  int? clientId;
-  double? stars;
-  String? comment;
-  String? attorneyResponse;
-  String? createdAt;
-  String? profileImg;
-  String? firstName;
-  String? lastName;
-  int? countryId;
-  String? flagImage;
-
   RatingAndReviewResponseData(
       {this.id,
       this.clientId,
@@ -54,4 +41,15 @@ class RatingAndReviewResponseData {
     countryId = json['country_id'];
     flagImage = json['flag_image'];
   }
+  int? id;
+  int? clientId;
+  double? stars;
+  String? comment;
+  String? attorneyResponse;
+  String? createdAt;
+  String? profileImg;
+  String? firstName;
+  String? lastName;
+  int? countryId;
+  String? flagImage;
 }

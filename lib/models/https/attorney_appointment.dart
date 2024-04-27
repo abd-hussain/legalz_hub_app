@@ -1,18 +1,8 @@
 import 'package:legalz_hub_app/models/model_checker.dart';
 
-enum AppointmentsState {
-  active,
-  attorneyCancel,
-  customerCancel,
-  customerMiss,
-  attorneyMiss,
-  completed
-}
+enum AppointmentsState { active, attorneyCancel, customerCancel, customerMiss, attorneyMiss, completed }
 
 class AttorneyAppointments {
-  List<AttorneyAppointmentsData>? data;
-  String? message;
-
   AttorneyAppointments({this.data, this.message});
 
   AttorneyAppointments.fromJson(Map<String, dynamic> json) {
@@ -24,38 +14,11 @@ class AttorneyAppointments {
     }
     message = json['message'];
   }
+  List<AttorneyAppointmentsData>? data;
+  String? message;
 }
 
 class AttorneyAppointmentsData with ModelChecker {
-  int? id;
-  String? dateFrom;
-  String? dateTo;
-  int? customersId;
-  int? attorneyId;
-  int? appointmentType;
-  String? channelId;
-  String? noteFromAttorney;
-  String? noteFromCustomer;
-  double? price;
-  double? totalPrice;
-  int? state;
-  String? attorneyJoinCall;
-  String? customerJoinCall;
-  String? attorneyDateOfClose;
-  String? customerDateOfClose;
-  String? currencyEnglish;
-  String? currencyArabic;
-  bool? isFree;
-  double? attorneyHourRate;
-  int? discountId;
-  String? profileImg;
-  String? firstName;
-  String? lastName;
-  int? gender;
-  String? dateOfBirth;
-  int? countryId;
-  String? flagImage;
-
   AttorneyAppointmentsData({
     this.id,
     this.dateFrom,
@@ -117,4 +80,32 @@ class AttorneyAppointmentsData with ModelChecker {
     countryId = json['country_id'];
     flagImage = convertToString(json['flag_image']);
   }
+  int? id;
+  String? dateFrom;
+  String? dateTo;
+  int? customersId;
+  int? attorneyId;
+  int? appointmentType;
+  String? channelId;
+  String? noteFromAttorney;
+  String? noteFromCustomer;
+  double? price;
+  double? totalPrice;
+  int? state;
+  String? attorneyJoinCall;
+  String? customerJoinCall;
+  String? attorneyDateOfClose;
+  String? customerDateOfClose;
+  String? currencyEnglish;
+  String? currencyArabic;
+  bool? isFree;
+  double? attorneyHourRate;
+  int? discountId;
+  String? profileImg;
+  String? firstName;
+  String? lastName;
+  int? gender;
+  String? dateOfBirth;
+  int? countryId;
+  String? flagImage;
 }

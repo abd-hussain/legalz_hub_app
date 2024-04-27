@@ -7,6 +7,21 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/currency.dart';
 
 class AttorneyProfileFooterView extends StatelessWidget {
+  const AttorneyProfileFooterView({
+    required this.currency,
+    required this.hourRate,
+    super.key,
+    required this.freeCall,
+    required this.workingHoursSaturday,
+    required this.workingHoursSunday,
+    required this.workingHoursMonday,
+    required this.workingHoursTuesday,
+    required this.workingHoursWednesday,
+    required this.workingHoursThursday,
+    required this.workingHoursFriday,
+    required this.listOfAppointments,
+    required this.openBookingView,
+  });
   final String currency;
   final double hourRate;
   final bool freeCall;
@@ -24,22 +39,6 @@ class AttorneyProfileFooterView extends StatelessWidget {
     int selectedMeetingTime,
   ) openBookingView;
 
-  const AttorneyProfileFooterView({
-    required this.currency,
-    required this.hourRate,
-    super.key,
-    required this.freeCall,
-    required this.workingHoursSaturday,
-    required this.workingHoursSunday,
-    required this.workingHoursMonday,
-    required this.workingHoursTuesday,
-    required this.workingHoursWednesday,
-    required this.workingHoursThursday,
-    required this.workingHoursFriday,
-    required this.listOfAppointments,
-    required this.openBookingView,
-  });
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,8 +49,7 @@ class AttorneyProfileFooterView extends StatelessWidget {
         child: Row(
           children: [
             CustomText(
-              title: Currency().calculateHourRate(
-                  hourRate, Timing.halfHour, currency, false),
+              title: Currency().calculateHourRate(hourRate, Timing.halfHour, currency, false),
               fontSize: 18,
               fontWeight: FontWeight.bold,
               textColor: const Color(0xff034061),
@@ -89,17 +87,7 @@ class AttorneyProfileFooterView extends StatelessWidget {
                   workingHoursThursday: workingHoursThursday,
                   workingHoursFriday: workingHoursFriday,
                   listOfAppointments: listOfAppointments,
-                  onEndSelection: (
-                    selectedMeetingDuration,
-                    selectedMeetingDate,
-                    selectedMeetingTime,
-                  ) {
-                    openBookingView(
-                      selectedMeetingDuration,
-                      selectedMeetingDate,
-                      selectedMeetingTime,
-                    );
-                  },
+                  onEndSelection: openBookingView,
                 );
               },
             )

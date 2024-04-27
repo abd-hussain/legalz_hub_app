@@ -1,7 +1,4 @@
 class Suffix {
-  List<SuffixData>? data;
-  String? message;
-
   Suffix({this.data, this.message});
 
   Suffix.fromJson(Map<String, dynamic> json) {
@@ -13,16 +10,17 @@ class Suffix {
     }
     message = json['message'];
   }
+  List<SuffixData>? data;
+  String? message;
 }
 
 class SuffixData {
-  int? id;
-  String? name;
-
   SuffixData({this.id, this.name});
 
   SuffixData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
   }
+  int? id;
+  String? name;
 }

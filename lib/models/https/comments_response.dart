@@ -1,7 +1,4 @@
 class CommentsResponse {
-  List<CommentsResponseData>? data;
-  String? message;
-
   CommentsResponse({this.data, this.message});
 
   CommentsResponse.fromJson(Map<String, dynamic> json) {
@@ -13,24 +10,11 @@ class CommentsResponse {
     }
     message = json['message'];
   }
+  List<CommentsResponseData>? data;
+  String? message;
 }
 
 class CommentsResponseData {
-  int? id;
-  String? content;
-  String? createdAt;
-  int? postId;
-  int? customersOwnerId;
-  int? attorneyOwnerId;
-  String? customerFirstName;
-  String? customerLastName;
-  String? customerProfileImg;
-  String? attorneySuffixeName;
-  String? attorneyFirstName;
-  String? attorneyLastName;
-  String? attorneyProfileImg;
-  String? flagImage;
-
   CommentsResponseData(
       {this.id,
       this.content,
@@ -63,4 +47,18 @@ class CommentsResponseData {
     attorneyProfileImg = json['attorney_profile_img'];
     flagImage = json['flag_image'];
   }
+  int? id;
+  String? content;
+  String? createdAt;
+  int? postId;
+  int? customersOwnerId;
+  int? attorneyOwnerId;
+  String? customerFirstName;
+  String? customerLastName;
+  String? customerProfileImg;
+  String? attorneySuffixeName;
+  String? attorneyFirstName;
+  String? attorneyLastName;
+  String? attorneyProfileImg;
+  String? flagImage;
 }

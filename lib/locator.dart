@@ -6,7 +6,10 @@ import 'package:legalz_hub_app/services/attorney/attorney_account_experiance_ser
 import 'package:legalz_hub_app/services/attorney/attorney_account_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_appointments_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_hour_rate_service.dart';
+import 'package:legalz_hub_app/services/attorney/attorney_payment_services.dart';
+import 'package:legalz_hub_app/services/attorney/attorney_register_service.dart';
 import 'package:legalz_hub_app/services/attorney/attorney_settings_service.dart';
+import 'package:legalz_hub_app/services/attorney/working_hours_services.dart';
 import 'package:legalz_hub_app/services/auth_services.dart';
 import 'package:legalz_hub_app/services/comment_post_services.dart';
 import 'package:legalz_hub_app/services/customer/attorney_details_service.dart';
@@ -19,10 +22,7 @@ import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/services/general/authentication_service.dart';
 import 'package:legalz_hub_app/services/general/network_info_service.dart';
 import 'package:legalz_hub_app/services/home_services.dart';
-import 'package:legalz_hub_app/services/attorney/working_hours_services.dart';
 import 'package:legalz_hub_app/services/noticitions_services.dart';
-import 'package:legalz_hub_app/services/attorney/attorney_payment_services.dart';
-import 'package:legalz_hub_app/services/attorney/attorney_register_service.dart';
 import 'package:legalz_hub_app/services/post_services.dart';
 import 'package:legalz_hub_app/services/report_service.dart';
 import 'package:legalz_hub_app/services/settings_service.dart';
@@ -35,53 +35,43 @@ GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   locator.pushNewScope();
-  locator.registerLazySingleton(() => MainContext());
+  locator.registerLazySingleton(MainContext.new);
   locator.registerSingleton<MainContainerBloc>(MainContainerBloc());
 
   locator.registerSingleton<NetworkInfoService>(NetworkInfoService());
 
-  locator.registerFactory<FilterService>(() => FilterService());
-  locator.registerFactory<AuthService>(() => AuthService());
-  locator.registerFactory<DiscountService>(() => DiscountService());
-  locator.registerFactory<HomeService>(() => HomeService());
-  locator.registerFactory<NotificationsService>(() => NotificationsService());
-  locator.registerFactory<ReportService>(() => ReportService());
-  locator.registerFactory<SettingService>(() => SettingService());
-  locator.registerFactory<CustomerRegisterService>(
-      () => CustomerRegisterService());
-  locator.registerFactory<AttorneyRegisterService>(
-      () => AttorneyRegisterService());
+  locator.registerFactory<FilterService>(FilterService.new);
+  locator.registerFactory<AuthService>(AuthService.new);
+  locator.registerFactory<DiscountService>(DiscountService.new);
+  locator.registerFactory<HomeService>(HomeService.new);
+  locator.registerFactory<NotificationsService>(NotificationsService.new);
+  locator.registerFactory<ReportService>(ReportService.new);
+  locator.registerFactory<SettingService>(SettingService.new);
+  locator.registerFactory<CustomerRegisterService>(CustomerRegisterService.new);
+  locator.registerFactory<AttorneyRegisterService>(AttorneyRegisterService.new);
 
-  locator.registerFactory<AttorneyAccountExperianceService>(
-      () => AttorneyAccountExperianceService());
-  locator
-      .registerFactory<AttorneyAccountService>(() => AttorneyAccountService());
+  locator.registerFactory<AttorneyAccountExperianceService>(AttorneyAccountExperianceService.new);
+  locator.registerFactory<AttorneyAccountService>(AttorneyAccountService.new);
 
-  locator
-      .registerFactory<CustomerAccountService>(() => CustomerAccountService());
-  locator.registerFactory<AttorneyListService>(() => AttorneyListService());
-  locator.registerFactory<PostService>(() => PostService());
-  locator.registerFactory<CommentPostService>(() => CommentPostService());
+  locator.registerFactory<CustomerAccountService>(CustomerAccountService.new);
+  locator.registerFactory<AttorneyListService>(AttorneyListService.new);
+  locator.registerFactory<PostService>(PostService.new);
+  locator.registerFactory<CommentPostService>(CommentPostService.new);
 
-  locator.registerFactory<AttorneyAppointmentsService>(
-      () => AttorneyAppointmentsService());
-  locator.registerFactory<AttorneyHourRateService>(
-      () => AttorneyHourRateService());
-  locator.registerFactory<PaymentService>(() => PaymentService());
-  locator.registerFactory<CustomerAppointmentsService>(
-      () => CustomerAppointmentsService());
-  locator
-      .registerFactory<AttorneyDetailsService>(() => AttorneyDetailsService());
+  locator.registerFactory<AttorneyAppointmentsService>(AttorneyAppointmentsService.new);
+  locator.registerFactory<AttorneyHourRateService>(AttorneyHourRateService.new);
+  locator.registerFactory<PaymentService>(PaymentService.new);
+  locator.registerFactory<CustomerAppointmentsService>(CustomerAppointmentsService.new);
+  locator.registerFactory<AttorneyDetailsService>(AttorneyDetailsService.new);
 
-  locator.registerFactory<AttorneySettingsService>(
-      () => AttorneySettingsService());
-  locator.registerFactory<WorkingHoursService>(() => WorkingHoursService());
+  locator.registerFactory<AttorneySettingsService>(AttorneySettingsService.new);
+  locator.registerFactory<WorkingHoursService>(WorkingHoursService.new);
 
-  locator.registerLazySingleton(() => AuthenticationService());
-  locator.registerLazySingleton(() => LocalAuthentication());
+  locator.registerLazySingleton(AuthenticationService.new);
+  locator.registerLazySingleton(LocalAuthentication.new);
   locator.registerSingleton<DayTime>(DayTime());
 
-  locator.registerFactory<Dio>(() => Dio());
-  locator.registerFactory<HttpInterceptor>(() => HttpInterceptor());
+  locator.registerFactory<Dio>(Dio.new);
+  locator.registerFactory<HttpInterceptor>(HttpInterceptor.new);
   locator.registerSingleton<HttpRepository>(HttpRepository());
 }

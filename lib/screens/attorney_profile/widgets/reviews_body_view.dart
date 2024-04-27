@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:legalz_hub_app/models/https/attorney_details_model.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 
 class ReviewBodyView extends StatelessWidget {
-  final List<Reviews> reviews;
   const ReviewBodyView({required this.reviews, super.key});
+  final List<Reviews> reviews;
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +45,14 @@ class ReviewBodyView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: reviews[index].customerProfileImg != ""
                                   ? FadeInImage(
-                                      placeholder: const AssetImage(
-                                          "assets/images/avatar.jpeg"),
+                                      placeholder: const AssetImage("assets/images/avatar.jpeg"),
                                       image: NetworkImage(
-                                          AppConstant.imagesBaseURLForCustomer +
-                                              reviews[index]
-                                                  .customerProfileImg!,
-                                          scale: 1),
+                                          AppConstant.imagesBaseURLForCustomer + reviews[index].customerProfileImg!),
                                     )
                                   : Image.asset(
                                       'assets/images/avatar.jpeg',
-                                      width: 110.0,
-                                      height: 110.0,
+                                      width: 110,
+                                      height: 110,
                                       fit: BoxFit.fill,
                                     ),
                             ),
@@ -66,15 +62,13 @@ class ReviewBodyView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                title:
-                                    "${reviews[index].customerFirstName!} ${reviews[index].customerLastName!}",
+                                title: "${reviews[index].customerFirstName!} ${reviews[index].customerLastName!}",
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 textColor: const Color(0xff554d56),
                               ),
                               CustomText(
-                                title: DayTime()
-                                    .dateFormatter(reviews[index].createdAt!),
+                                title: DayTime().dateFormatter(reviews[index].createdAt!),
                                 fontSize: 10,
                                 textColor: const Color(0xff554d56),
                               ),
@@ -85,7 +79,6 @@ class ReviewBodyView extends StatelessWidget {
                                   Icons.star,
                                   color: Colors.amber,
                                 ),
-                                itemCount: 5,
                                 itemSize: 10,
                               ),
                               const SizedBox(height: 4),
@@ -105,45 +98,45 @@ class ReviewBodyView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  reviews[index].attorneyResponse! != ""
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(0, 3),
+                  if (reviews[index].attorneyResponse! != "")
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 100,
+                          child: Column(
+                            children: [
+                              CustomText(
+                                title: "-- ${AppLocalizations.of(context)!.mentorrespond} --",
+                                fontSize: 14,
+                                textColor: const Color(0xff554d56),
+                              ),
+                              CustomText(
+                                title: reviews[index].attorneyResponse!,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                maxLins: 10,
+                                textColor: const Color(0xff554d56),
                               ),
                             ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Column(
-                                children: [
-                                  CustomText(
-                                    title:
-                                        "-- ${AppLocalizations.of(context)!.mentorrespond} --",
-                                    fontSize: 14,
-                                    textColor: const Color(0xff554d56),
-                                  ),
-                                  CustomText(
-                                    title: reviews[index].attorneyResponse!,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    maxLins: 10,
-                                    textColor: const Color(0xff554d56),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container(),
+                        ),
+                      ),
+                    )
+                  else
+                    Container(),
                 ],
               ),
             );

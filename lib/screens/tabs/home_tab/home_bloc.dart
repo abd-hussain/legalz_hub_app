@@ -79,11 +79,13 @@ class HomeBloc extends Bloc<HomeService> {
     }
   }
 
-  Future<void> getHomePosts({required int catId, required int skip}) async {
-    final value =
-        await locator<PostService>().getHomePosts(catId: catId, skip: skip);
+  Future<List<PostResponseData>?> getHomePosts({required int catId, required int skip}) async {
+    final value = await locator<PostService>().getHomePosts(catId: catId, skip: skip);
     if (value.data != null) {
       postsStreamController.sink.add(value.data);
+      return value.data!;
+    } else {
+      return null;
     }
   }
 
@@ -93,21 +95,19 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   void handleTapControllerListener() {
+    //TODO : handle pagination
+    getHomePosts(catId: 0, skip: 0);
     tabController!.addListener(() async {
       getHomePosts(catId: tabController!.index, skip: 0);
     });
   }
 
-  Future<void> addNewPost(
-      {required int catId, required String content, File? postImg}) async {
-    await locator<PostService>()
-        .addPost(catId: catId.toString(), content: content, postImg: postImg);
+  Future<void> addNewPost({required int catId, required String content, File? postImg}) async {
+    await locator<PostService>().addPost(catId: catId.toString(), content: content, postImg: postImg);
   }
 
-  Future<dynamic> reportPost(
-      {required int postId, required String reason}) async {
-    return await locator<PostService>()
-        .reportPost(postId: postId, reason: reason, userType: userType);
+  Future<dynamic> reportPost({required int postId, required String reason}) async {
+    return await locator<PostService>().reportPost(postId: postId, reason: reason, userType: userType);
   }
 
   Future<dynamic> deletePost({required int postId}) async {
@@ -115,12 +115,10 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<CommentsResponse> getPostComments({required int postId}) async {
-    return await locator<CommentPostService>()
-        .getCommentsForPost(postId: postId);
+    return await locator<CommentPostService>().getCommentsForPost(postId: postId);
   }
 
-  Future<dynamic> addNewComment(
-      {required int postId, required String content}) async {
+  Future<dynamic> addNewComment({required int postId, required String content}) async {
     await locator<CommentPostService>().addCommentOnPost(
         model: AddCommentToThePost(
       postId: postId,

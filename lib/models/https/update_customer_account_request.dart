@@ -1,15 +1,6 @@
 import 'dart:io';
 
 class UpdateCustomerAccountRequest {
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? referalCode;
-  int? gender;
-  int? countryId;
-  String? dateOfBirth;
-  File? profileImage;
-
   UpdateCustomerAccountRequest({
     this.firstName,
     this.lastName,
@@ -20,4 +11,12 @@ class UpdateCustomerAccountRequest {
     this.dateOfBirth,
     this.profileImage,
   });
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? referalCode;
+  int? gender;
+  int? countryId;
+  String? dateOfBirth;
+  File? profileImage;
 }

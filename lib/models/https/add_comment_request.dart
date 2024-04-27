@@ -1,15 +1,14 @@
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class AddCommentToThePost implements Model {
-  int? postId;
-  String? userType;
-  String? content;
-
   AddCommentToThePost({
     this.postId,
     this.userType,
     this.content,
   });
+  int? postId;
+  String? userType;
+  String? content;
 
   @override
   Map<String, dynamic> toJson() {

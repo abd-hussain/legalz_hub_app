@@ -1,11 +1,7 @@
 import 'package:legalz_hub_app/models/model_checker.dart';
 
 class CustomerAppointment {
-  List<CustomerAppointmentData>? data;
-  String? message;
-
   CustomerAppointment({this.data, this.message});
-
   CustomerAppointment.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <CustomerAppointmentData>[];
@@ -15,34 +11,11 @@ class CustomerAppointment {
     }
     message = json['message'];
   }
+  List<CustomerAppointmentData>? data;
+  String? message;
 }
 
 class CustomerAppointmentData with ModelChecker {
-  int? id;
-  String? dateFrom;
-  String? dateTo;
-  int? attorneyId;
-  int? appointmentType;
-  int? state;
-  int? discountId;
-  bool? isFree;
-  double? price;
-  double? totalPrice;
-  String? currency;
-  double? attorneyHourRate;
-  String? noteFromCustomer;
-  String? noteFromAttorney;
-  String? channelId;
-  String? profileImg;
-  String? suffixeName;
-  String? firstName;
-  String? lastName;
-  List<String>? speakingLanguage;
-  String? countryName;
-  String? categoryName;
-  String? flagImage;
-  int? gender;
-
   CustomerAppointmentData(
       {this.id,
       this.dateFrom,
@@ -95,4 +68,28 @@ class CustomerAppointmentData with ModelChecker {
     gender = json['gender'];
     flagImage = json['flag_image'];
   }
+  int? id;
+  String? dateFrom;
+  String? dateTo;
+  int? attorneyId;
+  int? appointmentType;
+  int? state;
+  int? discountId;
+  bool? isFree;
+  double? price;
+  double? totalPrice;
+  String? currency;
+  double? attorneyHourRate;
+  String? noteFromCustomer;
+  String? noteFromAttorney;
+  String? channelId;
+  String? profileImg;
+  String? suffixeName;
+  String? firstName;
+  String? lastName;
+  List<String>? speakingLanguage;
+  String? countryName;
+  String? categoryName;
+  String? flagImage;
+  int? gender;
 }

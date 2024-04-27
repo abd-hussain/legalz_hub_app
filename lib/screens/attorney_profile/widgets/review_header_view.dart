@@ -4,11 +4,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class ReviewHeaderView extends StatelessWidget {
+  const ReviewHeaderView({required this.ratesCount, required this.totalRates, super.key});
   final int ratesCount;
   final double totalRates;
-
-  const ReviewHeaderView(
-      {required this.ratesCount, required this.totalRates, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,6 @@ class ReviewHeaderView extends StatelessWidget {
                     Icons.star,
                     color: Colors.amber,
                   ),
-                  itemCount: 5,
                   itemSize: 30,
                 ),
               ],

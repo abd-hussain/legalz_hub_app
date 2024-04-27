@@ -26,9 +26,7 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
     logDebugMessage(message: 'Account init Called ...');
     bloc.readBiometricsInitValue();
 
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
-        ? UserType.customer
-        : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
 
     super.didChangeDependencies();
   }
@@ -45,14 +43,11 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
               listOfOptions: bloc.listOfAccountOptions(context, bloc.userType),
             ),
             TitleView(title: AppLocalizations.of(context)!.generalsettings),
-            CollectionListOptionView(
-                listOfOptions: bloc.listOfSettingsOptions(context)),
+            CollectionListOptionView(listOfOptions: bloc.listOfSettingsOptions(context)),
             TitleView(title: AppLocalizations.of(context)!.reachouttous),
-            CollectionListOptionView(
-                listOfOptions: bloc.listOfReachOutUsOptions(context)),
+            CollectionListOptionView(listOfOptions: bloc.listOfReachOutUsOptions(context)),
             TitleView(title: AppLocalizations.of(context)!.support),
-            CollectionListOptionView(
-                listOfOptions: bloc.listOfSupportOptions(context)),
+            CollectionListOptionView(listOfOptions: bloc.listOfSupportOptions(context)),
             const SizedBox(height: 8),
             kIsWeb ? Container() : const AddMobBanner(),
             FooterView(

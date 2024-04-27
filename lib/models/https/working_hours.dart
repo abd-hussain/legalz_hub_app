@@ -1,26 +1,15 @@
 class WorkingHours {
-  WorkingHoursData? data;
-  String? message;
-
   WorkingHours({this.data, this.message});
 
   WorkingHours.fromJson(Map<String, dynamic> json) {
-    data =
-        json['data'] != null ? WorkingHoursData.fromJson(json['data']) : null;
+    data = json['data'] != null ? WorkingHoursData.fromJson(json['data']) : null;
     message = json['message'];
   }
+  WorkingHoursData? data;
+  String? message;
 }
 
 class WorkingHoursData {
-  int? id;
-  List<int>? workingHoursSaturday;
-  List<int>? workingHoursSunday;
-  List<int>? workingHoursMonday;
-  List<int>? workingHoursTuesday;
-  List<int>? workingHoursWednesday;
-  List<int>? workingHoursThursday;
-  List<int>? workingHoursFriday;
-
   WorkingHoursData(
       {this.id,
       this.workingHoursSaturday,
@@ -41,6 +30,14 @@ class WorkingHoursData {
     workingHoursThursday = json['working_hours_thursday'].cast<int>();
     workingHoursFriday = json['working_hours_friday'].cast<int>();
   }
+  int? id;
+  List<int>? workingHoursSaturday;
+  List<int>? workingHoursSunday;
+  List<int>? workingHoursMonday;
+  List<int>? workingHoursTuesday;
+  List<int>? workingHoursWednesday;
+  List<int>? workingHoursThursday;
+  List<int>? workingHoursFriday;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};

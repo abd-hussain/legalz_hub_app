@@ -1,33 +1,15 @@
 class AttorneyAccountInfo {
-  AttorneyAccountInfoData? data;
-  String? message;
-
   AttorneyAccountInfo({this.data, this.message});
 
   AttorneyAccountInfo.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null
-        ? AttorneyAccountInfoData.fromJson(json['data'])
-        : null;
+    data = json['data'] != null ? AttorneyAccountInfoData.fromJson(json['data']) : null;
     message = json['message'];
   }
+  AttorneyAccountInfoData? data;
+  String? message;
 }
 
 class AttorneyAccountInfoData {
-  String? profileImg;
-  String? mobileNumber;
-  String? suffixeName;
-  String? dateOfBirth;
-  String? firstName;
-  String? email;
-  String? lastName;
-  int? gender;
-  List<String>? speakingLanguage;
-  int? countryId;
-  DBCountries? dBCountries;
-  String? invitationCode;
-  String? idImg;
-  String? bio;
-
   AttorneyAccountInfoData(
       {this.profileImg,
       this.mobileNumber,
@@ -58,25 +40,25 @@ class AttorneyAccountInfoData {
     countryId = json['country_id'];
     invitationCode = json['invitation_code'];
     idImg = json['id_img'];
-    dBCountries = json['DB_Countries'] != null
-        ? DBCountries.fromJson(json['DB_Countries'])
-        : null;
+    dBCountries = json['DB_Countries'] != null ? DBCountries.fromJson(json['DB_Countries']) : null;
   }
+  String? profileImg;
+  String? mobileNumber;
+  String? suffixeName;
+  String? dateOfBirth;
+  String? firstName;
+  String? email;
+  String? lastName;
+  int? gender;
+  List<String>? speakingLanguage;
+  int? countryId;
+  DBCountries? dBCountries;
+  String? invitationCode;
+  String? idImg;
+  String? bio;
 }
 
 class DBCountries {
-  String? flagImage;
-  String? currencyArabic;
-  String? nameArabic;
-  String? dialCode;
-  String? createdAt;
-  String? nameEnglish;
-  int? id;
-  String? currencyEnglish;
-  bool? published;
-  int? minLength;
-  int? maxLength;
-
   DBCountries({
     this.flagImage,
     this.currencyArabic,
@@ -105,4 +87,15 @@ class DBCountries {
     maxLength = json['maxLength'];
     createdAt = json['created_at'];
   }
+  String? flagImage;
+  String? currencyArabic;
+  String? nameArabic;
+  String? dialCode;
+  String? createdAt;
+  String? nameEnglish;
+  int? id;
+  String? currencyEnglish;
+  bool? published;
+  int? minLength;
+  int? maxLength;
 }

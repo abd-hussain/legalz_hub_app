@@ -1,9 +1,6 @@
 import 'package:legalz_hub_app/models/model_checker.dart';
 
 class AttorneyInfoAvaliableResponse {
-  List<AttorneyInfoAvaliableResponseData>? data;
-  String? message;
-
   AttorneyInfoAvaliableResponse({this.data, this.message});
 
   AttorneyInfoAvaliableResponse.fromJson(Map<String, dynamic> json) {
@@ -15,29 +12,11 @@ class AttorneyInfoAvaliableResponse {
     }
     message = json['message'];
   }
+  List<AttorneyInfoAvaliableResponseData>? data;
+  String? message;
 }
 
 class AttorneyInfoAvaliableResponseData with ModelChecker {
-  int? id;
-  String? suffixeName;
-  String? firstName;
-  String? lastName;
-  int? gender;
-  String? profileImg;
-  double? hourRate;
-  List<int>? workingHours;
-  double? rate;
-  String? date;
-  String? currency;
-  String? currencyCode;
-  String? countryCode;
-  List<String>? languages;
-  String? countryName;
-  String? countryFlag;
-  int? numberOfReviewers;
-  String? day;
-  int? hour;
-
   AttorneyInfoAvaliableResponseData(
       {this.id,
       this.suffixeName,
@@ -80,4 +59,23 @@ class AttorneyInfoAvaliableResponseData with ModelChecker {
     day = json['day'];
     hour = json['hour'];
   }
+  int? id;
+  String? suffixeName;
+  String? firstName;
+  String? lastName;
+  int? gender;
+  String? profileImg;
+  double? hourRate;
+  List<int>? workingHours;
+  double? rate;
+  String? date;
+  String? currency;
+  String? currencyCode;
+  String? countryCode;
+  List<String>? languages;
+  String? countryName;
+  String? countryFlag;
+  int? numberOfReviewers;
+  String? day;
+  int? hour;
 }

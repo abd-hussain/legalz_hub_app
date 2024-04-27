@@ -1,9 +1,6 @@
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 
 class AttorneyModel {
-  List<AttorneyModelData>? data;
-  String? message;
-
   AttorneyModel({this.data, this.message});
 
   AttorneyModel.fromJson(Map<String, dynamic> json) {
@@ -15,26 +12,11 @@ class AttorneyModel {
     }
     message = json['message'];
   }
+  List<AttorneyModelData>? data;
+  String? message;
 }
 
 class AttorneyModelData {
-  int? id;
-  String? categoryName;
-  String? suffixeName;
-  String? firstName;
-  String? lastName;
-  int? gender;
-  double? hourRate;
-  List<String>? languages;
-  String? profileImg;
-  String? experianceSince;
-
-  double? rate;
-  String? countryName;
-  String? countryFlag;
-  String? currency;
-  int? numberOfReviewers;
-
   AttorneyModelData(
       {this.id,
       this.categoryName,
@@ -70,4 +52,20 @@ class AttorneyModelData {
 
     numberOfReviewers = json['number_of_reviewers'];
   }
+  int? id;
+  String? categoryName;
+  String? suffixeName;
+  String? firstName;
+  String? lastName;
+  int? gender;
+  double? hourRate;
+  List<String>? languages;
+  String? profileImg;
+  String? experianceSince;
+
+  double? rate;
+  String? countryName;
+  String? countryFlag;
+  String? currency;
+  int? numberOfReviewers;
 }

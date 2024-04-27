@@ -15,16 +15,6 @@ enum AccountButtonType {
 }
 
 class ProfileOptions {
-  final IconData icon;
-  final Color iconColor;
-  final String name;
-  final Color nameColor;
-  final String selectedItem;
-  final Widget? selectedItemImage;
-  final String subtitle;
-  final bool avaliable;
-  final VoidCallback onTap;
-
   ProfileOptions(
       {required this.icon,
       this.iconColor = const Color(0xff034061),
@@ -35,4 +25,13 @@ class ProfileOptions {
       this.subtitle = "",
       this.avaliable = true,
       required this.onTap});
+  final IconData icon;
+  final Color iconColor;
+  final String name;
+  final Color nameColor;
+  final String selectedItem;
+  final Widget? selectedItemImage;
+  final String subtitle;
+  final bool avaliable;
+  final VoidCallback onTap;
 }

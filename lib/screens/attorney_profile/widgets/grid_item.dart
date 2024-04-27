@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class MentorGridItem extends StatelessWidget {
+  const MentorGridItem({required this.title, required this.value, required this.icon, super.key});
   final String title;
   final String value;
   final Widget icon;
-
-  const MentorGridItem(
-      {required this.title,
-      required this.value,
-      required this.icon,
-      super.key});
 
   @override
   Widget build(BuildContext context) {
