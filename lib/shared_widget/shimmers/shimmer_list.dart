@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerListView extends StatelessWidget {
-  final int count;
   const ShimmerListView({required this.count, super.key});
+  final int count;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ShimmerListView extends StatelessWidget {
                   color: Colors.white,
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                 ),
                 Expanded(
                   child: Column(
@@ -33,23 +33,23 @@ class ShimmerListView extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height: 8.0,
+                        height: 8,
                         color: Colors.white,
                       ),
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 2.0),
+                        padding: EdgeInsets.symmetric(vertical: 2),
                       ),
                       Container(
                         width: 100,
-                        height: 8.0,
+                        height: 8,
                         color: Colors.white,
                       ),
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 2.0),
+                        padding: EdgeInsets.symmetric(vertical: 2),
                       ),
                       Container(
-                        width: 40.0,
-                        height: 8.0,
+                        width: 40,
+                        height: 8,
                         color: Colors.white,
                       ),
                     ],

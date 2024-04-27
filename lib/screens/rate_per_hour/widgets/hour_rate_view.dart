@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/rate_per_hour/widgets/calculation_hours_view.dart';
 import 'package:legalz_hub_app/screens/rate_per_hour/widgets/promo_code_view.dart';
 import 'package:legalz_hub_app/screens/rate_per_hour/widgets/segment_free_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HourRateView extends StatefulWidget {
-  final TextEditingController controller;
-  final String currency;
-  final int freeType;
-  final Function() onTapPlus;
-  final Function() onTapMinus;
-  final Function(int) freeCallTypeSelected;
-
   const HourRateView(
       {super.key,
       required this.controller,
@@ -23,13 +16,19 @@ class HourRateView extends StatefulWidget {
       required this.currency,
       required this.freeType,
       required this.freeCallTypeSelected});
+  final TextEditingController controller;
+  final String currency;
+  final int freeType;
+  final Function() onTapPlus;
+  final Function() onTapMinus;
+  final Function(int) freeCallTypeSelected;
 
   @override
   State<HourRateView> createState() => _HourRateViewState();
 }
 
 class _HourRateViewState extends State<HourRateView> {
-  double recumendedRatePerHour = 16.0;
+  double recumendedRatePerHour = 16;
   ValueNotifier<String> valueEntered = ValueNotifier<String>("16.0");
   ValueNotifier<int> selectedFreeType = ValueNotifier<int>(0);
 
@@ -97,7 +96,6 @@ class _HourRateViewState extends State<HourRateView> {
             Row(
               children: [
                 Expanded(
-                  flex: 1,
                   child: Container(
                     color: Colors.grey[200],
                     child: IconButton(
@@ -118,7 +116,7 @@ class _HourRateViewState extends State<HourRateView> {
                     ],
                     fontSize: 18,
                     textAlign: TextAlign.center,
-                    padding: const EdgeInsets.all(0),
+                    padding: EdgeInsets.zero,
                     onEditingComplete: () {
                       if (widget.controller.text.isEmpty) {
                         widget.controller.text = "0.0";
@@ -128,7 +126,6 @@ class _HourRateViewState extends State<HourRateView> {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
                   child: Container(
                     color: Colors.grey[200],
                     child: IconButton(
@@ -149,7 +146,6 @@ class _HourRateViewState extends State<HourRateView> {
                       CustomText(
                         title: AppLocalizations.of(context)!.calculations,
                         fontSize: 14,
-                        textAlign: TextAlign.start,
                         textColor: const Color(0xff444444),
                         fontWeight: FontWeight.bold,
                       ),
@@ -157,28 +153,24 @@ class _HourRateViewState extends State<HourRateView> {
                         timing: AppLocalizations.of(context)!.quarter,
                         currency: widget.currency,
                         value: calculateQuarter(snapshot),
-                        textColor: const Color(0xff444444),
                         onPress: () {},
                       ),
                       CalculationHoursView(
                         timing: AppLocalizations.of(context)!.half,
                         currency: widget.currency,
                         value: calculateHalf(snapshot),
-                        textColor: const Color(0xff444444),
                         onPress: () {},
                       ),
                       CalculationHoursView(
                         timing: AppLocalizations.of(context)!.threequarter,
                         currency: widget.currency,
                         value: calculate3Quarter(snapshot),
-                        textColor: const Color(0xff444444),
                         onPress: () {},
                       ),
                       CalculationHoursView(
                         timing: AppLocalizations.of(context)!.one,
                         currency: widget.currency,
                         value: calculate4Quarter(snapshot),
-                        textColor: const Color(0xff444444),
                         onPress: () {},
                       ),
                       Padding(
@@ -230,7 +222,7 @@ class _HourRateViewState extends State<HourRateView> {
   }
 
   String calculate4Quarter(String value) {
-    double val = double.parse(value == "" ? "0" : value);
+    final double val = double.parse(value == "" ? "0" : value);
     return "$val";
   }
 }

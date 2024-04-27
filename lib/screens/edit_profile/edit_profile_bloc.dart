@@ -52,11 +52,11 @@ class EditProfileBloc {
 
   UserType userType = UserType.customer;
 
-  validateFields() {
+  void validateFields() {
     enableSaveButtonNotifier.value = false;
 
     if (userType == UserType.attorney) {
-      bool areAllFieldsValid = suffixNameController.text.isNotEmpty &&
+      final bool areAllFieldsValid = suffixNameController.text.isNotEmpty &&
           firstNameController.text.isNotEmpty &&
           lastNameController.text.isNotEmpty &&
           (profileImageUrl != "" || profileImage != null) &&
@@ -66,14 +66,14 @@ class EditProfileBloc {
           mobileNumberController.text.isNotEmpty &&
           bioController.text.isNotEmpty;
 
-      bool hasValidLanguage =
+      final bool hasValidLanguage =
           listOfSpeakingLanguageNotifier.value.any((item) => item.isEnable);
 
       if (areAllFieldsValid && hasValidLanguage) {
         enableSaveButtonNotifier.value = true;
       }
     } else {
-      bool areAllFieldsValid = firstNameController.text.isNotEmpty &&
+      final bool areAllFieldsValid = firstNameController.text.isNotEmpty &&
           lastNameController.text.isNotEmpty &&
           selectedCountry != null &&
           genderController.text != "" &&
@@ -85,7 +85,7 @@ class EditProfileBloc {
     }
   }
 
-  void getProfileInformations(BuildContext context) async {
+  Future<void> getProfileInformations(BuildContext context) async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
     if (userType == UserType.attorney) {
@@ -201,7 +201,7 @@ class EditProfileBloc {
   }
 
   List<CheckBox> _prepareList(List<String> theList) {
-    List<CheckBox> list = [];
+    final List<CheckBox> list = [];
 
     final languagesToCheck = [
       "English",
@@ -210,7 +210,7 @@ class EditProfileBloc {
       "Español",
       "Türkçe"
     ];
-    for (var language in languagesToCheck) {
+    for (final language in languagesToCheck) {
       final isEnable = theList.any((item) => item.contains(language));
       list.add(CheckBox(value: language, isEnable: isEnable));
     }
@@ -224,7 +224,7 @@ class EditProfileBloc {
           .map((item) => item.value)
           .toList();
 
-      UpdateAttorneyAccountRequest account = UpdateAttorneyAccountRequest(
+      final UpdateAttorneyAccountRequest account = UpdateAttorneyAccountRequest(
         suffix: suffixNameController.text,
         firstName: firstNameController.text,
         lastName: lastNameController.text,
@@ -240,7 +240,7 @@ class EditProfileBloc {
       return locator<AttorneyAccountService>()
           .updateProfileInfo(account: account);
     } else {
-      UpdateCustomerAccountRequest account = UpdateCustomerAccountRequest(
+      final UpdateCustomerAccountRequest account = UpdateCustomerAccountRequest(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         email: emailController.text,

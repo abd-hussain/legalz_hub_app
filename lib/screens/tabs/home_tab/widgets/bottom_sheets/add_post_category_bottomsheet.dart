@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
+import 'package:legalz_hub_app/shared_widget/booking/widgets/cell_of_booking.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:legalz_hub_app/shared_widget/booking/widgets/cell_of_booking.dart';
 
 class AddPostCategoryBottomSheetsUtil {
   ValueNotifier<Category?> selectedCategory = ValueNotifier<Category?>(null);
@@ -68,9 +68,6 @@ class AddPostCategoryBottomSheetsUtil {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
-                            mainAxisSpacing: 0,
-                            crossAxisSpacing: 0,
-                            childAspectRatio: 1,
                           ),
                           itemCount: listOfCategories.length,
                           itemBuilder: (context, index) {

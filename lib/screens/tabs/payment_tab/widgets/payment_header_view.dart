@@ -3,16 +3,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PaymentHeaderView extends StatelessWidget {
-  final double pendingAmount;
-  final double recivedAmount;
-  final String currency;
-
   const PaymentHeaderView({
     super.key,
     required this.pendingAmount,
     required this.recivedAmount,
     required this.currency,
   });
+  final double pendingAmount;
+  final double recivedAmount;
+  final String currency;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class PaymentHeaderView extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

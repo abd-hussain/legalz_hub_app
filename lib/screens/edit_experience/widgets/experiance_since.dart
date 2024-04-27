@@ -5,16 +5,16 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
 class ExperianceSinceField extends StatefulWidget {
-  final TextEditingController controller;
-  final bool isEnable;
-  final EdgeInsets padding;
-  final VoidCallback onSelected;
   const ExperianceSinceField(
       {required this.controller,
       this.padding = const EdgeInsets.only(left: 16, right: 16),
       this.isEnable = true,
       required this.onSelected,
       super.key});
+  final TextEditingController controller;
+  final bool isEnable;
+  final EdgeInsets padding;
+  final VoidCallback onSelected;
 
   @override
   State<ExperianceSinceField> createState() => _ExperianceSinceFieldState();
@@ -68,7 +68,7 @@ class _ExperianceSinceFieldState extends State<ExperianceSinceField> {
   Future experianceSinceBottomSheet(
       BuildContext context, Function(String) selectedYear) {
     final int currentYear = DateTime.now().year;
-    List<String> listOfYears = [];
+    final List<String> listOfYears = [];
     for (int x = currentYear; x > currentYear - 50; x--) {
       listOfYears.add(x.toString());
     }
@@ -84,23 +84,22 @@ class _ExperianceSinceFieldState extends State<ExperianceSinceField> {
       context: context,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
                 title: AppLocalizations.of(context)!.experience_since,
                 textColor: Colors.black,
                 fontSize: 20,
               ),
-              const SizedBox(height: 27.0),
+              const SizedBox(height: 27),
               SizedBox(
                 height: 200,
                 child: ListView.builder(
                   itemCount: listOfYears.length,
-                  itemBuilder: ((context, index) {
+                  itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
@@ -126,7 +125,7 @@ class _ExperianceSinceFieldState extends State<ExperianceSinceField> {
                         ),
                       ),
                     );
-                  }),
+                  },
                 ),
               ),
               const SizedBox(height: 16),

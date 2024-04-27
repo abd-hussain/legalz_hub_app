@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/payments_response.dart';
 import 'package:legalz_hub_app/screens/tabs/payment_tab/payments_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/payment_tab/widgets/bottom_payment.dart';
@@ -9,7 +10,6 @@ import 'package:legalz_hub_app/shared_widget/main_header_view.dart';
 import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_notifications.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentTabScreen extends StatefulWidget {
   const PaymentTabScreen({super.key});
@@ -61,7 +61,7 @@ class _PaymentTabScreenState extends State<PaymentTabScreen>
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!
                                     .detailspayments,
@@ -99,7 +99,7 @@ class _PaymentTabScreenState extends State<PaymentTabScreen>
   }
 
   Future<void> _displayReportDialog(BuildContext context, int itemId) async {
-    TextEditingController controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {

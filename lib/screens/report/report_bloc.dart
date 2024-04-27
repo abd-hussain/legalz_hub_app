@@ -12,7 +12,7 @@ import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class ReportBloc extends Bloc<ReportService> {
-  var box = Hive.box(DatabaseBoxConstant.userInfo);
+  Box box = Hive.box(DatabaseBoxConstant.userInfo);
   UserType userType = UserType.customer;
 
   TextEditingController textController = TextEditingController();
@@ -60,7 +60,7 @@ class ReportBloc extends Bloc<ReportService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     attach1 = null;
     attach2 = null;
     attach3 = null;

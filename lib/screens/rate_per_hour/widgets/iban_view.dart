@@ -5,9 +5,9 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
 class IbanView extends StatelessWidget {
+  const IbanView({super.key, required this.controller, required this.onChange});
   final TextEditingController controller;
   final Function(String) onChange;
-  const IbanView({super.key, required this.controller, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class IbanView extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               CustomText(
@@ -44,9 +44,7 @@ class IbanView extends StatelessWidget {
                 fontSize: 20,
                 keyboardType: TextInputType.name,
                 inputFormatters: [LengthLimitingTextInputFormatter(30)],
-                onChange: (text) {
-                  onChange(text);
-                },
+                onChange: onChange,
                 onEditingComplete: () =>
                     FocusManager.instance.primaryFocus?.unfocus(),
               ),

@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 
 class ReportAttatchment extends StatefulWidget {
-  final Function(File?) attach1;
-  final Function(File?) attach2;
-  final Function(File?) attach3;
-
   const ReportAttatchment({
     super.key,
     required this.attach1,
     required this.attach2,
     required this.attach3,
   });
+  final Function(File?) attach1;
+  final Function(File?) attach2;
+  final Function(File?) attach3;
 
   @override
   State<ReportAttatchment> createState() => _ReportAttatchmentState();
@@ -75,20 +75,21 @@ class _ReportAttatchmentState extends State<ReportAttatchment> {
                     width: 70,
                     height: 70,
                   ),
-                  image1 != null
-                      ? Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              image1!,
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        )
-                      : Container()
+                  if (image1 != null)
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          image1!,
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  else
+                    Container()
                 ],
               ),
             ),
@@ -132,20 +133,21 @@ class _ReportAttatchmentState extends State<ReportAttatchment> {
                     width: 70,
                     height: 70,
                   ),
-                  image2 != null
-                      ? Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              image2!,
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        )
-                      : Container(),
+                  if (image2 != null)
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          image2!,
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  else
+                    Container(),
                 ],
               ),
             ),
@@ -188,20 +190,21 @@ class _ReportAttatchmentState extends State<ReportAttatchment> {
                   width: 70,
                   height: 70,
                 ),
-                image3 != null
-                    ? Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.file(
-                            image3!,
-                            width: 60,
-                            height: 60,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
-                    : Container(),
+                if (image3 != null)
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        image3!,
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                else
+                  Container(),
               ],
             ),
           ),

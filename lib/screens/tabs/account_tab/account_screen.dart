@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/tabs/account_tab/account_bloc.dart';
 import 'package:legalz_hub_app/screens/tabs/account_tab/widgets/collection_list_option.dart';
 import 'package:legalz_hub_app/screens/tabs/account_tab/widgets/footer.dart';
@@ -9,7 +10,6 @@ import 'package:legalz_hub_app/shared_widget/admob_banner.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountTabScreen extends StatefulWidget {
   const AccountTabScreen({super.key});
@@ -26,7 +26,9 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
     logDebugMessage(message: 'Account init Called ...');
     bloc.readBiometricsInitValue();
 
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
+        ? UserType.customer
+        : UserType.attorney;
 
     super.didChangeDependencies();
   }
@@ -43,13 +45,16 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
               listOfOptions: bloc.listOfAccountOptions(context, bloc.userType),
             ),
             TitleView(title: AppLocalizations.of(context)!.generalsettings),
-            CollectionListOptionView(listOfOptions: bloc.listOfSettingsOptions(context)),
+            CollectionListOptionView(
+                listOfOptions: bloc.listOfSettingsOptions(context)),
             TitleView(title: AppLocalizations.of(context)!.reachouttous),
-            CollectionListOptionView(listOfOptions: bloc.listOfReachOutUsOptions(context)),
+            CollectionListOptionView(
+                listOfOptions: bloc.listOfReachOutUsOptions(context)),
             TitleView(title: AppLocalizations.of(context)!.support),
-            CollectionListOptionView(listOfOptions: bloc.listOfSupportOptions(context)),
+            CollectionListOptionView(
+                listOfOptions: bloc.listOfSupportOptions(context)),
             const SizedBox(height: 8),
-            kIsWeb ? Container() : const AddMobBanner(),
+            if (kIsWeb) Container() else const AddMobBanner(),
             FooterView(
               language: bloc.box.get(DatabaseFieldConstant.language),
             ),

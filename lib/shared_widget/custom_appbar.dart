@@ -17,7 +17,6 @@ PreferredSizeWidget customAppBar(
         CustomText(
           title: title,
           fontSize: 14,
-          textColor: Colors.white,
         )
       ],
     ),

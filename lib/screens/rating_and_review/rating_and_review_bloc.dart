@@ -11,8 +11,8 @@ class RatingAndReviewBloc extends Bloc<AttorneySettingsService> {
 
   final DateFormat formatter = DateFormat('yyyy/MM/dd hh:mm');
 
-  void getRatingAndReviews() async {
-    service.getAttorneyRatingAndReviews().then((value) {
+  Future<void> getRatingAndReviews() async {
+    await service.getAttorneyRatingAndReviews().then((value) {
       if (value.data != null) {}
       ratingAndReviewsListNotifier.value = value.data!;
     });
@@ -24,7 +24,7 @@ class RatingAndReviewBloc extends Bloc<AttorneySettingsService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     ratingAndReviewsListNotifier.dispose();
   }
 }

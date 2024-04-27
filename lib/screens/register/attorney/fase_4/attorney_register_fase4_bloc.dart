@@ -14,7 +14,7 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
 
   String ibanRes = "";
 
-  tryToFillTheFields() {
+  void tryToFillTheFields() {
     if (box.get(TempFieldToRegistrtAttorneyConstant.iban) != null) {
       ibanController.text = box.get(TempFieldToRegistrtAttorneyConstant.iban);
     }
@@ -30,9 +30,10 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
     return box.get(DatabaseFieldConstant.selectedCountryCurrency) ?? "\$";
   }
 
-  validateFieldsForFaze4() {
+  void validateFieldsForFaze4() {
     if (ratePerHourController.text.isNotEmpty) {
-      double convertedText = double.tryParse(ratePerHourController.text) ?? 0.0;
+      final double convertedText =
+          double.tryParse(ratePerHourController.text) ?? 0.0;
       if (convertedText > 0) {
         enableNextBtn.value = true;
       } else {
@@ -43,7 +44,7 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
     }
   }
 
-  encreseRatePerHourBy1() {
+  void encreseRatePerHourBy1() {
     if (ratePerHourController.text.isEmpty) {
       ratePerHourController.text = "1.0";
     }
@@ -58,7 +59,7 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
     validateFieldsForFaze4();
   }
 
-  decreseRatePerHourBy1() {
+  void decreseRatePerHourBy1() {
     if (ratePerHourController.text.isEmpty) {
       ratePerHourController.text = "1.0";
     }
@@ -72,5 +73,5 @@ class AttorneyRegister4Bloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

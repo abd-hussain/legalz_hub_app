@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PointsViewBooking extends StatelessWidget {
-  final String number;
-  final String text;
-  final Color textColor;
-  final Function() onPress;
-
   const PointsViewBooking(
       {required this.number,
       required this.text,
       super.key,
       this.textColor = const Color(0xff444444),
       required this.onPress});
+  final String number;
+  final String text;
+  final Color textColor;
+  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +43,18 @@ class PointsViewBooking extends StatelessWidget {
             maxLins: 4,
           ),
         ),
-        textColor != const Color(0xff444444)
-            ? IconButton(
-                onPressed: () => onPress(),
-                icon: Icon(
-                  Icons.arrow_circle_right,
-                  color: textColor,
-                ))
-            : const SizedBox(
-                width: 20,
-                height: 20,
-              )
+        if (textColor != const Color(0xff444444))
+          IconButton(
+              onPressed: onPress,
+              icon: Icon(
+                Icons.arrow_circle_right,
+                color: textColor,
+              ))
+        else
+          const SizedBox(
+            width: 20,
+            height: 20,
+          )
       ],
     );
   }

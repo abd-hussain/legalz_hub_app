@@ -5,14 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class FileHolderField extends StatefulWidget {
-  final String title;
-  final double width;
-  final double height;
-
-  final File? currentFile;
-  final Function(File image) onAddFile;
-  final Function() onRemoveFile;
-
   const FileHolderField({
     super.key,
     required this.onAddFile,
@@ -22,6 +14,13 @@ class FileHolderField extends StatefulWidget {
     required this.width,
     this.height = 50,
   });
+  final String title;
+  final double width;
+  final double height;
+
+  final File? currentFile;
+  final Function(File image) onAddFile;
+  final Function() onRemoveFile;
 
   @override
   State<FileHolderField> createState() => _FileHolderFieldState();
@@ -41,12 +40,13 @@ class _FileHolderFieldState extends State<FileHolderField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: InkWell(
         onTap: () async {
           if (fileController.value == null) {
             try {
-              FilePickerResult? result = await FilePicker.platform.pickFiles(
+              final FilePickerResult? result =
+                  await FilePicker.platform.pickFiles(
                 type: FileType.custom,
                 allowedExtensions: ['jpg', 'pdf', 'doc'],
               );
@@ -80,7 +80,6 @@ class _FileHolderFieldState extends State<FileHolderField> {
                   ),
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
@@ -89,15 +88,16 @@ class _FileHolderFieldState extends State<FileHolderField> {
                       textAlign: TextAlign.center,
                       textColor: Colors.black,
                     ),
-                    snapshot != null
-                        ? const Icon(
-                            Icons.remove,
-                            color: Color(0xff444444),
-                          )
-                        : const Icon(
-                            Icons.add,
-                            color: Color(0xff444444),
-                          ),
+                    if (snapshot != null)
+                      const Icon(
+                        Icons.remove,
+                        color: Color(0xff444444),
+                      )
+                    else
+                      const Icon(
+                        Icons.add,
+                        color: Color(0xff444444),
+                      ),
                   ],
                 ),
               );

@@ -1,37 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:legalz_hub_app/models/https/attorney_appointment.dart';
-import 'package:legalz_hub_app/shared_widget/other_user_info_view.dart';
 import 'package:legalz_hub_app/screens/tabs/calender_tab/widgets/price_view.dart';
 import 'package:legalz_hub_app/shared_widget/appointment_details_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
+import 'package:legalz_hub_app/shared_widget/other_user_info_view.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
 class MainCalenderBottomSheetsUtil {
-  final BuildContext context;
-  final String language;
-  final int? meetingState;
-  final int? appointmentType;
-  final String? dateFrom;
-  final String? dateTo;
-  final String? suffixeName;
-  final String? firstName;
-  final String? lastName;
-  final String? gender;
-  final String? profileImg;
-  final String? flagImage;
-  final String? categoryName;
-  final String? dateOfBirth;
-  final UserType userType;
-  final String? noteFromCustomer;
-  final String? noteFromAttorney;
-  final String? currency;
-  final double? price;
-  final double? totalPrice;
-
   MainCalenderBottomSheetsUtil({
     required this.context,
     required this.language,
@@ -54,12 +33,32 @@ class MainCalenderBottomSheetsUtil {
     required this.price,
     required this.totalPrice,
   });
+  final BuildContext context;
+  final String language;
+  final int? meetingState;
+  final int? appointmentType;
+  final String? dateFrom;
+  final String? dateTo;
+  final String? suffixeName;
+  final String? firstName;
+  final String? lastName;
+  final String? gender;
+  final String? profileImg;
+  final String? flagImage;
+  final String? categoryName;
+  final String? dateOfBirth;
+  final UserType userType;
+  final String? noteFromCustomer;
+  final String? noteFromAttorney;
+  final String? currency;
+  final double? price;
+  final double? totalPrice;
 
   Future bookMeetingBottomSheet({
     required Function() cancel,
     required Function() addNote,
   }) async {
-    return await showModalBottomSheet(
+    return showModalBottomSheet(
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -117,8 +116,7 @@ class MainCalenderBottomSheetsUtil {
                 const SizedBox(height: 20),
                 CustomButton(
                   enableButton: true,
-                  padding: const EdgeInsets.all(8.0),
-                  buttonColor: const Color(0xff4CB6EA),
+                  padding: const EdgeInsets.all(8),
                   buttonTitle: AppLocalizations.of(context)!.addeditnote,
                   onTap: () {
                     Navigator.pop(context);
@@ -129,7 +127,7 @@ class MainCalenderBottomSheetsUtil {
                   enableButton:
                       DateTime.now().isBefore(DateTime.parse(dateFrom!)) &&
                           meetingState == 1,
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   buttonColor: const Color(0xffda1100),
                   buttonTitle: AppLocalizations.of(context)!.cancelappointment,
                   onTap: () {
@@ -163,8 +161,8 @@ class MainCalenderBottomSheetsUtil {
     required String noteFromCustomer,
     required String noteFromAttorney,
   }) {
-    DateTime fromTime = DateTime.parse(dateFrom);
-    DateTime toTime = DateTime.parse(dateTo);
+    final DateTime fromTime = DateTime.parse(dateFrom);
+    final DateTime toTime = DateTime.parse(dateTo);
     final difference = toTime.difference(fromTime).inMinutes;
 
     return Column(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/forgot_password_request.dart';
 import 'package:legalz_hub_app/services/auth_services.dart';
 import 'package:legalz_hub_app/services/settings_service.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordBloc extends Bloc<AuthService> {
   final TextEditingController emailFieldController = TextEditingController();
@@ -16,7 +16,7 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier =
       ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
-  handleListeners() {
+  void handleListeners() {
     emailFieldController.addListener(_emailListen);
   }
 
@@ -24,7 +24,7 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
     showHideEmailClearNotifier.value = emailFieldController.text.isNotEmpty;
   }
 
-  fieldValidation() {
+  void fieldValidation() {
     fieldsValidations.value = false;
     if (emailFieldController.text.isNotEmpty) {
       if (_validateEmail(emailFieldController.text)) {
@@ -38,17 +38,17 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
   }
 
   bool _validateEmail(String value) {
-    Pattern pattern =
+    final Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern as String);
+    final RegExp regex = RegExp(pattern as String);
     return (!regex.hasMatch(value)) ? false : true;
   }
 
   Future<dynamic> doForgotPasswordCall() async {
-    return await locator<SettingService>().forgotPassword(
+    return locator<SettingService>().forgotPassword(
         data: ForgotPasswordRequest(email: emailFieldController.text));
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

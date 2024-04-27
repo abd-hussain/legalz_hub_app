@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PriceView extends StatelessWidget {
-  final double priceBeforeDiscount;
-  final double priceAfterDiscount;
-  final String currency;
-
   const PriceView(
       {super.key,
       required this.priceBeforeDiscount,
       required this.priceAfterDiscount,
       required this.currency});
+  final double priceBeforeDiscount;
+  final double priceAfterDiscount;
+  final String currency;
 
   @override
   Widget build(BuildContext context) {

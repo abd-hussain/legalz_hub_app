@@ -4,9 +4,8 @@ import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 
 class MainBannerHomePage extends StatelessWidget {
-  final List<HomeBannerResponseData> bannerList;
-
   const MainBannerHomePage({required this.bannerList, super.key});
+  final List<HomeBannerResponseData> bannerList;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +17,8 @@ class MainBannerHomePage extends StatelessWidget {
   }
 
   List<Widget> _listOfBanners(List<HomeBannerResponseData> commingList) {
-    List<Widget> list = [];
-    for (var item in commingList) {
+    final List<Widget> list = [];
+    for (final item in commingList) {
       list.add(_banner(obj: item));
     }
     return list;
@@ -31,7 +30,6 @@ class MainBannerHomePage extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
-            spreadRadius: 0,
             blurRadius: 4,
             offset: const Offset(0, 3),
           ),

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class EditWorkingHourBottomSheetsUtil {
@@ -30,14 +30,14 @@ class EditWorkingHourBottomSheetsUtil {
 }
 
 class EditWorkingHoursView extends StatefulWidget {
-  final String dayName;
-  final List<CheckBox> listOfWorkingHour;
-  final Function(List<int>) onSave;
   const EditWorkingHoursView(
       {super.key,
       required this.dayName,
       required this.listOfWorkingHour,
       required this.onSave});
+  final String dayName;
+  final List<CheckBox> listOfWorkingHour;
+  final Function(List<int>) onSave;
 
   @override
   State<EditWorkingHoursView> createState() => _EditWorkingHoursViewState();
@@ -47,7 +47,7 @@ class _EditWorkingHoursViewState extends State<EditWorkingHoursView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.all(18),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -81,9 +81,9 @@ class _EditWorkingHoursViewState extends State<EditWorkingHoursView> {
                 },
                 icon: InkWell(
                   onTap: () {
-                    List<int> listOfSelectedHour = [];
+                    final List<int> listOfSelectedHour = [];
 
-                    for (CheckBox item in widget.listOfWorkingHour) {
+                    for (final CheckBox item in widget.listOfWorkingHour) {
                       if (item.isEnable) {
                         listOfSelectedHour
                             .add(convertHourStringToInt(item.value));

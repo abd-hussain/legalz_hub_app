@@ -5,7 +5,7 @@ class DateofBirthBloc {
   TextEditingController dobController = TextEditingController();
   late FocusNode focusNode = FocusNode();
 
-  format(DateTime datePicked) {
+  void format(DateTime datePicked) {
     dobController.text = DateFormat('dd/MM/yyyy').format(datePicked);
   }
 

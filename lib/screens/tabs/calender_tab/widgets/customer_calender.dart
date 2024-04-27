@@ -10,16 +10,16 @@ import 'package:legalz_hub_app/utils/gender_format.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CustomerCalenderView extends StatelessWidget {
-  final String language;
-  final ValueNotifier<List<CustomerAppointmentData>> valueNotifier;
-  final Function(int) cancelMeeting;
-  final Function(NoteAppointmentRequest) addNote;
   const CustomerCalenderView(
       {required this.language,
       required this.valueNotifier,
       super.key,
       required this.cancelMeeting,
       required this.addNote});
+  final String language;
+  final ValueNotifier<List<CustomerAppointmentData>> valueNotifier;
+  final Function(int) cancelMeeting;
+  final Function(NoteAppointmentRequest) addNote;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,7 @@ class CustomerCalenderView extends StatelessWidget {
             todayHighlightColor: const Color(0xff034061),
             dataSource: CustomerDataSource(context, snapshot),
             monthViewSettings: const MonthViewSettings(
-              appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
               showAgenda: true,
-              numberOfWeeksInView: 6,
               appointmentDisplayCount: 10,
               agendaStyle: AgendaStyle(
                 backgroundColor: Color(0xffE8E8E8),
@@ -91,7 +89,7 @@ class CustomerCalenderView extends StatelessWidget {
                         .showAddEditNoteDialog(
                             note: item.noteFromCustomer ?? "",
                             confirm: (note) {
-                              var body = NoteAppointmentRequest(
+                              final body = NoteAppointmentRequest(
                                   id: item.id!, comment: note);
                               addNote(body);
                             });

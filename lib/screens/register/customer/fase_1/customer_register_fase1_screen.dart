@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
-import 'package:legalz_hub_app/shared_widget/mobile_header.dart';
-import 'package:legalz_hub_app/shared_widget/mobile_number_widget.dart';
 import 'package:legalz_hub_app/screens/register/customer/fase_1/customer_register_fase1_bloc.dart';
 import 'package:legalz_hub_app/screens/register/widgets/footer_view.dart';
 import 'package:legalz_hub_app/shared_widget/country_field.dart';
@@ -15,6 +12,8 @@ import 'package:legalz_hub_app/shared_widget/date_of_birth/date_of_birth_view.da
 import 'package:legalz_hub_app/shared_widget/gender_field.dart';
 import 'package:legalz_hub_app/shared_widget/image_holder_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
+import 'package:legalz_hub_app/shared_widget/mobile_header.dart';
+import 'package:legalz_hub_app/shared_widget/mobile_number_widget.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
@@ -84,7 +83,7 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                         : "");
                 await bloc.box
                     .put(DatabaseFieldConstant.customerRegistrationStep, "2");
-                navigator
+                await navigator
                     .pushNamed(RoutesConstants.registerCustomerFaze2Screen);
               },
             );
@@ -264,7 +263,6 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                   const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.dbprofile,
-                                textAlign: TextAlign.start,
                                 fontSize: 14,
                                 textColor: const Color(0xff384048),
                               ),
@@ -288,7 +286,6 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                   const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.optional,
-                                textAlign: TextAlign.start,
                                 fontSize: 14,
                                 textColor: const Color(0xff384048),
                               ),

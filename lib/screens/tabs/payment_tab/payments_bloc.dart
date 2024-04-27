@@ -12,14 +12,14 @@ class PaymentsBloc extends Bloc<PaymentService> {
   double pendingTotalAmount = 0;
   double recivedTotalAmount = 0;
   String currency = "";
-  var box = Hive.box(DatabaseBoxConstant.userInfo);
+  Box box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  getListOfPayments() {
+  void getListOfPayments() {
     service.listOfPayments().then((value) {
       if (value.data != null) {
         pendingTotalAmount = 0;
         recivedTotalAmount = 0;
-        for (PaymentResponseData item in value.data!) {
+        for (final PaymentResponseData item in value.data!) {
           if (item.appointmentIsFree == false) {
             if (item.paymentStatus == 1) {
               if (item.appointmentDiscountId != null) {
@@ -49,11 +49,11 @@ class PaymentsBloc extends Bloc<PaymentService> {
   }
 
   Future<dynamic> reportPayment(int id, String message) async {
-    PaymentReportRequest data =
+    final PaymentReportRequest data =
         PaymentReportRequest(message: message, paymentId: id);
     return service.reportPayment(data);
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

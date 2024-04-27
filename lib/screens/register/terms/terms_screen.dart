@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/register/terms/terms_bloc.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
@@ -9,7 +10,6 @@ import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TermsAndConditionScreen extends StatefulWidget {
   const TermsAndConditionScreen({super.key});
@@ -61,20 +61,19 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
           ),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.all(3.0),
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                   border: Border.all(color: const Color(0xff444444))),
               child: WebViewAware(
                 child: WebViewX(
                   key: const ValueKey('webviewx'),
-                  ignoreAllGestures: false,
                   initialSourceType: SourceType.urlBypass,
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   onWebViewCreated: (controller) async {
                     bloc.webviewController = controller;
-                    bloc.webviewController.loadContent(
+                    await bloc.webviewController.loadContent(
                       bloc.box.get(DatabaseFieldConstant.language) == "en"
                           ? AppConstant.termsLink
                           : AppConstant.termsLinkAR,

@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class TutView extends StatelessWidget {
-  final String title;
-  final String desc;
-
-  final String image;
-
   const TutView({
     super.key,
     required this.title,
     required this.desc,
     required this.image,
   });
+  final String title;
+  final String desc;
+
+  final String image;
 
   @override
   Widget build(BuildContext context) {

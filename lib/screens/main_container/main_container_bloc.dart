@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
@@ -10,7 +12,6 @@ import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum CustomerSelectedTab { home, categories, call, calender, account }
 
@@ -21,7 +22,6 @@ class MainContainerBloc {
       ValueNotifier<CustomerSelectedTab>(CustomerSelectedTab.home);
   final ValueNotifier<AttorneySelectedTab> attornyCurrentTabIndexNotifier =
       ValueNotifier<AttorneySelectedTab>(AttorneySelectedTab.home);
-  // StreamController<List<Category>> listOfCategoriesStreamController = StreamController<List<Category>>.broadcast();
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   UserType userType = UserType.attorney;
@@ -152,13 +152,13 @@ class MainContainerBloc {
   }
 
   Future<List<Category>> getlistOfCategories(BuildContext context) async {
-    return await locator<FilterService>().categories().then((value) {
-      List<Category> list = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+    return locator<FilterService>().categories().then((value) {
+      final List<Category> list = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
 
       list.insert(0, Category(id: 0, name: AppLocalizations.of(context)!.all));
 
       return list;
-      // listOfCategoriesStreamController.add(list);
     });
   }
 }

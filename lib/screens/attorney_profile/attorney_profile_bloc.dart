@@ -13,7 +13,8 @@ import 'package:legalz_hub_app/utils/gender_format.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
-  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   String? profileImageUrl;
 
   String? firstName;
@@ -50,7 +51,8 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
   List<AttorneyAppointmentsResponseData> listOfAppointments = [];
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  void handleReadingArguments(BuildContext context, {required Object? arguments}) {
+  void handleReadingArguments(BuildContext context,
+      {required Object? arguments}) {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
       final int attorneyId = newArguments["id"] as int;
@@ -61,7 +63,9 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
   }
 
   void _getAttorneyAppointments(int id) {
-    locator<CustomerAppointmentsService>().getAttorneyAppointments(id).then((value) {
+    locator<CustomerAppointmentsService>()
+        .getAttorneyAppointments(id)
+        .then((value) {
       if (value.data != null) {
         listOfAppointments = _prepareAttorneyAppoitnmentsFromUTC(value.data!);
       }
@@ -123,13 +127,34 @@ class AttorneyProfileBloc extends Bloc<AttorneyDetailsService> {
             workingHoursThursday: value.data!.workingHoursThursday ?? [],
             workingHoursFriday: value.data!.workingHoursFriday ?? []);
 
-        workingHoursSaturday = workingHours.where((element) => element.dayName == DayNameEnum.saturday).first.list;
-        workingHoursSunday = workingHours.where((element) => element.dayName == DayNameEnum.sunday).first.list;
-        workingHoursMonday = workingHours.where((element) => element.dayName == DayNameEnum.monday).first.list;
-        workingHoursTuesday = workingHours.where((element) => element.dayName == DayNameEnum.tuesday).first.list;
-        workingHoursWednesday = workingHours.where((element) => element.dayName == DayNameEnum.wednesday).first.list;
-        workingHoursThursday = workingHours.where((element) => element.dayName == DayNameEnum.thursday).first.list;
-        workingHoursFriday = workingHours.where((element) => element.dayName == DayNameEnum.friday).first.list;
+        workingHoursSaturday = workingHours
+            .where((element) => element.dayName == DayNameEnum.saturday)
+            .first
+            .list;
+        workingHoursSunday = workingHours
+            .where((element) => element.dayName == DayNameEnum.sunday)
+            .first
+            .list;
+        workingHoursMonday = workingHours
+            .where((element) => element.dayName == DayNameEnum.monday)
+            .first
+            .list;
+        workingHoursTuesday = workingHours
+            .where((element) => element.dayName == DayNameEnum.tuesday)
+            .first
+            .list;
+        workingHoursWednesday = workingHours
+            .where((element) => element.dayName == DayNameEnum.wednesday)
+            .first
+            .list;
+        workingHoursThursday = workingHours
+            .where((element) => element.dayName == DayNameEnum.thursday)
+            .first
+            .list;
+        workingHoursFriday = workingHours
+            .where((element) => element.dayName == DayNameEnum.friday)
+            .first
+            .list;
 
         reviews = value.data!.reviews!;
         loadingStatus.value = LoadingStatus.finish;

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/attorney_appointment.dart';
 import 'package:legalz_hub_app/utils/meeting_status.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AttorneyDataSource extends CalendarDataSource {
-  late final BuildContext context;
-
   AttorneyDataSource(this.context, List<AttorneyAppointmentsData> source) {
     appointments = source;
   }
+  late final BuildContext context;
 
   @override
   DateTime getStartTime(int index) {

@@ -2,15 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomButton extends StatelessWidget {
-  final String buttonTitle;
-  final Color buttonTitleColor;
-
-  final bool enableButton;
-  final Color buttonColor;
-  final Function() onTap;
-  final double? width;
-  final EdgeInsetsGeometry padding;
-
   const CustomButton({
     this.buttonTitle = "Submit",
     this.buttonTitleColor = Colors.black,
@@ -21,6 +12,14 @@ class CustomButton extends StatelessWidget {
     super.key,
     this.padding = const EdgeInsets.all(16),
   });
+  final String buttonTitle;
+  final Color buttonTitleColor;
+
+  final bool enableButton;
+  final Color buttonColor;
+  final Function() onTap;
+  final double? width;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {

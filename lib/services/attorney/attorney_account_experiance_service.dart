@@ -35,7 +35,7 @@ class AttorneyAccountExperianceService with Service {
     if (account.cert3 != null) {
       cert3FileName = account.cert3!.path.split('/').last;
     }
-    FormData formData = FormData.fromMap({
+    final FormData formData = FormData.fromMap({
       "cv": account.cv != null && account.cv != File("")
           ? await MultipartFile.fromFile(account.cv!.path, filename: cvFileName)
           : MultipartFile.fromString(""),

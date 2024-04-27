@@ -4,13 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
 class PasswordField extends StatelessWidget {
-  final TextEditingController controller;
-  final ValueNotifier<bool> showHidePasswordClearNotifier;
-  final String hintText;
-  final Function() onchange;
-  final Function() onEditingComplete;
-
-  final Function() onClear;
   const PasswordField(
       {super.key,
       required this.controller,
@@ -19,10 +12,18 @@ class PasswordField extends StatelessWidget {
       required this.onEditingComplete,
       this.hintText = "",
       required this.onClear});
+  final TextEditingController controller;
+  final ValueNotifier<bool> showHidePasswordClearNotifier;
+  final String hintText;
+  final Function() onchange;
+  final Function() onEditingComplete;
+
+  final Function() onClear;
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<bool> showHidePasswordNotifier = ValueNotifier<bool>(true);
+    final ValueNotifier<bool> showHidePasswordNotifier =
+        ValueNotifier<bool>(true);
 
     void showHidePassword() {
       showHidePasswordNotifier.value = !showHidePasswordNotifier.value;
@@ -52,7 +53,7 @@ class PasswordField extends StatelessWidget {
                         builder: (context, snapshot, child) {
                           return snapshot
                               ? IconButton(
-                                  onPressed: () => onClear(),
+                                  onPressed: onClear,
                                   icon: Icon(
                                     Icons.close,
                                     size: 20,
@@ -62,9 +63,7 @@ class PasswordField extends StatelessWidget {
                               : Container();
                         }),
                     IconButton(
-                      onPressed: () {
-                        showHidePassword();
-                      },
+                      onPressed: showHidePassword,
                       icon: Icon(
                         showHidePasswordSnapshot
                             ? Icons.visibility
@@ -77,7 +76,7 @@ class PasswordField extends StatelessWidget {
                 ),
               ),
               onChange: (text) => onchange(),
-              onEditingComplete: () => onEditingComplete(),
+              onEditingComplete: onEditingComplete,
             );
           }),
     );

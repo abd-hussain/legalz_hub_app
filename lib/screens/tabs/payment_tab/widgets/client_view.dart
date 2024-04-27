@@ -4,17 +4,16 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 
 class ClientView extends StatelessWidget {
-  final String clientProfileImg;
-  final String clientFirstName;
-  final String clientLastName;
-  final String clientCountryFlag;
-
   const ClientView(
       {super.key,
       required this.clientProfileImg,
       required this.clientFirstName,
       required this.clientLastName,
       required this.clientCountryFlag});
+  final String clientProfileImg;
+  final String clientFirstName;
+  final String clientLastName;
+  final String clientCountryFlag;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class ClientView extends StatelessWidget {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
                   Stack(
@@ -58,14 +57,14 @@ class ClientView extends StatelessWidget {
                                   placeholder: const AssetImage(
                                       "assets/images/avatar.jpeg"),
                                   image: NetworkImage(
-                                      AppConstant.imagesBaseURLForCustomer +
-                                          clientProfileImg,
-                                      scale: 1),
+                                    AppConstant.imagesBaseURLForCustomer +
+                                        clientProfileImg,
+                                  ),
                                 )
                               : Image.asset(
                                   'assets/images/avatar.jpeg',
-                                  width: 110.0,
-                                  height: 110.0,
+                                  width: 110,
+                                  height: 110,
                                   fit: BoxFit.fill,
                                 ),
                         ),
@@ -83,14 +82,14 @@ class ClientView extends StatelessWidget {
                                     placeholder: const AssetImage(
                                         "assets/images/avatar.jpeg"),
                                     image: NetworkImage(
-                                        AppConstant.imagesBaseURLForCountries +
-                                            clientCountryFlag,
-                                        scale: 1),
+                                      AppConstant.imagesBaseURLForCountries +
+                                          clientCountryFlag,
+                                    ),
                                   )
                                 : Image.asset(
                                     'assets/images/avatar.jpeg',
-                                    width: 110.0,
-                                    height: 110.0,
+                                    width: 110,
+                                    height: 110,
                                     fit: BoxFit.fill,
                                   ),
                           ),

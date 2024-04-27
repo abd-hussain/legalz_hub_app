@@ -14,10 +14,10 @@ class RatePerHourBloc extends Bloc<AttorneyHourRateService> {
   String currency = "";
   int freeType = 0;
 
-  void getHourPerRate() async {
+  Future<void> getHourPerRate() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
-    service.getHourRateAndIban().then((value) {
+    await service.getHourRateAndIban().then((value) {
       final hourRate = value.data!.hourRate ?? 0;
 
       ratePerHourController.text = "$hourRate";
@@ -37,7 +37,7 @@ class RatePerHourBloc extends Bloc<AttorneyHourRateService> {
     );
   }
 
-  validateFieldsForFaze5() {
+  void validateFieldsForFaze5() {
     if (ratePerHourController.text.isNotEmpty &&
         ibanController.text.isNotEmpty) {
       enableSaveButton.value = true;
@@ -46,7 +46,7 @@ class RatePerHourBloc extends Bloc<AttorneyHourRateService> {
     }
   }
 
-  encreseRatePerHourBy1() {
+  void encreseRatePerHourBy1() {
     if (ratePerHourController.text.isEmpty) {
       ratePerHourController.text = "1.0";
     }
@@ -61,7 +61,7 @@ class RatePerHourBloc extends Bloc<AttorneyHourRateService> {
     validateFieldsForFaze5();
   }
 
-  decreseRatePerHourBy1() {
+  void decreseRatePerHourBy1() {
     if (ratePerHourController.text.isEmpty) {
       ratePerHourController.text = "1.0";
     }
@@ -75,7 +75,7 @@ class RatePerHourBloc extends Bloc<AttorneyHourRateService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     loadingStatusNotifier.dispose();
     enableSaveButton.dispose();
   }

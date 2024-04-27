@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:legalz_hub_app/utils/version.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FooterView extends StatelessWidget {
-  final String language;
   const FooterView({super.key, required this.language});
+  final String language;
 
   @override
   Widget build(BuildContext context) {
@@ -66,25 +66,25 @@ class FooterView extends StatelessWidget {
               ),
             ],
           ),
-          kIsWeb
-              ? Container()
-              : TextButton(
-                  onPressed: () {
-                    WidgetsBinding.instance.addPostFrameCallback((_) async {
-                      RateMyApp().showRateDialog(
-                        context,
-                        title: AppLocalizations.of(context)!.rateapponstore,
-                        message:
-                            AppLocalizations.of(context)!.rateapponstoremessage,
-                        rateButton: AppLocalizations.of(context)!.rateapp,
-                        laterButton: AppLocalizations.of(context)!.later,
-                        noButton: AppLocalizations.of(context)!.close,
-                      );
-                    });
-                  },
-                  child:
-                      _footerTextWidget(AppLocalizations.of(context)!.rateapp),
-                ),
+          if (kIsWeb)
+            Container()
+          else
+            TextButton(
+              onPressed: () {
+                WidgetsBinding.instance.addPostFrameCallback((_) async {
+                  await RateMyApp().showRateDialog(
+                    context,
+                    title: AppLocalizations.of(context)!.rateapponstore,
+                    message:
+                        AppLocalizations.of(context)!.rateapponstoremessage,
+                    rateButton: AppLocalizations.of(context)!.rateapp,
+                    laterButton: AppLocalizations.of(context)!.later,
+                    noButton: AppLocalizations.of(context)!.close,
+                  );
+                });
+              },
+              child: _footerTextWidget(AppLocalizations.of(context)!.rateapp),
+            ),
           TextButton(
             onPressed: () {
               Navigator.of(context, rootNavigator: true)
@@ -152,12 +152,12 @@ class FooterView extends StatelessWidget {
     );
   }
 
-  void _launchWhatsapp(BuildContext context) async {
+  Future<void> _launchWhatsapp(BuildContext context) async {
     final localize = AppLocalizations.of(context)!;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    var whatsapp = AppConstant.whatsappNumber;
-    var whatsappAndroid =
+    final whatsapp = AppConstant.whatsappNumber;
+    final whatsappAndroid =
         Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
     if (await canLaunchUrl(whatsappAndroid)) {
       await launchUrl(whatsappAndroid);

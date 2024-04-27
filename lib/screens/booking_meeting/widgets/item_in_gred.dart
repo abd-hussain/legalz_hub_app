@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class ItemInGrid extends StatelessWidget {
-  final String title;
-  final String? value;
-  final double valueHight;
-
   const ItemInGrid({
     super.key,
     required this.title,
     required this.value,
     this.valueHight = 25,
   });
+  final String title;
+  final String? value;
+  final double valueHight;
 
   @override
   Widget build(BuildContext context) {

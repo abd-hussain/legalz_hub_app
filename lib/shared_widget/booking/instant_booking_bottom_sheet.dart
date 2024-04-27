@@ -23,7 +23,7 @@ class InstantBookingBottomSheetsUtil {
     required Function(Category selectedCategory, Timing selectedMeetingDuration)
         onEndSelection,
   }) async {
-    return await showModalBottomSheet(
+    return showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -114,11 +114,7 @@ class InstantBookingBottomSheetsUtil {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            mainAxisSpacing: 0,
-                            crossAxisSpacing: 0,
-                            childAspectRatio: 1,
-                            mainAxisExtent: 100),
+                            crossAxisCount: 4, mainAxisExtent: 100),
                     itemCount: listOfCategories.length,
                     itemBuilder: (context, index) {
                       return BookingCell(
@@ -295,7 +291,6 @@ class InstantBookingBottomSheetsUtil {
           children: [
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -306,14 +301,15 @@ class InstantBookingBottomSheetsUtil {
                         textColor: const Color(0xff554d56),
                       ),
                       const SizedBox(width: 2),
-                      categoryName != ""
-                          ? CustomText(
-                              title: categoryName,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              textColor: const Color(0xff554d56),
-                            )
-                          : Container(),
+                      if (categoryName != "")
+                        CustomText(
+                          title: categoryName,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          textColor: const Color(0xff554d56),
+                        )
+                      else
+                        Container(),
                     ],
                   ),
                   Row(
@@ -325,14 +321,15 @@ class InstantBookingBottomSheetsUtil {
                         textColor: const Color(0xff554d56),
                       ),
                       const SizedBox(width: 2),
-                      duration != ""
-                          ? CustomText(
-                              title: duration,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              textColor: const Color(0xff554d56),
-                            )
-                          : Container(),
+                      if (duration != "")
+                        CustomText(
+                          title: duration,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          textColor: const Color(0xff554d56),
+                        )
+                      else
+                        Container(),
                     ],
                   ),
                 ],

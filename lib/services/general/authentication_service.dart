@@ -39,8 +39,8 @@ class AuthenticationService with Service {
       String localizedAuthenticationMessage) async {
     return localAuthentication!
         .authenticate(
-      options: const AuthenticationOptions(
-          biometricOnly: true, useErrorDialogs: true, stickyAuth: true),
+      options:
+          const AuthenticationOptions(biometricOnly: true, stickyAuth: true),
       localizedReason: localizedAuthenticationMessage,
     )
         .then((value) async {
@@ -58,7 +58,7 @@ class AuthenticationService with Service {
 
     AuthenticationBiometricType? response = AuthenticationBiometricType(
         isAvailable: false, type: BiometricType.iris);
-    return await localAuthentication!
+    return localAuthentication!
         .getAvailableBiometrics()
         .then((listOfBiometrics) {
       for (final biometricType in listOfBiometrics) {

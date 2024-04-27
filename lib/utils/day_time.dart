@@ -11,13 +11,13 @@ class DayTime {
   }
 
   String dateFormatter(String dateAsString) {
-    var parsedDate = DateTime.parse(dateAsString);
+    final parsedDate = DateTime.parse(dateAsString);
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     return formatter.format(parsedDate);
   }
 
   String dateFormatterWithTime(String dateAsString) {
-    var parsedDate = DateTime.parse(dateAsString);
+    final parsedDate = DateTime.parse(dateAsString);
     final DateFormat formatter = DateFormat('yyyy/MM/dd hh:mm a');
     return formatter.format(parsedDate);
   }
@@ -60,11 +60,11 @@ class DayTime {
       required List<int> workingHoursWednesday,
       required List<int> workingHoursThursday,
       required List<int> workingHoursFriday}) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
-    List<WorkingHourUTCModel> returnedList = [];
+    final int offset = DateTime.now().timeZoneOffset.inHours;
+    final List<WorkingHourUTCModel> returnedList = [];
 
     // Map of working hours for each day
-    var workingHoursMap = {
+    final workingHoursMap = {
       DayNameEnum.saturday: workingHoursSaturday,
       DayNameEnum.sunday: workingHoursSunday,
       DayNameEnum.monday: workingHoursMonday,
@@ -77,17 +77,17 @@ class DayTime {
     DayNameEnum previousDay =
         DayNameEnum.friday; // Start with Friday as the previous day of Saturday
 
-    for (var entry in workingHoursMap.entries) {
-      var day = entry.key;
-      var hours = entry.value;
-      var previousDayHours = <int>[];
+    for (final entry in workingHoursMap.entries) {
+      final day = entry.key;
+      final hours = entry.value;
+      final previousDayHours = <int>[];
 
       if (hours.isEmpty) {
         returnedList.add(WorkingHourUTCModel(dayName: day, list: []));
       } else {
-        var editedWorkingHour = <int>[];
-        for (var hour in hours) {
-          var editedHour = hour - offset;
+        final editedWorkingHour = <int>[];
+        for (final hour in hours) {
+          final editedHour = hour - offset;
           if (editedHour < 0) {
             previousDayHours.add(24 + editedHour);
           } else {
@@ -100,7 +100,7 @@ class DayTime {
 
       // Add hours to the previous day if needed
       if (previousDayHours.isNotEmpty) {
-        var previousDayModel = returnedList.firstWhere(
+        final previousDayModel = returnedList.firstWhere(
           (element) => element.dayName == previousDay,
           orElse: () => WorkingHourUTCModel(dayName: previousDay, list: []),
         );
@@ -121,8 +121,8 @@ class DayTime {
       required List<int> workingHoursWednesday,
       required List<int> workingHoursThursday,
       required List<int> workingHoursFriday}) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
-    List<WorkingHourUTCModel> returnedList = [
+    final int offset = DateTime.now().timeZoneOffset.inHours;
+    final List<WorkingHourUTCModel> returnedList = [
       WorkingHourUTCModel(dayName: DayNameEnum.saturday, list: []),
       WorkingHourUTCModel(dayName: DayNameEnum.sunday, list: []),
       WorkingHourUTCModel(dayName: DayNameEnum.monday, list: []),
@@ -133,7 +133,7 @@ class DayTime {
     ];
 
     // Map of working hours for each day
-    var workingHoursMap = {
+    final workingHoursMap = {
       DayNameEnum.saturday: workingHoursSaturday,
       DayNameEnum.sunday: workingHoursSunday,
       DayNameEnum.monday: workingHoursMonday,
@@ -146,15 +146,15 @@ class DayTime {
     DayNameEnum nextDay =
         DayNameEnum.sunday; // Start with sunday as the after day of Saturday
 
-    for (var entry in workingHoursMap.entries) {
-      var day = entry.key;
-      var hours = entry.value;
-      var nextDayHours = <int>[];
+    for (final entry in workingHoursMap.entries) {
+      final day = entry.key;
+      final hours = entry.value;
+      final nextDayHours = <int>[];
 
       if (hours.isNotEmpty) {
-        var editedWorkingHour = <int>[];
-        for (var hour in hours) {
-          var editedHour = hour + offset;
+        final editedWorkingHour = <int>[];
+        for (final hour in hours) {
+          final editedHour = hour + offset;
           if (editedHour >= 24) {
             nextDayHours.add(editedHour - 24);
           } else {
@@ -169,7 +169,7 @@ class DayTime {
 
       // Add hours to the next day if needed
       if (nextDayHours.isNotEmpty) {
-        var nextDayModel = returnedList.firstWhere(
+        final nextDayModel = returnedList.firstWhere(
           (element) => element.dayName == getNextDay(nextDay),
           orElse: () =>
               WorkingHourUTCModel(dayName: getNextDay(nextDay), list: []),
@@ -204,12 +204,12 @@ class DayTime {
 
   int getHourFromTimeString(String time) {
     if (time.contains("a.m")) {
-      String result = time.replaceAll(" a.m", "");
-      var parts = result.split(':');
+      final String result = time.replaceAll(" a.m", "");
+      final parts = result.split(':');
       return int.parse(parts[0].trim());
     } else {
-      String result = time.replaceAll(" p.m", "");
-      var parts = result.split(':');
+      final String result = time.replaceAll(" p.m", "");
+      final parts = result.split(':');
       return _getHourPm(int.parse(parts[0].trim()));
     }
   }

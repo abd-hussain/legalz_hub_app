@@ -4,15 +4,14 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
 class CustomTabBar extends StatefulWidget {
-  final TabController? tabController;
-  final List<Widget> tabs;
-  final UserType userType;
-
   const CustomTabBar(
       {super.key,
       required this.tabController,
       required this.tabs,
       required this.userType});
+  final TabController? tabController;
+  final List<Widget> tabs;
+  final UserType userType;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -27,7 +26,6 @@ class _CustomTabBarState extends State<CustomTabBar> {
         SizedBox(
           height: 42,
           child: Align(
-            alignment: Alignment.center,
             child: TabBar(
               indicatorColor: Colors.transparent,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -64,7 +62,6 @@ class _CustomTabBarState extends State<CustomTabBar> {
   Widget indicator() {
     return ClipRect(
       child: BackdropFilter(
-        blendMode: BlendMode.srcOver,
         filter: ImageFilter.blur(sigmaX: 0.7, sigmaY: 0.7),
         child: Container(
           width: 20,
@@ -79,9 +76,8 @@ class _CustomTabBarState extends State<CustomTabBar> {
 }
 
 class CustomTab extends StatelessWidget {
-  final String tabName;
-
   const CustomTab({super.key, required this.tabName});
+  final String tabName;
 
   @override
   Widget build(BuildContext context) {

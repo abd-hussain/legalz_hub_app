@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class BookingCell extends StatelessWidget {
-  final String title;
-  final bool isSelected;
-  final Function() onPress;
-
   const BookingCell(
       {required this.title,
       required this.isSelected,
       required this.onPress,
       super.key});
+  final String title;
+  final bool isSelected;
+  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: InkWell(
-        onTap: () => onPress(),
+        onTap: onPress,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

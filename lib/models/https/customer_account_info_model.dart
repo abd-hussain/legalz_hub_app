@@ -3,7 +3,9 @@ import 'package:legalz_hub_app/models/https/attorney_account_info_model.dart';
 class CustomerAccountInfo {
   CustomerAccountInfo({this.data, this.message});
   CustomerAccountInfo.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? CustomerAccountInfoData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? CustomerAccountInfoData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
   CustomerAccountInfoData? data;
@@ -38,7 +40,9 @@ class CustomerAccountInfoData {
     invitationCode = json['invitation_code'];
     points = json['points'];
     allowNotifications = json['allow_notifications'];
-    dBCountries = json['DB_Countries'] != null ? DBCountries.fromJson(json['DB_Countries']) : null;
+    dBCountries = json['DB_Countries'] != null
+        ? DBCountries.fromJson(json['DB_Countries'])
+        : null;
   }
   String? firstName;
   String? lastName;

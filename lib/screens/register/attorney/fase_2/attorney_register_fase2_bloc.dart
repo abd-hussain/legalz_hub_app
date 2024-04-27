@@ -31,7 +31,7 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
   ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
       ValueNotifier<List<CheckBox>>([]);
 
-  tryToFillTheFields() {
+  void tryToFillTheFields() {
     if (box.get(TempFieldToRegistrtAttorneyConstant.bio) != null) {
       bioController.text = box.get(TempFieldToRegistrtAttorneyConstant.bio);
     }
@@ -42,7 +42,8 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.category) != null) {
-      var id = int.parse(box.get(TempFieldToRegistrtAttorneyConstant.category));
+      final id =
+          int.parse(box.get(TempFieldToRegistrtAttorneyConstant.category));
       selectedCategory = Category(
         id: id,
         name: listOfCategories.value
@@ -61,10 +62,10 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.speakingLanguages) !=
         null) {
-      var originalList = _prepareList();
+      final originalList = _prepareList();
 
-      for (var item in originalList) {
-        for (var lang
+      for (final item in originalList) {
+        for (final lang
             in box.get(TempFieldToRegistrtAttorneyConstant.speakingLanguages)) {
           if (item.value == lang) {
             item.isEnable = true;
@@ -78,7 +79,7 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
     loadingStatusController.sink.add(LoadingStatus.finish);
   }
 
-  validateFieldsForFaze2() {
+  void validateFieldsForFaze2() {
     enableNextBtn.value = false;
     if (bioController.text.isNotEmpty &&
         categoryController.text.isNotEmpty &&
@@ -103,8 +104,8 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
   }
 
   List<String> filterListOfSelectedLanguage(List<CheckBox> list) {
-    List<String> newList = [];
-    for (var item in list) {
+    final List<String> newList = [];
+    for (final item in list) {
       if (item.isEnable) {
         newList.add(item.value);
       }
@@ -114,7 +115,7 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
   }
 
   List<CheckBox> _prepareList() {
-    List<CheckBox> list = [];
+    final List<CheckBox> list = [];
 
     list.add(CheckBox(value: "English", isEnable: false));
     list.add(CheckBox(value: "العربية", isEnable: true));
@@ -126,5 +127,5 @@ class AttorneyRegister2Bloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

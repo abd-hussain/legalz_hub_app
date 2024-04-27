@@ -26,7 +26,8 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleReadingArguments(context, arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(context,
+        arguments: ModalRoute.of(context)!.settings.arguments);
     super.didChangeDependencies();
   }
 
@@ -63,7 +64,8 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                                 borderRadius: BorderRadius.circular(50),
                                 child: bloc.profileImageUrl != ""
                                     ? Image.network(
-                                        AppConstant.imagesBaseURLForAttorney + bloc.profileImageUrl!,
+                                        AppConstant.imagesBaseURLForAttorney +
+                                            bloc.profileImageUrl!,
                                         fit: BoxFit.fill,
                                       )
                                     : Image.asset(
@@ -83,9 +85,11 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                                   textColor: const Color(0xff554d56),
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width - 160,
+                                  width:
+                                      MediaQuery.of(context).size.width - 160,
                                   child: CustomText(
-                                    title: "${bloc.firstName!} ${bloc.lastName!}",
+                                    title:
+                                        "${bloc.firstName!} ${bloc.lastName!}",
                                     fontSize: 18,
                                     maxLins: 3,
                                     fontWeight: FontWeight.bold,
@@ -97,7 +101,8 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     CustomText(
-                                      title: "${AppLocalizations.of(context)!.category} :",
+                                      title:
+                                          "${AppLocalizations.of(context)!.category} :",
                                       fontSize: 12,
                                       textColor: const Color(0xff554d56),
                                     ),
@@ -141,7 +146,9 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                                   title: AppLocalizations.of(context)!.gender,
                                   value: bloc.gender!,
                                   icon: Icon(
-                                    bloc.genderIndex == 1 ? Icons.male : Icons.female,
+                                    bloc.genderIndex == 1
+                                        ? Icons.male
+                                        : Icons.female,
                                     color: const Color(0xff444444),
                                   ),
                                 ),
@@ -160,19 +167,24 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 MentorGridItem(
-                                  title: AppLocalizations.of(context)!.countryprofile,
+                                  title: AppLocalizations.of(context)!
+                                      .countryprofile,
                                   value: bloc.countryName!,
                                   icon: SizedBox(
                                     width: 30,
                                     child: FadeInImage(
-                                      placeholder: const AssetImage("assets/images/flagPlaceHolderImg.png"),
-                                      image: NetworkImage(AppConstant.imagesBaseURLForCountries + bloc.countryFlag!),
+                                      placeholder: const AssetImage(
+                                          "assets/images/flagPlaceHolderImg.png"),
+                                      image: NetworkImage(AppConstant
+                                              .imagesBaseURLForCountries +
+                                          bloc.countryFlag!),
                                     ),
                                   ),
                                 ),
                                 const SizedBox(height: 10),
                                 MentorGridItem(
-                                  title: AppLocalizations.of(context)!.experience,
+                                  title:
+                                      AppLocalizations.of(context)!.experience,
                                   value:
                                       "${bloc.calculateExperience(bloc.experienceSince)} ${AppLocalizations.of(context)!.year}",
                                   icon: const Icon(
@@ -182,10 +194,12 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 MentorGridItem(
-                                  title: AppLocalizations.of(context)!.freecallexsist,
+                                  title: AppLocalizations.of(context)!
+                                      .freecallexsist,
                                   value: bloc.freeCall
                                       ? AppLocalizations.of(context)!.avaliable
-                                      : AppLocalizations.of(context)!.notavaliable,
+                                      : AppLocalizations.of(context)!
+                                          .notavaliable,
                                   icon: const Icon(
                                     Ionicons.magnet_outline,
                                     color: Color(0xff444444),
@@ -197,7 +211,8 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                         ),
                         const SizedBox(height: 10),
                         CustomText(
-                          title: "-- ${AppLocalizations.of(context)!.ratingandreview} --",
+                          title:
+                              "-- ${AppLocalizations.of(context)!.ratingandreview} --",
                           fontSize: 14,
                           textColor: const Color(0xff554d56),
                         ),
@@ -240,7 +255,8 @@ class _AttorneyProfileScreenState extends State<AttorneyProfileScreen> {
                 workingHoursThursday: bloc.workingHoursThursday,
                 workingHoursTuesday: bloc.workingHoursTuesday,
                 listOfAppointments: bloc.listOfAppointments,
-                openBookingView: (selectedMeetingDuration, selectedMeetingDate, selectedMeetingTime) {
+                openBookingView: (selectedMeetingDuration, selectedMeetingDate,
+                    selectedMeetingTime) {
                   Navigator.of(context, rootNavigator: true).pushNamed(
                     RoutesConstants.bookingScreen,
                     arguments: {

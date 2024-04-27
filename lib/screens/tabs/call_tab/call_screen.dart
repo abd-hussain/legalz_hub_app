@@ -66,8 +66,8 @@ class _CallTabScreenState extends State<CallTabScreen> {
                         return noCallView();
                       }
 
-                      DateTime now = DateTime.now();
-                      DateTime timeDifference =
+                      final DateTime now = DateTime.now();
+                      final DateTime timeDifference =
                           DateTime.parse(appointment.dateFrom!).isAfter(now)
                               ? DateTime.parse(appointment.dateFrom!)
                                   .subtract(Duration(
@@ -142,8 +142,8 @@ class _CallTabScreenState extends State<CallTabScreen> {
                         return noCallView();
                       }
 
-                      DateTime now = DateTime.now();
-                      DateTime timeDifference =
+                      final DateTime now = DateTime.now();
+                      final DateTime timeDifference =
                           DateTime.parse(appointment.dateFrom!).isAfter(now)
                               ? DateTime.parse(appointment.dateFrom!)
                                   .subtract(Duration(

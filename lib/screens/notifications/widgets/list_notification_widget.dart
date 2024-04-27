@@ -5,9 +5,9 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_notifications.dart';
 
 class NotificationsList extends StatefulWidget {
+  const NotificationsList({super.key, required this.notificationsListNotifier});
   final ValueNotifier<List<NotificationsResponseData>?>
       notificationsListNotifier;
-  const NotificationsList({super.key, required this.notificationsListNotifier});
 
   @override
   State<NotificationsList> createState() => _NotificationsListState();
@@ -39,8 +39,8 @@ class _NotificationsListState extends State<NotificationsList> {
 
   Widget notificationTile(
       BuildContext context, NotificationsResponseData item, int index) {
-    var parsedDate = DateTime.parse(item.createdAt!);
-    var dateLocal = parsedDate.toLocal();
+    final parsedDate = DateTime.parse(item.createdAt!);
+    final dateLocal = parsedDate.toLocal();
 
     return Padding(
       padding: const EdgeInsets.all(8),

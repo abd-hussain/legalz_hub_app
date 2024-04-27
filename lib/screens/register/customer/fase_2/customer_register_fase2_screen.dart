@@ -84,7 +84,8 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
 
                   await bloc.box
                       .put(DatabaseFieldConstant.customerRegistrationStep, "3");
-                  navigator.pushNamed(RoutesConstants.registerfinalfazeScreen,
+                  await navigator.pushNamed(
+                      RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.customer});
                 },
               );
@@ -141,7 +142,7 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
                     bloc.passwordController.clear();
                     bloc.showHidePasswordClearNotifier.value = false;
                   },
-                  onchange: () => bloc.validateFieldsForFaze2(),
+                  onchange: bloc.validateFieldsForFaze2,
                   onEditingComplete: () =>
                       FocusManager.instance.primaryFocus?.unfocus(),
                 ),
@@ -155,7 +156,7 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
                     bloc.confirmPasswordController.clear();
                     bloc.showHideConfirmPasswordClearNotifier.value = false;
                   },
-                  onchange: () => bloc.validateFieldsForFaze2(),
+                  onchange: bloc.validateFieldsForFaze2,
                   onEditingComplete: () =>
                       FocusManager.instance.primaryFocus?.unfocus(),
                 ),

@@ -4,25 +4,24 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class DotsIndicator extends AnimatedWidget {
-  final PageController controller;
-  final ValueChanged<int> onPageSelected;
-  final Function() skipPressed;
-
   const DotsIndicator({
     super.key,
     required this.skipPressed,
     required this.controller,
     required this.onPageSelected,
   }) : super(listenable: controller);
+  final PageController controller;
+  final ValueChanged<int> onPageSelected;
+  final Function() skipPressed;
 
   Widget _buildDot(int index) {
-    double selectedness = Curves.easeOut.transform(
+    final double selectedness = Curves.easeOut.transform(
       max(
-        0.0,
+        0,
         1.0 - ((controller.page ?? controller.initialPage) - index).abs(),
       ),
     );
-    double zoom = 1.0 + (2 - 1.0) * selectedness;
+    final double zoom = 1.0 + (2 - 1.0) * selectedness;
     return SizedBox(
       width: 25,
       child: Center(
@@ -46,12 +45,11 @@ class DotsIndicator extends AnimatedWidget {
     return Row(
       children: [
         TextButton(
-          onPressed: () => skipPressed(),
+          onPressed: skipPressed,
           child: CustomText(
             title: AppLocalizations.of(context)!.skip,
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            textColor: Colors.white,
           ),
         ),
         const Expanded(child: SizedBox()),

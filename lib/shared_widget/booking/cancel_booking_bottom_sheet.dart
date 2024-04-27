@@ -4,16 +4,15 @@ import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class CancelBookingBottomSheetsUtil {
-  final BuildContext context;
-
   CancelBookingBottomSheetsUtil({
     required this.context,
   });
+  final BuildContext context;
 
   Future bookMeetingBottomSheet({
     required Function() confirm,
   }) async {
-    return await showModalBottomSheet(
+    return showModalBottomSheet(
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -54,7 +53,7 @@ class CancelBookingBottomSheetsUtil {
                 ),
                 const SizedBox(height: 8),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: CustomText(
                     title: AppLocalizations.of(context)!.cancelmeetingmessage,
                     textColor: const Color(0xff444444),

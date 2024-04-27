@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'constants/database_constant.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 
 enum Timing { hour, threeQuarter, halfHour, quarterHour }
 
@@ -25,7 +25,7 @@ class Currency {
   }
 
   String getHourRateWithoutCurrency(String hourRate) {
-    String currency = "\$";
+    final String currency = "\$";
     return hourRate.replaceAll(currency, "");
   }
 }

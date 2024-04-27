@@ -18,20 +18,23 @@ class InviteFriendsBloc extends Bloc<SettingService> {
 
   Future fetchContacts() async {
     if (await FlutterContacts.requestPermission(readonly: true)) {
-      uploadContactsListToServer(await FlutterContacts.getContacts(
-          withProperties: true, withPhoto: true));
+      await uploadContactsListToServer(
+        await FlutterContacts.getContacts(
+            withProperties: true, withPhoto: true),
+      );
     }
   }
 
   Future<void> uploadContactsListToServer(List<Contact> contatctList) async {
-    var listOfContacts = UploadContact(list: []);
+    final listOfContacts = UploadContact(list: []);
 
-    for (var item in contatctList) {
-      String contactName = item.displayName != ""
+    for (final item in contatctList) {
+      final String contactName = item.displayName != ""
           ? item.displayName
           : ("${item.name.first} ${item.name.last}");
-      String phoneNumber = item.phones.isNotEmpty ? item.phones[0].number : "";
-      String email = item.emails.isNotEmpty ? item.emails[0].address : "";
+      final String phoneNumber =
+          item.phones.isNotEmpty ? item.phones[0].number : "";
+      final String email = item.emails.isNotEmpty ? item.emails[0].address : "";
 
       if (userType == UserType.attorney) {
         listOfContacts.list.add(
@@ -58,7 +61,7 @@ class InviteFriendsBloc extends Bloc<SettingService> {
     }
   }
 
-  void getProfileInformations() async {
+  Future<void> getProfileInformations() async {
     if (userType == UserType.attorney) {
       await locator<AttorneyAccountService>().getProfileInfo().then((value) {
         final data = value.data;
@@ -79,7 +82,7 @@ class InviteFriendsBloc extends Bloc<SettingService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     invitationCodeNotifier.dispose();
   }
 }

@@ -24,9 +24,7 @@ class _ReportScreenState extends State<ReportScreen> {
     bloc.handleReadingArguments(
         arguments: ModalRoute.of(context)!.settings.arguments);
 
-    bloc.textController.addListener(() {
-      bloc.validationFields();
-    });
+    bloc.textController.addListener(bloc.validationFields);
     super.didChangeDependencies();
   }
 
@@ -56,11 +54,11 @@ class _ReportScreenState extends State<ReportScreen> {
                     children: [
                       Expanded(
                           child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: ColoredBox(
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: TextField(
                               controller: bloc.textController,
                               decoration: InputDecoration(
@@ -77,13 +75,14 @@ class _ReportScreenState extends State<ReportScreen> {
                           ),
                         ),
                       )),
-                      kIsWeb
-                          ? Container()
-                          : ReportAttatchment(
-                              attach1: (file) => bloc.attach1 = file,
-                              attach2: (file) => bloc.attach2 = file,
-                              attach3: (file) => bloc.attach3 = file,
-                            ),
+                      if (kIsWeb)
+                        Container()
+                      else
+                        ReportAttatchment(
+                          attach1: (file) => bloc.attach1 = file,
+                          attach2: (file) => bloc.attach2 = file,
+                          attach3: (file) => bloc.attach3 = file,
+                        ),
                       ValueListenableBuilder<bool>(
                           valueListenable: bloc.enableSubmitBtn,
                           builder: (context, snapshot, child) {

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/password_strength_model.dart';
 import 'package:legalz_hub_app/screens/change_password/change_password_bloc.dart';
 import 'package:legalz_hub_app/screens/change_password/widgets/password_strenght.dart';
@@ -12,7 +13,6 @@ import 'package:legalz_hub_app/shared_widget/password_strenght_logic.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -267,11 +267,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 navigation.pop();
                               });
                             } on DioException catch (e) {
-                              final error = e.error as HttpException;
+                              final error = e.error! as HttpException;
                               bloc.loadingStatus.value = LoadingStatus.finish;
                               scaffoldMessenger.showSnackBar(
-                                SnackBar(
-                                    content: Text(error.message.toString())),
+                                SnackBar(content: Text(error.message)),
                               );
                             }
                           }),

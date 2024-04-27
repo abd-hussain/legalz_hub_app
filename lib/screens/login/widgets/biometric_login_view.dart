@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BiometrincLoginView extends StatelessWidget {
-  final BiometricType? biometricType;
-  final Function onPress;
   const BiometrincLoginView(
       {super.key, this.biometricType, required this.onPress});
+  final BiometricType? biometricType;
+  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class BiometrincLoginView extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
-                Radius.circular(20.0),
+                Radius.circular(20),
               ),
             ),
             child: ElevatedButton(
@@ -61,7 +61,7 @@ class BiometrincLoginView extends StatelessWidget {
                 elevation: MaterialStateProperty.all(0),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
+                    borderRadius: BorderRadius.circular(4),
                     side: const BorderSide(
                       color: Color(0xffE8E8E8),
                     ),
@@ -83,11 +83,10 @@ class BiometrincLoginView extends StatelessWidget {
                         : 'assets/images/touch_id.png',
                     height: 30,
                     color: const Color(0xff191C1F),
-                    alignment: Alignment.center,
                   ),
                 ],
               ),
-              onPressed: () => onPress(),
+              onPressed: onPress,
             ),
           ),
         ],

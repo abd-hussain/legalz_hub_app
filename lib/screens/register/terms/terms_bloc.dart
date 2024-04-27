@@ -20,7 +20,7 @@ class RegisterTermsBloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     webviewController.dispose();
   }
 }

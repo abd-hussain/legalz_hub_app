@@ -3,9 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
 class NoteView extends StatelessWidget {
-  final TextEditingController controller;
-
   const NoteView({required this.controller, super.key});
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {

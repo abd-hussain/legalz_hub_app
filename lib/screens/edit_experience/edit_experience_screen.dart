@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:legalz_hub_app/screens/edit_experience/edit_experience_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/screens/edit_experience/edit_experience_bloc.dart';
 import 'package:legalz_hub_app/screens/edit_experience/widgets/experiance_since.dart';
 import 'package:legalz_hub_app/shared_widget/category_field.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
@@ -78,7 +78,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                       CategoryField(
                                         controller: bloc.categoryController,
                                         isEnable: false,
-                                        padding: const EdgeInsets.all(0),
+                                        padding: EdgeInsets.zero,
                                         listOfCategory: const [],
                                         selectedCategory: (p0) {},
                                       ),
@@ -86,10 +86,8 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                       ExperianceSinceField(
                                         controller:
                                             bloc.experianceSinceController,
-                                        padding: const EdgeInsets.all(0),
-                                        onSelected: () {
-                                          bloc.validateFields();
-                                        },
+                                        padding: EdgeInsets.zero,
+                                        onSelected: bloc.validateFields,
                                       ),
                                       const SizedBox(height: 16),
                                       FileHolderField(

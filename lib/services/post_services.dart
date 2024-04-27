@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
-import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:legalz_hub_app/utils/repository/http_repository.dart';
 import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
@@ -13,7 +13,7 @@ class PostService with Service {
       {required int postId,
       required UserType userType,
       required String reason}) async {
-    return await repository.callRequest(
+    return repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.reportPost,
       queryParam: {
@@ -36,13 +36,13 @@ class PostService with Service {
 
   Future<dynamic> addPost(
       {required String catId, required String content, File? postImg}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
 
     formData.fields.add(MapEntry("content", content));
     formData.fields.add(MapEntry("cat_id", catId));
 
     if (postImg != null) {
-      String fileName = postImg.path.split('/').last;
+      final String fileName = postImg.path.split('/').last;
       formData.files.add(
         MapEntry(
           "post_img",
@@ -67,14 +67,14 @@ class PostService with Service {
       required String catId,
       required String content,
       String? postImg}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
 
     formData.fields.add(MapEntry("content", content));
     formData.fields.add(MapEntry("cat_id", catId));
     formData.fields.add(MapEntry("post_id", postId));
 
     if (postImg != null) {
-      String fileName = postImg.split('/').last;
+      final String fileName = postImg.split('/').last;
       formData.files.add(
         MapEntry(
           "post_img",

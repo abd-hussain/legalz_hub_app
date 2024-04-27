@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ClientShareView extends StatelessWidget {
-  final String invitationCode;
   const ClientShareView({super.key, required this.invitationCode});
+  final String invitationCode;
 
   @override
   Widget build(BuildContext context) {

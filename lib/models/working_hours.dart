@@ -1,4 +1,12 @@
-enum DayNameEnum { saturday, sunday, monday, tuesday, wednesday, thursday, friday }
+enum DayNameEnum {
+  saturday,
+  sunday,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday
+}
 
 class WorkingHourModel {
   WorkingHourModel({required this.list, required this.dayName});

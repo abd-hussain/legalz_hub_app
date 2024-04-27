@@ -42,7 +42,7 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
 
   StreamController<bool> enableNextBtn = StreamController<bool>();
 
-  tryToFillTheFields() {
+  void tryToFillTheFields() {
     if (box.get(TempFieldToRegistrtCustomerConstant.firstName) != null) {
       firstNameController.text =
           box.get(TempFieldToRegistrtCustomerConstant.firstName);
@@ -54,7 +54,8 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtCustomerConstant.country) != null) {
-      var id = int.parse(box.get(TempFieldToRegistrtCustomerConstant.country));
+      final id =
+          int.parse(box.get(TempFieldToRegistrtCustomerConstant.country));
       selectedCountry = Country(
         id: id,
         flagImage: listOfCountries.value
@@ -117,7 +118,7 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
     loadingStatusController.sink.add(LoadingStatus.finish);
   }
 
-  validateFieldsForFaze1() {
+  void validateFieldsForFaze1() {
     enableNextBtn.sink.add(false);
 
     if (firstNameController.text.isNotEmpty &&
@@ -133,7 +134,7 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
     }
   }
 
-  validateMobileNumber(String fullMobileNumber) {
+  void validateMobileNumber(String fullMobileNumber) {
     service.validateMobileNumber(fullMobileNumber).then((value) {
       mobileNumberErrorMessage.value = value;
       validateFieldsForFaze1();
@@ -158,7 +159,7 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
     return country!;
   }
 
-  getlistOfCountries() {
+  void getlistOfCountries() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
     service.countries().then((value) {
       listOfCountries.value = value.data!
@@ -174,5 +175,5 @@ class CustomerRegister1Bloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/models/https/working_hour_request.dart';
 import 'package:legalz_hub_app/models/https/working_hours.dart';
@@ -7,7 +8,6 @@ import 'package:legalz_hub_app/services/attorney/working_hours_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class WorkingHoursBloc extends Bloc<WorkingHoursService> {
@@ -15,11 +15,11 @@ class WorkingHoursBloc extends Bloc<WorkingHoursService> {
       ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<List<WorkingHourModel>> listOfWorkingHourNotifier =
       ValueNotifier<List<WorkingHourModel>>([]);
-  var box = Hive.box(DatabaseBoxConstant.userInfo);
+  Box box = Hive.box(DatabaseBoxConstant.userInfo);
 
   List<CheckBox> _prepareList(
       {required BuildContext context, required List<int> theList}) {
-    List<CheckBox> list = [];
+    final List<CheckBox> list = [];
 
     list.add(CheckBox(
         value: "1:00 ${AppLocalizations.of(context)!.pm}",
@@ -145,9 +145,9 @@ class WorkingHoursBloc extends Bloc<WorkingHoursService> {
     service.getWorkingHours().then((value) {
       loadingStatusNotifier.value = LoadingStatus.finish;
       if (value.data != null) {
-        WorkingHoursData formatedData =
+        final WorkingHoursData formatedData =
             formatDataFromUTCToLocalTime(value.data!);
-        List<WorkingHourModel> theList = [];
+        final List<WorkingHourModel> theList = [];
         if (formatedData.workingHoursSaturday != null) {
           theList.add(WorkingHourModel(
               list: _prepareList(
@@ -236,9 +236,9 @@ class WorkingHoursBloc extends Bloc<WorkingHoursService> {
         workingHoursThursday: workingHoursThursday,
         workingHoursFriday: workingHoursFriday);
 
-    for (var item in newData) {
+    for (final item in newData) {
       if (item.list.isNotEmpty) {
-        WorkingHoursRequest newObj = WorkingHoursRequest(
+        final WorkingHoursRequest newObj = WorkingHoursRequest(
             dayName: dayParser(item.dayName), workingHours: item.list);
         await service.updateWorkingHours(data: newObj);
       }
@@ -265,7 +265,7 @@ class WorkingHoursBloc extends Bloc<WorkingHoursService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     loadingStatusNotifier.dispose();
     listOfWorkingHourNotifier.dispose();
   }

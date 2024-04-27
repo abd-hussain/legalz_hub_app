@@ -45,9 +45,11 @@ class ReviewBodyView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: reviews[index].customerProfileImg != ""
                                   ? FadeInImage(
-                                      placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                                      image: NetworkImage(
-                                          AppConstant.imagesBaseURLForCustomer + reviews[index].customerProfileImg!),
+                                      placeholder: const AssetImage(
+                                          "assets/images/avatar.jpeg"),
+                                      image: NetworkImage(AppConstant
+                                              .imagesBaseURLForCustomer +
+                                          reviews[index].customerProfileImg!),
                                     )
                                   : Image.asset(
                                       'assets/images/avatar.jpeg',
@@ -62,13 +64,15 @@ class ReviewBodyView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                title: "${reviews[index].customerFirstName!} ${reviews[index].customerLastName!}",
+                                title:
+                                    "${reviews[index].customerFirstName!} ${reviews[index].customerLastName!}",
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 textColor: const Color(0xff554d56),
                               ),
                               CustomText(
-                                title: DayTime().dateFormatter(reviews[index].createdAt!),
+                                title: DayTime()
+                                    .dateFormatter(reviews[index].createdAt!),
                                 fontSize: 10,
                                 textColor: const Color(0xff554d56),
                               ),
@@ -119,7 +123,8 @@ class ReviewBodyView extends StatelessWidget {
                           child: Column(
                             children: [
                               CustomText(
-                                title: "-- ${AppLocalizations.of(context)!.mentorrespond} --",
+                                title:
+                                    "-- ${AppLocalizations.of(context)!.mentorrespond} --",
                                 fontSize: 14,
                                 textColor: const Color(0xff554d56),
                               ),

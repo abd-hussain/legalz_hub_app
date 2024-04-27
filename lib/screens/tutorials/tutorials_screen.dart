@@ -19,7 +19,7 @@ class TutorialsScreen extends StatefulWidget {
 }
 
 class _TutorialsScreenState extends State<TutorialsScreen> {
-  final PageController controller = PageController(initialPage: 0);
+  final PageController controller = PageController();
   TutorialOpenFrom? openFrom;
 
   @override
@@ -78,13 +78,13 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
             ],
           ),
           Positioned(
-            bottom: 0.0,
-            left: 0.0,
-            right: 0.0,
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: Container(
               height: 75,
               color: Colors.grey[800],
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20),
               child: Center(
                 child: DotsIndicator(
                   controller: controller,
@@ -101,7 +101,8 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
                       final box = Hive.box(DatabaseBoxConstant.userInfo);
                       await box.put(
                           DatabaseFieldConstant.skipTutorials, "true");
-                      nav.pushNamedAndRemoveUntil(RoutesConstants.loginScreen,
+                      await nav.pushNamedAndRemoveUntil(
+                          RoutesConstants.loginScreen,
                           (Route<dynamic> route) => false);
                     } else {
                       Navigator.pop(context);

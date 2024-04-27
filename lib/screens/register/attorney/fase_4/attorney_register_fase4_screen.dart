@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:legalz_hub_app/screens/register/attorney/fase_4/attorney_register_fase4_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/screens/register/attorney/fase_4/attorney_register_fase4_bloc.dart';
 import 'package:legalz_hub_app/screens/register/widgets/footer_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
@@ -65,7 +65,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
 
                   await bloc.box
                       .put(DatabaseFieldConstant.attorneyRegistrationStep, "5");
-                  navigator
+                  await navigator
                       .pushNamed(RoutesConstants.registerAttornyFaze5Screen);
                 },
               );
@@ -81,7 +81,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                 children: [
                   const SizedBox(height: 20),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: CustomText(
                       title: AppLocalizations.of(context)!.rateperhourdesc1,
                       fontSize: 14,
@@ -92,7 +92,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: CustomText(
                       title: AppLocalizations.of(context)!.rateperhourdesc2,
                       fontSize: 14,
@@ -103,7 +103,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: CustomText(
                       title: AppLocalizations.of(context)!.rateperhourdesc3,
                       fontSize: 14,
@@ -113,7 +113,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: CustomText(
                       title: "16 ${bloc.getUserCurrency()}",
                       fontSize: 16,
@@ -128,12 +128,11 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 1,
                           child: Container(
                             color: Colors.grey[200],
                             child: IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () => bloc.decreseRatePerHourBy1(),
+                              onPressed: bloc.decreseRatePerHourBy1,
                             ),
                           ),
                         ),
@@ -150,16 +149,15 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                             ],
                             fontSize: 18,
                             textAlign: TextAlign.center,
-                            padding: const EdgeInsets.all(0),
+                            padding: EdgeInsets.zero,
                           ),
                         ),
                         Expanded(
-                          flex: 1,
                           child: Container(
                             color: Colors.grey[200],
                             child: IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () => bloc.encreseRatePerHourBy1(),
+                              onPressed: bloc.encreseRatePerHourBy1,
                             ),
                           ),
                         ),
@@ -167,7 +165,7 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: CustomText(
                       title: AppLocalizations.of(context)!.ibaninfo,
                       fontSize: 14,
@@ -178,7 +176,6 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                   ),
                   CustomTextField(
                     controller: bloc.ibanController,
-                    padding: const EdgeInsets.only(left: 16, right: 16),
                     hintText: "",
                     fontSize: 20,
                     keyboardType: TextInputType.name,

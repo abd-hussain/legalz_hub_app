@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class EmailHeader extends StatelessWidget {
   const EmailHeader({super.key});

@@ -3,12 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class CalculationHoursView extends StatelessWidget {
-  final String timing;
-  final String value;
-  final String currency;
-  final Color textColor;
-  final Function() onPress;
-
   const CalculationHoursView(
       {required this.value,
       super.key,
@@ -16,6 +10,11 @@ class CalculationHoursView extends StatelessWidget {
       required this.onPress,
       required this.timing,
       required this.currency});
+  final String timing;
+  final String value;
+  final String currency;
+  final Color textColor;
+  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +50,18 @@ class CalculationHoursView extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
-          textColor != const Color(0xff444444)
-              ? IconButton(
-                  onPressed: () => onPress(),
-                  icon: Icon(
-                    Icons.arrow_circle_right,
-                    color: textColor,
-                  ))
-              : const SizedBox(
-                  width: 20,
-                  height: 20,
-                )
+          if (textColor != const Color(0xff444444))
+            IconButton(
+                onPressed: onPress,
+                icon: Icon(
+                  Icons.arrow_circle_right,
+                  color: textColor,
+                ))
+          else
+            const SizedBox(
+              width: 20,
+              height: 20,
+            )
         ],
       ),
     );

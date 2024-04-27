@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/working_hour_request.dart';
 import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:legalz_hub_app/screens/working_hours/widgets/info_working_hour_bottomsheet.dart';
 import 'package:legalz_hub_app/screens/working_hours/working_hours_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/edit_working_hour_bottomsheet.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
@@ -91,7 +91,7 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
                                       .value[index]
                                       .list,
                                   onSave: (newList) async {
-                                    bloc
+                                    await bloc
                                         .updateWorkingHours(
                                             context: context,
                                             obj: WorkingHoursRequest(

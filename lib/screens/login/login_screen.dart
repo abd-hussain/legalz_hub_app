@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/authentication_models.dart';
 import 'package:legalz_hub_app/screens/login/login_bloc.dart';
 import 'package:legalz_hub_app/screens/login/widgets/biometric_login_view.dart';
@@ -16,7 +17,6 @@ import 'package:legalz_hub_app/shared_widget/password_field.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           false;
                                       bloc.fieldsValidations.value = false;
                                     },
-                                    onchange: () => bloc.fieldValidation(),
+                                    onchange: bloc.fieldValidation,
                                     onEditingComplete: () => FocusManager
                                         .instance.primaryFocus
                                         ?.unfocus(),
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           false;
                                       bloc.fieldsValidations.value = false;
                                     },
-                                    onchange: () => bloc.fieldValidation(),
+                                    onchange: bloc.fieldValidation,
                                     showHidePasswordClearNotifier:
                                         bloc.showHidePasswordClearNotifier,
                                     onEditingComplete: () => FocusManager

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/initial/initial_bloc.dart';
-import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/screens/initial/widgets/change_language_widget.dart';
 import 'package:legalz_hub_app/screens/initial/widgets/list_of_countries_widget.dart';
 import 'package:legalz_hub_app/screens/initial/widgets/title_table_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -18,9 +18,7 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   void didChangeDependencies() {
-    _bloc.getSystemLanguage(context).whenComplete(() {
-      _bloc.listOfCountries();
-    });
+    _bloc.getSystemLanguage(context).whenComplete(_bloc.listOfCountries);
     super.didChangeDependencies();
   }
 
@@ -70,8 +68,8 @@ class _InitialScreenState extends State<InitialScreen> {
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async =>
-                        await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) =>
+                        _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             Padding(

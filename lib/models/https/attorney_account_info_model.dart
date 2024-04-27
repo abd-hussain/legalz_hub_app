@@ -2,7 +2,9 @@ class AttorneyAccountInfo {
   AttorneyAccountInfo({this.data, this.message});
 
   AttorneyAccountInfo.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? AttorneyAccountInfoData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? AttorneyAccountInfoData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
   AttorneyAccountInfoData? data;
@@ -40,7 +42,9 @@ class AttorneyAccountInfoData {
     countryId = json['country_id'];
     invitationCode = json['invitation_code'];
     idImg = json['id_img'];
-    dBCountries = json['DB_Countries'] != null ? DBCountries.fromJson(json['DB_Countries']) : null;
+    dBCountries = json['DB_Countries'] != null
+        ? DBCountries.fromJson(json['DB_Countries'])
+        : null;
   }
   String? profileImg;
   String? mobileNumber;

@@ -16,7 +16,7 @@ class CustomerAccountService with Service {
 
   Future<CustomerAccountInfo> updateAccount(
       {required UpdateCustomerAccountRequest account}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
     if (account.firstName != null) {
       formData.fields.add(MapEntry("first_name", account.firstName!));
     }

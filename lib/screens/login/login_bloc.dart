@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:jaguar_jwt/jaguar_jwt.dart';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:jaguar_jwt/jaguar_jwt.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/authentication_models.dart';
 import 'package:legalz_hub_app/models/https/login_request.dart';
@@ -42,7 +43,7 @@ class LoginBloc extends Bloc<AuthService> {
   bool biometricStatus = false;
   final authenticationService = locator<AuthenticationService>();
 
-  fieldValidation() {
+  void fieldValidation() {
     fieldsValidations.value = false;
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       if (_validateEmail(emailController.text)) {
@@ -55,12 +56,12 @@ class LoginBloc extends Bloc<AuthService> {
     }
   }
 
-  handleListeners() {
+  void handleListeners() {
     emailController.addListener(_emailListen);
     passwordController.addListener(_passwordListen);
   }
 
-  getUserNameAndPasswordWhenSavePasswordTicked() {
+  void getUserNameAndPasswordWhenSavePasswordTicked() {
     if (box.get(DatabaseFieldConstant.saveEmailAndPassword) == true) {
       emailController.text = box.get(DatabaseFieldConstant.biometricU) ?? "";
       passwordController.text = box.get(DatabaseFieldConstant.biometricP) ?? "";
@@ -130,7 +131,7 @@ class LoginBloc extends Bloc<AuthService> {
                       .pleasecheckyourinternetconnection);
             } else {
               if (context.mounted) {
-                doLoginCall(
+                await doLoginCall(
                   context: context,
                   userName: biometricU,
                   password: biometricP,
@@ -152,7 +153,7 @@ class LoginBloc extends Bloc<AuthService> {
   Future<bool> _checkAuthentication(TargetPlatform platform) async {
     if (await authenticationService.isBiometricAvailable()) {
       biometricResultNotifier.value =
-          await (authenticationService.getAvailableBiometricTypes(platform));
+          await authenticationService.getAvailableBiometricTypes(platform);
       buildNotifier.value = true;
       return true;
     }
@@ -160,9 +161,9 @@ class LoginBloc extends Bloc<AuthService> {
   }
 
   bool _validateEmail(String value) {
-    Pattern pattern =
+    final Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern as String);
+    final RegExp regex = RegExp(pattern as String);
     return (!regex.hasMatch(value)) ? false : true;
   }
 
@@ -171,7 +172,7 @@ class LoginBloc extends Bloc<AuthService> {
         RoutesConstants.mainContainer, (Route<dynamic> route) => false);
   }
 
-  _saveValuesInMemory(
+  Future<void> _saveValuesInMemory(
       {required String userName,
       required String password,
       required String token,
@@ -184,15 +185,15 @@ class LoginBloc extends Bloc<AuthService> {
     await getUserIdFromJWT(token);
   }
 
-  getUserIdFromJWT(String token) async {
+  Future<void> getUserIdFromJWT(String token) async {
     final parts = token.split('.');
     final payload = parts[1];
     final String decoded = B64urlEncRfc7515.decodeUtf8(payload);
-    Map valueMap = json.decode(decoded);
+    final Map valueMap = json.decode(decoded);
     await box.put(DatabaseFieldConstant.userid, valueMap["user_id"]);
   }
 
-  void doLoginCall(
+  Future<void> doLoginCall(
       {required BuildContext context,
       required String userName,
       required String password,
@@ -211,25 +212,25 @@ class LoginBloc extends Bloc<AuthService> {
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openMainScreen(maincontext!);
     } on DioException catch (e) {
-      final error = e.error as HttpException;
+      final error = e.error! as HttpException;
       loadingStatusNotifier.value = LoadingStatus.finish;
 
-      if (error.message.toString() == "Invalid Attorney Password" ||
-          error.message.toString() == "Invalid Credentials") {
+      if (error.message == "Invalid Attorney Password" ||
+          error.message == "Invalid Credentials") {
         errorMessage.value =
             AppLocalizations.of(maincontext!)!.wrongemailorpassword;
-      } else if (error.message.toString() == "Attorney Blocked" ||
-          error.message.toString() == "customer Blocked") {
+      } else if (error.message == "Attorney Blocked" ||
+          error.message == "customer Blocked") {
         errorMessage.value = AppLocalizations.of(maincontext!)!.userblocked;
-      } else if (error.message.toString() == "Attorney Under Review") {
+      } else if (error.message == "Attorney Under Review") {
         errorMessage.value =
             AppLocalizations.of(maincontext!)!.userstillunderreview;
       } else {
-        errorMessage.value = error.message.toString();
+        errorMessage.value = error.message;
       }
     }
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

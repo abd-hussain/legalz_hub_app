@@ -1,20 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 
 class CustomAttachTextField extends StatelessWidget {
-  final Function(File image) onAddImage;
-  final Function() onDeleteImage;
-  final bool isFromNetwork;
-  final String? urlImage;
-  final double hight;
-  final double width;
-
   const CustomAttachTextField({
     super.key,
     required this.onAddImage,
@@ -24,6 +18,12 @@ class CustomAttachTextField extends StatelessWidget {
     this.hight = 60,
     this.width = 120,
   });
+  final Function(File image) onAddImage;
+  final Function() onDeleteImage;
+  final bool isFromNetwork;
+  final String? urlImage;
+  final double hight;
+  final double width;
 
   Future<File> _pickImage(ImageSource source) async {
     final image = await ImagePicker().pickImage(source: source);
@@ -32,7 +32,7 @@ class CustomAttachTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<File?> imageController = ValueNotifier<File?>(null);
+    final ValueNotifier<File?> imageController = ValueNotifier<File?>(null);
     File? image;
     return InkWell(
       onTap: () {
@@ -102,7 +102,6 @@ class CustomAttachTextField extends StatelessWidget {
                         ),
                       )
                 : Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(

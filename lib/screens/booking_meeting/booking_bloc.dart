@@ -100,7 +100,7 @@ class BookingBloc extends Bloc<DiscountService> {
 
   String? meetingDayNamed(DateTime? date) {
     if (date != null) {
-      var dayName = DateFormat('EEEE').format(date);
+      final dayName = DateFormat('EEEE').format(date);
       return box.get(DatabaseFieldConstant.language) == "en"
           ? dayName
           : DayTime().convertDayToArabic(dayName);
@@ -123,30 +123,36 @@ class BookingBloc extends Bloc<DiscountService> {
     return null;
   }
 
-  double calculateMeetingCostAmountVariable = 0.0;
+  double calculateMeetingCostAmountVariable = 0;
   double? calculateMeetingCost(
       {required double? hourRate,
       required Timing? duration,
       required bool freeCall}) {
     if (hourRate == null || duration == null) {
-      calculateMeetingCostAmountVariable = 0.0;
-      return calculateMeetingCostAmountVariable;
+      final double returnValue = 0;
+
+      calculateMeetingCostAmountVariable = returnValue;
+      return returnValue;
     } else {
       switch (duration) {
         case Timing.quarterHour:
           if (freeCall) {
-            calculateMeetingCostAmountVariable = 0.0;
-            return calculateMeetingCostAmountVariable;
+            final double returnValue = 0;
+
+            calculateMeetingCostAmountVariable = returnValue;
+            return returnValue;
           } else {
-            calculateMeetingCostAmountVariable = (hourRate / 4);
-            return calculateMeetingCostAmountVariable;
+            final double returnValue = hourRate / 4;
+
+            calculateMeetingCostAmountVariable = returnValue;
+            return returnValue;
           }
 
         case Timing.halfHour:
-          calculateMeetingCostAmountVariable = (hourRate / 2);
+          calculateMeetingCostAmountVariable = hourRate / 2;
           return calculateMeetingCostAmountVariable;
         case Timing.threeQuarter:
-          calculateMeetingCostAmountVariable = (hourRate - (hourRate / 4));
+          calculateMeetingCostAmountVariable = hourRate - (hourRate / 4);
           return calculateMeetingCostAmountVariable;
         case Timing.hour:
           calculateMeetingCostAmountVariable = hourRate;
@@ -155,15 +161,16 @@ class BookingBloc extends Bloc<DiscountService> {
     }
   }
 
-  double calculateTotalAmountVariable = 0.0;
+  double calculateTotalAmountVariable = 0;
   double calculateTotalAmount(
       {required double? hourRate,
       required Timing? duration,
       required String discount,
       required bool freeCall}) {
     if (hourRate == null || duration == null) {
-      calculateTotalAmountVariable = 0.0;
-      return calculateTotalAmountVariable;
+      final double returnValue = 0;
+      calculateTotalAmountVariable = returnValue;
+      return returnValue;
     } else {
       double newDiscount = 0;
 
@@ -174,54 +181,69 @@ class BookingBloc extends Bloc<DiscountService> {
       switch (duration) {
         case Timing.quarterHour:
           if (freeCall) {
-            calculateTotalAmountVariable = 0;
-            return calculateTotalAmountVariable;
+            final double returnValue = 0;
+
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           } else {
             if (newDiscount > 0) {
-              calculateTotalAmountVariable =
+              final double returnValue =
                   (hourRate / 4) - ((hourRate / 4) * (newDiscount / 100));
-              return calculateTotalAmountVariable;
+
+              calculateTotalAmountVariable = returnValue;
+              return returnValue;
             } else {
-              calculateTotalAmountVariable = (hourRate / 4);
-              return calculateTotalAmountVariable;
+              final double returnValue = hourRate / 4;
+
+              calculateTotalAmountVariable = returnValue;
+              return returnValue;
             }
           }
         case Timing.halfHour:
           if (newDiscount > 0) {
-            calculateTotalAmountVariable =
+            final double returnValue =
                 (hourRate / 2) - ((hourRate / 2) * (newDiscount / 100));
-            return calculateTotalAmountVariable;
+
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           } else {
-            calculateTotalAmountVariable = (hourRate / 2);
-            return calculateTotalAmountVariable;
+            final double returnValue = hourRate / 2;
+
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           }
 
         case Timing.threeQuarter:
           if (newDiscount > 0) {
-            calculateTotalAmountVariable = (hourRate - (hourRate / 4)) -
+            final double returnValue = (hourRate - (hourRate / 4)) -
                 ((hourRate - (hourRate / 4)) * (newDiscount / 100));
-            return calculateTotalAmountVariable;
+
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           } else {
-            calculateTotalAmountVariable = (hourRate - (hourRate / 4));
-            return calculateTotalAmountVariable;
+            final double returnValue = hourRate - (hourRate / 4);
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           }
 
         case Timing.hour:
           if (newDiscount > 0) {
-            calculateTotalAmountVariable =
+            final double returnValue =
                 hourRate - (hourRate * (newDiscount / 100));
-            return calculateTotalAmountVariable;
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           } else {
-            calculateTotalAmountVariable = hourRate;
-            return calculateTotalAmountVariable;
+            final double returnValue = hourRate;
+            calculateTotalAmountVariable = returnValue;
+            return returnValue;
           }
       }
     }
   }
 
-  _checkingAvaliableAttornies(int catID) async {
+  Future<void> _checkingAvaliableAttornies(int catID) async {
     try {
-      var attornies = await locator<AttorneyDetailsService>()
+      final attornies = await locator<AttorneyDetailsService>()
           .getAttorneyAvaliable(categoryID: catID);
       if (attornies.data != null) {
         avaliableAttornies.value = attornies.data;
@@ -233,15 +255,15 @@ class BookingBloc extends Bloc<DiscountService> {
         attorneyMeetingdate =
             DateFormat("yyyy-MM-dd").parse(attornies.data![0].date!);
         meetingDay = meetingDayNamed(attorneyMeetingdate);
-        attorneyMeetingtime = attornies.data![0].hour!;
+        attorneyMeetingtime = attornies.data![0].hour;
         meetingFreeCall = false;
         enablePayButton = true;
         errorFoundingAttornies.value = "";
         loadingStatus.value = LoadingStatus.finish;
       }
     } on DioException catch (e) {
-      final error = e.error as HttpException;
-      errorFoundingAttornies.value = error.message.toString();
+      final error = e.error! as HttpException;
+      errorFoundingAttornies.value = error.message;
       loadingStatus.value = LoadingStatus.finish;
     }
   }
@@ -253,8 +275,7 @@ class BookingBloc extends Bloc<DiscountService> {
                 DateTime.now().year,
                 DateTime.now().month,
                 DateTime.now().day,
-                DateTime.now().hour + attorneyMeetingtime! + 1,
-                0)
+                DateTime.now().hour + attorneyMeetingtime! + 1)
             .toUtc();
       case BookingType.schudule:
         return DateTime(attorneyMeetingdate!.year, attorneyMeetingdate!.month,
@@ -278,8 +299,9 @@ class BookingBloc extends Bloc<DiscountService> {
   }
 
   Future<dynamic> bookMeetingRequest(PaymentTypeMethod payment) async {
-    DateTime fromDateTime = _calculateDateFromToUTC(bookingType: bookingType!);
-    DateTime toDateTime = _calculateDateToToUTC(
+    final DateTime fromDateTime =
+        _calculateDateFromToUTC(bookingType: bookingType!);
+    final DateTime toDateTime = _calculateDateToToUTC(
         dateFrom: fromDateTime, duration: meetingduration!);
 
     int paymentMethod = 0;
@@ -323,11 +345,11 @@ class BookingBloc extends Bloc<DiscountService> {
       note: noteController.text.isEmpty ? null : noteController.text,
     );
 
-    return await locator<CustomerAppointmentsService>()
+    return locator<CustomerAppointmentsService>()
         .bookNewAppointments(appointment: appointment);
   }
 
-  handleLisinnerOfDiscountController() {
+  void handleLisinnerOfDiscountController() {
     discountController.addListener(() {
       applyDiscountButton.value = false;
       discountErrorMessage.value = "";
@@ -352,9 +374,9 @@ class BookingBloc extends Bloc<DiscountService> {
 
   double calculateDiscountPercent(String snapshot) {
     if (snapshot == "") {
-      return 0.0;
+      return 0;
     } else if (snapshot == "error") {
-      return 0.0;
+      return 0;
     } else {
       return double.tryParse(snapshot) ?? 0.0;
     }
@@ -378,7 +400,7 @@ class BookingBloc extends Bloc<DiscountService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     applyDiscountButton.dispose();
   }
 }

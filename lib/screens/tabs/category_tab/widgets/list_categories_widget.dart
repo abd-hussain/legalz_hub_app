@@ -3,11 +3,10 @@ import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class CategoriesList extends StatefulWidget {
-  final List<Category> categoriesList;
-  final Function(Category) onTap;
-
   const CategoriesList(
       {super.key, required this.categoriesList, required this.onTap});
+  final List<Category> categoriesList;
+  final Function(Category) onTap;
 
   @override
   State<CategoriesList> createState() => _CategoriesListState();
@@ -62,7 +61,7 @@ class _CategoriesListState extends State<CategoriesList> {
                         child: FadeInImage(
                           placeholder: const AssetImage(
                               "assets/images/flagPlaceHolderImg.png"),
-                          image: NetworkImage(item.icon!, scale: 1),
+                          image: NetworkImage(item.icon!),
                         ),
                       ),
                       const SizedBox(height: 8),

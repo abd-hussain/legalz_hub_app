@@ -3,8 +3,8 @@ import 'package:legalz_hub_app/models/profile_options.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class CollectionListOptionView extends StatelessWidget {
-  final List<ProfileOptions> listOfOptions;
   const CollectionListOptionView({super.key, required this.listOfOptions});
+  final List<ProfileOptions> listOfOptions;
 
   @override
   Widget build(BuildContext context) {
@@ -58,28 +58,31 @@ class CollectionListOptionView extends StatelessWidget {
                                   ? listOfOptions[index].nameColor
                                   : Colors.grey,
                               fontWeight: FontWeight.w500),
-                          listOfOptions[index].subtitle != ""
-                              ? CustomText(
-                                  title: listOfOptions[index].subtitle,
-                                  fontSize: 12,
-                                  textColor: listOfOptions[index].avaliable
-                                      ? listOfOptions[index].nameColor
-                                      : Colors.grey,
-                                  fontWeight: FontWeight.w500)
-                              : Container(),
+                          if (listOfOptions[index].subtitle != "")
+                            CustomText(
+                                title: listOfOptions[index].subtitle,
+                                fontSize: 12,
+                                textColor: listOfOptions[index].avaliable
+                                    ? listOfOptions[index].nameColor
+                                    : Colors.grey,
+                                fontWeight: FontWeight.w500)
+                          else
+                            Container(),
                         ],
                       ),
                       Expanded(child: Container()),
-                      listOfOptions[index].selectedItem != ""
-                          ? CustomText(
-                              title: listOfOptions[index].selectedItem,
-                              fontSize: 14,
-                              textColor: const Color(0xffFFA200),
-                            )
-                          : Container(),
-                      listOfOptions[index].selectedItemImage != null
-                          ? listOfOptions[index].selectedItemImage!
-                          : Container(),
+                      if (listOfOptions[index].selectedItem != "")
+                        CustomText(
+                          title: listOfOptions[index].selectedItem,
+                          fontSize: 14,
+                          textColor: const Color(0xffFFA200),
+                        )
+                      else
+                        Container(),
+                      if (listOfOptions[index].selectedItemImage != null)
+                        listOfOptions[index].selectedItemImage!
+                      else
+                        Container(),
                       const SizedBox(width: 8),
                       const Icon(
                         Icons.arrow_forward_ios_outlined,

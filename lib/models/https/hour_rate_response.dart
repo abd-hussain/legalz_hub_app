@@ -4,7 +4,9 @@ class HourRateResponse {
   HourRateResponse({this.data, this.message});
 
   HourRateResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? HourRateResponseData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? HourRateResponseData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
   HourRateResponseData? data;
@@ -12,7 +14,8 @@ class HourRateResponse {
 }
 
 class HourRateResponseData with ModelChecker {
-  HourRateResponseData({this.hourRate, this.iban, this.currency, this.freeCall});
+  HourRateResponseData(
+      {this.hourRate, this.iban, this.currency, this.freeCall});
 
   HourRateResponseData.fromJson(Map<String, dynamic> json) {
     hourRate = convertToDouble(json['hour_rate']);

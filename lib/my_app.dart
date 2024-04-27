@@ -1,27 +1,26 @@
 // import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/main_context.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'package:legalz_hub_app/screens/splash/splash_screen.dart';
 // import 'package:legalz_hub_app/services/general/network_info_service.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/custom_gusture.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 BuildContext? buildContext;
 
 class MyApp extends StatefulWidget {
-  final bool isConnected;
-
   const MyApp({
     super.key,
     required this.isConnected,
   });
+  final bool isConnected;
 
   static MyAppState? of(BuildContext context) {
     buildContext = context;
@@ -75,7 +74,7 @@ class MyAppState extends State<MyApp> {
                 Widget child) {
               return SlideTransition(
                 position: Tween<Offset>(
-                  begin: const Offset(1.0, 0.0),
+                  begin: const Offset(1, 0),
                   end: Offset.zero,
                 ).animate(animation),
                 child: child,
@@ -102,11 +101,11 @@ class MyAppState extends State<MyApp> {
   }
 
   Future<FirebaseApp> _setupMobileFirebase() async {
-    return await Firebase.initializeApp();
+    return Firebase.initializeApp();
   }
 
   Future<FirebaseApp> _setupWebFirebase() async {
-    return await Firebase.initializeApp(
+    return Firebase.initializeApp(
       options: const FirebaseOptions(
           projectId: "legalzhub",
           messagingSenderId: "427308149539",

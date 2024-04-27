@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:legalz_hub_app/models/https/rating_and_review_response.dart';
 import 'package:legalz_hub_app/screens/rating_and_review/rating_and_review_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
@@ -59,16 +59,17 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
                 return ListView.builder(
                     itemCount: snapshot.length,
                     itemBuilder: (ctx, index) {
-                      var noteDate = DateTime.parse(snapshot[index].createdAt!);
+                      final noteDate =
+                          DateTime.parse(snapshot[index].createdAt!);
                       final String formattedDate =
                           bloc.formatter.format(noteDate);
-                      TextEditingController controller =
+                      final TextEditingController controller =
                           TextEditingController();
 
                       controller.text = snapshot[index].attorneyResponse ?? "";
 
                       return Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8),
                         child: Column(
                           children: [
                             Container(
@@ -87,7 +88,7 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
                                 ],
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8),
                                 child: Column(
                                   children: [
                                     Row(
@@ -109,16 +110,16 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
                                                             const AssetImage(
                                                                 "assets/images/avatar.jpeg"),
                                                         image: NetworkImage(
-                                                            AppConstant
-                                                                    .imagesBaseURLForCustomer +
-                                                                snapshot[index]
-                                                                    .profileImg!,
-                                                            scale: 1),
+                                                          AppConstant
+                                                                  .imagesBaseURLForCustomer +
+                                                              snapshot[index]
+                                                                  .profileImg!,
+                                                        ),
                                                       )
                                                     : Image.asset(
                                                         'assets/images/avatar.jpeg',
-                                                        width: 110.0,
-                                                        height: 110.0,
+                                                        width: 110,
+                                                        height: 110,
                                                         fit: BoxFit.fill,
                                                       ),
                                               ),
@@ -141,17 +142,16 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
                                                               const AssetImage(
                                                                   "assets/images/avatar.jpeg"),
                                                           image: NetworkImage(
-                                                              AppConstant
-                                                                      .imagesBaseURLForCountries +
-                                                                  snapshot[
-                                                                          index]
-                                                                      .flagImage!,
-                                                              scale: 1),
+                                                            AppConstant
+                                                                    .imagesBaseURLForCountries +
+                                                                snapshot[index]
+                                                                    .flagImage!,
+                                                          ),
                                                         )
                                                       : Image.asset(
                                                           'assets/images/avatar.jpeg',
-                                                          width: 110.0,
-                                                          height: 110.0,
+                                                          width: 110,
+                                                          height: 110,
                                                           fit: BoxFit.fill,
                                                         ),
                                                 ),
@@ -195,20 +195,18 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
                                           Icons.star,
                                           color: Colors.amber,
                                         ),
-                                        itemCount: 5,
                                         itemSize: 30,
                                       ),
                                     ),
                                     CustomText(
                                       title: snapshot[index].comment ?? "",
                                       textColor: const Color(0xff444444),
-                                      textAlign: TextAlign.start,
                                       fontSize: 14,
                                       maxLins: 4,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8),
                                       child: CustomTextField(
                                         onEditingComplete: () async {
                                           FocusScope.of(context).unfocus();

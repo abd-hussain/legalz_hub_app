@@ -26,7 +26,7 @@ class ShimmerNotificationsView extends StatelessWidget {
                     color: Colors.white,
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                   ),
                   Expanded(
                     child: Column(
@@ -34,15 +34,15 @@ class ShimmerNotificationsView extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width - 100,
-                          height: 8.0,
+                          height: 8,
                           color: Colors.white,
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                          padding: EdgeInsets.symmetric(vertical: 2),
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width - 120,
-                          height: 8.0,
+                          height: 8,
                           color: Colors.white,
                         ),
                       ],

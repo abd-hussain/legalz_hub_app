@@ -49,7 +49,7 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
 
   StreamController<bool> enableNextBtn = StreamController<bool>();
 
-  tryToFillTheFields() {
+  void tryToFillTheFields() {
     if (box.get(TempFieldToRegistrtAttorneyConstant.suffix) != null) {
       suffixNameController.text =
           box.get(TempFieldToRegistrtAttorneyConstant.suffix);
@@ -88,7 +88,8 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
     }
 
     if (box.get(TempFieldToRegistrtAttorneyConstant.country) != null) {
-      var id = int.parse(box.get(TempFieldToRegistrtAttorneyConstant.country));
+      final id =
+          int.parse(box.get(TempFieldToRegistrtAttorneyConstant.country));
       selectedCountry = Country(
         id: id,
         flagImage: listOfCountries.value
@@ -125,7 +126,7 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
     loadingStatusController.sink.add(LoadingStatus.finish);
   }
 
-  validateFieldsForFaze1() {
+  void validateFieldsForFaze1() {
     enableNextBtn.sink.add(false);
 
     if (suffixNameController.text.isNotEmpty &&
@@ -143,7 +144,7 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
     }
   }
 
-  validateMobileNumber(String fullMobileNumber) {
+  void validateMobileNumber(String fullMobileNumber) {
     service.validateMobileNumber(fullMobileNumber).then((value) {
       mobileNumberErrorMessage.value = value;
       validateFieldsForFaze1();
@@ -193,5 +194,5 @@ class AttorneyRegister1Bloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/add_comment_request.dart';
@@ -15,7 +17,6 @@ import 'package:legalz_hub_app/services/post_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeBloc extends Bloc<HomeService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -79,8 +80,10 @@ class HomeBloc extends Bloc<HomeService> {
     }
   }
 
-  Future<List<PostResponseData>?> getHomePosts({required int catId, required int skip}) async {
-    final value = await locator<PostService>().getHomePosts(catId: catId, skip: skip);
+  Future<List<PostResponseData>?> getHomePosts(
+      {required int catId, required int skip}) async {
+    final value =
+        await locator<PostService>().getHomePosts(catId: catId, skip: skip);
     if (value.data != null) {
       postsStreamController.sink.add(value.data);
       return value.data!;
@@ -89,7 +92,7 @@ class HomeBloc extends Bloc<HomeService> {
     }
   }
 
-  void callRegisterTokenRequest() async {
+  Future<void> callRegisterTokenRequest() async {
     final String token = box.get(DatabaseFieldConstant.pushNotificationToken);
     await locator<NotificationsService>().registerToken(token, userType);
   }
@@ -98,27 +101,32 @@ class HomeBloc extends Bloc<HomeService> {
     //TODO : handle pagination
     getHomePosts(catId: 0, skip: 0);
     tabController!.addListener(() async {
-      getHomePosts(catId: tabController!.index, skip: 0);
+      await getHomePosts(catId: tabController!.index, skip: 0);
     });
   }
 
-  Future<void> addNewPost({required int catId, required String content, File? postImg}) async {
-    await locator<PostService>().addPost(catId: catId.toString(), content: content, postImg: postImg);
+  Future<void> addNewPost(
+      {required int catId, required String content, File? postImg}) async {
+    await locator<PostService>()
+        .addPost(catId: catId.toString(), content: content, postImg: postImg);
   }
 
-  Future<dynamic> reportPost({required int postId, required String reason}) async {
-    return await locator<PostService>().reportPost(postId: postId, reason: reason, userType: userType);
+  Future<dynamic> reportPost(
+      {required int postId, required String reason}) async {
+    return locator<PostService>()
+        .reportPost(postId: postId, reason: reason, userType: userType);
   }
 
   Future<dynamic> deletePost({required int postId}) async {
-    return await locator<PostService>().removePost(postId: postId);
+    return locator<PostService>().removePost(postId: postId);
   }
 
   Future<CommentsResponse> getPostComments({required int postId}) async {
-    return await locator<CommentPostService>().getCommentsForPost(postId: postId);
+    return locator<CommentPostService>().getCommentsForPost(postId: postId);
   }
 
-  Future<dynamic> addNewComment({required int postId, required String content}) async {
+  Future<dynamic> addNewComment(
+      {required int postId, required String content}) async {
     await locator<CommentPostService>().addCommentOnPost(
         model: AddCommentToThePost(
       postId: postId,
@@ -135,7 +143,7 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     tabController?.dispose();
   }
 }

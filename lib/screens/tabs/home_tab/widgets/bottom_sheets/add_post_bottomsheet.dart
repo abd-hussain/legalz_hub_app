@@ -25,7 +25,7 @@ class AddPostBottomSheetsUtil {
       required Function(
               {required int catId, required String content, File? postImg})
           addPost}) {
-    List<Category> listOfCategories =
+    final List<Category> listOfCategories =
         categories.where((s) => s.id != 0).toList();
 
     return showModalBottomSheet(
@@ -101,7 +101,7 @@ class AddPostBottomSheetsUtil {
                               ],
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -167,7 +167,7 @@ class AddPostBottomSheetsUtil {
                                         Radius.circular(20)),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8),
                                     child: Row(
                                       children: [
                                         CustomText(
@@ -252,21 +252,21 @@ class AddPostBottomSheetsUtil {
                                   width: 70,
                                   height: 70,
                                 ),
-                                image != null
-                                    ? Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.file(
-                                            image!,
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      )
-                                    : Container()
+                                if (image != null)
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.file(
+                                        image!,
+                                        width: 60,
+                                        height: 60,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                else
+                                  Container()
                               ],
                             ),
                           ),

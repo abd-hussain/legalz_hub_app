@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_1/attorney_register_fase1_bloc.dart';
-import 'package:legalz_hub_app/shared_widget/mobile_header.dart';
-import 'package:legalz_hub_app/shared_widget/mobile_number_widget.dart';
 import 'package:legalz_hub_app/screens/register/widgets/footer_view.dart';
 import 'package:legalz_hub_app/shared_widget/country_field.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
@@ -16,6 +13,8 @@ import 'package:legalz_hub_app/shared_widget/date_of_birth/date_of_birth_view.da
 import 'package:legalz_hub_app/shared_widget/gender_field.dart';
 import 'package:legalz_hub_app/shared_widget/image_holder_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
+import 'package:legalz_hub_app/shared_widget/mobile_header.dart';
+import 'package:legalz_hub_app/shared_widget/mobile_number_widget.dart';
 import 'package:legalz_hub_app/shared_widget/suffix_field.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
@@ -90,7 +89,8 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                         : "");
                 await bloc.box
                     .put(DatabaseFieldConstant.attorneyRegistrationStep, "2");
-                navigator.pushNamed(RoutesConstants.registerAttornyFaze2Screen);
+                await navigator
+                    .pushNamed(RoutesConstants.registerAttornyFaze2Screen);
               },
             );
           }),
@@ -306,7 +306,6 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                   const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.dbprofile,
-                                textAlign: TextAlign.start,
                                 fontSize: 14,
                                 textColor: const Color(0xff384048),
                               ),
@@ -330,7 +329,6 @@ class _AttorneyRegister1ScreenState extends State<AttorneyRegister1Screen> {
                                   const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.optional,
-                                textAlign: TextAlign.start,
                                 fontSize: 14,
                                 textColor: const Color(0xff384048),
                               ),

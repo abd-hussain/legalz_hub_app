@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/forgot_password/forgot_password_bloc.dart';
 import 'package:legalz_hub_app/shared_widget/background_container.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
@@ -7,7 +8,6 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/email_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
@@ -75,7 +75,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   bloc.showHideEmailClearNotifier.value = false;
                                   bloc.fieldsValidations.value = false;
                                 },
-                                onchange: () => bloc.fieldValidation(),
+                                onchange: bloc.fieldValidation,
                                 onEditingComplete: () => FocusManager
                                     .instance.primaryFocus
                                     ?.unfocus(),
@@ -116,7 +116,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                         await bloc.doForgotPasswordCall();
                                         bloc.loadingStatusNotifier.value =
                                             LoadingStatus.finish;
-                                        navigation.pushNamed(
+                                        await navigation.pushNamed(
                                           RoutesConstants
                                               .forgotPasswordConfirmationScreen,
                                           arguments: {

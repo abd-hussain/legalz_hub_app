@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:legalz_hub_app/screens/register/attorney/fase_3/attorney_register_fase3_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/register/widgets/footer_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/edit_working_hour_bottomsheet.dart';
 import 'package:legalz_hub_app/shared_widget/working_hours.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
+import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
-
-import '../../../../utils/enums/user_type.dart';
 
 class AttorneyRegister3Screen extends StatefulWidget {
   const AttorneyRegister3Screen({super.key});
@@ -72,7 +71,8 @@ class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
 
                 await bloc.box
                     .put(DatabaseFieldConstant.attorneyRegistrationStep, "4");
-                navigator.pushNamed(RoutesConstants.registerAttornyFaze4Screen);
+                await navigator
+                    .pushNamed(RoutesConstants.registerAttornyFaze4Screen);
               },
             );
           }),

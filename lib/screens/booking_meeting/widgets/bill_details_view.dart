@@ -3,17 +3,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/item_in_gred.dart';
 
 class BillDetailsView extends StatelessWidget {
-  final String? currency;
-  final double? meetingCostAmount;
-  final double? totalAmount;
-  final double? discountPercent;
-
   const BillDetailsView(
       {super.key,
       required this.currency,
       required this.meetingCostAmount,
       required this.totalAmount,
       required this.discountPercent});
+  final String? currency;
+  final double? meetingCostAmount;
+  final double? totalAmount;
+  final double? discountPercent;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,6 @@ class BillDetailsView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 0,
           crossAxisSpacing: 8,
           childAspectRatio: 3.2,
         ),

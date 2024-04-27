@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/permission.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CallReadyView extends StatelessWidget {
-  final UserType userType;
-  final String channelId;
-  final int appointmentId;
-  final int meetingDurationInMin;
-  final Function callEnd;
-
   const CallReadyView(
       {super.key,
       required this.userType,
@@ -22,6 +16,11 @@ class CallReadyView extends StatelessWidget {
       required this.appointmentId,
       required this.callEnd,
       required this.meetingDurationInMin});
+  final UserType userType;
+  final String channelId;
+  final int appointmentId;
+  final int meetingDurationInMin;
+  final Function callEnd;
 
   @override
   Widget build(BuildContext context) {
@@ -70,13 +69,13 @@ class CallReadyView extends StatelessWidget {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: CustomButton(
                   padding: const EdgeInsets.all(8),
                   buttonTitle: AppLocalizations.of(context)!.joinnow,
                   enableButton: true,
                   onTap: () async {
-                    PermissionHandler()
+                    await PermissionHandler()
                         .handlePermission(Permission.camera)
                         .whenComplete(() {
                       PermissionHandler()

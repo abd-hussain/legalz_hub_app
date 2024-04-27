@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/booking_bloc.dart';
@@ -14,7 +15,6 @@ import 'package:legalz_hub_app/screens/booking_meeting/widgets/schedule_booking_
 import 'package:legalz_hub_app/screens/main_container/main_container_bloc.dart';
 import 'package:legalz_hub_app/shared_widget/booking/payment_bottom_sheet.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
@@ -68,46 +68,44 @@ class _BookingScreenState extends State<BookingScreen> {
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  bloc.bookingType == BookingType.schudule
-                                      ? ScheduleBookingView(
-                                          profileImg: bloc
-                                              .scheduleAttorneyProfileImageUrl,
-                                          flagImage: bloc.attorneyCountryFlag,
-                                          gender: bloc.scheduleAttorneyGender,
-                                          firstName:
-                                              bloc.scheduleAttorneyFirstName,
-                                          lastName:
-                                              bloc.scheduleAttorneyLastName,
-                                          suffixName:
-                                              bloc.scheduleAttorneySuffixName,
-                                          categoryName: bloc.categoryName,
-                                        )
-                                      : InstanceBookingView(
-                                          avaliableAttornies:
-                                              bloc.avaliableAttornies,
-                                          categoryName: bloc.categoryName,
-                                          onSelectAttorney: (attorneyDate) {
-                                            bloc.loadingStatus.value =
-                                                LoadingStatus.inprogress;
-                                            bloc.attorneyId = attorneyDate.id;
-                                            bloc.attorneyHourRate =
-                                                attorneyDate.hourRate;
-                                            bloc.attorneyCurrency =
-                                                attorneyDate.currency;
-                                            bloc.attorneyMeetingdate =
-                                                DateFormat("yyyy-MM-dd")
-                                                    .parse(attorneyDate.date!);
-                                            bloc.meetingDay =
-                                                bloc.meetingDayNamed(
-                                                    bloc.attorneyMeetingdate);
-                                            bloc.attorneyMeetingtime =
-                                                attorneyDate.hour!;
-                                            bloc.meetingFreeCall = false;
-                                            bloc.enablePayButton = true;
-                                            bloc.loadingStatus.value =
-                                                LoadingStatus.finish;
-                                          },
-                                        ),
+                                  if (bloc.bookingType == BookingType.schudule)
+                                    ScheduleBookingView(
+                                      profileImg:
+                                          bloc.scheduleAttorneyProfileImageUrl,
+                                      flagImage: bloc.attorneyCountryFlag,
+                                      gender: bloc.scheduleAttorneyGender,
+                                      firstName: bloc.scheduleAttorneyFirstName,
+                                      lastName: bloc.scheduleAttorneyLastName,
+                                      suffixName:
+                                          bloc.scheduleAttorneySuffixName,
+                                      categoryName: bloc.categoryName,
+                                    )
+                                  else
+                                    InstanceBookingView(
+                                      avaliableAttornies:
+                                          bloc.avaliableAttornies,
+                                      categoryName: bloc.categoryName,
+                                      onSelectAttorney: (attorneyDate) {
+                                        bloc.loadingStatus.value =
+                                            LoadingStatus.inprogress;
+                                        bloc.attorneyId = attorneyDate.id;
+                                        bloc.attorneyHourRate =
+                                            attorneyDate.hourRate;
+                                        bloc.attorneyCurrency =
+                                            attorneyDate.currency;
+                                        bloc.attorneyMeetingdate =
+                                            DateFormat("yyyy-MM-dd")
+                                                .parse(attorneyDate.date!);
+                                        bloc.meetingDay = bloc.meetingDayNamed(
+                                            bloc.attorneyMeetingdate);
+                                        bloc.attorneyMeetingtime =
+                                            attorneyDate.hour;
+                                        bloc.meetingFreeCall = false;
+                                        bloc.enablePayButton = true;
+                                        bloc.loadingStatus.value =
+                                            LoadingStatus.finish;
+                                      },
+                                    ),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         right: 16, left: 16, bottom: 8),
@@ -254,7 +252,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                         if (bloc.currencyCode !=
                                             bloc.box.get(DatabaseFieldConstant
                                                 .selectedCurrencyCode)) {
-                                          double dollerEquavilant =
+                                          final double dollerEquavilant =
                                               await bloc.currencyConversion(
                                                   bloc.currencyCode!);
                                           if (context.mounted) {
@@ -345,14 +343,14 @@ class _BookingScreenState extends State<BookingScreen> {
       await bloc.bookMeetingRequest(type);
       _backAfterRequest();
     } on DioException catch (e) {
-      final error = e.error as HttpException;
+      final error = e.error! as HttpException;
       scaffoldMessenger.showSnackBar(
-        SnackBar(content: Text(error.message.toString())),
+        SnackBar(content: Text(error.message)),
       );
     }
   }
 
-  _backAfterRequest() {
+  void _backAfterRequest() {
     if (bloc.bookingType == BookingType.schudule) {
       Navigator.of(context).pop();
       Navigator.of(context).pop();

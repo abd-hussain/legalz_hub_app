@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/register/widgets/points_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
@@ -6,18 +7,16 @@ import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterCustomerBottomSheetsUtil {
+  RegisterCustomerBottomSheetsUtil(
+      {required this.language, required this.context});
   final BuildContext context;
   final String language;
 
-  RegisterCustomerBottomSheetsUtil(
-      {required this.language, required this.context});
-
   Future infoBottomSheet(
       {required int step, required Function() openNext}) async {
-    return await showModalBottomSheet(
+    return showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(

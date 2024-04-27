@@ -7,10 +7,6 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
 class DiscountView extends StatelessWidget {
-  final TextEditingController controller;
-  final ValueListenable<bool> applyDiscountButton;
-  final ValueListenable<String> discountErrorMessage;
-  final Function() applyDiscountButtonCallBack;
   const DiscountView({
     required this.controller,
     required this.applyDiscountButton,
@@ -18,6 +14,10 @@ class DiscountView extends StatelessWidget {
     required this.applyDiscountButtonCallBack,
     super.key,
   });
+  final TextEditingController controller;
+  final ValueListenable<bool> applyDiscountButton;
+  final ValueListenable<String> discountErrorMessage;
+  final Function() applyDiscountButtonCallBack;
 
   @override
   Widget build(BuildContext context) {

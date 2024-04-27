@@ -7,7 +7,8 @@ class AuthenticationResult {
 }
 
 class UserAuthenticationBlockResult {
-  UserAuthenticationBlockResult({required this.shouldAllowUser, required this.dateOfAllowed});
+  UserAuthenticationBlockResult(
+      {required this.shouldAllowUser, required this.dateOfAllowed});
   bool shouldAllowUser;
   String dateOfAllowed;
 }

@@ -3,26 +3,25 @@ import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class WorkingHoursWidget extends StatelessWidget {
-  final String dayName;
-  final List<CheckBox> workingHours;
-  final Function() onSave;
   const WorkingHoursWidget({
     super.key,
     required this.dayName,
     required this.workingHours,
     required this.onSave,
   });
+  final String dayName;
+  final List<CheckBox> workingHours;
+  final Function() onSave;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           Row(
             children: [
               Expanded(
-                flex: 1,
                 child: Column(
                   children: [
                     CustomText(
@@ -32,7 +31,7 @@ class WorkingHoursWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     IconButton(
-                      onPressed: () => onSave(),
+                      onPressed: onSave,
                       icon: const Icon(
                         Icons.edit,
                         color: Color(0xff444444),

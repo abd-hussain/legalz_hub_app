@@ -9,12 +9,13 @@ import 'package:legalz_hub_app/utils/mixins.dart';
 
 class HttpInterceptor extends InterceptorsWrapper {
   @override
-  void onRequest(
+  Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    var box = Hive.box(DatabaseBoxConstant.userInfo);
+    final box = Hive.box(DatabaseBoxConstant.userInfo);
     if (box.get(DatabaseFieldConstant.token) != null ||
         box.get(DatabaseFieldConstant.token) != "") {
-      String bearerToken = "Bearer ${box.get(DatabaseFieldConstant.token)}";
+      final String bearerToken =
+          "Bearer ${box.get(DatabaseFieldConstant.token)}";
       options.headers = {
         "Authorization": bearerToken,
         "lang": box.get(DatabaseFieldConstant.language),
@@ -27,7 +28,8 @@ class HttpInterceptor extends InterceptorsWrapper {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+  Future<void> onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     try {
       if (await validateResponse(response)) {
         return handler.next(response);
@@ -54,7 +56,7 @@ class HttpInterceptor extends InterceptorsWrapper {
       case 404:
         logErrorMessageCrashlytics(
           error: response.statusCode,
-          message: "response.data ${response.data.toString()}",
+          message: "response.data ${response.data}",
         );
 
         throw DioException(
@@ -66,7 +68,7 @@ class HttpInterceptor extends InterceptorsWrapper {
       default:
         logErrorMessageCrashlytics(
           error: response.statusCode,
-          message: "response.data ${response.data.toString()}",
+          message: "response.data ${response.data}",
         );
 
         throw DioException(

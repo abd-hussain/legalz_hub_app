@@ -48,7 +48,12 @@ class AppointmentRequest implements Model {
 }
 
 class CustomDate {
-  CustomDate({required this.year, required this.month, required this.day, required this.hour, required this.min});
+  CustomDate(
+      {required this.year,
+      required this.month,
+      required this.day,
+      required this.hour,
+      required this.min});
   int year;
   int month;
   int day;

@@ -4,13 +4,12 @@ import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class SpeakingLanguageField extends StatefulWidget {
-  final List<CheckBox> listOfLanguages;
-  final Function(List<CheckBox>) selectedLanguage;
-
   const SpeakingLanguageField(
       {required this.listOfLanguages,
       super.key,
       required this.selectedLanguage});
+  final List<CheckBox> listOfLanguages;
+  final Function(List<CheckBox>) selectedLanguage;
 
   @override
   State<SpeakingLanguageField> createState() => _SpeakingLanguageFieldState();
@@ -21,7 +20,7 @@ class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
 
   @override
   void initState() {
-    for (CheckBox item in widget.listOfLanguages) {
+    for (final CheckBox item in widget.listOfLanguages) {
       if (item.isEnable) {
         listOfSelectedLanguages.add(item.value);
       }
@@ -39,7 +38,7 @@ class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
             onSave: (languageSelected) {
               setState(() {
                 listOfSelectedLanguages = [];
-                for (CheckBox item in languageSelected) {
+                for (final CheckBox item in languageSelected) {
                   if (item.isEnable) {
                     listOfSelectedLanguages.add(item.value);
                   }
@@ -56,7 +55,7 @@ class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: ListView.builder(
             itemCount: listOfSelectedLanguages.length,
             scrollDirection: Axis.horizontal,

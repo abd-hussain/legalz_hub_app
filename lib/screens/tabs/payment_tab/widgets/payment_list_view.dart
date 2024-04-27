@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:legalz_hub_app/models/https/payments_response.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/tabs/payment_tab/widgets/client_view.dart';
 import 'package:legalz_hub_app/shared_widget/appointment_details_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PaymentListView extends StatelessWidget {
-  final List<PaymentResponseData> list;
-  final Function(PaymentResponseData) onReportPressed;
   const PaymentListView(
       {required this.list, super.key, required this.onReportPressed});
+  final List<PaymentResponseData> list;
+  final Function(PaymentResponseData) onReportPressed;
 
   @override
   Widget build(BuildContext context) {
     return list.isNotEmpty
         ? Padding(
-            padding:
-                const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 16),
+            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 16),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey[200],
@@ -39,9 +38,8 @@ class PaymentListView extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 itemCount: list.length,
                 itemBuilder: (context, index) {
-                  return _buildExpandableTile(context, list[index], (item) {
-                    onReportPressed(item);
-                  });
+                  return _buildExpandableTile(
+                      context, list[index], onReportPressed);
                 },
               ),
             ),
@@ -60,11 +58,11 @@ class PaymentListView extends StatelessWidget {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final DateTime parsedDate = DateTime.parse(item.createdAt!);
 
-    DateTime dateFrom = DateTime.parse(item.appointmentDateFrom!);
-    DateTime dateTo = DateTime.parse(item.appointmentDateTo!);
+    final DateTime dateFrom = DateTime.parse(item.appointmentDateFrom!);
+    final DateTime dateTo = DateTime.parse(item.appointmentDateTo!);
 
-    Duration difference = dateTo.difference(dateFrom);
-    int totalMinutes = difference.inMinutes;
+    final Duration difference = dateTo.difference(dateFrom);
+    final int totalMinutes = difference.inMinutes;
 
     return ExpansionTile(
       title: Row(
@@ -144,7 +142,7 @@ class PaymentListView extends StatelessWidget {
           clientCountryFlag: item.customerFlagImg ?? "",
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -154,7 +152,7 @@ class PaymentListView extends StatelessWidget {
             child: item.paymentReportedMessage != null
                 ? Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8),
                       child: Column(
                         children: [
                           CustomText(

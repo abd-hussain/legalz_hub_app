@@ -51,7 +51,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         userType: bloc.userType,
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.zero,
         child: ValueListenableBuilder<bool>(
             valueListenable: bloc.enableSaveButtonNotifier,
             builder: (context, snapshot, child) {
@@ -121,27 +121,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       Expanded(
                                         child: Column(
                                           children: [
-                                            bloc.userType == UserType.attorney
-                                                ? ValueListenableBuilder<
-                                                        List<SuffixData>>(
-                                                    valueListenable:
-                                                        bloc.listOfSuffix,
-                                                    builder: (context, snapshot,
-                                                        child) {
-                                                      return SuffixField(
-                                                        controller: bloc
-                                                            .suffixNameController,
-                                                        listOfSuffix: bloc
-                                                            .listOfSuffix.value,
-                                                        selectedSuffix: (p0) {
-                                                          bloc.validateFields();
-                                                        },
-                                                      );
-                                                    })
-                                                : Container(),
-                                            bloc.userType == UserType.attorney
-                                                ? const SizedBox(height: 10)
-                                                : Container(),
+                                            if (bloc.userType ==
+                                                UserType.attorney)
+                                              ValueListenableBuilder<
+                                                      List<SuffixData>>(
+                                                  valueListenable:
+                                                      bloc.listOfSuffix,
+                                                  builder: (context, snapshot,
+                                                      child) {
+                                                    return SuffixField(
+                                                      controller: bloc
+                                                          .suffixNameController,
+                                                      listOfSuffix: bloc
+                                                          .listOfSuffix.value,
+                                                      selectedSuffix: (p0) {
+                                                        bloc.validateFields();
+                                                      },
+                                                    );
+                                                  })
+                                            else
+                                              Container(),
+                                            if (bloc.userType ==
+                                                UserType.attorney)
+                                              const SizedBox(height: 10)
+                                            else
+                                              Container(),
                                             CustomTextField(
                                               controller:
                                                   bloc.firstNameController,
@@ -194,25 +198,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   color: const Color(0xffE8E8E8),
                                   height: 1,
                                 ),
-                                bloc.userType == UserType.attorney
-                                    ? const SizedBox(height: 16)
-                                    : Container(),
-                                bloc.userType == UserType.attorney
-                                    ? BioField(
-                                        bioController: bloc.bioController,
-                                        onChanged: (text) =>
-                                            bloc.validateFields(),
-                                      )
-                                    : Container(),
-                                bloc.userType == UserType.attorney
-                                    ? const SizedBox(height: 16)
-                                    : Container(),
-                                bloc.userType == UserType.attorney
-                                    ? Container(
-                                        color: const Color(0xffE8E8E8),
-                                        height: 1,
-                                      )
-                                    : Container(),
+                                if (bloc.userType == UserType.attorney)
+                                  const SizedBox(height: 16)
+                                else
+                                  Container(),
+                                if (bloc.userType == UserType.attorney)
+                                  BioField(
+                                    bioController: bloc.bioController,
+                                    onChanged: (text) => bloc.validateFields(),
+                                  )
+                                else
+                                  Container(),
+                                if (bloc.userType == UserType.attorney)
+                                  const SizedBox(height: 16)
+                                else
+                                  Container(),
+                                if (bloc.userType == UserType.attorney)
+                                  Container(
+                                    color: const Color(0xffE8E8E8),
+                                    height: 1,
+                                  )
+                                else
+                                  Container(),
                                 const SizedBox(height: 16),
                                 Padding(
                                   padding: bloc.userType == UserType.attorney
@@ -221,27 +228,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               "ar"
                                           ? const EdgeInsets.only(right: 16)
                                           : const EdgeInsets.only(left: 16)
-                                      : const EdgeInsets.all(0),
+                                      : EdgeInsets.zero,
                                   child: Row(
                                     children: [
-                                      bloc.userType == UserType.attorney
-                                          ? CustomAttachTextField(
-                                              isFromNetwork:
-                                                  bloc.iDImageUrl != "",
-                                              urlImage: bloc.iDImageUrl == ""
-                                                  ? null
-                                                  : bloc.iDImageUrl,
-                                              onAddImage: (file) {
-                                                bloc.iDImage = file;
-                                                bloc.validateFields();
-                                              },
-                                              onDeleteImage: () {
-                                                bloc.iDImage = null;
-                                                bloc.iDImageUrl = "";
-                                                bloc.validateFields();
-                                                setState(() {});
-                                              })
-                                          : Container(),
+                                      if (bloc.userType == UserType.attorney)
+                                        CustomAttachTextField(
+                                            isFromNetwork:
+                                                bloc.iDImageUrl != "",
+                                            urlImage: bloc.iDImageUrl == ""
+                                                ? null
+                                                : bloc.iDImageUrl,
+                                            onAddImage: (file) {
+                                              bloc.iDImage = file;
+                                              bloc.validateFields();
+                                            },
+                                            onDeleteImage: () {
+                                              bloc.iDImage = null;
+                                              bloc.iDImageUrl = "";
+                                              bloc.validateFields();
+                                              setState(() {});
+                                            })
+                                      else
+                                        Container(),
                                       Expanded(
                                         child: Column(
                                           children: [
@@ -273,42 +281,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ],
                                   ),
                                 ),
-                                bloc.userType == UserType.attorney
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10, left: 16, right: 16),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomText(
-                                              title:
-                                                  AppLocalizations.of(context)!
-                                                      .speakinglanguage,
-                                              fontSize: 12,
-                                              textColor:
-                                                  const Color(0xff444444),
-                                            ),
-                                            ValueListenableBuilder<
-                                                    List<CheckBox>>(
-                                                valueListenable: bloc
-                                                    .listOfSpeakingLanguageNotifier,
-                                                builder:
-                                                    (context, snapshot, child) {
-                                                  return SpeakingLanguageField(
-                                                    listOfLanguages: snapshot,
-                                                    selectedLanguage:
-                                                        (language) {
-                                                      bloc.listOfSpeakingLanguageNotifier
-                                                          .value = language;
-                                                      bloc.validateFields();
-                                                    },
-                                                  );
-                                                }),
-                                          ],
+                                if (bloc.userType == UserType.attorney)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, left: 16, right: 16),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          title: AppLocalizations.of(context)!
+                                              .speakinglanguage,
+                                          fontSize: 12,
+                                          textColor: const Color(0xff444444),
                                         ),
-                                      )
-                                    : Container(),
+                                        ValueListenableBuilder<List<CheckBox>>(
+                                            valueListenable: bloc
+                                                .listOfSpeakingLanguageNotifier,
+                                            builder:
+                                                (context, snapshot, child) {
+                                              return SpeakingLanguageField(
+                                                listOfLanguages: snapshot,
+                                                selectedLanguage: (language) {
+                                                  bloc.listOfSpeakingLanguageNotifier
+                                                      .value = language;
+                                                  bloc.validateFields();
+                                                },
+                                              );
+                                            }),
+                                      ],
+                                    ),
+                                  )
+                                else
+                                  Container(),
                                 const SizedBox(height: 16),
                                 Container(
                                   color: const Color(0xffE8E8E8),

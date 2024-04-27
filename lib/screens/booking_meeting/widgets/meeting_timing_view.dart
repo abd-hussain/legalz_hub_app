@@ -4,12 +4,6 @@ import 'package:legalz_hub_app/screens/booking_meeting/booking_bloc.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/widgets/item_in_gred.dart';
 
 class MeetingTimingView extends StatelessWidget {
-  final String? date;
-  final String? time;
-  final String? duration;
-  final BookingType? type;
-  final EdgeInsetsGeometry padding;
-
   const MeetingTimingView({
     super.key,
     required this.date,
@@ -18,6 +12,11 @@ class MeetingTimingView extends StatelessWidget {
     required this.type,
     this.padding = const EdgeInsets.only(top: 8, left: 16, right: 16),
   });
+  final String? date;
+  final String? time;
+  final String? duration;
+  final BookingType? type;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,6 @@ class MeetingTimingView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 0,
           crossAxisSpacing: 8,
           childAspectRatio: 3.2,
         ),

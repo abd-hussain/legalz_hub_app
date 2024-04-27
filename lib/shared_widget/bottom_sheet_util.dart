@@ -24,7 +24,7 @@ class BottomSheetsUtil {
         context: context,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.all(18),
             child: image!
                 ? Column(
                     mainAxisSize: MainAxisSize.min,
@@ -34,7 +34,7 @@ class BottomSheetsUtil {
                         textColor: Colors.black,
                         fontSize: 18,
                       ),
-                      const SizedBox(height: 27.0),
+                      const SizedBox(height: 27),
                       TextButton(
                         onPressed: () {
                           deleteCallBack();
@@ -66,7 +66,7 @@ class BottomSheetsUtil {
                         textColor: Colors.black,
                         fontSize: 18,
                       ),
-                      const SizedBox(height: 27.0),
+                      const SizedBox(height: 27),
                       SizedBox(
                         height: 100,
                         child: Column(
@@ -161,23 +161,22 @@ class BottomSheetsUtil {
         context: context,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomText(
                   title: AppLocalizations.of(context)!.genderprofile,
                   textColor: Colors.black,
                   fontSize: 20,
                 ),
-                const SizedBox(height: 27.0),
+                const SizedBox(height: 27),
                 SizedBox(
                   height: 150,
                   child: ListView.builder(
                     itemCount: listOfGender.length,
-                    itemBuilder: ((context, index) {
+                    itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
                           Navigator.of(context).pop();
@@ -207,7 +206,7 @@ class BottomSheetsUtil {
                           ),
                         ),
                       );
-                    }),
+                    },
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -230,59 +229,59 @@ class BottomSheetsUtil {
       context: context,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
                 title: AppLocalizations.of(context)!.selectCountry,
                 textColor: Colors.black,
                 fontSize: 20,
               ),
-              const SizedBox(height: 27.0),
+              const SizedBox(height: 27),
               SizedBox(
                 height: 200,
                 child: ListView.builder(
-                  itemCount: listOfCountries.length,
-                  itemBuilder: ((context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        selectedCountry(listOfCountries[index]);
-                      },
-                      child: SizedBox(
-                        height: 50,
-                        child: Row(
-                          children: [
-                            SizedBox(
+                    itemCount: listOfCountries.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          selectedCountry(listOfCountries[index]);
+                        },
+                        child: SizedBox(
+                          height: 50,
+                          child: Row(
+                            children: [
+                              SizedBox(
                                 width: 30,
                                 height: 30,
                                 child: FadeInImage(
-                                    placeholder: const AssetImage(
-                                        "assets/images/flagPlaceHolderImg.png"),
-                                    image: NetworkImage(
-                                        listOfCountries[index].flagImage!,
-                                        scale: 1))),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: CustomText(
-                                title: listOfCountries[index].name!,
-                                fontSize: 16,
-                                textColor: const Color(0xff444444),
+                                  placeholder: const AssetImage(
+                                      "assets/images/flagPlaceHolderImg.png"),
+                                  image: NetworkImage(
+                                    listOfCountries[index].flagImage!,
+                                  ),
+                                ),
                               ),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 15,
-                            )
-                          ],
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: CustomText(
+                                  title: listOfCountries[index].name!,
+                                  fontSize: 16,
+                                  textColor: const Color(0xff444444),
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-                ),
+                      );
+                    }),
               ),
               const SizedBox(height: 16),
             ],
@@ -305,49 +304,47 @@ class BottomSheetsUtil {
       context: context,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
                 title: AppLocalizations.of(context)!.selectSuffix,
                 textColor: Colors.black,
                 fontSize: 20,
               ),
-              const SizedBox(height: 27.0),
+              const SizedBox(height: 27),
               SizedBox(
                 height: 200,
                 child: ListView.builder(
-                  itemCount: listOfSuffix.length,
-                  itemBuilder: ((context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        selectedSuffix(listOfSuffix[index]);
-                      },
-                      child: SizedBox(
-                        height: 50,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: CustomText(
-                                title: listOfSuffix[index].name!,
-                                fontSize: 16,
-                                textColor: const Color(0xff444444),
+                    itemCount: listOfSuffix.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          selectedSuffix(listOfSuffix[index]);
+                        },
+                        child: SizedBox(
+                          height: 50,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: CustomText(
+                                  title: listOfSuffix[index].name!,
+                                  fontSize: 16,
+                                  textColor: const Color(0xff444444),
+                                ),
                               ),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 15,
-                            )
-                          ],
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-                ),
+                      );
+                    }),
               ),
               const SizedBox(height: 16),
             ],
@@ -361,7 +358,8 @@ class BottomSheetsUtil {
       {required BuildContext context,
       required List<CheckBox> listOfLanguage,
       required Function(List<CheckBox>) onSave}) {
-    StreamController<bool> valueListenable = StreamController<bool>.broadcast();
+    final StreamController<bool> valueListenable =
+        StreamController<bool>.broadcast();
 
     return showModalBottomSheet(
       isScrollControlled: true,
@@ -374,11 +372,10 @@ class BottomSheetsUtil {
       context: context,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -419,31 +416,30 @@ class BottomSheetsUtil {
                 child: SizedBox(
                   height: 300,
                   child: ListView.builder(
-                    itemCount: listOfLanguage.length,
-                    itemBuilder: ((context, index) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomText(
-                            title: listOfLanguage[index].value,
-                            textColor: Colors.black,
-                            fontSize: 18,
-                          ),
-                          StreamBuilder<bool>(
-                              stream: valueListenable.stream,
-                              builder: (context, snapshot) {
-                                return Checkbox(
-                                    value: listOfLanguage[index].isEnable,
-                                    onChanged: (va) {
-                                      listOfLanguage[index].isEnable =
-                                          !listOfLanguage[index].isEnable;
-                                      valueListenable.sink.add(true);
-                                    });
-                              }),
-                        ],
-                      );
-                    }),
-                  ),
+                      itemCount: listOfLanguage.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              title: listOfLanguage[index].value,
+                              textColor: Colors.black,
+                              fontSize: 18,
+                            ),
+                            StreamBuilder<bool>(
+                                stream: valueListenable.stream,
+                                builder: (context, snapshot) {
+                                  return Checkbox(
+                                      value: listOfLanguage[index].isEnable,
+                                      onChanged: (va) {
+                                        listOfLanguage[index].isEnable =
+                                            !listOfLanguage[index].isEnable;
+                                        valueListenable.sink.add(true);
+                                      });
+                                }),
+                          ],
+                        );
+                      }),
                 ),
               ),
               const SizedBox(height: 16),

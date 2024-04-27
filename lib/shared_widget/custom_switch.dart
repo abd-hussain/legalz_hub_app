@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
-  final bool? value;
-  final String language;
-  final Color? backgroundColorOfSelection;
-  final ValueChanged<bool>? onChanged;
-
   const CustomSwitch({
     super.key,
     this.value,
@@ -13,6 +8,10 @@ class CustomSwitch extends StatefulWidget {
     required this.language,
     this.backgroundColorOfSelection,
   });
+  final bool? value;
+  final String language;
+  final Color? backgroundColorOfSelection;
+  final ValueChanged<bool>? onChanged;
 
   @override
   State<CustomSwitch> createState() => _CustomSwitchState();
@@ -56,7 +55,7 @@ class _CustomSwitchState extends State<CustomSwitch>
             width: 40,
             height: 25,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
+                borderRadius: BorderRadius.circular(24),
                 color: !widget.value!
                     ? const Color(0xffDFE1E3)
                     : widget.backgroundColorOfSelection),
@@ -71,8 +70,8 @@ class _CustomSwitchState extends State<CustomSwitch>
                         ? Alignment.centerRight
                         : Alignment.centerLeft),
                 child: Container(
-                  width: 20.0,
-                  height: 20.0,
+                  width: 20,
+                  height: 20,
                   decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: Color(0xffFFFFFF)),
                 ),

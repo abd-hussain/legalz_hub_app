@@ -7,12 +7,12 @@ import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 class ProfileHeader extends StatelessWidget {
-  final UserType userType;
   const ProfileHeader({required this.userType, super.key});
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: userType == UserType.customer
           ? const Color(0xff034061)
           : const Color(0xff292929),

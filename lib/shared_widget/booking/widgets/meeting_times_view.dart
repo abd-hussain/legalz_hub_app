@@ -6,11 +6,6 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 
 class MeetingTimeView extends StatelessWidget {
-  final List<int> workingHours;
-
-  final ValueNotifier<int?> selectedMeetingTime;
-  final DateTime selectedMeetingDate;
-  final List<AttorneyAppointmentsResponseData> listOfAppointments;
   const MeetingTimeView({
     super.key,
     required this.workingHours,
@@ -18,6 +13,11 @@ class MeetingTimeView extends StatelessWidget {
     required this.listOfAppointments,
     required this.selectedMeetingDate,
   });
+  final List<int> workingHours;
+
+  final ValueNotifier<int?> selectedMeetingTime;
+  final DateTime selectedMeetingDate;
+  final List<AttorneyAppointmentsResponseData> listOfAppointments;
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +74,9 @@ class MeetingTimeView extends StatelessWidget {
   }
 
   List<int> filterListWithCurrentTime(List<int> list) {
-    List<int> filteredList = [];
-    int currentHour = DateTime.now().hour;
-    for (int time in list) {
+    final List<int> filteredList = [];
+    final int currentHour = DateTime.now().hour;
+    for (final int time in list) {
       if (time > currentHour) {
         filteredList.add(time);
       }
@@ -86,10 +86,10 @@ class MeetingTimeView extends StatelessWidget {
 
   List<int> _chackifTheDateSelectedExsistInAppotmentsList(
       {required DateTime selectedDateTime, required List<int> workingHours}) {
-    List<int> newListOFHours = [];
-    List<int> listOfAppointments = _returnListOfHourFromAppointment();
+    final List<int> newListOFHours = [];
+    final List<int> listOfAppointments = _returnListOfHourFromAppointment();
 
-    for (int hour in workingHours) {
+    for (final int hour in workingHours) {
       if (listOfAppointments.contains(hour) == false) {
         newListOFHours.add(hour);
       }
@@ -99,10 +99,10 @@ class MeetingTimeView extends StatelessWidget {
   }
 
   List<int> _returnListOfHourFromAppointment() {
-    List<int> newListOFHours = [];
+    final List<int> newListOFHours = [];
 
-    for (var appointment in listOfAppointments) {
-      var parsedDateFrom = DateTime.parse(appointment.dateFrom!);
+    for (final appointment in listOfAppointments) {
+      final parsedDateFrom = DateTime.parse(appointment.dateFrom!);
       if (DateTime(selectedMeetingDate.year, selectedMeetingDate.month,
               selectedMeetingDate.day) ==
           DateTime(

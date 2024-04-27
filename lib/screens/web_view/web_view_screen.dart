@@ -45,13 +45,12 @@ class _WebViewScreenState extends State<WebViewScreen> {
               return WebViewAware(
                 child: WebViewX(
                   key: const ValueKey('webviewx'),
-                  ignoreAllGestures: false,
                   initialSourceType: SourceType.urlBypass,
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   onWebViewCreated: (controller) async {
                     bloc.webviewController = controller;
-                    bloc.webviewController!.loadContent(
+                    await bloc.webviewController!.loadContent(
                       bloc.webViewUrl,
                       sourceType: SourceType.urlBypass,
                     );

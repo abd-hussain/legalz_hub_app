@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/screens/login/login_screen.dart';
 import 'package:legalz_hub_app/screens/register/final_stage/register_final_bloc.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
@@ -11,7 +12,6 @@ import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterFinalScreen extends StatefulWidget {
   const RegisterFinalScreen({super.key});
@@ -102,17 +102,17 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                                               .password));
                                   await bloc.clearAttorneyRegistrationData();
 
-                                  navigation.pushReplacement(
+                                  await navigation.pushReplacement(
                                       MaterialPageRoute(builder: (ctx) {
                                     return const LoginScreen();
                                   }));
                                 });
                               } on DioException catch (e) {
-                                final error = e.error as HttpException;
+                                final error = e.error! as HttpException;
                                 bloc.loadingStatus.value = LoadingStatus.finish;
                                 scaffoldMessenger.showSnackBar(
                                   SnackBar(
-                                    content: Text(error.message.toString()),
+                                    content: Text(error.message),
                                   ),
                                 );
                               }
@@ -141,17 +141,17 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                                               .password));
                                   await bloc.clearCustomerRegistrationData();
 
-                                  navigation.pushReplacement(
+                                  await navigation.pushReplacement(
                                       MaterialPageRoute(builder: (ctx) {
                                     return const LoginScreen();
                                   }));
                                 });
                               } on DioException catch (e) {
-                                final error = e.error as HttpException;
+                                final error = e.error! as HttpException;
                                 bloc.loadingStatus.value = LoadingStatus.finish;
                                 scaffoldMessenger.showSnackBar(
                                   SnackBar(
-                                    content: Text(error.message.toString()),
+                                    content: Text(error.message),
                                   ),
                                 );
                               }
@@ -159,9 +159,10 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                           }),
                     ],
                   ),
-                  snapshot == LoadingStatus.inprogress
-                      ? const LoadingView(fullScreen: true)
-                      : Container()
+                  if (snapshot == LoadingStatus.inprogress)
+                    const LoadingView(fullScreen: true)
+                  else
+                    Container()
                 ],
               );
             }),

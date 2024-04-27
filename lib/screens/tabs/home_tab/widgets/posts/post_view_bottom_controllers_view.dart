@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostViewBottomControllersView extends StatelessWidget {
-  final UserType currentUserType;
-  final int numberComment;
-
-  final Function() commentAction;
-
   const PostViewBottomControllersView({
     super.key,
     required this.currentUserType,
     required this.numberComment,
     required this.commentAction,
   });
+  final UserType currentUserType;
+  final int numberComment;
+
+  final Function() commentAction;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => commentAction(),
+      onTap: commentAction,
       child: SizedBox(
         height: 35,
         child: Row(

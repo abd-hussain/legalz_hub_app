@@ -16,15 +16,16 @@ class SetupBloc extends Bloc<FilterService> {
     final String? savedLanguage = box.get(DatabaseFieldConstant.language);
 
     if (savedLanguage == null) {
-      _setLanguageFromTheSystem(context: context);
+      await _setLanguageFromTheSystem(context: context);
     } else {
       _setLanguageFromTheSavedData(
           context: context, savedLanguage: savedLanguage);
     }
   }
 
-  void _setLanguageFromTheSystem({required BuildContext context}) async {
-    Locale activeLocale = Localizations.localeOf(context);
+  Future<void> _setLanguageFromTheSystem(
+      {required BuildContext context}) async {
+    final Locale activeLocale = Localizations.localeOf(context);
 
     selectedLanguageNotifier.value = 0;
     await box.put(DatabaseFieldConstant.language, "en");
@@ -52,7 +53,7 @@ class SetupBloc extends Bloc<FilterService> {
     });
   }
 
-  Future<void> setLanguageInStorage(BuildContext context, int index) async {
+  void setLanguageInStorage(BuildContext context, int index) {
     if (index == 0) {
       _setLanguageToEnglish(context);
     } else {
@@ -74,7 +75,7 @@ class SetupBloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     selectedLanguageNotifier.dispose();
     countriesListNotifier.dispose();
   }

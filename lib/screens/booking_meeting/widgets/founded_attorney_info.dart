@@ -8,23 +8,22 @@ import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/currency.dart';
 
 class FoundedAttorneyInfoView extends StatelessWidget {
-  final AttorneyInfoAvaliableResponseData data;
-  final bool selected;
-  final Function() onPress;
-
   const FoundedAttorneyInfoView({
     super.key,
     required this.data,
     required this.selected,
     required this.onPress,
   });
+  final AttorneyInfoAvaliableResponseData data;
+  final bool selected;
+  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: InkWell(
-          onTap: () => onPress(),
+          onTap: onPress,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.grey[100],
@@ -45,7 +44,7 @@ class FoundedAttorneyInfoView extends StatelessWidget {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
                   Row(
@@ -100,15 +99,16 @@ class FoundedAttorneyInfoView extends StatelessWidget {
                             children: [
                               ClipOval(
                                 child: FadeInImage(
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.cover,
-                                    placeholder: const AssetImage(
-                                        "assets/images/flagPlaceHolderImg.png"),
-                                    image: NetworkImage(
-                                        AppConstant.imagesBaseURLForCountries +
-                                            data.countryFlag!,
-                                        scale: 1)),
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                  placeholder: const AssetImage(
+                                      "assets/images/flagPlaceHolderImg.png"),
+                                  image: NetworkImage(
+                                    AppConstant.imagesBaseURLForCountries +
+                                        data.countryFlag!,
+                                  ),
+                                ),
                               ),
                               const SizedBox(width: 8),
                               CustomText(
@@ -186,7 +186,6 @@ class FoundedAttorneyInfoView extends StatelessWidget {
                                   Icons.star,
                                   color: Colors.amber,
                                 ),
-                                itemCount: 5,
                                 itemSize: 14,
                               ),
                               const SizedBox(width: 2),

@@ -27,7 +27,7 @@ class NotificationsBloc extends Bloc<NotificationsService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     notificationsListNotifier.dispose();
   }
 }

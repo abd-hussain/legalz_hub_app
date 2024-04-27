@@ -3,16 +3,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PasswordComplexity extends StatelessWidget {
-  final ValueNotifier<bool> passwordEquilConfirmPasswordNotifier;
-  final ValueNotifier<bool> passwordMoreThan8CharNotifier;
-  final ValueNotifier<bool> passwordHaveNumberNotifier;
-
   const PasswordComplexity({
     super.key,
     required this.passwordEquilConfirmPasswordNotifier,
     required this.passwordMoreThan8CharNotifier,
     required this.passwordHaveNumberNotifier,
   });
+  final ValueNotifier<bool> passwordEquilConfirmPasswordNotifier;
+  final ValueNotifier<bool> passwordMoreThan8CharNotifier;
+  final ValueNotifier<bool> passwordHaveNumberNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +48,17 @@ class PasswordComplexity extends StatelessWidget {
   Widget condition(String title, bool status) {
     return Row(
       children: [
-        status
-            ? const Icon(
-                Icons.check,
-                color: Color(0xff034061),
-                size: 25,
-              )
-            : const SizedBox(
-                width: 25,
-                height: 25,
-              ),
+        if (status)
+          const Icon(
+            Icons.check,
+            color: Color(0xff034061),
+            size: 25,
+          )
+        else
+          const SizedBox(
+            width: 25,
+            height: 25,
+          ),
         CustomText(
           title: title,
           fontSize: 14,

@@ -4,13 +4,6 @@ import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class RegistrationFooterView extends StatelessWidget {
-  final int pageCount;
-  final int maxpageCount;
-  final String pageTitle;
-  final String nextPageTitle;
-  final bool enableNextButton;
-  final Function() nextPressed;
-
   const RegistrationFooterView(
       {super.key,
       required this.pageCount,
@@ -19,6 +12,12 @@ class RegistrationFooterView extends StatelessWidget {
       required this.nextPageTitle,
       required this.nextPressed,
       required this.enableNextButton});
+  final int pageCount;
+  final int maxpageCount;
+  final String pageTitle;
+  final String nextPageTitle;
+  final bool enableNextButton;
+  final Function() nextPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class RegistrationFooterView extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Row(
               children: [
                 Container(
@@ -68,14 +67,14 @@ class RegistrationFooterView extends StatelessWidget {
                 CustomButton(
                   enableButton: enableNextButton,
                   buttonTitle: AppLocalizations.of(context)!.next,
-                  onTap: () => nextPressed(),
+                  onTap: nextPressed,
                 )
               ],
             ),
           ),
           Container(height: 1, color: const Color(0xff444444)),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: CustomText(
                 title: AppLocalizations.of(context)!.slogen, fontSize: 12),
           ),

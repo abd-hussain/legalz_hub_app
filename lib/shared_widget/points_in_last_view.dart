@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PointsInLastViewBooking extends StatelessWidget {
-  final String number;
-  final String text;
-  final Color textColor;
-
   const PointsInLastViewBooking(
       {required this.number,
       required this.text,
       super.key,
       this.textColor = const Color(0xff444444)});
+  final String number;
+  final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/gender_model.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 class GenderField extends StatelessWidget {
-  final TextEditingController controller;
-  final Function(String) onChange;
   const GenderField(
       {required this.controller, super.key, required this.onChange});
+  final TextEditingController controller;
+  final Function(String) onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,6 @@ class GenderField extends StatelessWidget {
           controller: controller,
           readOnly: true,
           hintText: AppLocalizations.of(context)!.gender,
-          padding: const EdgeInsets.only(left: 16, right: 16),
           keyboardType: TextInputType.text,
           inputFormatters: [
             LengthLimitingTextInputFormatter(45),

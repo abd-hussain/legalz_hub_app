@@ -2,17 +2,11 @@ import 'dart:async';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtherUserCameraView extends StatefulWidget {
-  final RtcEngine rtcEngine;
-  final String channelName;
-  final UserType otherUserType;
-  final ValueNotifier<int?> remoteUidStatus;
-  final Function() timesup;
-
   const OtherUserCameraView({
     super.key,
     required this.remoteUidStatus,
@@ -21,6 +15,11 @@ class OtherUserCameraView extends StatefulWidget {
     required this.timesup,
     required this.otherUserType,
   });
+  final RtcEngine rtcEngine;
+  final String channelName;
+  final UserType otherUserType;
+  final ValueNotifier<int?> remoteUidStatus;
+  final Function() timesup;
 
   @override
   State<OtherUserCameraView> createState() => _OtherUserCameraViewState();

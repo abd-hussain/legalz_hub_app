@@ -7,7 +7,7 @@ import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
 class CustomerRegisterService with Service {
   Future<dynamic> callRegister({required CustomerRegister data}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
 
     formData.fields.add(MapEntry("first_name", data.firstName));
     formData.fields.add(MapEntry("last_name", data.lastName));
@@ -31,7 +31,7 @@ class CustomerRegisterService with Service {
     }
 
     if (data.profileImg != null) {
-      String fileName = data.profileImg!.split('/').last;
+      final String fileName = data.profileImg!.split('/').last;
       formData.files.add(
         MapEntry(
           "profile_img",

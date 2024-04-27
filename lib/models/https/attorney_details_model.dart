@@ -4,7 +4,9 @@ class AttorneyDetailsResponse {
   AttorneyDetailsResponse({this.data, this.message});
 
   AttorneyDetailsResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? AttorneyDetailsResponseData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? AttorneyDetailsResponseData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
   AttorneyDetailsResponseData? data;

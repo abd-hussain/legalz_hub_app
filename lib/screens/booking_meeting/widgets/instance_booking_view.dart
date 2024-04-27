@@ -6,17 +6,16 @@ import 'package:legalz_hub_app/screens/booking_meeting/widgets/serching_for_atto
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class InstanceBookingView extends StatefulWidget {
-  final String? categoryName;
-  final ValueNotifier<List<AttorneyInfoAvaliableResponseData>?>
-      avaliableAttornies;
-  final Function(AttorneyInfoAvaliableResponseData) onSelectAttorney;
-
   const InstanceBookingView({
     super.key,
     required this.avaliableAttornies,
     required this.categoryName,
     required this.onSelectAttorney,
   });
+  final String? categoryName;
+  final ValueNotifier<List<AttorneyInfoAvaliableResponseData>?>
+      avaliableAttornies;
+  final Function(AttorneyInfoAvaliableResponseData) onSelectAttorney;
 
   @override
   State<InstanceBookingView> createState() => _InstanceBookingViewState();
@@ -51,7 +50,7 @@ class _InstanceBookingViewState extends State<InstanceBookingView> {
                   return const SearchForAttorneyView();
                 } else {
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: SizedBox(
                       height: 190,
                       child: ListView.builder(

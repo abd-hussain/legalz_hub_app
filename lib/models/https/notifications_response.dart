@@ -17,7 +17,8 @@ class NotificationsResponse {
 }
 
 class NotificationsResponseData {
-  NotificationsResponseData({this.id, this.title, this.content, this.readed, this.createdAt});
+  NotificationsResponseData(
+      {this.id, this.title, this.content, this.readed, this.createdAt});
 
   NotificationsResponseData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

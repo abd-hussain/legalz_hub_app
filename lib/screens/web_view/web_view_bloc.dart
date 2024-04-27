@@ -13,7 +13,7 @@ class WebViewBloc {
       ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   WebViewXController? webviewController;
   UserType userType = UserType.customer;
-  var box = Hive.box(DatabaseBoxConstant.userInfo);
+  Box box = Hive.box(DatabaseBoxConstant.userInfo);
 
   void extractArguments(BuildContext context) {
     loadingStatus.value = LoadingStatus.inprogress;
@@ -26,7 +26,7 @@ class WebViewBloc {
     }
   }
 
-  onDispose() {
+  void onDispose() {
     loadingStatus.dispose();
   }
 }

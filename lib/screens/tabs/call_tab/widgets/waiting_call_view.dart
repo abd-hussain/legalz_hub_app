@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:legalz_hub_app/models/https/attorney_appointment.dart';
 import 'package:legalz_hub_app/models/https/customer_appointment.dart';
@@ -10,24 +13,8 @@ import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/gender_format.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'dart:async';
 
 class WaitingCallView extends StatefulWidget {
-  final int timerStartNumberHour;
-  final int timerStartNumberMin;
-  final int timerStartNumberSec;
-  final String meetingduration;
-  final String meetingtime;
-  final String meetingday;
-  final UserType userType;
-
-  final AttorneyAppointmentsData? attorneyMetingDetails;
-  final CustomerAppointmentData? customerMetingDetails;
-
-  final Function() cancelMeetingTapped;
-  final Function() timesup;
-
   const WaitingCallView({
     super.key,
     required this.timerStartNumberHour,
@@ -42,6 +29,19 @@ class WaitingCallView extends StatefulWidget {
     required this.timesup,
     required this.userType,
   });
+  final int timerStartNumberHour;
+  final int timerStartNumberMin;
+  final int timerStartNumberSec;
+  final String meetingduration;
+  final String meetingtime;
+  final String meetingday;
+  final UserType userType;
+
+  final AttorneyAppointmentsData? attorneyMetingDetails;
+  final CustomerAppointmentData? customerMetingDetails;
+
+  final Function() cancelMeetingTapped;
+  final Function() timesup;
 
   @override
   State<WaitingCallView> createState() => _WaitingCallViewState();
@@ -163,7 +163,7 @@ class _WaitingCallViewState extends State<WaitingCallView> {
                   widget.userType == UserType.attorney
               ? widget.attorneyMetingDetails!.state == 1
               : widget.customerMetingDetails!.state == 1,
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           width: MediaQuery.of(context).size.width / 2,
           buttonColor: const Color(0xffda1100),
           buttonTitle: AppLocalizations.of(context)!.cancelappointment,
@@ -233,7 +233,6 @@ class _WaitingCallViewState extends State<WaitingCallView> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 0,
           crossAxisSpacing: 8,
           childAspectRatio: 3.2,
         ),
@@ -259,19 +258,19 @@ class _WaitingCallViewState extends State<WaitingCallView> {
   }
 
   Widget meetingPricingView(UserType userType) {
-    bool isFree = userType == UserType.attorney
+    final bool isFree = userType == UserType.attorney
         ? widget.attorneyMetingDetails!.isFree!
         : widget.customerMetingDetails!.isFree!;
-    int? discountId = userType == UserType.attorney
+    final int? discountId = userType == UserType.attorney
         ? widget.attorneyMetingDetails!.discountId
         : widget.customerMetingDetails!.discountId;
-    double price = userType == UserType.attorney
+    final double price = userType == UserType.attorney
         ? widget.attorneyMetingDetails!.price!
         : widget.customerMetingDetails!.price!;
-    double totalPrice = userType == UserType.attorney
+    final double totalPrice = userType == UserType.attorney
         ? widget.attorneyMetingDetails!.totalPrice!
         : widget.customerMetingDetails!.totalPrice!;
-    String currency = userType == UserType.attorney
+    final String currency = userType == UserType.attorney
         ? getCurrency(
             enCurrency: widget.attorneyMetingDetails!.currencyEnglish!,
             arCurrency: widget.attorneyMetingDetails!.currencyArabic!)
@@ -283,7 +282,6 @@ class _WaitingCallViewState extends State<WaitingCallView> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 0,
           crossAxisSpacing: 8,
           childAspectRatio: 3.2,
         ),
@@ -321,9 +319,7 @@ class _WaitingCallViewState extends State<WaitingCallView> {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 0,
             crossAxisSpacing: 8,
-            childAspectRatio: 1,
           ),
           children: [
             itemInGrid(

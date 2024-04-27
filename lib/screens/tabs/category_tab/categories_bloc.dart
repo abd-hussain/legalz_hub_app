@@ -31,7 +31,7 @@ class CategoriesBloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     selectedCategoryNotifier.dispose();
     attorniesListNotifier.dispose();
   }

@@ -55,8 +55,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                             controller: bloc.ratePerHourController,
                             currency: bloc.currency,
                             freeType: bloc.freeType,
-                            onTapPlus: () => bloc.encreseRatePerHourBy1(),
-                            onTapMinus: () => bloc.decreseRatePerHourBy1(),
+                            onTapPlus: bloc.encreseRatePerHourBy1,
+                            onTapMinus: bloc.decreseRatePerHourBy1,
                             freeCallTypeSelected: (type) {
                               bloc.freeType = type;
                               bloc.validateFieldsForFaze5();

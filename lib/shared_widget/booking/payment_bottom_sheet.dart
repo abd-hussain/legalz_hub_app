@@ -141,7 +141,7 @@ class PaymentBottomSheetsUtil {
       required double dollerEquvilant,
       required Function(double) openNext}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           Container(
@@ -153,7 +153,7 @@ class PaymentBottomSheetsUtil {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
                   CustomText(
@@ -186,7 +186,7 @@ class PaymentBottomSheetsUtil {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
@@ -207,7 +207,7 @@ class PaymentBottomSheetsUtil {
                         fontWeight: FontWeight.bold,
                       ),
                       Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
@@ -271,8 +271,8 @@ class PaymentBottomSheetsUtil {
       required String countryCode,
       required String currency,
       required Function(PaymentType) openNext}) {
-    String amount = totalAmount.toStringAsFixed(2);
-    var paymentItems = [
+    final String amount = totalAmount.toStringAsFixed(2);
+    final paymentItems = [
       PaymentItem(
         label: AppLocalizations.of(context)!.total,
         amount: amount,
@@ -280,7 +280,7 @@ class PaymentBottomSheetsUtil {
       )
     ];
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -291,9 +291,65 @@ class PaymentBottomSheetsUtil {
         ),
         child: Platform.isAndroid
             ? Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: GooglePayButton(
-                  paymentConfiguration: PaymentConfiguration.fromJsonString('''{
+                  paymentConfiguration: PaymentConfiguration.fromJsonString(
+                      googlePaymnet(
+                          countryCode: countryCode, currency: currency)),
+                  onError: (error) {
+                    logDebugMessage(message: error.toString());
+                  },
+                  paymentItems: paymentItems,
+                  onPaymentResult: (map) {
+                    openNext(PaymentType.google);
+                  },
+                  loadingIndicator: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8),
+                child: ApplePayButton(
+                  paymentConfiguration: PaymentConfiguration.fromJsonString(
+                      applePaymnet(
+                          countryCode: countryCode, currency: currency)),
+                  onError: (error) {
+                    logDebugMessage(message: error.toString());
+                  },
+                  paymentItems: paymentItems,
+                  type: ApplePayButtonType.buy,
+                  onPaymentResult: (map) {
+                    openNext(PaymentType.apple);
+                  },
+                  loadingIndicator: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
+      ),
+    );
+  }
+
+  String applePaymnet({required String countryCode, required String currency}) {
+    // ignore: leading_newlines_in_multiline_strings
+    return '''{
+                  "provider": "apple_pay",
+                  "data": {
+                  "merchantIdentifier": "merchant.com.legalzhub.app",
+                  "displayName": "LegalzHub",
+                  "merchantCapabilities": ["3DS", "debit", "credit"],
+                  "supportedNetworks": ["amex", "visa", "discover", "masterCard"],
+                  "countryCode": "$countryCode",
+                  "currencyCode": "$currency"
+                  }
+                  }''';
+  }
+
+  String googlePaymnet(
+      {required String countryCode, required String currency}) {
+    // ignore: leading_newlines_in_multiline_strings
+    return '''{
                   "provider": "google_pay",
                   "data": {
                     "environment": "TEST",
@@ -329,49 +385,6 @@ class PaymentBottomSheetsUtil {
                     "currencyCode": "$currency"
                     }
                   }
-                  }'''),
-                  onError: (error) {
-                    logDebugMessage(message: error.toString());
-                  },
-                  paymentItems: paymentItems,
-                  type: GooglePayButtonType.pay,
-                  onPaymentResult: (map) {
-                    openNext(PaymentType.google);
-                  },
-                  loadingIndicator: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ApplePayButton(
-                  paymentConfiguration: PaymentConfiguration.fromJsonString('''{
-                  "provider": "apple_pay",
-                  "data": {
-                  "merchantIdentifier": "merchant.com.legalzhub.app",
-                  "displayName": "LegalzHub",
-                  "merchantCapabilities": ["3DS", "debit", "credit"],
-                  "supportedNetworks": ["amex", "visa", "discover", "masterCard"],
-                  "countryCode": "$countryCode",
-                  "currencyCode": "$currency"
-                  }
-                  }'''),
-                  onError: (error) {
-                    logDebugMessage(message: error.toString());
-                  },
-                  paymentItems: paymentItems,
-                  style: ApplePayButtonStyle.black,
-                  type: ApplePayButtonType.buy,
-                  onPaymentResult: (map) {
-                    openNext(PaymentType.apple);
-                  },
-                  loadingIndicator: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              ),
-      ),
-    );
+                  }''';
   }
 }

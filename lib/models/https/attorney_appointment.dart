@@ -1,6 +1,13 @@
 import 'package:legalz_hub_app/models/model_checker.dart';
 
-enum AppointmentsState { active, attorneyCancel, customerCancel, customerMiss, attorneyMiss, completed }
+enum AppointmentsState {
+  active,
+  attorneyCancel,
+  customerCancel,
+  customerMiss,
+  attorneyMiss,
+  completed
+}
 
 class AttorneyAppointments {
   AttorneyAppointments({this.data, this.message});

@@ -28,7 +28,7 @@ class ShimmerHomePage extends StatelessWidget {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                   ),
                 ],
               ),

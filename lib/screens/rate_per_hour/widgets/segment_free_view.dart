@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class FreeCallSegmentedView extends StatelessWidget {
-  final int freeType;
-  final Function(int) freeCallTypeSelected;
   const FreeCallSegmentedView(
       {super.key, required this.freeType, required this.freeCallTypeSelected});
+  final int freeType;
+  final Function(int) freeCallTypeSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,7 @@ class FreeCallSegmentedView extends StatelessWidget {
         ),
         FreeOptions(
           freeType: checkValue(freeType),
-          freeCallTypeSelected: (val) {
-            freeCallTypeSelected(val);
-          },
+          freeCallTypeSelected: freeCallTypeSelected,
         ),
       ],
     );
@@ -58,11 +56,10 @@ class FreeCallSegmentedView extends StatelessWidget {
 enum FreeCallTypes { freeDisabled, free15Min, free15MinWithPromocode, nothing }
 
 class FreeOptions extends StatefulWidget {
-  final FreeCallTypes freeType;
-  final Function(int) freeCallTypeSelected;
-
   const FreeOptions(
       {super.key, required this.freeType, required this.freeCallTypeSelected});
+  final FreeCallTypes freeType;
+  final Function(int) freeCallTypeSelected;
 
   @override
   State<FreeOptions> createState() => _FreeOptionsState();

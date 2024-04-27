@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/password_strength_model.dart';
+import 'package:legalz_hub_app/models/password_strength_model.dart';
 
 class PasswordsStrength {
   bool checkerOfThePasswordStrength(
@@ -13,11 +13,11 @@ class PasswordsStrength {
         passwordStrengthValidationNotifier.value.oneSpicialChar!;
   }
 
-  validatePasswordStrength(
+  void validatePasswordStrength(
       {required TextEditingController passwordFieldController,
       required ValueNotifier<PasswordStrengthModel>
           passwordStrengthValidationNotifier}) {
-    var passwordStrength = PasswordStrengthModel();
+    final passwordStrength = PasswordStrengthModel();
 
     if (passwordFieldController.text.isNotEmpty) {
       if (passwordFieldController.text.length >= 8 &&
@@ -26,17 +26,17 @@ class PasswordsStrength {
       } else {
         passwordStrength.min8max30Cchar = false;
       }
-      if (passwordFieldController.text.contains(RegExp(r'[A-Z]'))) {
+      if (passwordFieldController.text.contains(RegExp('[A-Z]'))) {
         passwordStrength.oneUpperCase = true;
       } else {
         passwordStrength.oneUpperCase = false;
       }
-      if (passwordFieldController.text.contains(RegExp(r'[a-z]'))) {
+      if (passwordFieldController.text.contains(RegExp('[a-z]'))) {
         passwordStrength.oneLowerCase = true;
       } else {
         passwordStrength.oneLowerCase = false;
       }
-      if (passwordFieldController.text.contains(RegExp(r'[0-9]'))) {
+      if (passwordFieldController.text.contains(RegExp('[0-9]'))) {
         passwordStrength.oneNumber = true;
       } else {
         passwordStrength.oneNumber = false;

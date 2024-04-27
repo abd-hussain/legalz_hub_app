@@ -50,7 +50,8 @@ Future<void> setupLocator() async {
   locator.registerFactory<CustomerRegisterService>(CustomerRegisterService.new);
   locator.registerFactory<AttorneyRegisterService>(AttorneyRegisterService.new);
 
-  locator.registerFactory<AttorneyAccountExperianceService>(AttorneyAccountExperianceService.new);
+  locator.registerFactory<AttorneyAccountExperianceService>(
+      AttorneyAccountExperianceService.new);
   locator.registerFactory<AttorneyAccountService>(AttorneyAccountService.new);
 
   locator.registerFactory<CustomerAccountService>(CustomerAccountService.new);
@@ -58,10 +59,12 @@ Future<void> setupLocator() async {
   locator.registerFactory<PostService>(PostService.new);
   locator.registerFactory<CommentPostService>(CommentPostService.new);
 
-  locator.registerFactory<AttorneyAppointmentsService>(AttorneyAppointmentsService.new);
+  locator.registerFactory<AttorneyAppointmentsService>(
+      AttorneyAppointmentsService.new);
   locator.registerFactory<AttorneyHourRateService>(AttorneyHourRateService.new);
   locator.registerFactory<PaymentService>(PaymentService.new);
-  locator.registerFactory<CustomerAppointmentsService>(CustomerAppointmentsService.new);
+  locator.registerFactory<CustomerAppointmentsService>(
+      CustomerAppointmentsService.new);
   locator.registerFactory<AttorneyDetailsService>(AttorneyDetailsService.new);
 
   locator.registerFactory<AttorneySettingsService>(AttorneySettingsService.new);

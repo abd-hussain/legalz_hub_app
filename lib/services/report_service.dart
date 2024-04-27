@@ -7,7 +7,7 @@ import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
 class ReportService with Service {
   Future<dynamic> addSuggestion({required ReportRequest reportData}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
     formData.fields.add(MapEntry("content", reportData.content));
 
     switch (reportData.userType) {
@@ -18,7 +18,7 @@ class ReportService with Service {
     }
 
     if (reportData.attach1 != null) {
-      String fileName = reportData.attach1!.path.split('/').last;
+      final String fileName = reportData.attach1!.path.split('/').last;
       formData.files.add(
         MapEntry(
           "attach1",
@@ -31,7 +31,7 @@ class ReportService with Service {
     }
 
     if (reportData.attach2 != null) {
-      String fileName = reportData.attach2!.path.split('/').last;
+      final String fileName = reportData.attach2!.path.split('/').last;
       formData.files.add(
         MapEntry(
           "attach2",
@@ -43,7 +43,7 @@ class ReportService with Service {
       );
     }
     if (reportData.attach3 != null) {
-      String fileName = reportData.attach3!.path.split('/').last;
+      final String fileName = reportData.attach3!.path.split('/').last;
       formData.files.add(
         MapEntry(
           "attach3",
@@ -55,7 +55,7 @@ class ReportService with Service {
       );
     }
 
-    return await repository.callRequest(
+    return repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.reportSuggestion,
       formData: formData,
@@ -63,7 +63,7 @@ class ReportService with Service {
   }
 
   Future<dynamic> addBugIssue({required ReportRequest reportData}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
     formData.fields.add(MapEntry("content", reportData.content));
 
     switch (reportData.userType) {
@@ -74,7 +74,7 @@ class ReportService with Service {
     }
 
     if (reportData.attach1 != null) {
-      String fileName = reportData.attach1!.path.split('/').last;
+      final String fileName = reportData.attach1!.path.split('/').last;
       formData.files.add(
         MapEntry(
           "attach1",
@@ -86,7 +86,7 @@ class ReportService with Service {
       );
     }
     if (reportData.attach2 != null) {
-      String fileName = reportData.attach2!.path.split('/').last;
+      final String fileName = reportData.attach2!.path.split('/').last;
       formData.files.add(
         MapEntry(
           "attach2",
@@ -98,7 +98,7 @@ class ReportService with Service {
       );
     }
     if (reportData.attach3 != null) {
-      String fileName = reportData.attach3!.path.split('/').last;
+      final String fileName = reportData.attach3!.path.split('/').last;
       formData.files.add(
         MapEntry(
           "attach3",
@@ -110,7 +110,7 @@ class ReportService with Service {
       );
     }
 
-    return await repository.callRequest(
+    return repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.reportIssue,
       formData: formData,

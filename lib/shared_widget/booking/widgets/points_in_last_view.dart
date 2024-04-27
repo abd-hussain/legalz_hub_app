@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PointsInLastViewBooking extends StatelessWidget {
-  final String number;
-  final String text;
-
   const PointsInLastViewBooking(
       {required this.number, required this.text, super.key});
+  final String number;
+  final String text;
 
   @override
   Widget build(BuildContext context) {

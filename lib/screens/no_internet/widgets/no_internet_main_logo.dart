@@ -7,7 +7,6 @@ class MainLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       "assets/images/logoz/logo-blue.png",
-      alignment: Alignment.center,
       height: 100,
     );
   }

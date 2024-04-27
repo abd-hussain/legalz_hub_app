@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/models/working_hours.dart';
 import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AttorneyRegister3Bloc extends Bloc<FilterService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -14,7 +14,7 @@ class AttorneyRegister3Bloc extends Bloc<FilterService> {
       ValueNotifier<List<WorkingHourModel>>([]);
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
 
-  tryToFillTheFields(BuildContext context) {
+  void tryToFillTheFields(BuildContext context) {
     if (box.get(TempFieldToRegistrtAttorneyConstant.saturdayWH) != null) {
       listOfWorkingHourNotifier.value
               .firstWhere((element) =>
@@ -76,7 +76,7 @@ class AttorneyRegister3Bloc extends Bloc<FilterService> {
   }
 
   List<CheckBox> prepareList(BuildContext context, List<int> theList) {
-    List<CheckBox> list = [];
+    final List<CheckBox> list = [];
 
     list.add(CheckBox(
         value: "1:00 ${AppLocalizations.of(context)!.pm}",
@@ -154,7 +154,7 @@ class AttorneyRegister3Bloc extends Bloc<FilterService> {
     return list;
   }
 
-  fillListOfWorkingHourNotifier(BuildContext context) {
+  void fillListOfWorkingHourNotifier(BuildContext context) {
     listOfWorkingHourNotifier.value = [];
     listOfWorkingHourNotifier.value.add(WorkingHourModel(
         list: prepareList(context, []),
@@ -181,11 +181,11 @@ class AttorneyRegister3Bloc extends Bloc<FilterService> {
     tryToFillTheFields(context);
   }
 
-  validateFieldsForFaze3() {
+  void validateFieldsForFaze3() {
     bool isButtonEnabled = false;
 
-    for (var weekDay in listOfWorkingHourNotifier.value) {
-      for (var items in weekDay.list) {
+    for (final weekDay in listOfWorkingHourNotifier.value) {
+      for (final items in weekDay.list) {
         if (items.isEnable) {
           isButtonEnabled = true;
           break;
@@ -197,13 +197,13 @@ class AttorneyRegister3Bloc extends Bloc<FilterService> {
   }
 
   List<int> filterListOfTiming({required String dayName}) {
-    List<int> newList = [];
+    final List<int> newList = [];
 
-    List<WorkingHourModel> selectedList = listOfWorkingHourNotifier.value;
+    final List<WorkingHourModel> selectedList = listOfWorkingHourNotifier.value;
 
-    for (var item in selectedList) {
+    for (final item in selectedList) {
       if (item.dayName == dayName) {
-        for (var item2 in item.list) {
+        for (final item2 in item.list) {
           if (item2.isEnable) {
             newList.add(DayTime().getHourFromTimeString(item2.value));
           }
@@ -214,5 +214,5 @@ class AttorneyRegister3Bloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

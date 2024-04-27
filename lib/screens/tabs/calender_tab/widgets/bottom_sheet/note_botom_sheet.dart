@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NoteBottomSheetsUtil {
-  final BuildContext context;
-
   NoteBottomSheetsUtil({required this.context});
+  final BuildContext context;
 
   Future<dynamic> showAddEditNoteDialog({
     required String note,
     required Function(String) confirm,
   }) {
-    TextEditingController controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
     controller.text = note;
     return showDialog(
         context: context,
@@ -57,8 +56,7 @@ class NoteBottomSheetsUtil {
                   const SizedBox(height: 20),
                   CustomButton(
                     enableButton: true,
-                    padding: const EdgeInsets.all(8.0),
-                    buttonColor: const Color(0xff4CB6EA),
+                    padding: const EdgeInsets.all(8),
                     buttonTitle: AppLocalizations.of(context)!.submit,
                     onTap: () {
                       Navigator.pop(context);

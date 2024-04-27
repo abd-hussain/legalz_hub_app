@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerCardListView extends StatelessWidget {
-  final int count;
   const ShimmerCardListView({required this.count, super.key});
+  final int count;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ShimmerCardListView extends StatelessWidget {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                   ),
                 ],
               ),

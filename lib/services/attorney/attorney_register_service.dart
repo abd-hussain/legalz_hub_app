@@ -7,7 +7,7 @@ import 'package:legalz_hub_app/utils/repository/method_name_constractor.dart';
 
 class AttorneyRegisterService with Service {
   Future<dynamic> callRegister({required AttorneyRegister data}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
 
     formData.fields.add(MapEntry("suffixe_name", data.suffixeName));
     formData.fields.add(MapEntry("first_name", data.firstName));
@@ -36,53 +36,53 @@ class AttorneyRegisterService with Service {
     }
 
     if (data.workingHoursSaturday != null) {
-      for (var x1 in data.workingHoursSaturday!) {
+      for (final x1 in data.workingHoursSaturday!) {
         formData.fields.add(MapEntry("working_hours_saturday", x1.toString()));
       }
     }
 
     if (data.workingHoursSunday != null) {
-      for (var x1 in data.workingHoursSunday!) {
+      for (final x1 in data.workingHoursSunday!) {
         formData.fields.add(MapEntry("working_hours_sunday", x1.toString()));
       }
     }
 
     if (data.workingHoursMonday != null) {
-      for (var x1 in data.workingHoursMonday!) {
+      for (final x1 in data.workingHoursMonday!) {
         formData.fields.add(MapEntry("working_hours_monday", x1.toString()));
       }
     }
 
     if (data.workingHoursTuesday != null) {
-      for (var x1 in data.workingHoursTuesday!) {
+      for (final x1 in data.workingHoursTuesday!) {
         formData.fields.add(MapEntry("working_hours_tuesday", x1.toString()));
       }
     }
 
     if (data.workingHoursWednesday != null) {
-      for (var x1 in data.workingHoursWednesday!) {
+      for (final x1 in data.workingHoursWednesday!) {
         formData.fields.add(MapEntry("working_hours_wednesday", x1.toString()));
       }
     }
 
     if (data.workingHoursThursday != null) {
-      for (var x1 in data.workingHoursThursday!) {
+      for (final x1 in data.workingHoursThursday!) {
         formData.fields.add(MapEntry("working_hours_thursday", x1.toString()));
       }
     }
 
     if (data.workingHoursFriday != null) {
-      for (var x1 in data.workingHoursFriday!) {
+      for (final x1 in data.workingHoursFriday!) {
         formData.fields.add(MapEntry("working_hours_friday", x1.toString()));
       }
     }
 
-    for (var x1 in data.speakingLanguage) {
-      formData.fields.add(MapEntry("speaking_language", x1.toString()));
+    for (final x1 in data.speakingLanguage) {
+      formData.fields.add(MapEntry("speaking_language", x1));
     }
 
     if (data.profileImg != null) {
-      String fileName = data.profileImg!.split('/').last;
+      final String fileName = data.profileImg!.split('/').last;
       formData.files.add(
         MapEntry(
           "profile_img",
@@ -96,7 +96,7 @@ class AttorneyRegisterService with Service {
     }
 
     if (data.idImg != null) {
-      String fileName = data.idImg!.split('/').last;
+      final String fileName = data.idImg!.split('/').last;
       formData.files.add(
         MapEntry(
           "id_img",
@@ -110,7 +110,7 @@ class AttorneyRegisterService with Service {
     }
 
     if (data.cv != null) {
-      String fileName = data.cv!.split('/').last;
+      final String fileName = data.cv!.split('/').last;
       formData.files.add(
         MapEntry(
           "cv",
@@ -123,7 +123,7 @@ class AttorneyRegisterService with Service {
     }
 
     if (data.cert1 != null) {
-      String fileName = data.cert1!.split('/').last;
+      final String fileName = data.cert1!.split('/').last;
 
       formData.files.add(
         MapEntry(
@@ -137,7 +137,7 @@ class AttorneyRegisterService with Service {
     }
 
     if (data.cert2 != null && data.cert2 != "") {
-      String fileName = data.cert2!.split('/').last;
+      final String fileName = data.cert2!.split('/').last;
 
       formData.files.add(
         MapEntry(
@@ -151,7 +151,7 @@ class AttorneyRegisterService with Service {
     }
 
     if (data.cert3 != null && data.cert3 != "") {
-      String fileName = data.cert3!.split('/').last;
+      final String fileName = data.cert3!.split('/').last;
 
       formData.files.add(
         MapEntry(

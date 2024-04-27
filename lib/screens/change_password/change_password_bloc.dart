@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/models/https/update_password_request.dart';
 import 'package:legalz_hub_app/models/password_strength_model.dart';
@@ -8,7 +9,6 @@ import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordBloc extends Bloc<SettingService> {
   bool currentPassowrdObscureText = true;
@@ -45,7 +45,7 @@ class ChangePasswordBloc extends Bloc<SettingService> {
     return false;
   }
 
-  clearFields() {
+  void clearFields() {
     currentPasswordFieldController.clear();
     newPasswordFieldController.clear();
     confirmPasswordFieldController.clear();
@@ -60,7 +60,7 @@ class ChangePasswordBloc extends Bloc<SettingService> {
   }
 
   Future<dynamic> changePasswordRequest() {
-    UpdatePasswordRequest passObj = UpdatePasswordRequest(
+    final UpdatePasswordRequest passObj = UpdatePasswordRequest(
       oldPassword: currentPasswordFieldController.text,
       newPassword: confirmPasswordFieldController.text,
       userType: userType == UserType.attorney ? "attorney" : "customer",
@@ -69,7 +69,7 @@ class ChangePasswordBloc extends Bloc<SettingService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     clearFields();
     loadingStatus.dispose();
     currentPasswordFieldController.dispose();

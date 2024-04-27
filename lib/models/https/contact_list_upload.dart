@@ -13,7 +13,12 @@ class UploadContact implements Model {
 }
 
 class MyContact {
-  MyContact({this.fullName, this.mobileNumber, this.email, this.customersOwnerId, this.attorneyOwnerId});
+  MyContact(
+      {this.fullName,
+      this.mobileNumber,
+      this.email,
+      this.customersOwnerId,
+      this.attorneyOwnerId});
   String? fullName;
   String? mobileNumber;
   String? email;

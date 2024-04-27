@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class PromoCodeView extends StatelessWidget {
-  final TextEditingController controller;
-
   const PromoCodeView({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {

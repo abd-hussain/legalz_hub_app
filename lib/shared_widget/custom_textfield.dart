@@ -3,21 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text_style.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String? hintText;
-  final bool readOnly;
-  final bool enabled;
-  final bool obscureText;
-  final double fontSize;
-  final int maxLine;
-  final EdgeInsetsGeometry padding;
-  final Widget? suffixWidget;
-  final TextInputType? keyboardType;
-  final TextAlign textAlign;
-  final List<TextInputFormatter>? inputFormatters;
-  final Function(String text)? onChange;
-  final Function()? onEditingComplete;
-
   const CustomTextField(
       {required this.controller,
       required this.hintText,
@@ -34,6 +19,20 @@ class CustomTextField extends StatelessWidget {
       this.padding = const EdgeInsets.only(left: 16, right: 16),
       this.textAlign = TextAlign.start,
       super.key});
+  final TextEditingController controller;
+  final String? hintText;
+  final bool readOnly;
+  final bool enabled;
+  final bool obscureText;
+  final double fontSize;
+  final int maxLine;
+  final EdgeInsetsGeometry padding;
+  final Widget? suffixWidget;
+  final TextInputType? keyboardType;
+  final TextAlign textAlign;
+  final List<TextInputFormatter>? inputFormatters;
+  final Function(String text)? onChange;
+  final Function()? onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +73,13 @@ class CustomTextField extends StatelessWidget {
           ),
           onChanged: (text) {
             if (onChange != null) {
+              // ignore: prefer_null_aware_method_calls
               onChange!(text);
             }
           },
           onEditingComplete: () {
             if (onEditingComplete != null) {
+              // ignore: prefer_null_aware_method_calls
               onEditingComplete!();
             }
           }),

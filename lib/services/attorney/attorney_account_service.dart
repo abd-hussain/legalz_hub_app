@@ -16,7 +16,7 @@ class AttorneyAccountService with Service {
 
   Future<AttorneyAccountInfo> updateProfileInfo(
       {required UpdateAttorneyAccountRequest account}) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
     formData.fields.add(MapEntry("suffixe_name", account.suffix));
     formData.fields.add(MapEntry("first_name", account.firstName));
     formData.fields.add(MapEntry("last_name", account.lastName));
@@ -25,7 +25,7 @@ class AttorneyAccountService with Service {
     formData.fields.add(MapEntry("country_id", account.countryId.toString()));
     formData.fields.add(MapEntry("gender", account.gender.toString()));
 
-    for (var x1 in account.speackingLanguage) {
+    for (final x1 in account.speackingLanguage) {
       formData.fields.add(MapEntry("speaking_language", x1));
     }
 

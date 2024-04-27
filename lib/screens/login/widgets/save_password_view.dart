@@ -3,10 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class SavePasswordLoginView extends StatefulWidget {
-  final bool initialValue;
-  final Function(bool) selectedStatus;
   const SavePasswordLoginView(
       {super.key, required this.selectedStatus, required this.initialValue});
+  final bool initialValue;
+  final Function(bool) selectedStatus;
 
   @override
   State<SavePasswordLoginView> createState() => _SavePasswordLoginViewState();
@@ -31,7 +31,6 @@ class _SavePasswordLoginViewState extends State<SavePasswordLoginView> {
               valueListenable: boxSelectedNotifier,
               builder: (context, snapshot, child) {
                 return Checkbox(
-                    tristate: false,
                     checkColor: Colors.white,
                     activeColor: const Color(0xff034061),
                     value: snapshot,

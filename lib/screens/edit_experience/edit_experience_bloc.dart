@@ -31,7 +31,7 @@ class EditExperienceBloc extends Bloc<AttorneyAccountExperianceService> {
   File? cert3;
   String cert3FileUrl = "";
 
-  getProfileExperiance() async {
+  Future<void> getProfileExperiance() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
     await service.getProfileExperiance().then((value) {
@@ -52,7 +52,7 @@ class EditExperienceBloc extends Bloc<AttorneyAccountExperianceService> {
   }
 
   Future<dynamic> updateProfileExperiance() async {
-    return await service.updateProfileExperiance(
+    return service.updateProfileExperiance(
       account: UpdateAccountExperianceRequest(
         experienceSince: experianceSinceController.text,
         cv: cv,
@@ -64,7 +64,7 @@ class EditExperienceBloc extends Bloc<AttorneyAccountExperianceService> {
     );
   }
 
-  validateFields() {
+  void validateFields() {
     enableSaveButton.value = false;
 
     if (experianceSinceController.text.isNotEmpty &&
@@ -75,7 +75,7 @@ class EditExperienceBloc extends Bloc<AttorneyAccountExperianceService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     loadingStatusNotifier.dispose();
   }
 }

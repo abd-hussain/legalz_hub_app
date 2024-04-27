@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/report_model.dart';
 import 'package:legalz_hub_app/shared_widget/bio_field.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class ReportPostBottomSheetsUtil {
@@ -77,7 +77,6 @@ class ReportPostBottomSheetsUtil {
                                 title: reporsList[index].title,
                                 textColor: const Color(0xff444444),
                                 fontSize: 12,
-                                maxLins: 1,
                                 fontWeight: FontWeight.bold,
                               ),
                               subtitle: CustomText(

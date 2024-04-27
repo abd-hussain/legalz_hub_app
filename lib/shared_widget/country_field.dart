@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 class CountryField extends StatelessWidget {
-  final TextEditingController controller;
-  final List<Country> listOfCountries;
-  final Function(Country) selectedCountry;
   const CountryField(
       {required this.controller,
       required this.listOfCountries,
       required this.selectedCountry,
       super.key});
+  final TextEditingController controller;
+  final List<Country> listOfCountries;
+  final Function(Country) selectedCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,6 @@ class CountryField extends StatelessWidget {
           readOnly: true,
           controller: controller,
           hintText: AppLocalizations.of(context)!.countryprofile,
-          padding: const EdgeInsets.only(left: 16, right: 16),
           keyboardType: TextInputType.number,
           inputFormatters: [
             LengthLimitingTextInputFormatter(45),

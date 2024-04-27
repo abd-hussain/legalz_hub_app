@@ -5,16 +5,6 @@ import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
 class OtherUserInfoView extends StatelessWidget {
-  final String? profileImg;
-  final String? flagImage;
-  final String? suffixName;
-  final String? firstName;
-  final String? lastName;
-  final String? categoryName;
-  final String? gender;
-  final String? dateOfBirth;
-  final UserType userType;
-
   const OtherUserInfoView({
     super.key,
     required this.profileImg,
@@ -27,11 +17,20 @@ class OtherUserInfoView extends StatelessWidget {
     required this.dateOfBirth,
     required this.userType,
   });
+  final String? profileImg;
+  final String? flagImage;
+  final String? suffixName;
+  final String? firstName;
+  final String? lastName;
+  final String? categoryName;
+  final String? gender;
+  final String? dateOfBirth;
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -46,7 +45,7 @@ class OtherUserInfoView extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Row(
             children: [
               Stack(
@@ -66,18 +65,16 @@ class OtherUserInfoView extends StatelessWidget {
                                   ? NetworkImage(
                                       AppConstant.imagesBaseURLForCustomer +
                                           profileImg!,
-                                      scale: 1,
                                     )
                                   : NetworkImage(
                                       AppConstant.imagesBaseURLForAttorney +
                                           profileImg!,
-                                      scale: 1,
                                     ),
                             )
                           : Image.asset(
                               'assets/images/avatar.jpeg',
-                              width: 110.0,
-                              height: 110.0,
+                              width: 110,
+                              height: 110,
                               fit: BoxFit.fill,
                             ),
                     ),
@@ -96,13 +93,12 @@ class OtherUserInfoView extends StatelessWidget {
                                     "assets/images/avatar.jpeg"),
                                 image: NetworkImage(
                                     AppConstant.imagesBaseURLForCountries +
-                                        flagImage!,
-                                    scale: 1),
+                                        flagImage!),
                               )
                             : Image.asset(
                                 'assets/images/avatar.jpeg',
-                                width: 110.0,
-                                height: 110.0,
+                                width: 110,
+                                height: 110,
                                 fit: BoxFit.fill,
                               ),
                       ),
@@ -125,29 +121,30 @@ class OtherUserInfoView extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(height: 8),
-                  categoryName != ""
-                      ? Row(
-                          children: [
-                            Text("${AppLocalizations.of(context)!.category}: "),
-                            Text(categoryName!),
-                          ],
-                        )
-                      : Container(),
+                  if (categoryName != "")
+                    Row(
+                      children: [
+                        Text("${AppLocalizations.of(context)!.category}: "),
+                        Text(categoryName!),
+                      ],
+                    )
+                  else
+                    Container(),
                   Row(
                     children: [
                       Text("${AppLocalizations.of(context)!.gender}: "),
                       Text(gender!),
                     ],
                   ),
-                  dateOfBirth != ""
-                      ? Row(
-                          children: [
-                            Text(
-                                "${AppLocalizations.of(context)!.dateofbirth}: "),
-                            Text(dateOfBirth!),
-                          ],
-                        )
-                      : Container(),
+                  if (dateOfBirth != "")
+                    Row(
+                      children: [
+                        Text("${AppLocalizations.of(context)!.dateofbirth}: "),
+                        Text(dateOfBirth!),
+                      ],
+                    )
+                  else
+                    Container(),
                 ],
               ),
             ],

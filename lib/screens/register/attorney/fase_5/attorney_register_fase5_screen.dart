@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:legalz_hub_app/screens/register/attorney/fase_5/attorney_register_fase5_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:legalz_hub_app/shared_widget/email_header.dart';
-import 'package:legalz_hub_app/shared_widget/password_complexity.dart';
-import 'package:legalz_hub_app/shared_widget/save_password_view.dart';
+import 'package:legalz_hub_app/screens/register/attorney/fase_5/attorney_register_fase5_bloc.dart';
 import 'package:legalz_hub_app/screens/register/widgets/footer_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/custom_textfield.dart';
+import 'package:legalz_hub_app/shared_widget/email_header.dart';
+import 'package:legalz_hub_app/shared_widget/password_complexity.dart';
 import 'package:legalz_hub_app/shared_widget/password_field.dart';
+import 'package:legalz_hub_app/shared_widget/save_password_view.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
@@ -84,7 +84,8 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
 
                   await bloc.box
                       .put(DatabaseFieldConstant.attorneyRegistrationStep, "6");
-                  navigator.pushNamed(RoutesConstants.registerfinalfazeScreen,
+                  await navigator.pushNamed(
+                      RoutesConstants.registerfinalfazeScreen,
                       arguments: {AppConstant.userType: UserType.attorney});
                 },
               );
@@ -141,7 +142,7 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                     bloc.passwordController.clear();
                     bloc.showHidePasswordClearNotifier.value = false;
                   },
-                  onchange: () => bloc.validateFieldsForFaze5(),
+                  onchange: bloc.validateFieldsForFaze5,
                   onEditingComplete: () =>
                       FocusManager.instance.primaryFocus?.unfocus(),
                 ),
@@ -155,7 +156,7 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                     bloc.confirmPasswordController.clear();
                     bloc.showHideConfirmPasswordClearNotifier.value = false;
                   },
-                  onchange: () => bloc.validateFieldsForFaze5(),
+                  onchange: bloc.validateFieldsForFaze5,
                   onEditingComplete: () =>
                       FocusManager.instance.primaryFocus?.unfocus(),
                 ),

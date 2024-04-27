@@ -11,7 +11,7 @@ class NetworkInfoService {
   Connectivity connectivity = Connectivity();
 
   Future<bool> isConnected() async {
-    ConnectivityResult result = await connectivity.checkConnectivity();
+    final ConnectivityResult result = await connectivity.checkConnectivity();
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
@@ -25,7 +25,7 @@ class NetworkInfoService {
     connectivity.onConnectivityChanged.distinct((previous, next) {
       return previous == next;
     }).listen((event) {
-      var isConnected = event == ConnectivityResult.mobile ||
+      final isConnected = event == ConnectivityResult.mobile ||
           event == ConnectivityResult.wifi;
       firebaseInitNetworkStateStreamControler.sink.add(isConnected);
       Future.delayed(const Duration(seconds: 1), () {
@@ -35,11 +35,11 @@ class NetworkInfoService {
   }
 
   Future<bool> checkConnectivityonLunching() async {
-    ConnectivityResult result = await connectivity.checkConnectivity();
+    final ConnectivityResult result = await connectivity.checkConnectivity();
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
-        return await internetLookupCheck();
+        return internetLookupCheck();
       default:
         return false;
     }

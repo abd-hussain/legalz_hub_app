@@ -65,7 +65,8 @@ class InsideCallBloc {
     await _initAgoraRtcEngine(userType);
     _addAgoraEventHandlers();
 
-    VideoEncoderConfiguration configuration = const VideoEncoderConfiguration(
+    final VideoEncoderConfiguration configuration =
+        const VideoEncoderConfiguration(
       dimensions: VideoDimensions(width: 1920, height: 1080),
       orientationMode: OrientationMode.orientationModeAdaptive,
     );

@@ -49,7 +49,8 @@ class AttorneyProfileFooterView extends StatelessWidget {
         child: Row(
           children: [
             CustomText(
-              title: Currency().calculateHourRate(hourRate, Timing.halfHour, currency, false),
+              title: Currency().calculateHourRate(
+                  hourRate, Timing.halfHour, currency, false),
               fontSize: 18,
               fontWeight: FontWeight.bold,
               textColor: const Color(0xff034061),

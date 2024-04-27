@@ -5,8 +5,8 @@ import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:share_plus/share_plus.dart';
 
 class MentorShareView extends StatelessWidget {
-  final String invitationCode;
   const MentorShareView({super.key, required this.invitationCode});
+  final String invitationCode;
 
   @override
   Widget build(BuildContext context) {

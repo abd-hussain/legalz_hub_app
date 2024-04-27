@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BackgroundContainer extends StatelessWidget {
-  final Widget child;
   const BackgroundContainer({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class BackgroundContainer extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             boxShadow: [
               BoxShadow(
                 color: Color.fromARGB(15, 4, 3, 3),

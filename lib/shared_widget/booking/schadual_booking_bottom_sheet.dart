@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:legalz_hub_app/models/https/attorney_appoitments_response.dart';
 import 'package:legalz_hub_app/shared_widget/booking/widgets/cell_of_booking.dart';
@@ -9,7 +10,6 @@ import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/currency.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum SchaduleBookingFaze { one, two, three }
 
@@ -41,7 +41,7 @@ class SchaduleBookingBottomSheetsUtil {
       int selectedMeetingTime,
     ) onEndSelection,
   }) async {
-    return await showModalBottomSheet(
+    return showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -217,8 +217,6 @@ class SchaduleBookingBottomSheetsUtil {
           view: CalendarView.month,
           firstDayOfWeek: 6,
           monthViewSettings: const MonthViewSettings(
-            appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
-            numberOfWeeksInView: 6,
             appointmentDisplayCount: 10,
           ),
           minDate: DateTime.now(),
@@ -363,7 +361,6 @@ class SchaduleBookingBottomSheetsUtil {
           children: [
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomText(
                     title: selectedMeetingDuration == null

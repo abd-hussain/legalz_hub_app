@@ -5,16 +5,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/file_holder_field.dart';
 
 class CertificateView extends StatefulWidget {
-  final double width;
-  final double height;
-  final Function(File?, File?, File?) onChange;
-
   const CertificateView({
     super.key,
     required this.onChange,
     required this.width,
     this.height = 50,
   });
+  final double width;
+  final double height;
+  final Function(File?, File?, File?) onChange;
 
   @override
   State<CertificateView> createState() => _CertificateViewState();

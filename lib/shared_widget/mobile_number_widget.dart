@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class MobileNumberField extends StatefulWidget {
-  final Country initialCountry;
-  final List<Country> countryList;
-  final Function(Country?) selectedCountryCode;
-  final Function(String) enteredPhoneNumber;
-  final Function(bool) validatePhoneNumber;
-
   const MobileNumberField(
       {required this.selectedCountryCode,
       required this.initialCountry,
@@ -19,6 +13,11 @@ class MobileNumberField extends StatefulWidget {
       required this.countryList,
       required this.enteredPhoneNumber,
       required this.validatePhoneNumber});
+  final Country initialCountry;
+  final List<Country> countryList;
+  final Function(Country?) selectedCountryCode;
+  final Function(String) enteredPhoneNumber;
+  final Function(bool) validatePhoneNumber;
 
   @override
   State<MobileNumberField> createState() => _MobileNumberFieldState();
@@ -37,7 +36,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
     super.initState();
   }
 
-  controllerLisiner() {
+  void controllerLisiner() {
     controller.addListener(() {
       if (selectedPhoneCountryNotifier.value.minLength! <=
               controller.text.length &&
@@ -77,8 +76,8 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(
-                          selectedPhoneCountryData.maxLength!),
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          selectedPhoneCountryData.maxLength),
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                     ],
                     decoration: InputDecoration(
                       filled: true,
@@ -119,8 +118,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                                   placeholder: const AssetImage(
                                       "assets/images/flagPlaceHolderImg.png"),
                                   image: NetworkImage(
-                                      selectedPhoneCountryData.flagImage!,
-                                      scale: 1),
+                                      selectedPhoneCountryData.flagImage!),
                                 ),
                               ),
                               const SizedBox(
@@ -139,7 +137,6 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                                 color: const Color(0xff8F8F92),
                                 width: 12,
                                 height: 12,
-                                alignment: Alignment.center,
                               ),
                             ],
                           ),

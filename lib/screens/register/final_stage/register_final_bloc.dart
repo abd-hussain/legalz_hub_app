@@ -31,7 +31,7 @@ class RegisterFinalBloc extends Bloc<FilterService> {
   }
 
   Future<dynamic> handleCreatingTheCustomerProfile(BuildContext context) async {
-    String? version = await Version().getApplicationVersion();
+    final String version = await Version().getApplicationVersion();
     int gender = 0;
     if (context.mounted) {
       gender = GenderFormat().convertStringToIndex(
@@ -56,18 +56,19 @@ class RegisterFinalBloc extends Bloc<FilterService> {
       pushToken: box.get(DatabaseFieldConstant.pushNotificationToken),
     );
 
-    return await locator<CustomerRegisterService>().callRegister(data: model);
+    return locator<CustomerRegisterService>().callRegister(data: model);
   }
 
   Future<dynamic> handleCreatingTheAttorneyProfile(BuildContext context) async {
-    String? version = await Version().getApplicationVersion();
+    final String version = await Version().getApplicationVersion();
     int gender = 0;
     if (context.mounted) {
       gender = GenderFormat().convertStringToIndex(
           context, box.get(TempFieldToRegistrtAttorneyConstant.gender));
     }
 
-    List<WorkingHourUTCModel> workingHoursUTC = DayTime().prepareTimingToUTC(
+    final List<WorkingHourUTCModel> workingHoursUTC =
+        DayTime().prepareTimingToUTC(
       workingHoursSaturday:
           box.get(TempFieldToRegistrtAttorneyConstant.saturdayWH) ?? [],
       workingHoursSunday:
@@ -144,7 +145,7 @@ class RegisterFinalBloc extends Bloc<FilterService> {
           box.get(TempFieldToRegistrtAttorneyConstant.experianceSince) ?? "",
     );
 
-    return await locator<AttorneyRegisterService>().callRegister(data: model);
+    return locator<AttorneyRegisterService>().callRegister(data: model);
   }
 
   Future<void> clearCustomerRegistrationData() async {
@@ -199,7 +200,7 @@ class RegisterFinalBloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {
+  void onDispose() {
     loadingStatus.dispose();
   }
 }

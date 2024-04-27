@@ -89,7 +89,8 @@ class _AttorneyRegister2ScreenState extends State<AttorneyRegister2Screen> {
 
                 await bloc.box
                     .put(DatabaseFieldConstant.attorneyRegistrationStep, "3");
-                navigator.pushNamed(RoutesConstants.registerAttornyFaze3Screen);
+                await navigator
+                    .pushNamed(RoutesConstants.registerAttornyFaze3Screen);
               },
             );
           }),
@@ -126,15 +127,12 @@ class _AttorneyRegister2ScreenState extends State<AttorneyRegister2Screen> {
                                   left: 16, right: 16, top: 8, bottom: 8),
                               child: ExperianceSinceField(
                                 controller: bloc.experianceSinceController,
-                                padding: const EdgeInsets.all(0),
-                                onSelected: () {
-                                  bloc.validateFieldsForFaze2();
-                                },
+                                padding: EdgeInsets.zero,
+                                onSelected: bloc.validateFieldsForFaze2,
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8),
+                              padding: const EdgeInsets.only(left: 8, right: 8),
                               child: BioField(
                                 bioController: bloc.bioController,
                                 onChanged: (text) =>

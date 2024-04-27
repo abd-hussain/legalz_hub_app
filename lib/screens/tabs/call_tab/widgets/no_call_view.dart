@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/screens/booking_meeting/booking_bloc.dart';
@@ -9,20 +10,18 @@ import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NoCallView extends StatelessWidget {
-  final String language;
-  final UserType userType;
-  final List<Category> listOfCategories;
-  final Function() refreshThePage;
-
   const NoCallView(
       {required this.language,
       required this.userType,
       super.key,
       required this.listOfCategories,
       required this.refreshThePage});
+  final String language;
+  final UserType userType;
+  final List<Category> listOfCategories;
+  final Function() refreshThePage;
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +46,17 @@ class NoCallView extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        userType == UserType.attorney
-            ? hintToEncreaseMeetings(context)
-            : bookMeeting(context),
+        if (userType == UserType.attorney)
+          hintToEncreaseMeetings(context)
+        else
+          bookMeeting(context),
       ],
     );
   }
 
   Widget hintToEncreaseMeetings(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(
@@ -64,7 +64,7 @@ class NoCallView extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8)),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               const SizedBox(height: 8),
@@ -127,7 +127,7 @@ class NoCallView extends StatelessWidget {
 
   Widget bookMeeting(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(
@@ -135,7 +135,7 @@ class NoCallView extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8)),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               rowItem(
@@ -231,9 +231,10 @@ class NoCallView extends StatelessWidget {
             ],
           ),
           const Expanded(child: SizedBox()),
-          language == "en"
-              ? const Icon(Icons.arrow_left_outlined)
-              : const Icon(Icons.arrow_right_outlined)
+          if (language == "en")
+            const Icon(Icons.arrow_left_outlined)
+          else
+            const Icon(Icons.arrow_right_outlined)
         ],
       ),
     );

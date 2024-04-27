@@ -1,5 +1,5 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/main_context.dart';
 import 'package:legalz_hub_app/screens/no_internet/widgets/no_internet_bottom_text.dart';
@@ -33,7 +33,6 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        appBar: null,
         body: Center(
           child: Column(
             children: [
@@ -43,7 +42,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
               const BottomText(),
               Expanded(child: Container()),
               Padding(
-                padding: const EdgeInsets.only(left: 50.0, right: 50),
+                padding: const EdgeInsets.only(left: 50, right: 50),
                 child: CustomButton(
                     enableButton: true,
                     buttonTitle: AppLocalizations.of(context)!.retry,

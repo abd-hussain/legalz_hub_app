@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/profile_options.dart';
@@ -187,7 +187,7 @@ class AccountBloc {
   }
 
   List<ProfileOptions> listOfSupportOptions(BuildContext context) {
-    var list = [
+    final list = [
       ProfileOptions(
         icon: Ionicons.color_palette,
         name: AppLocalizations.of(context)!.aboutus,
@@ -207,18 +207,18 @@ class AccountBloc {
   }
 
   void _deleteAccountView(BuildContext context) {
-    var nav = Navigator.of(context, rootNavigator: true);
+    final nav = Navigator.of(context, rootNavigator: true);
 
     BottomSheetsUtil().areYouShoureButtomSheet(
         context: context,
         message: AppLocalizations.of(context)!.areyousuredeleteaccount,
         sure: () async {
-          BottomSheetsUtil().areYouShoureButtomSheet(
+          await BottomSheetsUtil().areYouShoureButtomSheet(
               context: context,
               message:
                   AppLocalizations.of(context)!.accountInformationwillbedeleted,
               sure: () async {
-                locator<SettingService>()
+                await locator<SettingService>()
                     .removeAccount(userType)
                     .then((c) async {
                   await _deleteAllUserData().then((value) async {
@@ -232,7 +232,7 @@ class AccountBloc {
   }
 
   void _logoutView(BuildContext context) {
-    var nav = Navigator.of(context, rootNavigator: true);
+    final nav = Navigator.of(context, rootNavigator: true);
     BottomSheetsUtil().areYouShoureButtomSheet(
         context: context,
         message: AppLocalizations.of(context)!.areyousurelogout,
@@ -276,7 +276,7 @@ class AccountBloc {
         .pushNamed(RoutesConstants.inviteFriendScreen);
   }
 
-  void _changeLanguage(BuildContext context) async {
+  Future<void> _changeLanguage(BuildContext context) async {
     await BottomSheetsUtil().areYouShoureButtomSheet(
         context: context,
         message: AppLocalizations.of(context)!.changelanguagemessage,
@@ -291,11 +291,11 @@ class AccountBloc {
         });
   }
 
-  void _refreshAppWithLanguageCode(BuildContext context) async {
+  Future<void> _refreshAppWithLanguageCode(BuildContext context) async {
     MyApp.of(context)!.rebuild();
   }
 
-  readBiometricsInitValue() {
+  void readBiometricsInitValue() {
     toggleOfBiometrics.value =
         box.get(DatabaseFieldConstant.biometricStatus) == "true";
   }

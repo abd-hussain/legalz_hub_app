@@ -5,14 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class TimerEndCallView extends StatefulWidget {
-  final Function() timesup;
-  final int meetingDurationInMin;
-
   const TimerEndCallView({
     super.key,
     required this.timesup,
     required this.meetingDurationInMin,
   });
+  final Function() timesup;
+  final int meetingDurationInMin;
 
   @override
   State<TimerEndCallView> createState() => _TimerEndCallViewState();
@@ -43,7 +42,7 @@ class _TimerEndCallViewState extends State<TimerEndCallView> {
   Widget build(BuildContext context) {
     return Center(
         child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Align(
         alignment: Alignment.topRight,
         child: Column(

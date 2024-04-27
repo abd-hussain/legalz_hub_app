@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class AppointmentDetailsView extends StatelessWidget {
-  final String title;
-  final String desc;
-  final Color descColor;
-  final bool forceView;
-  final EdgeInsetsGeometry padding;
-
   const AppointmentDetailsView({
     required this.title,
     required this.desc,
@@ -16,6 +10,11 @@ class AppointmentDetailsView extends StatelessWidget {
     this.descColor = const Color(0xff554d56),
     this.padding = const EdgeInsets.all(16),
   });
+  final String title;
+  final String desc;
+  final Color descColor;
+  final bool forceView;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {

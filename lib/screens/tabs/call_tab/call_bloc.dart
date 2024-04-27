@@ -47,9 +47,9 @@ class CallBloc extends Bloc<FilterService> {
 
   List<AttorneyAppointmentsData> _handleAttorneyTimingFromUTC(
       List<AttorneyAppointmentsData> data) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
+    final int offset = DateTime.now().timeZoneOffset.inHours;
 
-    for (var appoint in data) {
+    for (final appoint in data) {
       appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
       appoint.dateTo = _adjustDate(appoint.dateTo, offset);
     }
@@ -59,9 +59,9 @@ class CallBloc extends Bloc<FilterService> {
 
   List<CustomerAppointmentData> _handleCustomerTimingFromUTC(
       List<CustomerAppointmentData> data) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
+    final int offset = DateTime.now().timeZoneOffset.inHours;
 
-    for (var appoint in data) {
+    for (final appoint in data) {
       appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
       appoint.dateTo = _adjustDate(appoint.dateTo, offset);
     }
@@ -88,11 +88,11 @@ class CallBloc extends Bloc<FilterService> {
       List<AttorneyAppointmentsData> activeMeetings) {
     final now = DateTime.now();
 
-    var removeOldMeetingFromTheList = activeMeetings
+    final removeOldMeetingFromTheList = activeMeetings
         .where((meeting) => DateTime.parse(meeting.dateTo!).isAfter(now))
         .toList();
 
-    var filtermeetingavaliablewithing24Hour = removeOldMeetingFromTheList
+    final filtermeetingavaliablewithing24Hour = removeOldMeetingFromTheList
         .where((meeting) => DateTime.parse(meeting.dateFrom!)
             .isBefore(now.add(const Duration(hours: 24))))
         .toList();
@@ -110,11 +110,11 @@ class CallBloc extends Bloc<FilterService> {
       List<CustomerAppointmentData> activeMeetings) {
     final now = DateTime.now();
 
-    var removeOldMeetingFromTheList = activeMeetings
+    final removeOldMeetingFromTheList = activeMeetings
         .where((meeting) => DateTime.parse(meeting.dateTo!).isAfter(now))
         .toList();
 
-    var filtermeetingavaliablewithing24Hour = removeOldMeetingFromTheList
+    final filtermeetingavaliablewithing24Hour = removeOldMeetingFromTheList
         .where((meeting) => DateTime.parse(meeting.dateFrom!)
             .isBefore(now.add(const Duration(hours: 24))))
         .toList();
@@ -152,5 +152,5 @@ class CallBloc extends Bloc<FilterService> {
   }
 
   @override
-  onDispose() {}
+  void onDispose() {}
 }

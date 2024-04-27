@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextStyle {
-  CustomTextStyle? _instance;
+  late CustomTextStyle? _instance;
 
   Future<CustomTextStyle> getInstance() async {
     _instance = CustomTextStyle();

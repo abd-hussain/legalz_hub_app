@@ -1,19 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectUserTypeRegisterBottomSheetsUtil {
+  SelectUserTypeRegisterBottomSheetsUtil({required this.context});
   final BuildContext context;
 
-  SelectUserTypeRegisterBottomSheetsUtil({required this.context});
-
   Future infoBottomSheet({required Function(UserType) openNext}) async {
-    return await showModalBottomSheet(
+    return showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -106,6 +105,6 @@ class SelectUserTypeRegisterBottomSheetsUtil {
   }
 
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
-    Factory(() => EagerGestureRecognizer())
+    Factory(EagerGestureRecognizer.new)
   };
 }

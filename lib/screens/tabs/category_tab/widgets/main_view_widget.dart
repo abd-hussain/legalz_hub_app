@@ -11,13 +11,12 @@ import 'package:legalz_hub_app/utils/currency.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 class CategoryMainView extends StatefulWidget {
-  final Category selectedCategory;
-  final List<AttorneyModelData>? attorneyListNotifier;
-
   const CategoryMainView(
       {required this.selectedCategory,
       required this.attorneyListNotifier,
       super.key});
+  final Category selectedCategory;
+  final List<AttorneyModelData>? attorneyListNotifier;
 
   @override
   State<CategoryMainView> createState() => _CategoryMainViewState();
@@ -55,11 +54,11 @@ class _CategoryMainViewState extends State<CategoryMainView> {
 
   Widget headerFilter(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Container(
         color: Colors.grey[100],
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Row(
             children: [
               CustomText(
@@ -173,11 +172,12 @@ class _CategoryMainViewState extends State<CategoryMainView> {
       child: Column(
         children: [
           _card(context, widget.attorneyListNotifier![index]),
-          listLenght - 1 == index
-              ? const SizedBox(
-                  height: 16,
-                )
-              : const SizedBox(),
+          if (listLenght - 1 == index)
+            const SizedBox(
+              height: 16,
+            )
+          else
+            const SizedBox(),
         ],
       ),
     );
@@ -204,7 +204,7 @@ class _CategoryMainViewState extends State<CategoryMainView> {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               Row(
@@ -263,8 +263,7 @@ class _CategoryMainViewState extends State<CategoryMainView> {
                                 fit: BoxFit.cover,
                                 placeholder: const AssetImage(
                                     "assets/images/flagPlaceHolderImg.png"),
-                                image:
-                                    NetworkImage(data.countryFlag!, scale: 1)),
+                                image: NetworkImage(data.countryFlag!)),
                           ),
                           const SizedBox(width: 8),
                           CustomText(
@@ -341,7 +340,6 @@ class _CategoryMainViewState extends State<CategoryMainView> {
                               Icons.star,
                               color: Colors.amber,
                             ),
-                            itemCount: 5,
                             itemSize: 14,
                           ),
                           const SizedBox(width: 2),

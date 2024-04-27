@@ -8,8 +8,8 @@ import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 class ListOfCountriesWidget extends StatelessWidget {
-  final ValueNotifier<List<Country>> countriesListNotifier;
   const ListOfCountriesWidget({super.key, required this.countriesListNotifier});
+  final ValueNotifier<List<Country>> countriesListNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ListOfCountriesWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
       child: InkWell(
         onTap: () async {
-          var box = await Hive.openBox(DatabaseBoxConstant.userInfo);
+          final box = await Hive.openBox(DatabaseBoxConstant.userInfo);
 
           await box.put(
               DatabaseFieldConstant.selectedCountryId, item.id.toString());
@@ -54,7 +54,7 @@ class ListOfCountriesWidget extends StatelessWidget {
           await box.put(DatabaseFieldConstant.selectedCountryMaxLenght,
               item.maxLength.toString());
 
-          navigator.pushNamedAndRemoveUntil(
+          await navigator.pushNamedAndRemoveUntil(
             RoutesConstants.tutorialsScreen,
             (Route<dynamic> route) => false,
             arguments: {"openFrom": TutorialOpenFrom.firstInstall},
@@ -75,7 +75,7 @@ class ListOfCountriesWidget extends StatelessWidget {
                     child: FadeInImage(
                         placeholder: const AssetImage(
                             "assets/images/flagPlaceHolderImg.png"),
-                        image: NetworkImage(item.flagImage!, scale: 1))),
+                        image: NetworkImage(item.flagImage!))),
                 const SizedBox(width: 8),
                 Expanded(
                   child: CustomText(

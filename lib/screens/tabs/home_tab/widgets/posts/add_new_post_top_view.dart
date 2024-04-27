@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/bottom_sheets/add_post_bottomsheet.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
 class AddNewPostTopView extends StatelessWidget {
+  const AddNewPostTopView(
+      {super.key, required this.addPost, required this.listOfCategories});
   final List<Category> listOfCategories;
   final Function({required int catId, required String content, File? postImg})
       addPost;
-  const AddNewPostTopView(
-      {super.key, required this.addPost, required this.listOfCategories});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +19,13 @@ class AddNewPostTopView extends StatelessWidget {
       onTap: () => AddPostBottomSheetsUtil().bottomSheet(
         context: context,
         categories: listOfCategories,
-        addPost: ({required catId, required content, postImg}) {
-          addPost(catId: catId, content: content, postImg: postImg);
-        },
+        addPost: addPost,
       ),
       child: Container(
         height: 80,
         color: Colors.grey[200],
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               Expanded(

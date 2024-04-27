@@ -19,9 +19,9 @@ class CalenderBloc {
       ValueNotifier<List<CustomerAppointmentData>>([]);
   UserType userType = UserType.customer;
 
-  void getAppointments(BuildContext context) async {
+  Future<void> getAppointments(BuildContext context) async {
     if (userType == UserType.attorney) {
-      locator<AttorneyAppointmentsService>()
+      await locator<AttorneyAppointmentsService>()
           .getAttorneyAppointments()
           .then((value) {
         if (value.data != null) {
@@ -30,7 +30,7 @@ class CalenderBloc {
         }
       });
     } else {
-      locator<CustomerAppointmentsService>()
+      await locator<CustomerAppointmentsService>()
           .getCustomerAppointments()
           .then((value) {
         if (value.data != null) {
@@ -43,9 +43,9 @@ class CalenderBloc {
 
   List<AttorneyAppointmentsData> handleAttorneyTimingFromUTC(
       List<AttorneyAppointmentsData> data) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
+    final int offset = DateTime.now().timeZoneOffset.inHours;
 
-    for (var appoint in data) {
+    for (final appoint in data) {
       appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
       appoint.dateTo = _adjustDate(appoint.dateTo, offset);
     }
@@ -55,9 +55,9 @@ class CalenderBloc {
 
   List<CustomerAppointmentData> handleCustomerTimingFromUTC(
       List<CustomerAppointmentData> data) {
-    int offset = DateTime.now().timeZoneOffset.inHours;
+    final int offset = DateTime.now().timeZoneOffset.inHours;
 
-    for (var appoint in data) {
+    for (final appoint in data) {
       appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
       appoint.dateTo = _adjustDate(appoint.dateTo, offset);
     }

@@ -4,7 +4,8 @@ class DiscountModel {
   DiscountModel({this.data, this.message});
 
   DiscountModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? DiscountModelData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? DiscountModelData.fromJson(json['data']) : null;
     message = json['message'];
   }
   DiscountModelData? data;

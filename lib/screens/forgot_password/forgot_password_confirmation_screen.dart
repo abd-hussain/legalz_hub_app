@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/shared_widget/background_container.dart';
 import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 
 class ForgotPasswordConfirmationScreen extends StatefulWidget {
@@ -49,7 +49,6 @@ class _ForgotPasswordConfirmationScreenState
                       'assets/images/reset_password_icon_lite.png',
                       height: 90,
                       width: 83,
-                      alignment: Alignment.center,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -120,7 +119,7 @@ class _ForgotPasswordConfirmationScreenState
                   ),
                   const SizedBox(height: 30),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: SizedBox(
                       width: double.infinity,
                       height: 55,
