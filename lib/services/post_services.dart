@@ -66,7 +66,7 @@ class PostService with Service {
       {required String postId,
       required String catId,
       required String content,
-      String? postImg}) async {
+      File? postImg}) async {
     final FormData formData = FormData();
 
     formData.fields.add(MapEntry("content", content));
@@ -74,12 +74,12 @@ class PostService with Service {
     formData.fields.add(MapEntry("post_id", postId));
 
     if (postImg != null) {
-      final String fileName = postImg.split('/').last;
+      final String fileName = postImg.path.split('/').last;
       formData.files.add(
         MapEntry(
           "post_img",
           MultipartFile.fromFileSync(
-            postImg,
+            postImg.path,
             filename: fileName,
             contentType: MediaType('image', fileName.split('.').last),
           ),

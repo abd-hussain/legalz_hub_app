@@ -99,19 +99,15 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                           ),
                         ),
                         const SizedBox(height: 8),
-                        RefreshIndicator(
-                          onRefresh: bloc.pullRefresh,
-                          child: SizedBox(
-                            height: MediaQuery.of(context).size.height - 300,
-                            child: TabBarView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              controller: bloc.tabController,
-                              children: snapshot.data!.map((sub) {
-                                return _tabBarView(
-                                    listOfCategories: snapshot.data!,
-                                    item: sub);
-                              }).toList(),
-                            ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - 200,
+                          child: TabBarView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            controller: bloc.tabController,
+                            children: snapshot.data!.map((sub) {
+                              return _tabBarView(
+                                  listOfCategories: snapshot.data!, item: sub);
+                            }).toList(),
                           ),
                         ),
                       ],
@@ -129,101 +125,119 @@ class _HomeTabScreenState extends State<HomeTabScreen>
   Widget _tabBarView(
       {required List<Category> listOfCategories, required Category item}) {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (bloc.userType == UserType.customer)
-              AddNewPostTopView(
-                listOfCategories: listOfCategories,
-                addPost: ({required catId, required content, postImg}) async {
-                  await bloc.addNewPost(
-                      catId: catId, content: content, postImg: postImg);
-                },
-              )
-            else
-              Container(),
-            const SizedBox(height: 8),
-            if (item.id! == 0)
-              FutureBuilder<List<HomeBannerResponseData>?>(
+      child: RefreshIndicator(
+        onRefresh: bloc.pullRefresh,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              if (bloc.userType == UserType.customer)
+                AddNewPostTopView(
+                  listOfCategories: listOfCategories,
+                  addPost: ({required catId, required content, postImg}) async {
+                    await bloc.addNewPost(
+                        catId: catId, content: content, postImg: postImg);
+                  },
+                )
+              else
+                Container(),
+              const SizedBox(height: 8),
+              if (item.id! == 0)
+                FutureBuilder<List<HomeBannerResponseData>?>(
+                    initialData: const [],
+                    future: bloc.getHomeBanners(),
+                    builder: (context, snapshot) {
+                      if (snapshot.data == null && snapshot.hasData) {
+                        return const SizedBox(
+                            height: 220, child: LoadingView());
+                      } else {
+                        return MainBannerHomePage(
+                            bannerList: snapshot.data ?? []);
+                      }
+                    })
+              else
+                Container(),
+              if (item.id! == 0) const SizedBox(height: 8) else Container(),
+              StreamBuilder<List<PostResponseData>?>(
                   initialData: const [],
-                  future: bloc.getHomeBanners(),
+                  stream: bloc.postsStreamController.stream,
                   builder: (context, snapshot) {
-                    if (snapshot.data == null && snapshot.hasData) {
-                      return const SizedBox(height: 220, child: LoadingView());
-                    } else {
-                      return MainBannerHomePage(
-                          bannerList: snapshot.data ?? []);
-                    }
-                  })
-            else
-              Container(),
-            if (item.id! == 0) const SizedBox(height: 8) else Container(),
-            StreamBuilder<List<PostResponseData>?>(
-                initialData: const [],
-                stream: bloc.postsStreamController.stream,
-                builder: (context, snapshot) {
-                  return PostsListView(
-                    currentUserType: bloc.userType,
-                    box: bloc.box,
-                    postsList: snapshot.data,
-                    commentsAction: (postId) async {
-                      await bloc
-                          .getPostComments(postId: postId)
-                          .then((value) async {
-                        await PostCommentsBottomSheetsUtil().bottomSheet(
+                    return PostsListView(
+                      currentUserType: bloc.userType,
+                      box: bloc.box,
+                      postsList: snapshot.data,
+                      categories: listOfCategories,
+                      commentsAction: (postId) async {
+                        await bloc
+                            .getPostComments(postId: postId)
+                            .then((value) async {
+                          await PostCommentsBottomSheetsUtil().bottomSheet(
+                              context: context,
+                              comments: value.data,
+                              currentUserType: bloc.userType,
+                              currentUserId:
+                                  bloc.box.get(DatabaseFieldConstant.userid),
+                              addCommentCallBack: (comment) async {
+                                await bloc.addNewComment(
+                                    postId: postId, content: comment);
+                              },
+                              deleteCommentCallBack: (commentId) async {
+                                await BottomSheetsUtil()
+                                    .areYouShoureButtomSheet(
+                                        context: context,
+                                        message: AppLocalizations.of(context)!
+                                            .areyousuredeletcomment,
+                                        sure: () async {
+                                          await bloc
+                                              .deleteComment(
+                                                  commentId: commentId)
+                                              .then((value) {
+                                            bloc.getHomePosts(
+                                                catId: 0, skip: 0);
+                                          });
+                                        });
+                              });
+                        });
+                      },
+                      editPostAction: (
+                          {required catId,
+                          required content,
+                          required postId,
+                          postImg}) async {
+                        await bloc.editPost(
+                            postId: postId,
+                            catId: catId,
+                            content: content,
+                            postImg: postImg);
+                      },
+                      deleteAction: (postId) {
+                        BottomSheetsUtil().areYouShoureButtomSheet(
                             context: context,
-                            comments: value.data,
-                            currentUserType: bloc.userType,
-                            currentUserId:
-                                bloc.box.get(DatabaseFieldConstant.userid),
-                            addCommentCallBack: (comment) async {
-                              await bloc.addNewComment(
-                                  postId: postId, content: comment);
-                            },
-                            deleteCommentCallBack: (commentId) async {
-                              await BottomSheetsUtil().areYouShoureButtomSheet(
-                                  context: context,
-                                  message: AppLocalizations.of(context)!
-                                      .areyousuredeletcomment,
-                                  sure: () async {
-                                    await bloc
-                                        .deleteComment(commentId: commentId)
-                                        .then((value) {
-                                      bloc.getHomePosts(catId: 0, skip: 0);
-                                    });
-                                  });
+                            message: AppLocalizations.of(context)!
+                                .areyousuredeletepost,
+                            sure: () async {
+                              await bloc
+                                  .deletePost(postId: postId)
+                                  .then((value) {
+                                bloc.getHomePosts(catId: 0, skip: 0);
+                              });
                             });
-                      });
-                    },
-                    editPostAction: (postId) {
-                      //TODO: handle edit post
-                    },
-                    deleteAction: (postId) {
-                      BottomSheetsUtil().areYouShoureButtomSheet(
-                          context: context,
-                          message: AppLocalizations.of(context)!
-                              .areyousuredeletepost,
-                          sure: () async {
-                            await bloc.deletePost(postId: postId).then((value) {
-                              bloc.getHomePosts(catId: 0, skip: 0);
+                      },
+                      reportAction: (postId) {
+                        ReportPostBottomSheetsUtil().bottomSheet(
+                            context: context,
+                            reporsList: bloc.reportList,
+                            reportAction: (report) async {
+                              await bloc.reportPost(
+                                  postId: postId,
+                                  reason:
+                                      '${report.title} : ${report.desc} : ${report.otherNote}');
                             });
-                          });
-                    },
-                    reportAction: (postId) {
-                      ReportPostBottomSheetsUtil().bottomSheet(
-                          context: context,
-                          reporsList: bloc.reportList,
-                          reportAction: (report) async {
-                            await bloc.reportPost(
-                                postId: postId,
-                                reason:
-                                    '${report.title} : ${report.desc} : ${report.otherNote}');
-                          });
-                    },
-                  );
-                }),
-            const SizedBox(height: 10)
-          ],
+                      },
+                    );
+                  }),
+              const SizedBox(height: 10)
+            ],
+          ),
         ),
       ),
     );

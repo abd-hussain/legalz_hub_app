@@ -19,7 +19,7 @@ class AddNewPostTopView extends StatelessWidget {
       onTap: () => AddPostBottomSheetsUtil().bottomSheet(
         context: context,
         categories: listOfCategories,
-        addPost: addPost,
+        addPostCallback: addPost,
       ),
       child: Container(
         height: 80,

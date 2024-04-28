@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:legalz_hub_app/models/https/categories_model.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
+import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/bottom_sheets/edit_post_bottomsheet.dart';
 import 'package:legalz_hub_app/screens/tabs/home_tab/widgets/posts/post_view_bottom_controllers_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
@@ -16,6 +20,7 @@ class PostsListView extends StatelessWidget {
       {super.key,
       required this.box,
       required this.postsList,
+      required this.categories,
       required this.currentUserType,
       required this.commentsAction,
       required this.editPostAction,
@@ -24,8 +29,13 @@ class PostsListView extends StatelessWidget {
   final List<PostResponseData>? postsList;
   final UserType currentUserType;
   final Box<dynamic> box;
+  final List<Category> categories;
   final Function(int id) commentsAction;
-  final Function(int id) editPostAction;
+  final Function(
+      {required int postId,
+      required int catId,
+      required String content,
+      File? postImg}) editPostAction;
   final Function(int id) deleteAction;
   final Function(int id) reportAction;
 
@@ -163,8 +173,33 @@ class PostsListView extends StatelessWidget {
                                       ? Row(
                                           children: [
                                             IconButton(
-                                              onPressed: () => editPostAction(
-                                                  postsList![index].id!),
+                                              onPressed: () {
+                                                EditPostBottomSheetsUtil()
+                                                    .bottomSheet(
+                                                  context: context,
+                                                  initialCatId:
+                                                      postsList![index]
+                                                          .categoryId!,
+                                                  initialContent:
+                                                      postsList![index]
+                                                          .content!,
+                                                  initialPostImg:
+                                                      postsList![index].postImg,
+                                                  categories: categories,
+                                                  editPostCallback: (
+                                                      {required catId,
+                                                      required content,
+                                                      postImg}) {
+                                                    editPostAction(
+                                                        postId:
+                                                            postsList![index]
+                                                                .id!,
+                                                        catId: catId,
+                                                        content: content,
+                                                        postImg: postImg);
+                                                  },
+                                                );
+                                              },
                                               icon: Icon(
                                                 Ionicons.create_outline,
                                                 size: 20,

@@ -57,7 +57,7 @@ class _HomeHeaderViewState extends State<HomeHeaderView> {
               onPressed: () => AddPostBottomSheetsUtil().bottomSheet(
                 context: context,
                 categories: widget.listOfCategories,
-                addPost: ({required catId, required content, postImg}) {
+                addPostCallback: ({required catId, required content, postImg}) {
                   widget.addPost(
                       catId: catId, content: content, postImg: postImg);
                 },

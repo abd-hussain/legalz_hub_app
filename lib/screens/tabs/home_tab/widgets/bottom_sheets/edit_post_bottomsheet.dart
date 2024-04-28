@@ -11,7 +11,7 @@ import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 
-class AddPostBottomSheetsUtil {
+class EditPostBottomSheetsUtil {
   StreamController<AddPostModel> refreshPage =
       StreamController<AddPostModel>.broadcast();
   AddPostModel refreshObj =
@@ -22,11 +22,29 @@ class AddPostBottomSheetsUtil {
   Future bottomSheet(
       {required BuildContext context,
       required List<Category> categories,
+      required int initialCatId,
+      required String initialContent,
+      required String? initialPostImg,
       required Function(
               {required int catId, required String content, File? postImg})
-          addPostCallback}) {
+          editPostCallback}) {
     final List<Category> listOfCategories =
         categories.where((s) => s.id != 0).toList();
+
+    textController.text = initialContent;
+    final selectedCat = categories.firstWhere((s) => s.id == initialCatId);
+
+    if (initialPostImg != null) {
+      //TODO
+      image = File(initialPostImg);
+    }
+
+    refreshObj = AddPostModel(
+        categorySelected: selectedCat,
+        attachment: image,
+        content: textController.text);
+
+    refreshPage.sink.add(refreshObj);
 
     return showModalBottomSheet(
         isScrollControlled: true,
@@ -39,9 +57,9 @@ class AddPostBottomSheetsUtil {
         builder: (context) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: StreamBuilder<AddPostModel>(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: StreamBuilder<AddPostModel>(
                   stream: refreshPage.stream,
                   builder: (context, refreshPageSnapshot) {
                     return Column(
@@ -58,8 +76,8 @@ class AddPostBottomSheetsUtil {
                             ),
                             Expanded(
                               child: CustomText(
-                                title: AppLocalizations.of(context)!
-                                    .addnewquestion,
+                                title:
+                                    AppLocalizations.of(context)!.editquestion,
                                 textColor: const Color(0xff444444),
                                 textAlign: TextAlign.center,
                                 fontSize: 18,
@@ -72,7 +90,7 @@ class AddPostBottomSheetsUtil {
                                       validateFields(refreshPageSnapshot.data),
                                   onTap: () {
                                     Navigator.of(context).pop();
-                                    addPostCallback(
+                                    editPostCallback(
                                       catId: refreshPageSnapshot
                                           .data!.categorySelected!.id!,
                                       content:
@@ -273,8 +291,8 @@ class AddPostBottomSheetsUtil {
                         ),
                       ],
                     );
-                  }),
-            ),
+                  },
+                )),
           );
         });
   }

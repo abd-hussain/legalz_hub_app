@@ -111,6 +111,18 @@ class HomeBloc extends Bloc<HomeService> {
         .addPost(catId: catId.toString(), content: content, postImg: postImg);
   }
 
+  Future<void> editPost(
+      {required int postId,
+      required int catId,
+      required String content,
+      File? postImg}) async {
+    await locator<PostService>().editPost(
+        postId: postId.toString(),
+        catId: catId.toString(),
+        content: content,
+        postImg: postImg);
+  }
+
   Future<dynamic> reportPost(
       {required int postId, required String reason}) async {
     return locator<PostService>()
