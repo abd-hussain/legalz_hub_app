@@ -405,6 +405,7 @@
     "reporttitle7" : "Other",
     "reportdesc7" : "Ex. Illegal content (Upon clicking you will be directed to a form where you can provide details)",
     "areyousuredeletepost" : "Are you sure you want to Delete this question ?",
-    "areyousuredeletcomment" : "Are you sure you want to Delete this comment ?"
+    "areyousuredeletcomment" : "Are you sure you want to Delete this comment ?",
+    "noteforregistrationattorney" : "Please be advised that your selection will not impact any reservation commencement until you receive at least three reviews from customers. This approach ensures that new customers can gauge your expertise based on these reviews"
 
 }

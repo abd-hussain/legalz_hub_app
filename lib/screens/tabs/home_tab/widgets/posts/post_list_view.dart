@@ -41,10 +41,21 @@ class PostsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels) {
+        // if (!isLoading) {
+        //   isLoading = !isLoading;
+        //   // Perform event when user reach at the end of list (e.g. do Api call)
+        // }
+      }
+    });
     return postsList != null
         ? postsList!.isNotEmpty
             ? ListView.builder(
                 shrinkWrap: true,
+                controller: _scrollController,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: postsList!.length,
                 itemBuilder: (context, index) {

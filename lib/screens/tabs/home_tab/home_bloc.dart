@@ -64,7 +64,6 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<void> pullRefresh() async {
-    //TODO
     return Future.delayed(
       const Duration(milliseconds: 1000),
       () => getHomePosts(catId: tabController!.index, skip: 0),

@@ -1,6 +1,5 @@
 analyzer:
   errors:
-    todo: ignore
     prefer_const_constructors: info
     unnecessary_const: error
 linter:

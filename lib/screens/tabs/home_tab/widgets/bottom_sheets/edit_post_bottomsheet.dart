@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:legalz_hub_app/models/add_post_model.dart';
 import 'package:legalz_hub_app/models/https/categories_model.dart';
@@ -10,6 +13,8 @@ import 'package:legalz_hub_app/shared_widget/bio_field.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
+import 'package:legalz_hub_app/utils/constants/constant.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EditPostBottomSheetsUtil {
   StreamController<AddPostModel> refreshPage =
@@ -18,6 +23,8 @@ class EditPostBottomSheetsUtil {
       AddPostModel(categorySelected: null, attachment: null, content: null);
   TextEditingController textController = TextEditingController();
   File? image;
+  String _urlOfImage = '';
+  Random random = Random();
 
   Future bottomSheet(
       {required BuildContext context,
@@ -27,7 +34,7 @@ class EditPostBottomSheetsUtil {
       required String? initialPostImg,
       required Function(
               {required int catId, required String content, File? postImg})
-          editPostCallback}) {
+          editPostCallback}) async {
     final List<Category> listOfCategories =
         categories.where((s) => s.id != 0).toList();
 
@@ -35,8 +42,9 @@ class EditPostBottomSheetsUtil {
     final selectedCat = categories.firstWhere((s) => s.id == initialCatId);
 
     if (initialPostImg != null) {
-      //TODO
-      image = File(initialPostImg);
+      _urlOfImage = AppConstant.imagesIDBaseURLForPosts + initialPostImg;
+
+      image = await _saveImage(_urlOfImage);
     }
 
     refreshObj = AddPostModel(
@@ -316,5 +324,20 @@ class EditPostBottomSheetsUtil {
   Future<File> pickImage(ImageSource source) async {
     final image = await ImagePicker().pickImage(source: source);
     return File(image?.path ?? "");
+  }
+
+  Future<File> _saveImage(String url) async {
+    // Download image
+    final http.Response response = await http.get(Uri.parse(url));
+
+    // Get temporary directory
+    final dir = await getTemporaryDirectory();
+
+    // Create an image name
+    final filename = '${dir.path}/SaveImage${random.nextInt(100)}.png';
+    // Save to filesystem
+    final file = File(filename);
+    await file.writeAsBytes(response.bodyBytes);
+    return file;
   }
 }

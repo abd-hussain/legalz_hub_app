@@ -184,6 +184,24 @@ class _AttorneyRegister4ScreenState extends State<AttorneyRegister4Screen> {
                     onEditingComplete: () =>
                         FocusManager.instance.primaryFocus?.unfocus(),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ColoredBox(
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: CustomText(
+                          title: AppLocalizations.of(context)!
+                              .noteforregistrationattorney,
+                          fontSize: 14,
+                          maxLins: 6,
+                          textAlign: TextAlign.center,
+                          textColor: Colors.redAccent,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 10),
                 ],
               ),

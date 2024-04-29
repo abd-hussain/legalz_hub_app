@@ -28,8 +28,6 @@ class _AttorneyRegister3ScreenState extends State<AttorneyRegister3Screen> {
     super.didChangeDependencies();
   }
 
-  //TODO: Disaple working hour and make it always free
-
   @override
   void dispose() {
     super.dispose();
