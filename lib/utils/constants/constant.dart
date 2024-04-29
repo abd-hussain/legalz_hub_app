@@ -2,7 +2,7 @@ class AppConstant {
   static const String userType = "userType";
   static const String webViewPageUrl = "webViewPageUrl";
   static const String pageTitle = "pageTitle";
-  static const String applicationMainURL = "http://167.99.212.137/";
+  static const String applicationMainURL = "https://www.helpera.app/";
   static const String reportType = "reportType";
 
   static const String imagesBaseURLForCountries =

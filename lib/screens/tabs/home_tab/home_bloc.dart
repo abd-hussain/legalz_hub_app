@@ -22,11 +22,14 @@ class HomeBloc extends Bloc<HomeService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   UserType userType = UserType.customer;
   TabController? tabController;
+  int skipPost = 0;
 
   List<ReportPostModel> reportList = [];
 
   StreamController<List<PostResponseData>?> postsStreamController =
       StreamController<List<PostResponseData>?>.broadcast();
+
+  List<PostResponseData> listOfPost = [];
 
   List<ReportPostModel> fillReportList(BuildContext context) {
     return [
@@ -66,7 +69,11 @@ class HomeBloc extends Bloc<HomeService> {
   Future<void> pullRefresh() async {
     return Future.delayed(
       const Duration(milliseconds: 1000),
-      () => getHomePosts(catId: tabController!.index, skip: 0),
+      () {
+        skipPost = 0;
+        getHomePosts(
+            catId: tabController!.index, skip: skipPost, newRequest: true);
+      },
     );
   }
 
@@ -80,11 +87,18 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<List<PostResponseData>?> getHomePosts(
-      {required int catId, required int skip}) async {
+      {required int catId, required int skip, required bool newRequest}) async {
     final value =
         await locator<PostService>().getHomePosts(catId: catId, skip: skip);
     if (value.data != null) {
-      postsStreamController.sink.add(value.data);
+      if (!newRequest) {
+        listOfPost.addAll(value.data!);
+        postsStreamController.sink.add(listOfPost);
+      } else {
+        listOfPost = [];
+        listOfPost = value.data!;
+        postsStreamController.sink.add(listOfPost);
+      }
       return value.data!;
     } else {
       return null;
@@ -97,10 +111,14 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   void handleTapControllerListener() {
-    //TODO : handle pagination
-    getHomePosts(catId: 0, skip: 0);
+    skipPost = 0;
+
+    getHomePosts(catId: 0, skip: skipPost, newRequest: true);
     tabController!.addListener(() async {
-      await getHomePosts(catId: tabController!.index, skip: 0);
+      skipPost = 0;
+
+      await getHomePosts(
+          catId: tabController!.index, skip: skipPost, newRequest: true);
     });
   }
 

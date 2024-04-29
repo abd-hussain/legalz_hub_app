@@ -124,10 +124,23 @@ class _HomeTabScreenState extends State<HomeTabScreen>
 
   Widget _tabBarView(
       {required List<Category> listOfCategories, required Category item}) {
+    final ScrollController _scrollController = ScrollController();
+
+    _scrollController.addListener(() async {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels) {
+        bloc.skipPost = bloc.skipPost + 10;
+        await bloc.getHomePosts(
+            catId: bloc.tabController!.index,
+            skip: bloc.skipPost,
+            newRequest: false);
+      }
+    });
     return Expanded(
       child: RefreshIndicator(
         onRefresh: bloc.pullRefresh,
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Column(
             children: [
               if (bloc.userType == UserType.customer)
@@ -191,8 +204,11 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                                               .deleteComment(
                                                   commentId: commentId)
                                               .then((value) {
+                                            bloc.skipPost = 0;
                                             bloc.getHomePosts(
-                                                catId: 0, skip: 0);
+                                                catId: 0,
+                                                skip: bloc.skipPost,
+                                                newRequest: true);
                                           });
                                         });
                               });
@@ -218,7 +234,12 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                               await bloc
                                   .deletePost(postId: postId)
                                   .then((value) {
-                                bloc.getHomePosts(catId: 0, skip: 0);
+                                bloc.skipPost = 0;
+
+                                bloc.getHomePosts(
+                                    catId: 0,
+                                    skip: bloc.skipPost,
+                                    newRequest: true);
                               });
                             });
                       },
