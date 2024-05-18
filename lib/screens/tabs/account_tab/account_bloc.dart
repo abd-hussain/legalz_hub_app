@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:legalz_hub_app/legalz_app.dart';
 import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/profile_options.dart';
-import 'package:legalz_hub_app/my_app.dart';
 import 'package:legalz_hub_app/services/settings_service.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
 import 'package:legalz_hub_app/shared_widget/custom_switch.dart';
@@ -292,7 +292,7 @@ class AccountBloc {
   }
 
   Future<void> _refreshAppWithLanguageCode(BuildContext context) async {
-    MyApp.of(context)!.rebuild();
+    LegalzApp.of(context)!.rebuild();
   }
 
   void readBiometricsInitValue() {

@@ -27,8 +27,7 @@ class PostCommentsBottomSheetsUtil {
         context: context,
         builder: (context) {
           return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -67,8 +66,7 @@ class PostCommentsBottomSheetsUtil {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 2,
                                       blurRadius: 3,
-                                      offset: const Offset(
-                                          0, 3), // changes position of shadow
+                                      offset: const Offset(0, 3), // changes position of shadow
                                     ),
                                   ],
                                 ),
@@ -82,38 +80,22 @@ class PostCommentsBottomSheetsUtil {
                                           Stack(
                                             children: [
                                               CircleAvatar(
-                                                backgroundColor:
-                                                    const Color(0xff034061),
+                                                backgroundColor: const Color(0xff034061),
                                                 radius: 20,
                                                 child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  child: comments[index]
-                                                                  .attorneyProfileImg !=
-                                                              "" ||
-                                                          comments[index]
-                                                                  .customerProfileImg !=
-                                                              ""
+                                                  borderRadius: BorderRadius.circular(20),
+                                                  child: comments[index].attorneyProfileImg != null ||
+                                                          comments[index].customerProfileImg != null
                                                       ? FadeInImage(
-                                                          placeholder:
-                                                              const AssetImage(
-                                                                  "assets/images/avatar.jpeg"),
-                                                          image: comments[index]
-                                                                      .attorneyProfileImg !=
-                                                                  null
+                                                          placeholder: const AssetImage("assets/images/avatar.jpeg"),
+                                                          image: comments[index].attorneyProfileImg != null
                                                               ? NetworkImage(
-                                                                  AppConstant
-                                                                          .imagesBaseURLForAttorney +
-                                                                      comments[
-                                                                              index]
-                                                                          .attorneyProfileImg!,
+                                                                  AppConstant.imagesBaseURLForAttorney +
+                                                                      comments[index].attorneyProfileImg!,
                                                                 )
                                                               : NetworkImage(
-                                                                  AppConstant
-                                                                          .imagesBaseURLForCustomer +
-                                                                      comments[
-                                                                              index]
-                                                                          .customerProfileImg!,
+                                                                  AppConstant.imagesBaseURLForCustomer +
+                                                                      comments[index].customerProfileImg!,
                                                                 ))
                                                       : Image.asset(
                                                           'assets/images/avatar.jpeg',
@@ -127,34 +109,24 @@ class PostCommentsBottomSheetsUtil {
                                                 left: 8,
                                                 bottom: 0,
                                                 child: CircleAvatar(
-                                                  backgroundColor:
-                                                      Colors.transparent,
+                                                  backgroundColor: Colors.transparent,
                                                   radius: 10,
                                                   child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    child: comments[index]
-                                                                .flagImage !=
-                                                            ""
-                                                        ? FadeInImage(
-                                                            placeholder:
-                                                                const AssetImage(
-                                                                    "assets/images/avatar.jpeg"),
-                                                            image: NetworkImage(
-                                                              AppConstant
-                                                                      .imagesBaseURLForCountries +
-                                                                  comments[
-                                                                          index]
-                                                                      .flagImage!,
-                                                            ),
-                                                          )
-                                                        : Image.asset(
-                                                            'assets/images/avatar.jpeg',
-                                                            width: 110,
-                                                            height: 110,
-                                                            fit: BoxFit.fill,
-                                                          ),
+                                                    borderRadius: BorderRadius.circular(20),
+                                                    //   child: comments[index].flagImage != ""
+                                                    //       ? FadeInImage(
+                                                    //           placeholder: const AssetImage("assets/images/avatar.jpeg"),
+                                                    //           image: NetworkImage(
+                                                    //             AppConstant.imagesBaseURLForCountries +
+                                                    //                 comments[index].flagImage!,
+                                                    //           ),
+                                                    //         )
+                                                    //       : Image.asset(
+                                                    //           'assets/images/avatar.jpeg',
+                                                    //           width: 110,
+                                                    //           height: 110,
+                                                    //           fit: BoxFit.fill,
+                                                    //         ),
                                                   ),
                                                 ),
                                               )
@@ -162,32 +134,23 @@ class PostCommentsBottomSheetsUtil {
                                           ),
                                           const SizedBox(width: 4),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
-                                                title: comments[index]
-                                                            .attorneyFirstName !=
-                                                        null
+                                                title: comments[index].attorneyFirstName != null
                                                     ? "${comments[index].attorneyFirstName} ${comments[index].attorneyLastName}"
                                                     : "${comments[index].customerFirstName} ${comments[index].customerLastName}",
-                                                textColor:
-                                                    const Color(0xff444444),
+                                                textColor: const Color(0xff444444),
                                                 fontSize: 12,
                                                 textAlign: TextAlign.center,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                               const SizedBox(height: 8),
                                               Directionality(
-                                                textDirection:
-                                                    TextDirection.ltr,
+                                                textDirection: TextDirection.ltr,
                                                 child: CustomText(
-                                                  title: DayTime()
-                                                      .dateFormatterWithTime(
-                                                          comments[index]
-                                                              .createdAt!),
-                                                  textColor:
-                                                      const Color(0xff444444),
+                                                  title: DayTime().dateFormatterWithTime(comments[index].createdAt!),
+                                                  textColor: const Color(0xff444444),
                                                   fontSize: 10,
                                                   textAlign: TextAlign.center,
                                                 ),
@@ -195,25 +158,16 @@ class PostCommentsBottomSheetsUtil {
                                             ],
                                           ),
                                           Expanded(child: Container()),
-                                          if ((currentUserType ==
-                                                      UserType.attorney &&
-                                                  comments[index]
-                                                          .attorneyOwnerId ==
-                                                      currentUserId) ||
-                                              currentUserType ==
-                                                      UserType.customer &&
-                                                  comments[index]
-                                                          .customersOwnerId ==
-                                                      currentUserId)
+                                          if ((currentUserType == UserType.attorney &&
+                                                  comments[index].attorneyOwnerId == currentUserId) ||
+                                              currentUserType == UserType.customer &&
+                                                  comments[index].customersOwnerId == currentUserId)
                                             IconButton(
-                                              onPressed: () =>
-                                                  deleteCommentCallBack(
-                                                      comments[index].id!),
+                                              onPressed: () => deleteCommentCallBack(comments[index].id!),
                                               icon: Icon(
                                                 Icons.delete_sweep_outlined,
                                                 size: 20,
-                                                color: currentUserType ==
-                                                        UserType.attorney
+                                                color: currentUserType == UserType.attorney
                                                     ? const Color(0xff292929)
                                                     : const Color(0xff034061),
                                               ),
@@ -226,7 +180,7 @@ class PostCommentsBottomSheetsUtil {
                                     Padding(
                                       padding: const EdgeInsets.all(8),
                                       child: CustomText(
-                                        title: comments[index].content!,
+                                        title: comments[index].content ?? "",
                                         textColor: const Color(0xff444444),
                                         fontSize: 12,
                                         textAlign: TextAlign.center,
@@ -255,8 +209,7 @@ class PostCommentsBottomSheetsUtil {
                       Expanded(
                         child: CustomTextField(
                           controller: commentTextField,
-                          hintText:
-                              AppLocalizations.of(context)!.addcommentfield,
+                          hintText: AppLocalizations.of(context)!.addcommentfield,
                         ),
                       ),
                       IconButton(

@@ -1,15 +1,7 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/my_app.dart';
-import 'package:legalz_hub_app/services/general/network_info_service.dart';
-import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
 
@@ -17,31 +9,35 @@ import 'package:legalz_hub_app/utils/logger.dart';
 //TODO: check all of iO and make it disaple for web
 //TODO: handle internet coneection checkup inside application
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
-  runZonedGuarded(() async {
+  runZonedGuarded(() {
     logDebugMessage(message: 'Application Started ...');
     WidgetsFlutterBinding.ensureInitialized();
 
-    await Hive.initFlutter();
-    await Hive.openBox(DatabaseBoxConstant.userInfo);
-    bool hasConnectivity = true;
-    await setupLocator();
+    // await Hive.initFlutter();
+    // await Hive.openBox(DatabaseBoxConstant.userInfo);
+    // bool hasConnectivity = true;
+    // await setupLocator();
 
-    if (!kIsWeb) {
-      hasConnectivity = await _initInternetConnection();
+    // if (!kIsWeb) {
+    //   hasConnectivity = await _initInternetConnection();
 
-      await MobileAds.instance.initialize();
-      await MobileAds.instance.updateRequestConfiguration(
-        RequestConfiguration(
-            testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
-      );
-    }
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    //   await MobileAds.instance.initialize();
+    //   await MobileAds.instance.updateRequestConfiguration(
+    //     RequestConfiguration(
+    //         testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
+    //   );
+    // }
+    // await SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     runApp(
-      MyApp(isConnected: hasConnectivity),
+      MyApp(
+        navigatorKey,
+      ),
     );
   }, (error, stackTrace) {
     if (error is DioException) {
@@ -54,10 +50,4 @@ void main() {
       }
     }
   });
-}
-
-Future<bool> _initInternetConnection() async {
-  final NetworkInfoService networkInfoService = NetworkInfoService();
-  networkInfoService.initNetworkConnectionCheck();
-  return networkInfoService.checkConnectivityonLunching();
 }

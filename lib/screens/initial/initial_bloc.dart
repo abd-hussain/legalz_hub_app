@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:legalz_hub_app/legalz_app.dart';
 import 'package:legalz_hub_app/models/https/countries_model.dart';
-import 'package:legalz_hub_app/my_app.dart';
 import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
@@ -66,12 +66,12 @@ class SetupBloc extends Bloc<FilterService> {
 
   void _setLanguageToArabic(BuildContext context) {
     box.put(DatabaseFieldConstant.language, "ar");
-    MyApp.of(context)!.rebuild();
+    LegalzApp.of(context)!.rebuild();
   }
 
   void _setLanguageToEnglish(BuildContext context) {
     box.put(DatabaseFieldConstant.language, "en");
-    MyApp.of(context)!.rebuild();
+    LegalzApp.of(context)!.rebuild();
   }
 
   @override

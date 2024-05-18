@@ -1,50 +1,45 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:legalz_hub_app/legalz_app.dart';
 import 'package:legalz_hub_app/locator.dart';
-import 'package:legalz_hub_app/main_context.dart';
-import 'package:legalz_hub_app/utils/constants/constant.dart';
+import 'package:legalz_hub_app/screens/splash/splash_screen.dart';
+import 'package:legalz_hub_app/services/general/network_info_service.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
-import 'package:legalz_hub_app/utils/custom_gusture.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
-import 'package:legalz_hub_app/utils/routes.dart';
-
-BuildContext? buildContext;
+import 'package:async/async.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({
-    super.key,
-    required this.isConnected,
-  });
-  final bool isConnected;
-
-  static MyAppState? of(BuildContext context) {
-    buildContext = context;
-    return context.findAncestorStateOfType<MyAppState>();
-  }
+  const MyApp(this.navigatorKey, {super.key});
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
-  State<MyApp> createState() => MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
   late Box myBox = Hive.box(DatabaseBoxConstant.userInfo);
+  bool isDialogueOfNoInternetConnectionAppear = false;
+  bool hasConnectivity = false;
 
-  void rebuild() {
-    setState(() {});
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
+  Future fetchData() {
+    return this._memoizer.runOnce(() async {
+      await Future.delayed(Duration(seconds: 2));
+      return initializeEveryThing();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    locator<MainContext>().setMainContext(context);
-    final Future<FirebaseApp> _initialization =
-        kIsWeb ? _setupWebFirebase() : _setupMobileFirebase();
+    // locator<MainContext>().setMainContext(context);
+    // final Future<FirebaseApp> _initialization = kIsWeb ? _setupWebFirebase() : _setupMobileFirebase();
 
     return FutureBuilder(
-        future: _initialization,
+        future: fetchData(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             logDebugMessage(message: "snapshot error. $snapshot");
@@ -53,56 +48,48 @@ class MyAppState extends State<MyApp> {
           if (snapshot.connectionState == ConnectionState.done) {
             logDebugMessage(message: 'Initialize Firebase Done!!');
 
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              onGenerateTitle: (BuildContext context) {
-                return AppConstant.appName;
-              },
-              locale: myBox.get(DatabaseFieldConstant.language) != null
-                  ? Locale(myBox.get(DatabaseFieldConstant.language))
-                  : const Locale("en"),
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en', ''),
-                Locale('ar', ''),
-              ],
-              theme: ThemeData(useMaterial3: false),
-              scrollBehavior: MyCustomScrollBehavior(),
-              onGenerateRoute: (settings) {
-                return PageRouteBuilder(
-                    transitionsBuilder: (BuildContext context,
-                        Animation<double> animation,
-                        Animation<double> secondaryAnimation,
-                        Widget child) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(1, 0),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    settings: RouteSettings(arguments: settings.arguments),
-                    transitionDuration: const Duration(milliseconds: 100),
-                    pageBuilder: (_, __, ___) => routes[settings.name]!);
-              },
-              initialRoute: widget.isConnected
-                  ? myBox.get(DatabaseFieldConstant.selectedCountryId) != null
-                      ? myBox.get(DatabaseFieldConstant.skipTutorials) != null
-                          ? RoutesConstants.loginScreen
-                          : RoutesConstants.tutorialsScreen
-                      : RoutesConstants.initialRoute
-                  : RoutesConstants.noInternetScreen,
+            return LegalzApp(
+              navigatorKey: widget.navigatorKey,
+              hasConnectivity: hasConnectivity,
             );
           }
 
-          return Loading();
+          return SplashLoadingScreen();
         });
+  }
+
+  Future initializeEveryThing() async {
+    await Hive.initFlutter();
+    await Hive.openBox(DatabaseBoxConstant.userInfo);
+    await setupLocator();
+
+    if (!kIsWeb) {
+      hasConnectivity = await _initInternetConnection();
+
+      await MobileAds.instance.initialize();
+      await MobileAds.instance.updateRequestConfiguration(
+        RequestConfiguration(
+            testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
+      );
+    }
+
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    if (kIsWeb) {
+      hasConnectivity = true;
+      await _setupWebFirebase();
+    } else {
+      await _setupMobileFirebase();
+    }
+  }
+
+  Future<bool> _initInternetConnection() async {
+    final NetworkInfoService networkInfoService = NetworkInfoService();
+    networkInfoService.initNetworkConnectionCheck();
+    return networkInfoService.checkConnectivityonLunching();
   }
 
   Future<FirebaseApp> _setupMobileFirebase() async {
@@ -120,19 +107,5 @@ class MyAppState extends State<MyApp> {
           storageBucket: "legalzhub.appspot.com",
           measurementId: "G-FYY1QV12GF"),
     );
-  }
-}
-
-class Loading extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      body: Center(
-        child: Container(
-          child: Text("Loading..."),
-        ),
-      ),
-    ));
   }
 }
