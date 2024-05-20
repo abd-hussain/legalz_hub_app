@@ -44,7 +44,9 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "", userType: UserType.customer),
+      appBar: customAppBar(
+          title: AppLocalizations.of(context)!.customeruser,
+          userType: UserType.customer),
       bottomNavigationBar: StreamBuilder<bool?>(
           initialData: false,
           stream: bloc.enableNextBtn.stream,

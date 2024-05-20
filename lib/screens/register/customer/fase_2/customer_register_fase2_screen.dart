@@ -57,7 +57,9 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
         }
       },
       child: Scaffold(
-        appBar: customAppBar(title: "", userType: UserType.customer),
+        appBar: customAppBar(
+            title: AppLocalizations.of(context)!.customeruser,
+            userType: UserType.customer),
         bottomNavigationBar: ValueListenableBuilder<bool>(
             valueListenable: bloc.enableNextBtn,
             builder: (context, snapshot, child) {
