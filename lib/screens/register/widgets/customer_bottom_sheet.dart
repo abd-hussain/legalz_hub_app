@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/screens/register/widgets/points_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
@@ -132,9 +134,9 @@ class RegisterCustomerBottomSheetsUtil {
                 enableButton: true,
                 buttonTitle: AppLocalizations.of(context)!.cancelRegistration,
                 buttonColor: Colors.red,
-                onTap: () {
+                onTap: () async {
+                  await clearCustomerRegistrationData();
                   Navigator.pop(context);
-                  openNext();
                 },
               ),
             ],
@@ -142,5 +144,23 @@ class RegisterCustomerBottomSheetsUtil {
         );
       },
     );
+  }
+
+  Future<void> clearCustomerRegistrationData() async {
+    final box = Hive.box(DatabaseBoxConstant.userInfo);
+
+    await box.deleteAll([
+      TempFieldToRegistrtCustomerConstant.gender,
+      TempFieldToRegistrtCustomerConstant.firstName,
+      TempFieldToRegistrtCustomerConstant.lastName,
+      TempFieldToRegistrtCustomerConstant.dateOfBirth,
+      TempFieldToRegistrtCustomerConstant.password,
+      TempFieldToRegistrtCustomerConstant.country,
+      TempFieldToRegistrtCustomerConstant.email,
+      TempFieldToRegistrtCustomerConstant.phoneNumber,
+      TempFieldToRegistrtCustomerConstant.referalCode,
+      TempFieldToRegistrtCustomerConstant.profileImage,
+      DatabaseFieldConstant.customerRegistrationStep
+    ]);
   }
 }

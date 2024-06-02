@@ -56,6 +56,8 @@ class RegisterFinalBloc extends Bloc<FilterService> {
       pushToken: box.get(DatabaseFieldConstant.pushNotificationToken),
     );
 
+    print(model.pushToken);
+
     return locator<CustomerRegisterService>().callRegister(data: model);
   }
 

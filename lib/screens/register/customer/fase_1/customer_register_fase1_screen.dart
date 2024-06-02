@@ -131,6 +131,7 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                       onDeleteImage: () {
                                         bloc.profileImage = null;
                                         bloc.profileImageUrl = "";
+                                        setState(() {});
                                         bloc.validateFieldsForFaze1();
                                       }),
                                   Expanded(

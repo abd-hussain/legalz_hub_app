@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/screens/register/widgets/points_view.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/shared_widget/custom_text.dart';
 import 'package:legalz_hub_app/utils/constants/constant.dart';
+import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 import 'package:lottie/lottie.dart';
@@ -162,9 +164,9 @@ class RegisterAttorneyBottomSheetsUtil {
                 enableButton: true,
                 buttonTitle: AppLocalizations.of(context)!.cancelRegistration,
                 buttonColor: Colors.red,
-                onTap: () {
+                onTap: () async {
+                  await clearAttorneyRegistrationData();
                   Navigator.pop(context);
-                  openNext();
                 },
               ),
             ],
@@ -172,5 +174,42 @@ class RegisterAttorneyBottomSheetsUtil {
         );
       },
     );
+  }
+
+  Future<void> clearAttorneyRegistrationData() async {
+    final box = Hive.box(DatabaseBoxConstant.userInfo);
+
+    await box.deleteAll([
+      TempFieldToRegistrtAttorneyConstant.gender,
+      TempFieldToRegistrtAttorneyConstant.suffix,
+      TempFieldToRegistrtAttorneyConstant.firstName,
+      TempFieldToRegistrtAttorneyConstant.lastName,
+      TempFieldToRegistrtAttorneyConstant.dateOfBirth,
+      TempFieldToRegistrtAttorneyConstant.ratePerHour,
+      TempFieldToRegistrtAttorneyConstant.iban,
+      TempFieldToRegistrtAttorneyConstant.password,
+      TempFieldToRegistrtAttorneyConstant.bio,
+      TempFieldToRegistrtAttorneyConstant.category,
+      TempFieldToRegistrtAttorneyConstant.country,
+      TempFieldToRegistrtAttorneyConstant.email,
+      TempFieldToRegistrtAttorneyConstant.phoneNumber,
+      TempFieldToRegistrtAttorneyConstant.referalCode,
+      TempFieldToRegistrtAttorneyConstant.speakingLanguages,
+      TempFieldToRegistrtAttorneyConstant.profileImage,
+      TempFieldToRegistrtAttorneyConstant.cv,
+      TempFieldToRegistrtAttorneyConstant.idImage,
+      TempFieldToRegistrtAttorneyConstant.certificates1,
+      TempFieldToRegistrtAttorneyConstant.certificates2,
+      TempFieldToRegistrtAttorneyConstant.certificates3,
+      TempFieldToRegistrtAttorneyConstant.saturdayWH,
+      TempFieldToRegistrtAttorneyConstant.sundayWH,
+      TempFieldToRegistrtAttorneyConstant.mondayWH,
+      TempFieldToRegistrtAttorneyConstant.tuesdayWH,
+      TempFieldToRegistrtAttorneyConstant.wednesdayWH,
+      TempFieldToRegistrtAttorneyConstant.thursdayWH,
+      TempFieldToRegistrtAttorneyConstant.fridayWH,
+      TempFieldToRegistrtAttorneyConstant.experianceSince,
+      DatabaseFieldConstant.attorneyRegistrationStep
+    ]);
   }
 }
