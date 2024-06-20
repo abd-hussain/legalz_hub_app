@@ -7,7 +7,6 @@ import 'package:legalz_hub_app/utils/logger.dart';
 
 //TODO: Upgrade flutter verison and all of the packages
 //TODO: check all of iO and make it disaple for web
-//TODO: handle internet coneection checkup inside application
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -16,24 +15,6 @@ void main() {
     logDebugMessage(message: 'Application Started ...');
     WidgetsFlutterBinding.ensureInitialized();
 
-    // await Hive.initFlutter();
-    // await Hive.openBox(DatabaseBoxConstant.userInfo);
-    // bool hasConnectivity = true;
-    // await setupLocator();
-
-    // if (!kIsWeb) {
-    //   hasConnectivity = await _initInternetConnection();
-
-    //   await MobileAds.instance.initialize();
-    //   await MobileAds.instance.updateRequestConfiguration(
-    //     RequestConfiguration(
-    //         testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']),
-    //   );
-    // }
-    // await SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
     runApp(
       MyApp(
         navigatorKey,
@@ -48,6 +29,6 @@ void main() {
         debugPrint(exception.message);
         debugPrint(exception.requestId);
       }
-    }
+    } else if (error is ConnectionException) {}
   });
 }

@@ -228,7 +228,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                     applyDiscountButton:
                                         bloc.applyDiscountButton,
                                     applyDiscountButtonCallBack: () {
-                                      bloc.verifyCode();
+                                      bloc.verifyCode(context);
                                       bloc.applyDiscountButton.value = false;
                                     },
                                   ),

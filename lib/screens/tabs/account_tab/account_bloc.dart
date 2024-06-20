@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:legalz_hub_app/legalz_app.dart';
-import 'package:legalz_hub_app/locator.dart';
 import 'package:legalz_hub_app/models/profile_options.dart';
 import 'package:legalz_hub_app/services/settings_service.dart';
 import 'package:legalz_hub_app/shared_widget/bottom_sheet_util.dart';
@@ -13,9 +12,11 @@ import 'package:legalz_hub_app/utils/constants/constant.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/report_type.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
+import 'package:legalz_hub_app/utils/mixins.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
-class AccountBloc {
+class AccountBloc extends Bloc<SettingService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   ValueNotifier<bool> toggleOfBiometrics = ValueNotifier<bool>(false);
   UserType userType = UserType.customer;
@@ -218,15 +219,22 @@ class AccountBloc {
               message:
                   AppLocalizations.of(context)!.accountInformationwillbedeleted,
               sure: () async {
-                await locator<SettingService>()
-                    .removeAccount(userType)
-                    .then((c) async {
-                  await _deleteAllUserData().then((value) async {
-                    await nav.pushNamedAndRemoveUntil(
-                        RoutesConstants.initialRoute,
-                        (Route<dynamic> route) => true);
+                try {
+                  await service.removeAccount(userType).then((c) async {
+                    await _deleteAllUserData().then((value) async {
+                      await nav.pushNamedAndRemoveUntil(
+                          RoutesConstants.initialRoute,
+                          (Route<dynamic> route) => true);
+                    });
                   });
-                });
+                } on ConnectionException {
+                  final scaffoldMessenger = ScaffoldMessenger.of(context);
+                  scaffoldMessenger.showSnackBar(
+                    SnackBar(
+                        content: Text(AppLocalizations.of(context)!
+                            .pleasecheckyourinternetconnection)),
+                  );
+                }
               });
         });
   }
@@ -310,4 +318,7 @@ class AccountBloc {
       AppConstant.pageTitle: AppLocalizations.of(context)!.aboutus
     });
   }
+
+  @override
+  void onDispose() {}
 }

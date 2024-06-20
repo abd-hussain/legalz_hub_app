@@ -16,6 +16,7 @@ import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/services/post_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
 
 class HomeBloc extends Bloc<HomeService> {
@@ -105,9 +106,19 @@ class HomeBloc extends Bloc<HomeService> {
     }
   }
 
-  Future<void> callRegisterTokenRequest() async {
+  Future<void> callRegisterTokenRequest(BuildContext context) async {
     final String token = box.get(DatabaseFieldConstant.pushNotificationToken);
-    await locator<NotificationsService>().registerToken(token, userType);
+
+    try {
+      await locator<NotificationsService>().registerToken(token, userType);
+    } on ConnectionException {
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!
+                .pleasecheckyourinternetconnection)),
+      );
+    }
   }
 
   void handleTapControllerListener() {

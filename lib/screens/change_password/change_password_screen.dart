@@ -272,6 +272,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               scaffoldMessenger.showSnackBar(
                                 SnackBar(content: Text(error.message)),
                               );
+                            } on ConnectionException {
+                              final scaffoldMessenger =
+                                  ScaffoldMessenger.of(context);
+                              scaffoldMessenger.showSnackBar(
+                                SnackBar(
+                                    content: Text(AppLocalizations.of(context)!
+                                        .pleasecheckyourinternetconnection)),
+                              );
                             }
                           }),
                     ],

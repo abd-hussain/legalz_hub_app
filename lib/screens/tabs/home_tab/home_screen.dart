@@ -18,6 +18,7 @@ import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/shared_widget/shimmers/shimmer_home_page.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/logger.dart';
 import 'package:legalz_hub_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:legalz_hub_app/utils/push_notifications/notification_manager.dart';
@@ -46,7 +47,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
       });
     });
     bloc.reportList = bloc.fillReportList(context);
-    bloc.callRegisterTokenRequest();
+    bloc.callRegisterTokenRequest(context);
     super.didChangeDependencies();
   }
 
@@ -180,39 +181,71 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                       postsList: snapshot.data,
                       categories: listOfCategories,
                       commentsAction: (postId) async {
-                        await bloc
-                            .getPostComments(postId: postId)
-                            .then((value) async {
-                          await PostCommentsBottomSheetsUtil().bottomSheet(
-                              context: context,
-                              comments: value.data,
-                              currentUserType: bloc.userType,
-                              currentUserId:
-                                  bloc.box.get(DatabaseFieldConstant.userid),
-                              addCommentCallBack: (comment) async {
-                                await bloc.addNewComment(
-                                    postId: postId, content: comment);
-                              },
-                              deleteCommentCallBack: (commentId) async {
-                                await BottomSheetsUtil()
-                                    .areYouShoureButtomSheet(
-                                        context: context,
-                                        message: AppLocalizations.of(context)!
-                                            .areyousuredeletcomment,
-                                        sure: () async {
-                                          await bloc
-                                              .deleteComment(
-                                                  commentId: commentId)
-                                              .then((value) {
-                                            bloc.skipPost = 0;
-                                            bloc.getHomePosts(
-                                                catId: 0,
-                                                skip: bloc.skipPost,
-                                                newRequest: true);
+                        try {
+                          await bloc
+                              .getPostComments(postId: postId)
+                              .then((value) async {
+                            await PostCommentsBottomSheetsUtil().bottomSheet(
+                                context: context,
+                                comments: value.data,
+                                currentUserType: bloc.userType,
+                                currentUserId:
+                                    bloc.box.get(DatabaseFieldConstant.userid),
+                                addCommentCallBack: (comment) async {
+                                  try {
+                                    await bloc.addNewComment(
+                                        postId: postId, content: comment);
+                                  } on ConnectionException {
+                                    final scaffoldMessenger =
+                                        ScaffoldMessenger.of(context);
+                                    scaffoldMessenger.showSnackBar(
+                                      SnackBar(
+                                          content: Text(AppLocalizations.of(
+                                                  context)!
+                                              .pleasecheckyourinternetconnection)),
+                                    );
+                                  }
+                                },
+                                deleteCommentCallBack: (commentId) async {
+                                  await BottomSheetsUtil()
+                                      .areYouShoureButtomSheet(
+                                          context: context,
+                                          message: AppLocalizations.of(context)!
+                                              .areyousuredeletcomment,
+                                          sure: () async {
+                                            try {
+                                              await bloc
+                                                  .deleteComment(
+                                                      commentId: commentId)
+                                                  .then((value) {
+                                                bloc.skipPost = 0;
+                                                bloc.getHomePosts(
+                                                    catId: 0,
+                                                    skip: bloc.skipPost,
+                                                    newRequest: true);
+                                              });
+                                            } on ConnectionException {
+                                              final scaffoldMessenger =
+                                                  ScaffoldMessenger.of(context);
+                                              scaffoldMessenger.showSnackBar(
+                                                SnackBar(
+                                                    content: Text(AppLocalizations
+                                                            .of(context)!
+                                                        .pleasecheckyourinternetconnection)),
+                                              );
+                                            }
                                           });
-                                        });
-                              });
-                        });
+                                });
+                          });
+                        } on ConnectionException {
+                          final scaffoldMessenger =
+                              ScaffoldMessenger.of(context);
+                          scaffoldMessenger.showSnackBar(
+                            SnackBar(
+                                content: Text(AppLocalizations.of(context)!
+                                    .pleasecheckyourinternetconnection)),
+                          );
+                        }
                       },
                       editPostAction: (
                           {required catId,
@@ -248,10 +281,21 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                             context: context,
                             reporsList: bloc.reportList,
                             reportAction: (report) async {
-                              await bloc.reportPost(
-                                  postId: postId,
-                                  reason:
-                                      '${report.title} : ${report.desc} : ${report.otherNote}');
+                              try {
+                                await bloc.reportPost(
+                                    postId: postId,
+                                    reason:
+                                        '${report.title} : ${report.desc} : ${report.otherNote}');
+                              } on ConnectionException {
+                                final scaffoldMessenger =
+                                    ScaffoldMessenger.of(context);
+                                scaffoldMessenger.showSnackBar(
+                                  SnackBar(
+                                      content: Text(AppLocalizations.of(
+                                              context)!
+                                          .pleasecheckyourinternetconnection)),
+                                );
+                              }
                             });
                       },
                     );

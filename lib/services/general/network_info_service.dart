@@ -6,8 +6,6 @@ import 'package:legalz_hub_app/utils/error/exceptions.dart';
 class NetworkInfoService {
   StreamController<bool> networkStateStreamControler =
       StreamController.broadcast();
-  StreamController<bool> firebaseInitNetworkStateStreamControler =
-      StreamController.broadcast();
   Connectivity connectivity = Connectivity();
 
   Future<bool> isConnected() async {
@@ -15,8 +13,10 @@ class NetworkInfoService {
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
+        networkStateStreamControler.sink.add(true);
         return true;
       default:
+        networkStateStreamControler.sink.add(false);
         throw ConnectionException(message: 'No Internet Connection');
     }
   }
@@ -27,10 +27,7 @@ class NetworkInfoService {
     }).listen((event) {
       final isConnected = event == ConnectivityResult.mobile ||
           event == ConnectivityResult.wifi;
-      firebaseInitNetworkStateStreamControler.sink.add(isConnected);
-      Future.delayed(const Duration(seconds: 1), () {
-        networkStateStreamControler.sink.add(isConnected);
-      });
+      networkStateStreamControler.sink.add(isConnected);
     });
   }
 
@@ -39,15 +36,17 @@ class NetworkInfoService {
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
-        return internetLookupCheck();
+        networkStateStreamControler.sink.add(true);
+        return _internetLookupCheck();
       default:
+        networkStateStreamControler.sink.add(false);
         return false;
     }
   }
 
-  Future<bool> internetLookupCheck() async {
+  Future<bool> _internetLookupCheck() async {
     try {
-      final value = await lookup('google.com');
+      final value = await _lookup('google.com');
 
       if (value.isNotEmpty && value[0].rawAddress.isNotEmpty) {
         return true;
@@ -59,7 +58,7 @@ class NetworkInfoService {
     }
   }
 
-  Future<List<InternetAddress>> lookup(String host) async {
+  Future<List<InternetAddress>> _lookup(String host) async {
     return InternetAddress.lookup(host);
   }
 }

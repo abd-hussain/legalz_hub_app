@@ -9,6 +9,7 @@ import 'package:legalz_hub_app/shared_widget/email_field.dart';
 import 'package:legalz_hub_app/shared_widget/loading_view.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -105,25 +106,36 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                           left: 16, right: 16),
                                       enableButton: snapshot,
                                       onTap: () async {
-                                        final navigation =
-                                            Navigator.of(context);
+                                        try {
+                                          final navigation =
+                                              Navigator.of(context);
 
-                                        FocusScope.of(context)
-                                            .requestFocus(FocusNode());
-                                        bloc.loadingStatusNotifier.value =
-                                            LoadingStatus.inprogress;
+                                          FocusScope.of(context)
+                                              .requestFocus(FocusNode());
+                                          bloc.loadingStatusNotifier.value =
+                                              LoadingStatus.inprogress;
 
-                                        await bloc.doForgotPasswordCall();
-                                        bloc.loadingStatusNotifier.value =
-                                            LoadingStatus.finish;
-                                        await navigation.pushNamed(
-                                          RoutesConstants
-                                              .forgotPasswordConfirmationScreen,
-                                          arguments: {
-                                            "email":
-                                                bloc.emailFieldController.text,
-                                          },
-                                        );
+                                          await bloc.doForgotPasswordCall();
+                                          bloc.loadingStatusNotifier.value =
+                                              LoadingStatus.finish;
+                                          await navigation.pushNamed(
+                                            RoutesConstants
+                                                .forgotPasswordConfirmationScreen,
+                                            arguments: {
+                                              "email": bloc
+                                                  .emailFieldController.text,
+                                            },
+                                          );
+                                        } on ConnectionException {
+                                          final scaffoldMessenger =
+                                              ScaffoldMessenger.of(context);
+                                          scaffoldMessenger.showSnackBar(
+                                            SnackBar(
+                                                content: Text(AppLocalizations
+                                                        .of(context)!
+                                                    .pleasecheckyourinternetconnection)),
+                                          );
+                                        }
                                       },
                                     );
                                   }),

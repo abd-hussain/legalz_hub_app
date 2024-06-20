@@ -15,6 +15,7 @@ import 'package:legalz_hub_app/utils/day_time.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/mixins.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum BookingType {
   schudule,
@@ -360,16 +361,25 @@ class BookingBloc extends Bloc<DiscountService> {
   }
 
   int? selectedDiscountId;
-  void verifyCode() {
-    service.discount(discountController.text).then((value) {
-      if (value.data == null) {
-        selectedDiscountId = null;
-        discountErrorMessage.value = "error";
-      } else {
-        selectedDiscountId = value.data!.id;
-        discountErrorMessage.value = value.data!.percentValue!.toString();
-      }
-    });
+  void verifyCode(BuildContext context) {
+    try {
+      service.discount(discountController.text).then((value) {
+        if (value.data == null) {
+          selectedDiscountId = null;
+          discountErrorMessage.value = "error";
+        } else {
+          selectedDiscountId = value.data!.id;
+          discountErrorMessage.value = value.data!.percentValue!.toString();
+        }
+      });
+    } on ConnectionException {
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!
+                .pleasecheckyourinternetconnection)),
+      );
+    }
   }
 
   double calculateDiscountPercent(String snapshot) {

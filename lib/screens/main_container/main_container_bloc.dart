@@ -11,6 +11,7 @@ import 'package:legalz_hub_app/services/filter_services.dart';
 import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/utils/constants/database_constant.dart';
 import 'package:legalz_hub_app/utils/enums/user_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
 import 'package:legalz_hub_app/utils/routes.dart';
 
 enum CustomerSelectedTab { home, categories, call, calender, account }
@@ -144,10 +145,20 @@ class MainContainerBloc {
     }
   }
 
-  Future<void> callRegisterTokenRequest(UserType userType) async {
+  Future<void> callRegisterTokenRequest(
+      BuildContext context, UserType userType) async {
     final token = box.get(DatabaseFieldConstant.pushNotificationToken);
     if (token != null && token != "") {
-      await locator<NotificationsService>().registerToken(token, userType);
+      try {
+        await locator<NotificationsService>().registerToken(token, userType);
+      } on ConnectionException {
+        final scaffoldMessenger = ScaffoldMessenger.of(context);
+        scaffoldMessenger.showSnackBar(
+          SnackBar(
+              content: Text(AppLocalizations.of(context)!
+                  .pleasecheckyourinternetconnection)),
+        );
+      }
     }
   }
 

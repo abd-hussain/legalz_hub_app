@@ -8,6 +8,7 @@ import 'package:legalz_hub_app/shared_widget/custom_appbar.dart';
 import 'package:legalz_hub_app/shared_widget/custom_button.dart';
 import 'package:legalz_hub_app/utils/enums/loading_status.dart';
 import 'package:legalz_hub_app/utils/enums/report_type.dart';
+import 'package:legalz_hub_app/utils/error/exceptions.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -89,15 +90,26 @@ class _ReportScreenState extends State<ReportScreen> {
                             return CustomButton(
                               enableButton: snapshot,
                               onTap: () {
-                                bloc.loadingStatus.value =
-                                    LoadingStatus.inprogress;
-
-                                final navigator = Navigator.of(context);
-                                bloc.callRequest(context).then((value) async {
+                                try {
                                   bloc.loadingStatus.value =
-                                      LoadingStatus.finish;
-                                  navigator.pop();
-                                });
+                                      LoadingStatus.inprogress;
+
+                                  final navigator = Navigator.of(context);
+                                  bloc.callRequest(context).then((value) async {
+                                    bloc.loadingStatus.value =
+                                        LoadingStatus.finish;
+                                    navigator.pop();
+                                  });
+                                } on ConnectionException {
+                                  final scaffoldMessenger =
+                                      ScaffoldMessenger.of(context);
+                                  scaffoldMessenger.showSnackBar(
+                                    SnackBar(
+                                        content: Text(AppLocalizations.of(
+                                                context)!
+                                            .pleasecheckyourinternetconnection)),
+                                  );
+                                }
                               },
                             );
                           }),

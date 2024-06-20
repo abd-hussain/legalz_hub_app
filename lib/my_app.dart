@@ -35,9 +35,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // locator<MainContext>().setMainContext(context);
-    // final Future<FirebaseApp> _initialization = kIsWeb ? _setupWebFirebase() : _setupMobileFirebase();
-
     return FutureBuilder(
         future: fetchData(),
         builder: (context, snapshot) {

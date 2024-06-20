@@ -71,17 +71,17 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  await bloc.box.put(TempFieldToRegistrtAttorneyConstant.email,
+                  await bloc.box.put(TempFieldToRegistrtCustomerConstant.email,
                       bloc.emailController.text);
                   await bloc.box.put(
-                      TempFieldToRegistrtAttorneyConstant.password,
+                      TempFieldToRegistrtCustomerConstant.password,
                       bloc.passwordController.text);
 
                   await bloc.box.put(DatabaseFieldConstant.saveEmailAndPassword,
                       bloc.statusOfSaveEmailAndPassword);
 
                   await bloc.box.put(
-                      TempFieldToRegistrtAttorneyConstant.password,
+                      TempFieldToRegistrtCustomerConstant.password,
                       bloc.passwordController.text);
 
                   await bloc.box

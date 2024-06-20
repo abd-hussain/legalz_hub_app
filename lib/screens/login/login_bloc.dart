@@ -228,6 +228,15 @@ class LoginBloc extends Bloc<AuthService> {
       } else {
         errorMessage.value = error.message;
       }
+    } on ConnectionException {
+      loadingStatusNotifier.value = LoadingStatus.finish;
+
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!
+                .pleasecheckyourinternetconnection)),
+      );
     }
   }
 
