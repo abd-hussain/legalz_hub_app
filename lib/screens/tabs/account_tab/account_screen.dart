@@ -54,7 +54,7 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
             CollectionListOptionView(
                 listOfOptions: bloc.listOfSupportOptions(context)),
             const SizedBox(height: 8),
-            if (kIsWeb) Container() else const AddMobBanner(),
+            if (kIsWeb) const SizedBox() else const AddMobBanner(),
             FooterView(
               language: bloc.box.get(DatabaseFieldConstant.language),
             ),

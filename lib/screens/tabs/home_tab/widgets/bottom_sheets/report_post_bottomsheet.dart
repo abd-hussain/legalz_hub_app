@@ -119,7 +119,7 @@ class ReportPostBottomSheetsUtil {
                                 ),
                               );
                             } else {
-                              return Container();
+                              return const SizedBox();
                             }
                           }),
                       const SizedBox(height: 24)

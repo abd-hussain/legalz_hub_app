@@ -14,7 +14,7 @@ class SplashLoadingScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(child: Container()),
+                  Expanded(child: const SizedBox()),
                   Center(
                     child: Image.asset(
                       "assets/images/logoz/logo-blue.png",
@@ -33,7 +33,7 @@ class SplashLoadingScreen extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         pathBackgroundColor: Colors.transparent),
                   ),
-                  Expanded(child: Container()),
+                  Expanded(child: const SizedBox()),
                   Text(
                     "Loading ...",
                     style: TextStyle(

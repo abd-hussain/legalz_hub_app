@@ -191,7 +191,7 @@ class _HourRateViewState extends State<HourRateView> {
                                 controller: TextEditingController(text: ""),
                               );
                             } else {
-                              return Container();
+                              return const SizedBox();
                             }
                           }),
                     ],

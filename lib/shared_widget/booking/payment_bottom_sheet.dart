@@ -172,7 +172,7 @@ class PaymentBottomSheetsUtil {
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
-                      Expanded(child: Container()),
+                      Expanded(child: const SizedBox()),
                       CustomText(
                         title: "$totalAmount $mentorCurrency",
                         textColor: const Color(0xff444444),
@@ -233,7 +233,7 @@ class PaymentBottomSheetsUtil {
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
-                      Expanded(child: Container()),
+                      Expanded(child: const SizedBox()),
                       CustomText(
                         title:
                             "${calculateNewAmount(totalAmount: totalAmount, dollerEquavilant: dollerEquvilant).toStringAsFixed(2)} \$",

@@ -47,7 +47,7 @@ class TutView extends StatelessWidget {
                 textColor: const Color(0xff444444),
               ),
             ),
-            Expanded(child: Container()),
+            Expanded(child: const SizedBox()),
             Padding(
               padding: const EdgeInsets.only(bottom: 100),
               child: ClipRRect(

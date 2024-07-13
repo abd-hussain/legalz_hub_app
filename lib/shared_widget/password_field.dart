@@ -60,7 +60,7 @@ class PasswordField extends StatelessWidget {
                                     color: Colors.grey[500],
                                   ),
                                 )
-                              : Container();
+                              : const SizedBox();
                         }),
                     IconButton(
                       onPressed: showHidePassword,

@@ -292,7 +292,7 @@ class EditPostBottomSheetsUtil {
                                     ),
                                   )
                                 else
-                                  Container()
+                                  const SizedBox(),
                               ],
                             ),
                           ),

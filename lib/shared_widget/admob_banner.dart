@@ -56,6 +56,6 @@ class _AddMobBannerState extends State<AddMobBanner> {
               ),
             ),
           )
-        : Container();
+        : const SizedBox();
   }
 }

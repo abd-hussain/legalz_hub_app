@@ -7,6 +7,10 @@ import 'package:legalz_hub_app/utils/logger.dart';
 
 //TODO: Upgrade flutter verison and all of the packages
 //TODO: check all of iO and make it disaple for web
+//TODO: iOS list in Home Page and account not working
+//TODO: handle free booking for all attorney
+//TODO: send notification when any one book for attorney
+//TODO: send notification when the meeting near 5 min
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

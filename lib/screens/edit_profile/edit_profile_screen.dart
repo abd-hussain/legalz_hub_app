@@ -140,12 +140,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     );
                                                   })
                                             else
-                                              Container(),
+                                              const SizedBox(),
                                             if (bloc.userType ==
                                                 UserType.attorney)
                                               const SizedBox(height: 10)
                                             else
-                                              Container(),
+                                              const SizedBox(),
                                             CustomTextField(
                                               controller:
                                                   bloc.firstNameController,
@@ -201,25 +201,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 if (bloc.userType == UserType.attorney)
                                   const SizedBox(height: 16)
                                 else
-                                  Container(),
+                                  const SizedBox(),
                                 if (bloc.userType == UserType.attorney)
                                   BioField(
                                     bioController: bloc.bioController,
                                     onChanged: (text) => bloc.validateFields(),
                                   )
                                 else
-                                  Container(),
+                                  const SizedBox(),
                                 if (bloc.userType == UserType.attorney)
                                   const SizedBox(height: 16)
                                 else
-                                  Container(),
+                                  const SizedBox(),
                                 if (bloc.userType == UserType.attorney)
                                   Container(
                                     color: const Color(0xffE8E8E8),
                                     height: 1,
                                   )
                                 else
-                                  Container(),
+                                  const SizedBox(),
                                 const SizedBox(height: 16),
                                 Padding(
                                   padding: bloc.userType == UserType.attorney
@@ -249,7 +249,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               setState(() {});
                                             })
                                       else
-                                        Container(),
+                                        const SizedBox(),
                                       Expanded(
                                         child: Column(
                                           children: [
@@ -313,7 +313,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                   )
                                 else
-                                  Container(),
+                                  const SizedBox(),
                                 const SizedBox(height: 16),
                                 Container(
                                   color: const Color(0xffE8E8E8),

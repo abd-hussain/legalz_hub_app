@@ -141,7 +141,7 @@ class ReviewBodyView extends StatelessWidget {
                       ),
                     )
                   else
-                    Container(),
+                    const SizedBox(),
                 ],
               ),
             );

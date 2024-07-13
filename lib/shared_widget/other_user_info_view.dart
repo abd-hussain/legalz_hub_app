@@ -129,7 +129,7 @@ class OtherUserInfoView extends StatelessWidget {
                       ],
                     )
                   else
-                    Container(),
+                    const SizedBox(),
                   Row(
                     children: [
                       Text("${AppLocalizations.of(context)!.gender}: "),
@@ -144,7 +144,7 @@ class OtherUserInfoView extends StatelessWidget {
                       ],
                     )
                   else
-                    Container(),
+                    const SizedBox(),
                 ],
               ),
             ],

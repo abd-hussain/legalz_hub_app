@@ -23,7 +23,7 @@ class PriceView extends StatelessWidget {
             fontSize: 14,
             textColor: const Color(0xff554d56),
           ),
-          Expanded(child: Container()),
+          Expanded(child: const SizedBox()),
           Text.rich(
             TextSpan(
               children: <TextSpan>[

@@ -187,7 +187,7 @@ class PostCommentsBottomSheetsUtil {
                                               ),
                                             ],
                                           ),
-                                          Expanded(child: Container()),
+                                          Expanded(child: const SizedBox()),
                                           if ((currentUserType ==
                                                       UserType.attorney &&
                                                   comments[index]
@@ -212,7 +212,7 @@ class PostCommentsBottomSheetsUtil {
                                               ),
                                             )
                                           else
-                                            Container()
+                                            const SizedBox(),
                                         ],
                                       ),
                                     ),

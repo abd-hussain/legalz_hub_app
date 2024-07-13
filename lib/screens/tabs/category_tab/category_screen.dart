@@ -78,7 +78,7 @@ class _CategoryTabScreenState extends State<CategoryTabScreen> {
                                       );
                                     });
                               } else {
-                                return Container();
+                                return const SizedBox();
                               }
                             }),
                       ],

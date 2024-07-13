@@ -71,7 +71,7 @@ class DiscountView extends StatelessWidget {
                 }),
           ],
         ),
-        Expanded(child: Container()),
+        Expanded(child: const SizedBox()),
         ValueListenableBuilder<bool>(
             valueListenable: applyDiscountButton,
             builder: (context, snapshot, child) {

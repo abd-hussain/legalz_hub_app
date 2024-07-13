@@ -57,7 +57,7 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
                       },
                     );
                   } else {
-                    return Container();
+                    return const SizedBox();
                   }
                 }),
             ValueListenableBuilder<RtcEngine?>(
@@ -66,7 +66,7 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
                   if (snapshot != null) {
                     return MyCameraView(rtcEngine: snapshot);
                   } else {
-                    return Container();
+                    return const SizedBox();
                   }
                 }),
             ValueListenableBuilder<int?>(
@@ -83,7 +83,7 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
                       },
                     );
                   } else {
-                    return Container();
+                    return const SizedBox();
                   }
                 }),
             ValueListenableBuilder<RtcEngine?>(
@@ -100,7 +100,7 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
                       },
                     );
                   } else {
-                    return Container();
+                    return const SizedBox();
                   }
                 }),
           ],

@@ -67,7 +67,7 @@ class FooterView extends StatelessWidget {
             ],
           ),
           if (kIsWeb)
-            Container()
+            const SizedBox()
           else
             TextButton(
               onPressed: () {

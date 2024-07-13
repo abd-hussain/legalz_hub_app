@@ -157,7 +157,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
     if ((controller.text.isEmpty) ||
         (selectedCountry.minLength! <= controller.text.length &&
             controller.text.length <= selectedCountry.maxLength!)) {
-      return Container();
+      return const SizedBox();
     } else {
       return Padding(
         padding: const EdgeInsets.only(top: 2, left: 16, right: 16),

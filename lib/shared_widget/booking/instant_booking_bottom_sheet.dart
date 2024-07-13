@@ -309,7 +309,7 @@ class InstantBookingBottomSheetsUtil {
                           textColor: const Color(0xff554d56),
                         )
                       else
-                        Container(),
+                        const SizedBox(),
                     ],
                   ),
                   Row(
@@ -329,7 +329,7 @@ class InstantBookingBottomSheetsUtil {
                           textColor: const Color(0xff554d56),
                         )
                       else
-                        Container(),
+                        const SizedBox(),
                     ],
                   ),
                 ],

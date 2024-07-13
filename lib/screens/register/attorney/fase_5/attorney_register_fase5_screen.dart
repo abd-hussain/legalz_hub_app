@@ -112,7 +112,7 @@ class _AttorneyRegister5ScreenState extends State<AttorneyRegister5Screen> {
                     valueListenable: bloc.validateEmail,
                     builder: (context, snapshot, child) {
                       if (snapshot == "") {
-                        return Container();
+                        return const SizedBox();
                       } else {
                         return Row(
                           children: [

@@ -38,9 +38,9 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
             children: [
               const SizedBox(height: 100),
               const MainLogo(),
-              Expanded(child: Container()),
+              Expanded(child: const SizedBox()),
               const BottomText(),
-              Expanded(child: Container()),
+              Expanded(child: const SizedBox()),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50),
                 child: CustomButton(
@@ -53,7 +53,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
                         if (value) {
                           Navigator.pushNamed(
                             context,
-                            RoutesConstants.initialRoute,
+                            RoutesConstants.loginScreen,
                           );
                         }
                       });

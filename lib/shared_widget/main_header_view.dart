@@ -31,7 +31,7 @@ class _MainHeaderViewState extends State<MainHeaderView> {
               "assets/images/logoz/logo-blue.png",
               width: 100,
             ),
-          Expanded(child: Container()),
+          Expanded(child: const SizedBox()),
           IconButton(
             onPressed: () => Navigator.of(context, rootNavigator: true)
                 .pushNamed(RoutesConstants.notificationsScreen),
@@ -55,7 +55,7 @@ class _MainHeaderViewState extends State<MainHeaderView> {
               ),
             )
           else
-            Container(),
+            const SizedBox(),
         ],
       ),
     );

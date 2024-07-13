@@ -266,7 +266,7 @@ class AddPostBottomSheetsUtil {
                                     ),
                                   )
                                 else
-                                  Container()
+                                  const SizedBox(),
                               ],
                             ),
                           ),

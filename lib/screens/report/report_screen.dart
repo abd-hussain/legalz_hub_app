@@ -77,7 +77,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         ),
                       )),
                       if (kIsWeb)
-                        Container()
+                        const SizedBox()
                       else
                         ReportAttatchment(
                           attach1: (file) => bloc.attach1 = file,

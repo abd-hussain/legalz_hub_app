@@ -40,7 +40,7 @@ class EmailFieldLogin extends StatelessWidget {
                         color: Colors.grey[500],
                       ),
                     )
-                  : Container();
+                  : const SizedBox();
             }),
         onChange: (text) => onchange(),
         onEditingComplete: onEditingComplete,

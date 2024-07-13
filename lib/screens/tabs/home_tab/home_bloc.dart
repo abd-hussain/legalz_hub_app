@@ -1,16 +1,16 @@
 import 'dart:async';
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:legalz_hub_app/locator.dart';
-import 'package:legalz_hub_app/models/https/add_comment_request.dart';
-import 'package:legalz_hub_app/models/https/comments_response.dart';
+// import 'package:legalz_hub_app/models/https/add_comment_request.dart';
+// import 'package:legalz_hub_app/models/https/comments_response.dart';
 import 'package:legalz_hub_app/models/https/home_banners_response.dart';
 import 'package:legalz_hub_app/models/https/home_posts_response.dart';
 import 'package:legalz_hub_app/models/report_model.dart';
-import 'package:legalz_hub_app/services/comment_post_services.dart';
+// import 'package:legalz_hub_app/services/comment_post_services.dart';
 import 'package:legalz_hub_app/services/home_services.dart';
 import 'package:legalz_hub_app/services/noticitions_services.dart';
 import 'package:legalz_hub_app/services/post_services.dart';
@@ -121,66 +121,66 @@ class HomeBloc extends Bloc<HomeService> {
     }
   }
 
-  void handleTapControllerListener() {
-    skipPost = 0;
+  // void handleTapControllerListener() {
+  //   skipPost = 0;
 
-    getHomePosts(catId: 0, skip: skipPost, newRequest: true);
-    tabController!.addListener(() async {
-      skipPost = 0;
+  //   getHomePosts(catId: 0, skip: skipPost, newRequest: true);
+  //   tabController!.addListener(() async {
+  //     skipPost = 0;
 
-      await getHomePosts(
-          catId: tabController!.index, skip: skipPost, newRequest: true);
-    });
-  }
+  //     await getHomePosts(
+  //         catId: tabController!.index, skip: skipPost, newRequest: true);
+  //   });
+  // }
 
-  Future<void> addNewPost(
-      {required int catId, required String content, File? postImg}) async {
-    await locator<PostService>()
-        .addPost(catId: catId.toString(), content: content, postImg: postImg);
-  }
+  // Future<void> addNewPost(
+  //     {required int catId, required String content, File? postImg}) async {
+  //   await locator<PostService>()
+  //       .addPost(catId: catId.toString(), content: content, postImg: postImg);
+  // }
 
-  Future<void> editPost(
-      {required int postId,
-      required int catId,
-      required String content,
-      File? postImg}) async {
-    await locator<PostService>().editPost(
-        postId: postId.toString(),
-        catId: catId.toString(),
-        content: content,
-        postImg: postImg);
-  }
+  // Future<void> editPost(
+  //     {required int postId,
+  //     required int catId,
+  //     required String content,
+  //     File? postImg}) async {
+  //   await locator<PostService>().editPost(
+  //       postId: postId.toString(),
+  //       catId: catId.toString(),
+  //       content: content,
+  //       postImg: postImg);
+  // }
 
-  Future<dynamic> reportPost(
-      {required int postId, required String reason}) async {
-    return locator<PostService>()
-        .reportPost(postId: postId, reason: reason, userType: userType);
-  }
+  // Future<dynamic> reportPost(
+  //     {required int postId, required String reason}) async {
+  //   return locator<PostService>()
+  //       .reportPost(postId: postId, reason: reason, userType: userType);
+  // }
 
-  Future<dynamic> deletePost({required int postId}) async {
-    return locator<PostService>().removePost(postId: postId);
-  }
+  // Future<dynamic> deletePost({required int postId}) async {
+  //   return locator<PostService>().removePost(postId: postId);
+  // }
 
-  Future<CommentsResponse> getPostComments({required int postId}) async {
-    return locator<CommentPostService>().getCommentsForPost(postId: postId);
-  }
+  // Future<CommentsResponse> getPostComments({required int postId}) async {
+  //   return locator<CommentPostService>().getCommentsForPost(postId: postId);
+  // }
 
-  Future<dynamic> addNewComment(
-      {required int postId, required String content}) async {
-    await locator<CommentPostService>().addCommentOnPost(
-        model: AddCommentToThePost(
-      postId: postId,
-      content: content,
-      userType: userType == UserType.attorney ? "attorney" : "customer",
-    ));
-  }
+  // Future<dynamic> addNewComment(
+  //     {required int postId, required String content}) async {
+  //   await locator<CommentPostService>().addCommentOnPost(
+  //       model: AddCommentToThePost(
+  //     postId: postId,
+  //     content: content,
+  //     userType: userType == UserType.attorney ? "attorney" : "customer",
+  //   ));
+  // }
 
-  Future<dynamic> deleteComment({required int commentId}) async {
-    await locator<CommentPostService>().removeCommentOnPost(
-      commentId: commentId,
-      userType: userType,
-    );
-  }
+  // Future<dynamic> deleteComment({required int commentId}) async {
+  //   await locator<CommentPostService>().removeCommentOnPost(
+  //     commentId: commentId,
+  //     userType: userType,
+  //   );
+  // }
 
   @override
   void onDispose() {

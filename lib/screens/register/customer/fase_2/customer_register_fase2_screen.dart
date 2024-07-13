@@ -114,7 +114,7 @@ class _CustomerRegister2ScreenState extends State<CustomerRegister2Screen> {
                     valueListenable: bloc.validateEmail,
                     builder: (context, snapshot, child) {
                       if (snapshot == "") {
-                        return Container();
+                        return const SizedBox();
                       } else {
                         return Row(
                           children: [

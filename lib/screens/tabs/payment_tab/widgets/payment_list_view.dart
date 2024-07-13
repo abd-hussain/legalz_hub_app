@@ -17,12 +17,12 @@ class PaymentListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return list.isNotEmpty
         ? Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 16),
+            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 25),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xff444444)),
+                border: Border.all(color: Color.fromARGB(255, 189, 189, 189)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -91,7 +91,7 @@ class PaymentListView extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(child: Container()),
+          Expanded(child: const SizedBox()),
           CustomText(
             title: item.appointmentIsFree!
                 ? AppLocalizations.of(context)!.free

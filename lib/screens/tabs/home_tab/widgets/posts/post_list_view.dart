@@ -153,7 +153,7 @@ class PostsListView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Expanded(child: Container()),
+                                Expanded(child: const SizedBox()),
                                 if (currentUserType == UserType.attorney)
                                   IconButton(
                                     onPressed: () =>
@@ -262,7 +262,7 @@ class PostsListView extends StatelessWidget {
                               )),
                             )
                           else
-                            Container(),
+                            const SizedBox(),
                           PostViewBottomControllersView(
                             currentUserType: currentUserType,
                             numberComment: postsList![index].commentCount!,

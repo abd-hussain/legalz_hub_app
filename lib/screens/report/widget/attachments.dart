@@ -89,7 +89,7 @@ class _ReportAttatchmentState extends State<ReportAttatchment> {
                       ),
                     )
                   else
-                    Container()
+                    const SizedBox(),
                 ],
               ),
             ),
@@ -147,7 +147,7 @@ class _ReportAttatchmentState extends State<ReportAttatchment> {
                       ),
                     )
                   else
-                    Container(),
+                    const SizedBox(),
                 ],
               ),
             ),
@@ -204,11 +204,11 @@ class _ReportAttatchmentState extends State<ReportAttatchment> {
                     ),
                   )
                 else
-                  Container(),
+                  const SizedBox(),
               ],
             ),
           ),
-          Expanded(child: Container())
+          Expanded(child: const SizedBox())
         ],
       ),
     );

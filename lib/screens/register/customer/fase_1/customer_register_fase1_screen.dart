@@ -313,7 +313,7 @@ class _CustomerRegister1ScreenState extends State<CustomerRegister1Screen> {
                                 valueListenable: bloc.validateReferalCode,
                                 builder: (context, snapshot, child) {
                                   if (snapshot == null) {
-                                    return Container();
+                                    return const SizedBox();
                                   } else {
                                     return Row(
                                       children: [

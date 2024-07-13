@@ -162,7 +162,7 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                   if (snapshot == LoadingStatus.inprogress)
                     const LoadingView(fullScreen: true)
                   else
-                    Container()
+                    const SizedBox(),
                 ],
               );
             }),

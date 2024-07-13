@@ -11,8 +11,10 @@ class HomeHeaderView extends StatefulWidget {
       {super.key,
       required this.userType,
       required this.addPost,
-      required this.listOfCategories});
+      required this.listOfCategories,
+      required this.enableAddPost});
   final UserType userType;
+  final bool enableAddPost;
   final List<Category> listOfCategories;
 
   final Function({required int catId, required String content, File? postImg})
@@ -40,7 +42,7 @@ class _HomeHeaderViewState extends State<HomeHeaderView> {
               "assets/images/logoz/logo-blue.png",
               width: 100,
             ),
-          Expanded(child: Container()),
+          Expanded(child: const SizedBox()),
           IconButton(
             onPressed: () => Navigator.of(context, rootNavigator: true)
                 .pushNamed(RoutesConstants.notificationsScreen),
@@ -52,7 +54,7 @@ class _HomeHeaderViewState extends State<HomeHeaderView> {
               size: 30,
             ),
           ),
-          if (widget.userType == UserType.customer)
+          if (widget.userType == UserType.customer && widget.enableAddPost)
             IconButton(
               onPressed: () => AddPostBottomSheetsUtil().bottomSheet(
                 context: context,
@@ -71,7 +73,7 @@ class _HomeHeaderViewState extends State<HomeHeaderView> {
               ),
             )
           else
-            Container(),
+            const SizedBox(),
         ],
       ),
     );
