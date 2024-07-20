@@ -15,7 +15,8 @@ class AttorneyDetailsService with Service {
     return AttorneyDetailsResponse.fromJson(response);
   }
 
-  Future<AttorneyInfoAvaliableResponse> getAttorneyAvaliable({required int categoryID}) async {
+  Future<AttorneyInfoAvaliableResponse> getAttorneyAvaliable(
+      {required int categoryID}) async {
     final response = await repository.callRequest(
       requestType: RequestType.get,
       methodName: MethodNameConstant.attorneyListAvaliable,

@@ -2,34 +2,46 @@ class MethodNameConstant {
   // #Customer#
   static const String attorneyList = "attorney-list/";
   static const String attorneyDetails = "attorney-details/";
-  static const String attorneyListAvaliable = "attorney-details/attorney-available";
+  static const String attorneyListAvaliable =
+      "attorney-details/attorney-available";
   static const String customerAccount = "customer-account/";
   static const String customerAccountUpdate = "customer-account/update";
   static const String customerRegister = "customer/register/";
-  static const String specificAttorneyAppointments = "customer-appointment/specific-attorney-appointments";
+  static const String specificAttorneyAppointments =
+      "customer-appointment/specific-attorney-appointments";
   static const String customerAppointments = "customer-appointment/";
-  static const String customerAppointmentsActive = "customer-appointment/active";
-  static const String customerAppointmentsCancel = "customer-appointment/cancel";
-  static const String customerAppointmentsJoinCall = "customer-appointment/join-call";
-  static const String customerAppointmentsEndCall = "customer-appointment/end-call";
-  static const String customerAppointmentsEditNote = "customer-appointment/comment";
+  static const String customerAppointmentsActive =
+      "customer-appointment/active";
+  static const String customerAppointmentsCancel =
+      "customer-appointment/cancel";
+  static const String customerAppointmentsJoinCall =
+      "customer-appointment/join-call";
+  static const String customerAppointmentsEndCall =
+      "customer-appointment/end-call";
+  static const String customerAppointmentsEditNote =
+      "customer-appointment/comment";
   static const String bookAppointment = "customer-appointment/book";
 
   // #Attorney#
   static const String attorneyWorkingHours = "working_hours/";
   static const String attorneyRatingAndReviews = "attorney-settings/review";
-  static const String attorneyRespondOnReviews = "attorney-settings/review-response";
+  static const String attorneyRespondOnReviews =
+      "attorney-settings/review-response";
   static const String attorneyRegister = "attorney/register/";
   static const String payments = "attorney-payments/";
   static const String paymentReport = "attorney-payments/report";
   static const String attorneyHourRate = "hour-rate/";
 
   static const String attorneyAppointments = "attorney-appointment/";
-  static const String attorneyActiveAppointments = "attorney-appointment/active";
+  static const String attorneyActiveAppointments =
+      "attorney-appointment/active";
   static const String attorneyCancelAppointment = "attorney-appointment/cancel";
-  static const String attorneyJoinCallAppointment = "attorney-appointment/join-call";
-  static const String attorneyEndCallAppointment = "attorney-appointment/end-call";
-  static const String attorneyCommentAppointment = "attorney-appointment/comment";
+  static const String attorneyJoinCallAppointment =
+      "attorney-appointment/join-call";
+  static const String attorneyEndCallAppointment =
+      "attorney-appointment/end-call";
+  static const String attorneyCommentAppointment =
+      "attorney-appointment/comment";
 
   static const String accountExperiance = "attorney-account/exp-info";
   static const String accountInfo = "attorney-account/info";

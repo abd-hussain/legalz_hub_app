@@ -34,7 +34,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer" ? UserType.customer : UserType.attorney;
+    bloc.userType = bloc.box.get(DatabaseFieldConstant.userType) == "customer"
+        ? UserType.customer
+        : UserType.attorney;
     bloc.getProfileInformations(context);
     super.didChangeDependencies();
   }
@@ -93,14 +95,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               children: [
                                 const SizedBox(height: 20),
                                 Padding(
-                                  padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                                  padding: bloc.box.get(
+                                              DatabaseFieldConstant.language) ==
+                                          "ar"
                                       ? const EdgeInsets.only(right: 16)
                                       : const EdgeInsets.only(left: 16),
                                   child: Row(
                                     children: [
                                       ImageHolderField(
-                                          isFromNetwork: bloc.profileImageUrl != "",
-                                          urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
+                                          isFromNetwork:
+                                              bloc.profileImageUrl != "",
+                                          urlImage: bloc.profileImageUrl == ""
+                                              ? null
+                                              : bloc.profileImageUrl,
                                           onAddImage: (file) {
                                             bloc.profileImage = file;
                                             bloc.validateFields();
@@ -114,13 +121,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       Expanded(
                                         child: Column(
                                           children: [
-                                            if (bloc.userType == UserType.attorney)
-                                              ValueListenableBuilder<List<SuffixData>>(
-                                                  valueListenable: bloc.listOfSuffix,
-                                                  builder: (context, snapshot, child) {
+                                            if (bloc.userType ==
+                                                UserType.attorney)
+                                              ValueListenableBuilder<
+                                                      List<SuffixData>>(
+                                                  valueListenable:
+                                                      bloc.listOfSuffix,
+                                                  builder: (context, snapshot,
+                                                      child) {
                                                     return SuffixField(
-                                                      controller: bloc.suffixNameController,
-                                                      listOfSuffix: bloc.listOfSuffix.value,
+                                                      controller: bloc
+                                                          .suffixNameController,
+                                                      listOfSuffix: bloc
+                                                          .listOfSuffix.value,
                                                       selectedSuffix: (p0) {
                                                         bloc.validateFields();
                                                       },
@@ -128,16 +141,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                   })
                                             else
                                               const SizedBox(),
-                                            if (bloc.userType == UserType.attorney)
+                                            if (bloc.userType ==
+                                                UserType.attorney)
                                               const SizedBox(height: 10)
                                             else
                                               const SizedBox(),
                                             CustomTextField(
-                                              controller: bloc.firstNameController,
-                                              hintText: AppLocalizations.of(context)!.firstnameprofile,
+                                              controller:
+                                                  bloc.firstNameController,
+                                              hintText:
+                                                  AppLocalizations.of(context)!
+                                                      .firstnameprofile,
                                               keyboardType: TextInputType.name,
                                               inputFormatters: [
-                                                LengthLimitingTextInputFormatter(45),
+                                                LengthLimitingTextInputFormatter(
+                                                    45),
                                               ],
                                               onChange: (text) {
                                                 bloc.validateFields();
@@ -145,11 +163,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             ),
                                             const SizedBox(height: 10),
                                             CustomTextField(
-                                              controller: bloc.lastNameController,
-                                              hintText: AppLocalizations.of(context)!.lastnameprofile,
+                                              controller:
+                                                  bloc.lastNameController,
+                                              hintText:
+                                                  AppLocalizations.of(context)!
+                                                      .lastnameprofile,
                                               keyboardType: TextInputType.name,
                                               inputFormatters: [
-                                                LengthLimitingTextInputFormatter(45),
+                                                LengthLimitingTextInputFormatter(
+                                                    45),
                                               ],
                                               onChange: (text) {
                                                 bloc.validateFields();
@@ -163,7 +185,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 DateOfBirthField(
-                                  language: bloc.box.get(DatabaseFieldConstant.language),
+                                  language: bloc.box
+                                      .get(DatabaseFieldConstant.language),
                                   selectedDate: bloc.selectedDate,
                                   dateSelected: (p0) {
                                     bloc.selectedDate = p0;
@@ -200,7 +223,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 const SizedBox(height: 16),
                                 Padding(
                                   padding: bloc.userType == UserType.attorney
-                                      ? bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                                      ? bloc.box.get(DatabaseFieldConstant
+                                                  .language) ==
+                                              "ar"
                                           ? const EdgeInsets.only(right: 16)
                                           : const EdgeInsets.only(left: 16)
                                       : EdgeInsets.zero,
@@ -208,8 +233,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     children: [
                                       if (bloc.userType == UserType.attorney)
                                         CustomAttachTextField(
-                                            isFromNetwork: bloc.iDImageUrl != "",
-                                            urlImage: bloc.iDImageUrl == "" ? null : bloc.iDImageUrl,
+                                            isFromNetwork:
+                                                bloc.iDImageUrl != "",
+                                            urlImage: bloc.iDImageUrl == ""
+                                                ? null
+                                                : bloc.iDImageUrl,
                                             onAddImage: (file) {
                                               bloc.iDImage = file;
                                               bloc.validateFields();
@@ -225,11 +253,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       Expanded(
                                         child: Column(
                                           children: [
-                                            ValueListenableBuilder<List<Country>>(
-                                                valueListenable: bloc.listOfCountriesNotifier,
-                                                builder: (context, snapshot, child) {
+                                            ValueListenableBuilder<
+                                                    List<Country>>(
+                                                valueListenable: bloc
+                                                    .listOfCountriesNotifier,
+                                                builder:
+                                                    (context, snapshot, child) {
                                                   return CountryField(
-                                                    controller: bloc.countryController,
+                                                    controller:
+                                                        bloc.countryController,
                                                     listOfCountries: snapshot,
                                                     selectedCountry: (p0) {
                                                       bloc.selectedCountry = p0;
@@ -240,7 +272,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             const SizedBox(height: 10),
                                             GenderField(
                                               controller: bloc.genderController,
-                                              onChange: (p0) => bloc.validateFields(),
+                                              onChange: (p0) =>
+                                                  bloc.validateFields(),
                                             ),
                                           ],
                                         ),
@@ -250,18 +283,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 if (bloc.userType == UserType.attorney)
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
+                                    padding: const EdgeInsets.only(
+                                        top: 10, left: 16, right: 16),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         CustomText(
-                                          title: AppLocalizations.of(context)!.speakinglanguage,
+                                          title: AppLocalizations.of(context)!
+                                              .speakinglanguage,
                                           fontSize: 12,
                                           textColor: const Color(0xff444444),
                                         ),
                                         ValueListenableBuilder<List<CheckBox>>(
-                                            valueListenable: bloc.listOfSpeakingLanguageNotifier,
-                                            builder: (context, snapshot, child) {
+                                            valueListenable: bloc
+                                                .listOfSpeakingLanguageNotifier,
+                                            builder:
+                                                (context, snapshot, child) {
                                               return SpeakingLanguageField(
                                                 listOfLanguages: snapshot,
                                                 selectedLanguage: (language) {
@@ -272,7 +310,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     print(item.value);
                                                   }
 
-                                                  bloc.listOfSpeakingLanguageNotifier.value = language;
+                                                  bloc.listOfSpeakingLanguageNotifier
+                                                      .value = language;
                                                   bloc.validateFields();
                                                 },
                                               );
@@ -290,7 +329,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 const SizedBox(height: 16),
                                 CustomTextField(
                                   controller: bloc.emailController,
-                                  hintText: AppLocalizations.of(context)!.emailaddress,
+                                  hintText: AppLocalizations.of(context)!
+                                      .emailaddress,
                                   keyboardType: TextInputType.emailAddress,
                                   readOnly: true,
                                   enabled: false,
@@ -304,7 +344,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   controller: bloc.mobileNumberController,
                                   readOnly: true,
                                   enabled: false,
-                                  hintText: AppLocalizations.of(context)!.mobilenumber,
+                                  hintText: AppLocalizations.of(context)!
+                                      .mobilenumber,
                                   keyboardType: TextInputType.phone,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(35),
@@ -314,11 +355,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 const SizedBox(height: 16),
                                 CustomTextField(
                                   controller: bloc.referalCodeController,
-                                  hintText: AppLocalizations.of(context)!.referalcodeprofile,
+                                  hintText: AppLocalizations.of(context)!
+                                      .referalcodeprofile,
                                   readOnly: true,
                                   enabled: false,
                                   keyboardType: TextInputType.number,
-                                  inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(6)
+                                  ],
                                   onChange: (text) => bloc.validateFields(),
                                 ),
                                 const SizedBox(height: 20),

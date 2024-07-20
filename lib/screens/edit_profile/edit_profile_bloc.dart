@@ -16,10 +16,13 @@ import 'package:legalz_hub_app/utils/enums/user_type.dart';
 import 'package:legalz_hub_app/utils/gender_format.dart';
 
 class EditProfileBloc {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<Country>> listOfCountriesNotifier =
+      ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
+      ValueNotifier<List<CheckBox>>([]);
   List<String> listOfSpeakingLanguage = [];
   String? selectedDate;
 
@@ -36,7 +39,8 @@ class EditProfileBloc {
   TextEditingController referalCodeController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
+  ValueNotifier<List<SuffixData>> listOfSuffix =
+      ValueNotifier<List<SuffixData>>([]);
 
   String profileImageUrl = "";
   File? profileImage;
@@ -62,7 +66,8 @@ class EditProfileBloc {
           mobileNumberController.text.isNotEmpty &&
           bioController.text.isNotEmpty;
 
-      final bool hasValidLanguage = listOfSpeakingLanguageNotifier.value.any((item) => item.isEnable);
+      final bool hasValidLanguage =
+          listOfSpeakingLanguageNotifier.value.any((item) => item.isEnable);
 
       print("hasValidLanguage $hasValidLanguage");
 
@@ -87,7 +92,8 @@ class EditProfileBloc {
 
     if (userType == UserType.attorney) {
       await locator<FilterService>().suffix().then((value) {
-        listOfSuffix.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+        listOfSuffix.value = value.data!
+          ..sort((a, b) => a.id!.compareTo(b.id!));
       });
 
       await locator<AttorneyAccountService>().getProfileInfo().then((value) {
@@ -122,23 +128,28 @@ class EditProfileBloc {
               minLength: dbCountries.minLength ?? 0,
             );
 
-            countryController.text = box.get(DatabaseFieldConstant.language) == "en"
-                ? dbCountries.nameEnglish ?? ""
-                : dbCountries.nameArabic ?? "";
+            countryController.text =
+                box.get(DatabaseFieldConstant.language) == "en"
+                    ? dbCountries.nameEnglish ?? ""
+                    : dbCountries.nameArabic ?? "";
           }
 
           if (value.data!.gender != null) {
-            genderController.text = GenderFormat().convertIndexToString(context, value.data!.gender!);
+            genderController.text = GenderFormat()
+                .convertIndexToString(context, value.data!.gender!);
           }
 
           if (data.speakingLanguage != null) {
-            listOfSpeakingLanguageNotifier.value = _prepareList(data.speakingLanguage!);
+            listOfSpeakingLanguageNotifier.value =
+                _prepareList(data.speakingLanguage!);
           }
         }
         getListOfCountries(context);
       });
     } else {
-      await locator<CustomerAccountService>().getCustomerAccountInfo().then((value) {
+      await locator<CustomerAccountService>()
+          .getCustomerAccountInfo()
+          .then((value) {
         final data = value.data;
         if (data != null) {
           firstNameController.text = value.data!.firstName ?? "";
@@ -148,7 +159,8 @@ class EditProfileBloc {
           referalCodeController.text = value.data!.invitationCode ?? "";
 
           if (value.data!.gender != null) {
-            genderController.text = GenderFormat().convertIndexToString(context, value.data!.gender!);
+            genderController.text = GenderFormat()
+                .convertIndexToString(context, value.data!.gender!);
           }
 
           profileImageUrl = value.data!.profileImg!;
@@ -171,9 +183,10 @@ class EditProfileBloc {
               minLength: dbCountries.minLength ?? 0,
             );
 
-            countryController.text = box.get(DatabaseFieldConstant.language) == "en"
-                ? dbCountries.nameEnglish ?? ""
-                : dbCountries.nameArabic ?? "";
+            countryController.text =
+                box.get(DatabaseFieldConstant.language) == "en"
+                    ? dbCountries.nameEnglish ?? ""
+                    : dbCountries.nameArabic ?? "";
           }
         }
         getListOfCountries(context);
@@ -183,7 +196,8 @@ class EditProfileBloc {
 
   void getListOfCountries(BuildContext context) {
     locator<FilterService>().countries().then((value) async {
-      listOfCountriesNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountriesNotifier.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
   }
@@ -191,7 +205,13 @@ class EditProfileBloc {
   List<CheckBox> _prepareList(List<String> theList) {
     final List<CheckBox> list = [];
 
-    final languagesToCheck = ["English", "العربية", "Français", "Español", "Türkçe"];
+    final languagesToCheck = [
+      "English",
+      "العربية",
+      "Français",
+      "Español",
+      "Türkçe"
+    ];
     for (final language in languagesToCheck) {
       final isEnable = theList.any((item) => item.contains(language));
       list.add(CheckBox(value: language, isEnable: isEnable));
@@ -201,8 +221,10 @@ class EditProfileBloc {
 
   Future updateProfileInfo(BuildContext context) async {
     if (userType == UserType.attorney) {
-      final speackingLanguage =
-          listOfSpeakingLanguageNotifier.value.where((item) => item.isEnable).map((item) => item.value).toList();
+      final speackingLanguage = listOfSpeakingLanguageNotifier.value
+          .where((item) => item.isEnable)
+          .map((item) => item.value)
+          .toList();
 
       final UpdateAttorneyAccountRequest account = UpdateAttorneyAccountRequest(
         suffix: suffixNameController.text,
@@ -214,15 +236,18 @@ class EditProfileBloc {
         dateOfBirth: selectedDate!,
         speackingLanguage: speackingLanguage,
         bio: bioController.text,
-        gender: GenderFormat().convertStringToIndex(context, genderController.text),
+        gender:
+            GenderFormat().convertStringToIndex(context, genderController.text),
       );
-      return locator<AttorneyAccountService>().updateProfileInfo(account: account);
+      return locator<AttorneyAccountService>()
+          .updateProfileInfo(account: account);
     } else {
       final UpdateCustomerAccountRequest account = UpdateCustomerAccountRequest(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         email: emailController.text,
-        gender: GenderFormat().convertStringToIndex(context, genderController.text),
+        gender:
+            GenderFormat().convertStringToIndex(context, genderController.text),
         countryId: selectedCountry != null
             ? selectedCountry!.id!
             : int.parse(box.get(DatabaseFieldConstant.selectedCountryId)),
