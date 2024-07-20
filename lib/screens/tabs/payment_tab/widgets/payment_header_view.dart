@@ -21,11 +21,9 @@ class PaymentHeaderView extends StatelessWidget {
         height: 70,
         child: Row(
           children: [
-            item(AppLocalizations.of(context)!.pending, pendingAmount,
-                Colors.orange),
+            item(AppLocalizations.of(context)!.pending, pendingAmount, Colors.orange),
             const SizedBox(width: 16),
-            item(AppLocalizations.of(context)!.recived, recivedAmount,
-                Colors.green),
+            item(AppLocalizations.of(context)!.recived, recivedAmount, Colors.green),
           ],
         ),
       ),
@@ -58,7 +56,7 @@ class PaymentHeaderView extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 textColor: const Color(0xff444444),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               CustomText(
                 title: title,
                 fontSize: 12,

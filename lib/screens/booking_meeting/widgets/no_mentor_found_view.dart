@@ -13,11 +13,9 @@ class NoMentorFoundView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset('assets/lottie/Animation - 1706216819376.json',
-              width: MediaQuery.of(context).size.width),
+          Lottie.asset('assets/lottie/62575-freelancer-working.zip', width: MediaQuery.of(context).size.width - 20),
           CustomText(
-            title: AppLocalizations.of(context)!
-                .nothingfoundunderthiscategoryandmajor,
+            title: AppLocalizations.of(context)!.nothingfoundunderthiscategoryandmajor,
             fontSize: 18,
             textAlign: TextAlign.center,
             fontWeight: FontWeight.bold,
