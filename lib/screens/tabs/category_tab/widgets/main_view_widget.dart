@@ -173,9 +173,7 @@ class _CategoryMainViewState extends State<CategoryMainView> {
         children: [
           _card(context, widget.attorneyListNotifier![index]),
           if (listLenght - 1 == index)
-            const SizedBox(
-              height: 16,
-            )
+            const SizedBox(height: 16)
           else
             const SizedBox(),
         ],
@@ -381,6 +379,18 @@ class _CategoryMainViewState extends State<CategoryMainView> {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 4),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Center(
+                          child: CustomText(
+                            title: freeType(context, data.freeCall),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            textColor: const Color(0xff034061),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -390,5 +400,18 @@ class _CategoryMainViewState extends State<CategoryMainView> {
         ),
       ),
     );
+  }
+
+  String freeType(BuildContext context, int? freeCall) {
+    switch (freeCall) {
+      case null:
+        return "";
+      case 2:
+        return AppLocalizations.of(context)!.freefor15min;
+      case 3:
+        return AppLocalizations.of(context)!.freefor30min;
+      default:
+        return "";
+    }
   }
 }

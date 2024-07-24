@@ -25,6 +25,7 @@ class AttorneyModelData {
       this.lastName,
       this.gender,
       this.rate,
+      this.freeCall,
       this.hourRate,
       this.profileImg,
       this.experianceSince,
@@ -49,7 +50,7 @@ class AttorneyModelData {
     rate = json['rate'];
     currency = json['currency'];
     categoryName = json['category_name'];
-
+    freeCall = json['free_call'];
     numberOfReviewers = json['number_of_reviewers'];
   }
   int? id;
@@ -62,6 +63,7 @@ class AttorneyModelData {
   List<String>? languages;
   String? profileImg;
   String? experianceSince;
+  int? freeCall;
 
   double? rate;
   String? countryName;

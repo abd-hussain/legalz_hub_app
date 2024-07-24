@@ -407,6 +407,8 @@
     "areyousuredeletepost" : "Are you sure you want to Delete this question ?",
     "areyousuredeletcomment" : "Are you sure you want to Delete this comment ?",
     "noteforregistrationattorney" : "Please be advised that your selection will not impact any reservation commencement until you receive at least three reviews from customers. This approach ensures that new customers can gauge your expertise based on these reviews",
-    "questionandandwerscomingsoon" : "Question and Answers Will be available Soon ...."
+    "questionandandwerscomingsoon" : "Question and Answers Will be available Soon ....",
+    "freefor15min" : "Free for 15 min",
+    "freefor30min" : "Free for 30 min"
 
 }
