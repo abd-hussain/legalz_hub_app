@@ -73,7 +73,7 @@ class _OtherUserCameraViewState extends State<OtherUserCameraView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomText(
-              title: widget.otherUserType == UserType.attorney
+              title: widget.otherUserType == UserType.customer
                   ? AppLocalizations.of(context)!.pleasewaitforclient
                   : AppLocalizations.of(context)!.pleasewaitformentor,
               textAlign: TextAlign.center,
@@ -84,7 +84,7 @@ class _OtherUserCameraViewState extends State<OtherUserCameraView> {
             const CircularProgressIndicator(),
             const SizedBox(height: 8),
             CustomText(
-              title: widget.otherUserType == UserType.attorney
+              title: widget.otherUserType == UserType.customer
                   ? AppLocalizations.of(context)!.pleasewaitforclientdesc
                   : AppLocalizations.of(context)!.pleasewaitformentordesc,
               textAlign: TextAlign.center,

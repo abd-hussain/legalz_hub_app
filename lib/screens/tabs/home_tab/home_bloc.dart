@@ -107,7 +107,10 @@ class HomeBloc extends Bloc<HomeService> {
   }
 
   Future<void> callRegisterTokenRequest(BuildContext context) async {
-    final String token = box.get(DatabaseFieldConstant.pushNotificationToken);
+    final String token =
+        box.get(DatabaseFieldConstant.pushNotificationToken) ?? "";
+
+    print("token $token");
 
     try {
       await locator<NotificationsService>().registerToken(token, userType);

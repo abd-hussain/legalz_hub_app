@@ -65,6 +65,14 @@ class HttpInterceptor extends InterceptorsWrapper {
                 message: response.data["detail"] ?? response.data.toString(),
                 requestId: ""),
             requestOptions: response.requestOptions);
+
+      case 500:
+        throw DioException(
+            error: HttpException(
+                status: response.statusCode!,
+                message: "Server Down",
+                requestId: ""),
+            requestOptions: response.requestOptions);
       default:
         logErrorMessageCrashlytics(
           error: response.statusCode,

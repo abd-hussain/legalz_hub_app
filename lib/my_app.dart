@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<FirebaseApp> _setupMobileFirebase() async {
-    return Firebase.initializeApp();
+    return await Firebase.initializeApp();
   }
 
   Future<FirebaseApp> _setupWebFirebase() async {
